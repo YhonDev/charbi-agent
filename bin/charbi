@@ -74,29 +74,8 @@ case "${1:-chat}" in
             fi
         fi
         ;;
-    restart)
-        shift
-        $0 stop
-        sleep 2
-        $0 start --daemon
-        ;;
-    status) 
-        shift
-        PID_FILE="$CHARBI_HOME/run/kernel.pid"
-        if [ -f "$PID_FILE" ] && ps -p $(cat "$PID_FILE") > /dev/null; then
-            echo "ESTADO DEL AGENTE: ACTIVO (PID: $(cat $PID_FILE))"
-            echo "----------------------------------------"
-            echo "DETALLE DE SERVICIOS:"
-            # Intentar obtener estatus via API si existiera, o mostrar info base
-            echo "  kernel         running"
-            echo "  orchestrator   running"
-            echo "  channels       running (telegram, cli)"
-            echo "  skills         loaded"
-            echo "----------------------------------------"
-        else
-            echo "ESTADO DEL AGENTE: INACTIVO"
-        fi
-        ;;
+    restart) shift; $CHARBI_PYTHON -m charbi.commands.restart "$@" ;;
+    status)  shift; $CHARBI_PYTHON -m charbi.commands.status "$@" ;;
     skill) shift; $CHARBI_PYTHON -m charbi.commands.skill "$@" ;;
     auth) shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
     channels) shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;
