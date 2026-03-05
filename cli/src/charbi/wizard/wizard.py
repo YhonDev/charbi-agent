@@ -72,29 +72,38 @@ def run_wizard(options: dict = None):
     # === PASO 1: Proveedor ===
     result = provider_step(options)
     if result:
-        if "_env" in result:
-            env_vars.update(result["_env"])
-        state = deep_merge(state, result)
+    try:
+        # === PASO 1: Proveedor ===
+        result = provider_step(options)
+        if result:
+            if "_env" in result:
+                env_vars.update(result["_env"])
+            state = deep_merge(state, result)
 
-    # === PASO 2: Gateway ===
-    result = gateway_step(options)
-    if result:
-        state = deep_merge(state, result)
+        # === PASO 2: Gateway ===
+        result = gateway_step(options)
+        if result:
+            state = deep_merge(state, result)
 
-    # === PASO 3: Canales ===
-    result = channels_step(options)
-    if result:
-        state = deep_merge(state, result)
+        # === PASO 3: Canales ===
+        result = channels_step(options)
+        if result:
+            state = deep_merge(state, result)
 
-    # === PASO 4: Skills ===
-    result = skills_step(options)
-    if result:
-        state = deep_merge(state, result)
+        # === PASO 4: Skills ===
+        result = skills_step(options)
+        if result:
+            state = deep_merge(state, result)
 
-    # === PASO 5: Seguridad ===
-    result = security_step(options)
-    if result:
-        state = deep_merge(state, result)
+        # === PASO 5: Seguridad ===
+        result = security_step(options)
+        if result:
+            state = deep_merge(state, result)
+
+    except KeyboardInterrupt:
+        console.print("\n\n" + Panel("[yellow]⚠️  CONFIGURACIÓN ABORTADA POR EL USUARIO[/yellow]", border_style="yellow"))
+        print_status("Saliendo sin aplicar ningún cambio.", "info")
+        return None
 
     # === GUARDAR ===
     config_manager.save_config(state)

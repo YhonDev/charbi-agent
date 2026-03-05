@@ -10,16 +10,16 @@ memory:
   kernel_db: charbi/memory/kernel.db
   sessions_db: charbi/memory/sessions.db
 supervisor:
-  enabled: null
+  enabled: true
   policy_file: charbi/config/policies/default.yaml
-  max_cpu_time: 5000
-  max_tool_calls: 20
+  max_cpu_time: 3000
+  max_tool_calls: 10
   emergency_kill: true
 runtime:
   session_path: charbi/runtime/sessions
-  isolate_workspace: null
+  isolate_workspace: true
   autonomy:
-    enabled: null
+    enabled: false
     mode: governed
     maxDepth: 2
     maxActionsPerSession: 15
@@ -48,9 +48,9 @@ provider:
   enabled: true
   model: qwen-max
   auth_type: oauth
-  endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1
+  endpoint: https://chat.qwen.ai/api/v1
 gateway:
   port: 18789
   host: 127.0.0.1
   auth_enabled: true
-  auth_token: 46ef07bdd1ed569f4e5547c4045a3f36
+  auth_token: 6cb03826d07bbfcb1a9e0fa7b747f669
