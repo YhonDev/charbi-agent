@@ -1,0 +1,11 @@
+{
+  "name": "cognitive",
+  "version": "1.0.0",
+  "description": "Herramientas de inteligencia y memoria para el agente.",
+  "author": "Charbi Kernel",
+  "permissions": [
+    "filesystem.write",
+    "filesystem.read"
+  ],
+  "entry": "tools"
+}

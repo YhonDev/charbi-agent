@@ -26,6 +26,8 @@ const PERMISSION_MAP: Record<string, string> = {
   'system.execute': 'shell.execute',
   'system.search': 'network.access',
   'system.fetch': 'network.access',
+  'cognitive.store': 'filesystem.write',
+  'cognitive.search': 'filesystem.read',
 };
 
 function checkPermission(action: ActionRequest): boolean {

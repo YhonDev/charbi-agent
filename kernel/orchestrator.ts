@@ -10,13 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { SkillRegistry } from './skill_registry';
 import { cognitionLoader } from './cognition_loader';
 
-const MAX_TOOL_LOOPS = 5; // Máximo de iteraciones tool-calling
+import { promptBuilder } from './cognition/prompt_builder';
 
-// The static buildSystemPrompt is removed in favor of cognitionLoader.buildSystemPrompt()
+const MAX_COGNITIVE_STEPS = 10;
 
 export class Orchestrator {
   constructor() {
     this.setupListeners();
+    console.log('[Orchestrator] Online (Cognitive Loop Enabled)');
   }
 
   private setupListeners() {
@@ -32,17 +33,25 @@ export class Orchestrator {
         const analysis = await analyzeTask(text);
         console.log(`[Orchestrator] Specialist: ${analysis.specialist} | Complexity: ${analysis.complexity}`);
 
-        // Build dynamic system prompt using Cognition Layer
         const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
-        const systemPrompt = cognitionLoader.buildSystemPrompt(analysis.specialist, toolsSchema);
 
-        // Tool calling loop
-        let conversation = text;
+        // Multi-turn conversation for the cognitive loop
+        let conversation: string[] = [`User: ${text}`];
         let finalResponse = '';
+        let step = 0;
 
-        for (let i = 0; i < MAX_TOOL_LOOPS; i++) {
-          const llmRes = await queryLLM(systemPrompt, conversation);
+        while (step < MAX_COGNITIVE_STEPS) {
+          step++;
 
+          // 1. THINK: Build prompt with memory and history
+          const systemPrompt = promptBuilder.buildAgentPrompt({
+            agentName: analysis.specialist,
+            toolsSchema,
+            userInput: text,
+            history: conversation
+          });
+
+          const llmRes = await queryLLM(systemPrompt, conversation.join('\n'));
           if (!llmRes.success) {
             finalResponse = `⚠️ Error LLM: ${llmRes.error}`;
             break;
@@ -50,17 +59,23 @@ export class Orchestrator {
 
           const content = (llmRes.content || '').trim();
 
-          // Intentar parsear como tool call
+          // 2. PARSE: Extract reasoning and tools
           const toolCall = this.parseToolCall(content);
 
+          // Log thought if present
+          const thoughtMatch = content.match(/\{[\s\S]*"thought"\s*:\s*"([\s\S]*?)"/);
+          if (thoughtMatch) {
+            console.log(`[Orchestrator] Thought (Step ${step}): ${thoughtMatch[1].substring(0, 100)}...`);
+            conversation.push(`Thought: ${thoughtMatch[1]}`);
+          }
+
           if (toolCall) {
-            console.log(`[Orchestrator] Tool call: ${toolCall.tool}(${JSON.stringify(toolCall.params)})`);
+            console.log(`[Orchestrator] Tool call (${step}): ${toolCall.tool}`);
 
-            // Obtener permisos reales de la skill
+            // 3. ACT: Execute tool
             const skillMetadata = SkillRegistry.getInstance().get(analysis.specialist);
-            const permissions = skillMetadata?.manifest.permissions || [];
+            const permissions = skillMetadata?.manifest.permissions || ['filesystem.read', 'shell.execute', 'network.access'];
 
-            // Ejecutar la herramienta
             const result = await executeAction({
               type: toolCall.tool,
               origin: `orchestrator:${analysis.specialist}`,
@@ -68,23 +83,21 @@ export class Orchestrator {
               permissions,
             });
 
-            console.log(`[Orchestrator] Tool result: ${result.success ? 'OK' : 'FAIL'}`);
-
-            // Agregar resultado al contexto y volver a preguntar al LLM
+            // 4. OBSERVE: Add result to context
             const resultStr = JSON.stringify(result.data || { error: result.error });
-            conversation = `${text}\n\n[TOOL CALL: ${toolCall.tool}]\n[RESULT]: ${resultStr}\n\nAhora responde al usuario basándote en el resultado anterior.`;
+            conversation.push(`Observation (${toolCall.tool}): ${resultStr}`);
 
+            // Re-loop for reflection
+            continue;
           } else {
-            // No es tool call → es la respuesta final
-            finalResponse = content;
+            // Final response (remove JSON if any)
+            finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
+            if (!finalResponse && thoughtMatch) finalResponse = thoughtMatch[1];
             break;
           }
         }
 
-        if (!finalResponse) {
-          finalResponse = '⚠️ No se pudo generar una respuesta.';
-        }
-
+        if (!finalResponse) finalResponse = '⚠️ No se pudo generar una respuesta.';
         this.sendResponse(origin, chatId, finalResponse);
 
       } catch (error: any) {
@@ -94,31 +107,16 @@ export class Orchestrator {
     });
   }
 
-  /** Intenta extraer un tool call de la respuesta del LLM */
   private parseToolCall(content: string): { tool: string; params: any } | null {
     try {
-      // Limpiar: buscar JSON en el contenido
-      let jsonStr = content;
-
-      // Si viene envuelto en markdown ```json ... ```
-      const codeBlock = content.match(/```(?:json)?\s*([\s\S]*?)```/);
-      if (codeBlock) jsonStr = codeBlock[1].trim();
-
-      // Si viene después de </think>
-      const thinkMatch = jsonStr.match(/<\/think>\s*([\s\S]*)/);
-      if (thinkMatch) jsonStr = thinkMatch[1].trim();
-
-      // Buscar el primer { ... } en el string
-      const braceMatch = jsonStr.match(/\{[\s\S]*\}/);
+      const braceMatch = content.match(/\{[\s\S]*\}/);
       if (!braceMatch) return null;
 
       const parsed = JSON.parse(braceMatch[0]);
       if (parsed.tool && typeof parsed.tool === 'string') {
         return { tool: parsed.tool, params: parsed.params || {} };
       }
-    } catch {
-      // No es JSON válido → no es un tool call
-    }
+    } catch { }
     return null;
   }
 
