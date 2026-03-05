@@ -20,9 +20,18 @@ const MAX_COGNITIVE_STEPS = 10;
 const COMPLEXITY_THRESHOLD = 0.15;
 
 export class Orchestrator {
-  constructor() {
+  private static instance: Orchestrator;
+
+  private constructor() {
     this.setupListeners();
-    console.log('[Orchestrator] Online (Cognitive Loop & Task Graph Enabled)');
+    console.log('[Orchestrator] Online (Cognitive Singleton Mode)');
+  }
+
+  public static getInstance(): Orchestrator {
+    if (!Orchestrator.instance) {
+      Orchestrator.instance = new Orchestrator();
+    }
+    return Orchestrator.instance;
   }
 
   private setupListeners() {

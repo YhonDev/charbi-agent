@@ -4,11 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { emitEvent, eventBus } from './event_bus';
 
 export class Gateway {
+  private static instance: Gateway;
   private server: http.Server;
   private port: number = 5005;
 
-  constructor() {
+  private constructor() {
     this.server = http.createServer(this.handleRequest.bind(this));
+  }
+
+  public static getInstance(): Gateway {
+    if (!Gateway.instance) {
+      Gateway.instance = new Gateway();
+    }
+    return Gateway.instance;
   }
 
   async start() {
@@ -97,4 +105,4 @@ export class Gateway {
   }
 }
 
-export const gateway = new Gateway();
+export const gateway = Gateway.getInstance();

@@ -143,3 +143,8 @@
 [Telegram] Polling error: EFATAL: AggregateError
 [Telegram] Polling error: EFATAL: AggregateError
 [Telegram] Polling error: EFATAL: AggregateError
+
+[Boot] Shutting down...
+[Telegram] Bot stopped
+[Channel:cli] Stopped (stub)
+[Boot] Goodbye

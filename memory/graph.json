@@ -7,6 +7,24 @@
       "metadata": {
         "date": "2026-03-05T17:40:10.449Z"
       }
+    },
+    {
+      "subject": "Charbi",
+      "object": "Usuario",
+      "relation": "salud\u00f3 a",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Charbi",
+      "relation": "salud\u00f3 a",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "est\u00e1 interesado en",
+      "metadata": {}
     }
   ]
 }

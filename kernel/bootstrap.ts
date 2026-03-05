@@ -103,8 +103,8 @@ async function boot(): Promise<void> {
   ServiceManager.register({
     name: 'orchestrator',
     type: 'core',
-    start: async () => { new Orchestrator(); },
-    stop: async () => { /* Orchestrator is event-based, nothing specific to stop yet */ },
+    start: async () => { Orchestrator.getInstance(); },
+    stop: async () => { /* Orchestrator is event-based */ },
     running: false
   });
 
@@ -113,12 +113,12 @@ async function boot(): Promise<void> {
     name: 'gateway',
     type: 'core',
     start: async () => {
-      const { gateway } = await import('./gateway');
-      await gateway.start();
+      const { Gateway } = await import('./gateway');
+      await Gateway.getInstance().start();
     },
     stop: async () => {
-      const { gateway } = await import('./gateway');
-      await gateway.stop();
+      const { Gateway } = await import('./gateway');
+      await Gateway.getInstance().stop();
     },
     running: false
   });
@@ -136,6 +136,7 @@ async function boot(): Promise<void> {
 
   await ServiceManager.start('memory');
   await ServiceManager.start('orchestrator');
+  await ServiceManager.start('gateway');
 
   // Emit READY
   console.log('[Boot] Finalizing...');
