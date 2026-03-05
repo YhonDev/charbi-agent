@@ -26,7 +26,7 @@ console = Console()
 
 class KernelChatClient:
     """Cliente que delega el chat al Kernel de Charbi vía API"""
-    def __init__(self, endpoint="http://localhost:5005"):
+    def __init__(self, endpoint="http://127.0.0.1:5005"):
         self.endpoint = endpoint
 
     def chat(self, user_input: str) -> str:

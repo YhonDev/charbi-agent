@@ -20,9 +20,18 @@ export class Gateway {
   }
 
   async start() {
-    return new Promise<void>((resolve) => {
-      this.server.listen(this.port, () => {
-        console.log(`[Gateway] API listening on http://localhost:${this.port}`);
+    return new Promise<void>((resolve, reject) => {
+      this.server.on('error', (err: any) => {
+        if (err.code === 'EADDRINUSE') {
+          console.error(`[Gateway] FATAL: Port ${this.port} is already in use.`);
+          reject(err);
+        } else {
+          reject(err);
+        }
+      });
+
+      this.server.listen(this.port, '0.0.0.0', () => {
+        console.log(`[Gateway] API listening on http://0.0.0.0:${this.port}`);
         resolve();
       });
     });
