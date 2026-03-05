@@ -11,29 +11,32 @@ import { SkillRegistry } from './skill_registry';
 
 const MAX_TOOL_LOOPS = 5; // Máximo de iteraciones tool-calling
 
-// Prompt del sistema con las herramientas disponibles
+// Prompt del sistema con las herramientas disponibles (schemas estructurados)
 function buildSystemPrompt(): string {
   const tools = getAvailableTools();
-  const toolList = tools.map(t => `- ${t.name}(${t.params.join(', ')}): ${t.description}`).join('\n');
+  const toolSchemas = JSON.stringify(tools, null, 2);
 
-  return `Eres Charbi, un agente de IA con acceso a herramientas del sistema.
+  return `Eres Charbi, un agente de IA operativo con acceso a herramientas del sistema.
+Tu objetivo es ayudar al usuario realizando acciones reales cuando sea necesario.
 
-HERRAMIENTAS DISPONIBLES:
-${toolList}
+HERRAMIENTAS DISPONIBLES (JSON Schema):
+${toolSchemas}
 
-INSTRUCCIONES:
-- Si necesitas usar una herramienta, responde SOLO con un bloque JSON así:
-{"tool": "<nombre>", "params": {<parámetros>}}
+INSTRUCCIONES DE USO:
+1. Si necesitas realizar una acción, responde ÚNICAMENTE con la herramienta en formato JSON.
+2. Formato de respuesta para herramientas:
+{"tool": "nombre.herramienta", "params": {"param1": "valor1", ...}}
 
-- Ejemplos:
-{"tool": "shell.execute", "params": {"command": "ls -la /home"}}
-{"tool": "filesystem.read", "params": {"path": "/etc/hostname"}}
-{"tool": "filesystem.write", "params": {"path": "/tmp/test.txt", "content": "Hola mundo"}}
+3. Ejemplos críticos:
+- Para listar archivos: {"tool": "system.read", "params": {"path": "/home/yhondev/.charbi-agent"}}
+- Para escribir: {"tool": "system.write", "params": {"path": "ejemplo.txt", "content": "hola"}}
+- Para buscar: {"tool": "system.search", "params": {"query": "clima en medellin"}}
 
-- Si NO necesitas herramientas, responde normalmente en texto plano.
-- Después de recibir el resultado de una herramienta, analiza el resultado y responde al usuario.
-- No inventes resultados. Solo responde con lo que las herramientas te devuelven.
-- Responde en español.`;
+REGLAS:
+- No inventes herramientas. Solo usa las listadas arriba.
+- Si no necesitas herramientas, responde normalmente en texto plano (español).
+- Después de una acción, analiza el resultado y finaliza la tarea.
+- Sé conciso y eficiente.`;
 }
 
 export class Orchestrator {

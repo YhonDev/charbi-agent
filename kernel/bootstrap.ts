@@ -11,6 +11,7 @@ import { Orchestrator } from './orchestrator';
 import { emitEvent } from './event_bus';
 import { ServiceManager } from './runtime/service_manager';
 import { providerRegistry } from './providers/provider_registry';
+import { toolRegistry } from './tool_registry';
 import fs from 'fs';
 import path from 'path';
 
@@ -33,7 +34,7 @@ async function boot(): Promise<void> {
   }
 
   // Step 1: Load Configuration
-  console.log('[Boot] Step 1/4: Loading configuration...');
+  console.log('[Boot] Step 1/7: Loading configuration...');
   const configService = ConfigService.getInstance();
   const system = configService.getSystem();
   console.log('[Boot] System: ' + system.name + ' v' + system.version + ' (' + system.mode + ')');
@@ -47,7 +48,7 @@ async function boot(): Promise<void> {
   }
 
   // Step 2: Initialize Channels
-  console.log('[Boot] Step 2/4: Loading channels...');
+  console.log('[Boot] Step 2/7: Loading channels...');
   const channelRegistry = new ChannelRegistry();
   await channelRegistry.init();
   await channelRegistry.startAll();
@@ -55,27 +56,32 @@ async function boot(): Promise<void> {
   console.log('[Boot] Active channels: ' + (activeChannels.length > 0 ? activeChannels.join(', ') : 'none'));
 
   // Step 3: Load Plugins
-  console.log('[Boot] Step 3/5: Scanning plugins...');
+  console.log('[Boot] Step 3/7: Scanning plugins...');
   const pluginLoader = new PluginLoader();
   await pluginLoader.scan();
   const plugins = pluginLoader.listPlugins();
   console.log('[Boot] Discovered plugins: ' + plugins.length);
 
   // Step 4: Load LLM Providers
-  console.log('[Boot] Step 4/6: Loading LLM providers...');
+  console.log('[Boot] Step 4/7: Loading LLM providers...');
   await providerRegistry.loadProviders();
   console.log('[Boot] Providers available: ' + providerRegistry.list().join(', '));
 
   // Step 5: Register in SkillRegistry
-  console.log('[Boot] Step 4/5: Registering skills...');
+  console.log('[Boot] Step 5/7: Registering skills...');
   const skillRegistry = SkillRegistry.getInstance();
   for (const plugin of plugins) {
     skillRegistry.register(plugin.manifest as any, plugin.path);
   }
   console.log('[Boot] Registered skills: ' + skillRegistry.count());
 
-  // Step 5: Initialize Services
-  console.log('[Boot] Step 5/6: Registering services...');
+  // Step 6: Load Tools
+  console.log('[Boot] Step 6/7: Loading Tools into Registry...');
+  await toolRegistry.loadTools();
+  console.log('[Boot] Tools available: ' + toolRegistry.listNames().join(', '));
+
+  // Step 7: Initialize Services
+  console.log('[Boot] Step 7/7: Registering services...');
 
   // Register Orchestrator Service
   ServiceManager.register({
@@ -99,8 +105,8 @@ async function boot(): Promise<void> {
 
   await ServiceManager.start('orchestrator');
 
-  // Step 6: Emit READY
-  console.log('[Boot] Step 6/6: Emitting READY event...');
+  // Emit READY
+  console.log('[Boot] Finalizing...');
   const bootTimeMs = Date.now() - startTime;
   emitEvent({
     id: uuidv4(),
