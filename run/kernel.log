@@ -71,3 +71,13 @@
 [Orchestrator] Specialist: main | Complexity: 0.10800000000000001
 [Orchestrator] Response to telegram (62 chars)
 [32m[2026-03-05T16:03:20.834Z] [INFO] [EventBus] Emitted event: AGENT_RESPONSE[0m
+[ConfigService] Config file changed, reloading...
+[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
+[ConfigService] Config file changed, reloading...
+[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
+[Telegram] Message from Yhon: Hola
+[Orchestrator] Request from telegram: "Hola"
+[32m[2026-03-05T16:17:25.063Z] [INFO] [EventBus] Emitted event: USER_REQUEST[0m
+[Orchestrator] Specialist: main | Complexity: 0.10800000000000001
+[Orchestrator] Response to telegram (62 chars)
+[32m[2026-03-05T16:17:25.068Z] [INFO] [EventBus] Emitted event: AGENT_RESPONSE[0m

@@ -50,6 +50,7 @@ async function boot(): Promise<void> {
   // Step 2: Initialize Channels
   console.log('[Boot] Step 2/7: Loading channels...');
   const channelRegistry = new ChannelRegistry();
+  (global as any).channelRegistry = channelRegistry;
   await channelRegistry.init();
   await channelRegistry.startAll();
   const activeChannels = channelRegistry.listActive();
@@ -58,6 +59,7 @@ async function boot(): Promise<void> {
   // Step 3: Load Plugins
   console.log('[Boot] Step 3/7: Scanning plugins...');
   const pluginLoader = new PluginLoader();
+  (global as any).pluginLoader = pluginLoader;
   await pluginLoader.scan();
   const plugins = pluginLoader.listPlugins();
   console.log('[Boot] Discovered plugins: ' + plugins.length);

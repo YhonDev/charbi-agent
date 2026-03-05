@@ -89,6 +89,13 @@ class MemoryManager {
     if (category) return this.memories.filter(m => m.category === category);
     return this.memories;
   }
+
+  status() {
+    return {
+      count: this.memories.length,
+      path: this.memoryFilePath
+    };
+  }
 }
 
 export const memoryManager = new MemoryManager();

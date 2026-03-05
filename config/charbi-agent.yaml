@@ -51,6 +51,6 @@ provider:
   endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1
 gateway:
   port: 18789
-  host: 0.0.0.0
-  auth_enabled: null
-  auth_token: null
+  host: 127.0.0.1
+  auth_enabled: true
+  auth_token: 46ef07bdd1ed569f4e5547c4045a3f36

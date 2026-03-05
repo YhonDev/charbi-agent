@@ -123,6 +123,14 @@ class ChannelRegistry extends EventEmitter {
   listActive(): string[] {
     return Array.from(this.channels.keys());
   }
+
+  /** Lista canales con su estado operativo */
+  listStatus() {
+    return Array.from(this.channels.entries()).map(([name, channel]) => ({
+      name,
+      status: 'ACTIVE' // Por simplicidad, si está en el registry está cargado. Podríamos añadir check de health.
+    }));
+  }
 }
 
 export default ChannelRegistry;
