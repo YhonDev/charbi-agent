@@ -1,0 +1,73 @@
+
+========================================
+
+[Boot] Step 1/7: Loading configuration...
+[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
+[Boot] System: Charbi v1 (development)
+[Boot] Provider: qwen (qwen-max)
+[ConfigService] Hot-reload enabled
+[Boot] Step 2/7: Loading channels...
+[ChannelRegistry] Loaded: telegram
+[ChannelRegistry] No adapter at /home/yhondev/.charbi-agent/channels/cli/adapter.ts, using stub
+[ChannelRegistry] Loaded: cli
+[Telegram] Bot started with polling. Listening for messages...
+[32m[2026-03-05T16:02:41.589Z] [INFO] [TelegramAdapter] Telegram bot started[0m
+[ChannelRegistry] Started: telegram
+[Channel:cli] Started (stub)
+[ChannelRegistry] Started: cli
+[Boot] Active channels: telegram, cli
+[Boot] Step 3/7: Scanning plugins...
+[PluginLoader] Scanning: /home/yhondev/.charbi-agent/agents
+[PluginLoader] Registered: coder (agent)
+[PluginLoader] Registered: main (agent)
+[PluginLoader] Registered: scholar (agent)
+[PluginLoader] Registered: scout (agent)
+[PluginLoader] Registered: cognitive (undefined)
+[PluginLoader] Registered: system (skill)
+[PluginLoader] Loaded 6 plugins
+[Boot] Discovered plugins: 6
+[Boot] Step 4/7: Loading LLM providers...
+[ProviderRegistry] Escaneando proveedores...
+[ProviderRegistry] ✓ Proveedor cargado: gemini
+[ProviderRegistry] ✓ Proveedor cargado: groq
+[ProviderRegistry] ✓ Proveedor cargado: ollama
+[ProviderRegistry] ✓ Proveedor cargado: openai
+[Boot] Providers available: gemini, groq, ollama, openai
+[Boot] Step 5/7: Registering skills...
+[SkillRegistry] Registered: coder (agent)
+[SkillRegistry] Registered: main (agent)
+[SkillRegistry] Registered: scholar (agent)
+[SkillRegistry] Registered: scout (agent)
+[SkillRegistry] Registered: cognitive (undefined)
+[SkillRegistry] Registered: system (skill)
+[Boot] Registered skills: 6
+[Boot] Step 6/7: Loading Tools into Registry...
+[ToolRegistry] Escaneando herramientas...
+[ToolRegistry] ✓ Herramienta cargada: cognitive.search
+[ToolRegistry] ✓ Herramienta cargada: cognitive.store
+[ToolRegistry] ✓ Herramienta cargada: system.fetch
+[ToolRegistry] ✓ Herramienta cargada: system.write
+[ToolRegistry] ✓ Herramienta cargada: system.read
+[ToolRegistry] ✓ Herramienta cargada: system.search
+[ToolRegistry] ✓ Herramienta cargada: system.execute
+[Boot] Tools available: cognitive.search, cognitive.store, system.fetch, system.write, system.read, system.search, system.execute
+[Boot] Step 7/7: Registering services...
+[ServiceManager] Registered: orchestrator
+[ServiceManager] Registered: channels
+[ServiceManager] Starting orchestrator...
+[Orchestrator] Online (Cognitive Loop Enabled)
+[ServiceManager] orchestrator started.
+[Boot] Finalizing...
+[32m[2026-03-05T16:02:42.048Z] [INFO] [EventBus] Emitted event: SYSTEM_READY[0m
+
+[Boot] Charbi Kernel is READY (1066ms)
+[Boot] Channels: telegram, cli
+[Boot] Skills: coder, main, scholar, scout, cognitive, system
+[Boot] Listening for requests...
+
+[Telegram] Message from Yhon: Hola
+[Orchestrator] Request from telegram: "Hola"
+[32m[2026-03-05T16:03:20.827Z] [INFO] [EventBus] Emitted event: USER_REQUEST[0m
+[Orchestrator] Specialist: main | Complexity: 0.10800000000000001
+[Orchestrator] Response to telegram (62 chars)
+[32m[2026-03-05T16:03:20.834Z] [INFO] [EventBus] Emitted event: AGENT_RESPONSE[0m

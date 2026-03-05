@@ -13,7 +13,7 @@ export class QwenDeviceAuth {
 
     try {
       // 1. Solicitar Device Code
-      const res = await fetch('https://chat.qwen.ai/oauth/device/code', {
+      const res = await fetch('https://chat.qwen.ai/api/v1/oauth/device/code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ client_id: this.CLIENT_ID })
@@ -27,9 +27,8 @@ export class QwenDeviceAuth {
       console.log('       AUTORIZAR CHARBI (QWEN)');
       console.log('========================================');
       console.log('\n1. Abre esta URL en tu navegador:');
-      console.log(`   ${data.verification_uri}`);
-      console.log('\n2. Ingresa este código:');
-      console.log(`   ${data.user_code}`);
+      console.log(`   ${data.verification_uri}?user_code=${data.user_code}&client=${this.CLIENT_ID}`);
+      console.log('\n2. Confirma el acceso en la página.');
       console.log('\n========================================\n');
       console.log('Esperando autorización del usuario...');
 
@@ -41,13 +40,12 @@ export class QwenDeviceAuth {
         await new Promise(r => setTimeout(r, interval));
         attempts++;
 
-        const tokenRes = await fetch('https://chat.qwen.ai/oauth/token', {
+        const tokenRes = await fetch('https://chat.qwen.ai/api/v1/oauth/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             device_code: data.device_code,
-            grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-            client_id: this.CLIENT_ID // Algunos servidores lo requieren aquí también
+            grant_type: 'urn:ietf:params:oauth:grant-type:device_code'
           })
         });
 

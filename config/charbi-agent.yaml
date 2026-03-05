@@ -3,23 +3,23 @@ system:
   version: 1.0
   mode: development
 models:
-  router: gpt-oss:120b-cloud
+  router: qwen-max
   fallback: openrouter-auto
   test_role: test_model
 memory:
   kernel_db: charbi/memory/kernel.db
   sessions_db: charbi/memory/sessions.db
 supervisor:
-  enabled: true
+  enabled: null
   policy_file: charbi/config/policies/default.yaml
   max_cpu_time: 5000
   max_tool_calls: 20
   emergency_kill: true
 runtime:
   session_path: charbi/runtime/sessions
-  isolate_workspace: true
+  isolate_workspace: null
   autonomy:
-    enabled: true
+    enabled: null
     mode: governed
     maxDepth: 2
     maxActionsPerSession: 15
@@ -42,15 +42,15 @@ skills:
   github: true
   web_search: true
   filesystem: true
-  shell: true
+  shell: false
 provider:
-  name: ollama
+  name: qwen
   enabled: true
-  model: gpt-oss:120b-cloud
-  auth_type: none
-  endpoint: http://localhost:11434/v1
+  model: qwen-max
+  auth_type: oauth
+  endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1
 gateway:
   port: 18789
-  host: 127.0.0.1
-  auth_enabled: true
-  auth_token: 62a41200307813f6b463f21349a54378
+  host: 0.0.0.0
+  auth_enabled: null
+  auth_token: null
