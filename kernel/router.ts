@@ -78,7 +78,7 @@ Responde UNICAMENTE en formato JSON:
   };
 }
 
-function guessComplexity(s: string): number {
+export function guessComplexity(s: string): number {
   const lengthScore = Math.min(0.4, s.length / 500);
   const keywordScore = s.match(/investigar|crear|build|implement|buscar|noticia|news|file|archivo/i) ? 0.6 : 0.2;
   return Math.min(1, lengthScore + keywordScore);

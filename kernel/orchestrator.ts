@@ -3,7 +3,7 @@
 // Flujo: USER_REQUEST → Router → LLM (con tools) → ActionHandler → Response
 
 import { eventBus, emitEvent } from './event_bus';
-import { analyzeTask } from './router';
+import { analyzeTask, guessComplexity } from './router';
 import { queryLLM } from './llm_connector';
 import { executeAction, getAvailableTools } from './action_handlers';
 import { v4 as uuidv4 } from 'uuid';
