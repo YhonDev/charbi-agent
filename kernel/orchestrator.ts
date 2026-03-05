@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SkillRegistry } from './skill_registry';
 import { cognitionLoader } from './cognition_loader';
 
-import { promptBuilder } from './cognition/prompt_builder';
+import { contextBuilder } from './cognition/context_builder';
 
 const MAX_COGNITIVE_STEPS = 10;
 
@@ -43,8 +43,8 @@ export class Orchestrator {
         while (step < MAX_COGNITIVE_STEPS) {
           step++;
 
-          // 1. THINK: Build prompt with memory and history
-          const systemPrompt = promptBuilder.buildAgentPrompt({
+          // 1. THINK: Build complex context with memory, soul and tools
+          const systemPrompt = await contextBuilder.build({
             agentName: analysis.specialist,
             toolsSchema,
             userInput: text,
