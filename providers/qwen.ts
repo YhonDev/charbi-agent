@@ -15,18 +15,23 @@ export class QwenProvider implements Provider {
 
   async chat(messages: any[], options?: any): Promise<LLMResponse> {
     const startTime = Date.now();
-    const tokenData = TokenStore.load('qwen');
 
-    if (!tokenData || !tokenData.access_token) {
-      throw new Error('Qwen no autenticado. Ejecuta: charbi auth qwen');
+    // Prioridad: 1. API Key de la config, 2. Token de TokenStore (OAuth)
+    const apiKey = this.config.apiKey || TokenStore.load('qwen')?.access_token;
+
+    if (!apiKey) {
+      throw new Error('Qwen no autenticado. Ejecuta: charbi auth qwen o configura una API Key.');
     }
 
+    const baseUrl = (this.config.endpoint || 'https://chat.qwen.ai/api/v1').replace(/\/$/, '');
+    const url = `${baseUrl}/chat/completions`;
+
     try {
-      const res = await fetch('https://chat.qwen.ai/api/v1/chat/completions', {
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${tokenData.access_token}`
+          'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
           model: this.config.model || 'qwen-plus',

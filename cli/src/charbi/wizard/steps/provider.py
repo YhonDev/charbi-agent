@@ -11,12 +11,12 @@ from charbi.utils.models import ModelFetcher
 console = Console()
 
 PROVIDERS = [
-    {"name": "ollama",     "label": "� Ollama (Local)",        "auth": "none",    "endpoint": "http://localhost:11434/v1"},
-    {"name": "openai",     "label": "� OpenAI",               "auth": "api_key", "endpoint": "https://api.openai.com/v1"},
-    {"name": "anthropic",  "label": "� Anthropic (Claude)",    "auth": "api_key", "endpoint": "https://api.anthropic.com"},
+    {"name": "ollama",     "label": " Ollama (Local)",        "auth": "none",    "endpoint": "http://localhost:11434/v1"},
+    {"name": "openai",     "label": " OpenAI",               "auth": "api_key", "endpoint": "https://api.openai.com/v1"},
+    {"name": "anthropic",  "label": " Anthropic (Claude)",    "auth": "api_key", "endpoint": "https://api.anthropic.com"},
     {"name": "google",     "label": "✨ Google (Gemini)",       "auth": "api_key", "endpoint": "https://generativelanguage.googleapis.com"},
-    {"name": "qwen",       "label": "� Qwen (Alibaba)",       "auth": "oauth",   "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1"},
-    {"name": "openrouter", "label": "� OpenRouter (Multi)",    "auth": "api_key", "endpoint": "https://openrouter.ai/api/v1"},
+    {"name": "qwen",       "label": "🧠 Qwen (Chat OAuth)",    "auth": "oauth",   "endpoint": "https://chat.qwen.ai/api/v1"},
+    {"name": "openrouter", "label": " OpenRouter (Multi)",    "auth": "api_key", "endpoint": "https://openrouter.ai/api/v1"},
 ]
 
 
@@ -72,13 +72,13 @@ def provider_step(options: dict = None) -> dict:
             print_status("API Key requerida. Puedes configurarla después con 'charbi auth'.", "warning")
             
     elif provider["auth"] == "oauth":
-        if questionary.confirm("¿Deseas iniciar sesión ahora interactivamente?").ask():
-            try:
-                subprocess.run(["charbi", "auth", provider["name"]], check=False)
-            except Exception:
-                print_status(f"No se pudo iniciar el flujo automático. Ejecuta 'charbi auth {provider['name']}' después.", "warning")
-        else:
-            print_status(f"Recuerda ejecutar 'charbi auth {provider['name']}' para habilitar este proveedor.", "info")
+        print_status(f"Iniciando flujo de autenticación interactiva para {provider['name'].upper()}...", "info")
+        try:
+            # Usar sys.executable -m charbi.cli para asegurar que usamos el mismo entorno
+            import sys
+            subprocess.run([sys.executable, "-m", "charbi.cli", "auth", provider["name"]], check=False)
+        except Exception:
+            print_status(f"No se pudo iniciar el flujo automático. Ejecuta 'charbi auth {provider['name']}' después.", "warning")
 
     # --- Seleccionar Modelo ---
     console.print(f"\n[{COLORS['header']}]Selecciona el modelo:[/{COLORS['header']}]")
