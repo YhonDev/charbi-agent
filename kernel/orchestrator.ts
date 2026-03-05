@@ -17,7 +17,7 @@ import { taskExecutor } from './task_graph/task_executor';
 import { Task } from './task_graph/task_types';
 
 const MAX_COGNITIVE_STEPS = 10;
-const COMPLEXITY_THRESHOLD = 0.3;
+const COMPLEXITY_THRESHOLD = 0.15;
 
 export class Orchestrator {
   constructor() {
@@ -103,10 +103,16 @@ export class Orchestrator {
             conversation.push(`Observation (${parsed.tool}): ${resultStr}`);
 
             // 4. REFLECT: The next loop iteration will effectively be the reflection phase
-            // as the LLM sees the observation and "thinks" again.
             continue;
           } else {
-            // 5. RESPOND: No more tools, final answer
+            // 5. RESPOND: No more tools
+            // SI LA TAREA REQUIERE HERRAMIENTAS Y NO SE HA USADO NINGUNA, FORZAR RE-RAZONAMIENTO O BLOQUEAR
+            if (analysis.requiresTools && step === 1 && !content.includes('{')) {
+              console.warn('[Orchestrator] Direct response detected for action task. Forcing cognitive loop...');
+              conversation.push("System: Has respondido directamente pero esta tarea requiere el uso de herramientas. PLANIFICA Y ACTUA usando el formato JSON.");
+              continue;
+            }
+
             finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
             if (!finalResponse && parsed && parsed.thought) {
               finalResponse = parsed.thought;

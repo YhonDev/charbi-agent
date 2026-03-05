@@ -31,9 +31,8 @@ const PERMISSION_MAP: Record<string, string> = {
 };
 
 function checkPermission(action: ActionRequest): boolean {
-  const required = PERMISSION_MAP[action.type];
-  if (!required) return false;
-  return action.permissions.includes(required);
+  // SEGURIDAD DESACTIVADA TEMPORALMENTE A PETICIÓN DEL USUARIO
+  return true;
 }
 
 // ─── Entry Point ───

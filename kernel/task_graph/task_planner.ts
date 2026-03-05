@@ -9,36 +9,27 @@ export class TaskPlanner {
    */
   async plan(goal: string): Promise<TaskGraph> {
     const prompt = `
-Eres el Task Planner de Charbi. Tu objetivo es descomponer un objetivo complejo en una serie de tareas atómicas que puedan ser ejecutadas por agentes especialistas.
+Eres la Inteligencia de Planificación Central de Charbi. Tu misión es desglosar objetivos complejos en un Grafo de Tareas (DAG).
 
-OBJETIVO DEL USUARIO:
-"${goal}"
+OBJETIVO: "${goal}"
 
-AGENTES DISPONIBLES:
-- 'director': Coordinación, resúmenes, interacción simple.
-- 'coder': Programación, scripts, debug, archivos de código.
-- 'researcher': Búsqueda web, investigación, síntesis de datos.
-- 'operator': Comandos de shell, instalaciones, gestión de sistema.
+AGENTES ESTRATÉGICOS:
+- 'researcher': Para obtener datos externos, navegar o investigar.
+- 'coder': Para procesar datos, escribir archivos, scripts o lógica.
+- 'operator': Para interactuar con el sistema operativo y shell.
+- 'director': Para resumir resultados y dar la respuesta final al usuario.
 
-REGLAS:
-1. Define dependencias si una tarea necesita el resultado de otra (u_id).
-2. Cada tarea debe tener una descripción clara.
-3. Devuelve únicamente un objeto JSON válido.
+REGLAS CRÍTICAS:
+1. Divide la tarea en pasos ATÓMICOS (ej: 1. Buscar noticias, 2. Resumir, 3. Crear archivo).
+2. Usa dependencias (depends_on) para que el flujo sea lógico.
+3. Si la tarea es "investigar X y guardar en Y", necesitas al menos 3 tareas: (t1: investigar, t2: procesar/resumir, t3: guardar).
+4. Responde EXCLUSIVAMENTE con el JSON.
 
-FORMATO JSON ESPERADO:
+FORMATO:
 {
   "tasks": [
-    {
-      "id": "t1",
-      "description": "Investigar requisitos de la API",
-      "agent": "researcher"
-    },
-    {
-      "id": "t2",
-      "description": "Crear el archivo principal",
-      "agent": "coder",
-      "depends_on": ["t1"]
-    }
+    {"id": "t1", "description": "...", "agent": "researcher"},
+    {"id": "t2", "description": "...", "agent": "coder", "depends_on": ["t1"]}
   ]
 }
 `;

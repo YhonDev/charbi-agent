@@ -23,15 +23,17 @@ export async function analyzeTask(userInput: string): Promise<TaskAnalysis> {
 Analiza la solicitud del usuario y determina el especialista y la complejidad del proyecto.
 
 ESPECIALISTAS:
-- 'director': Saludos, charla general, ayuda sobre Charbi, o cuando no se requiere ninguna herramienta.
-- 'coder': Creación, modificación o análisis de código fuente y scripts.
-- 'researcher': Búsqueda de información externa, noticias, datos de internet o investigación de temas.
-- 'operator': Comandos de shell, instalaciones, gestión de archivos o sistema operativo.
+- 'director': Saludos, charla general o ayuda.
+- 'coder': Programación, scripts o análisis de código.
+- 'researcher': Búsqueda de información, noticias o investigación web.
+- 'operator': Comandos de shell, archivos o sistema.
 
 COMPLEJIDAD (0.0 a 1.0):
-- 0.1: Pregunta directa de conocimiento general.
-- 0.3: Tarea que requiere usar una herramienta (ej: buscar algo, crear un archivo).
-- 0.6+: Tarea multi-paso que requiere un plan (ej: "investiga X y crea un informe Y").
+- 0.1: Pregunta de conocimiento general que PUEDES responder directamente.
+- 0.5+: Tarea que requiere usar UNA herramienta (buscar, leer archivo). DEBE ser >= 0.5.
+- 0.8+: Tarea de múltiples pasos o investigación profunda.
+
+IMPORTANTE: Si el usuario pide investigar, crear archivos o ejecutar comandos, la complejidad DEBE ser alta para activar el MOTOR DE PROYECTOS.
 
 SOLICITUD: "${userInput}"
 
@@ -76,6 +78,6 @@ Responde UNICAMENTE en formato JSON:
 
 function guessComplexity(s: string): number {
   const lengthScore = Math.min(0.4, s.length / 500);
-  const keywordScore = s.match(/implement|create|refactor|fix|complex|autonomous/i) ? 0.4 : 0.1;
+  const keywordScore = s.match(/investigar|crear|build|implement|buscar|noticia|news|file|archivo/i) ? 0.6 : 0.2;
   return Math.min(1, lengthScore + keywordScore);
 }
