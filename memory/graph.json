@@ -15,6 +15,24 @@
       "metadata": {}
     },
     {
+      "subject": "Charbi",
+      "object": "buscar noticias de IA usando system.search",
+      "relation": "intenta",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "resultados de b\u00fasqueda",
+      "relation": "no obtiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "ampliar la consulta de b\u00fasqueda y usar cognitive.store para guardar el resumen",
+      "relation": "planifica",
+      "metadata": {}
+    },
+    {
       "subject": "Usuario",
       "object": "Charbi",
       "relation": "salud\u00f3 a",
@@ -24,6 +42,18 @@
       "subject": "Usuario",
       "object": "Sistema de Aprendizaje Activo",
       "relation": "est\u00e1 interesado en",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "3 noticias de IA del 2024-03-05",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "resumen de esas noticias almacenado en memoria persistente",
+      "relation": "quiere",
       "metadata": {}
     }
   ]

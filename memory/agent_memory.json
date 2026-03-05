@@ -12,5 +12,33 @@
     "category": "learning",
     "content": "El usuario menciona \"Sistema de Aprendizaje Activo\", lo que indica interés en funcionalidades de aprendizaje activo o en que el sistema opere de forma activa.",
     "metadata": {}
+  },
+  {
+    "id": "agsmwne",
+    "timestamp": 1772737767761,
+    "category": "learning",
+    "content": "When the user requests current AI news, Charbi attempts multiple web searches with progressively broader queries.",
+    "metadata": {}
+  },
+  {
+    "id": "ixo2juk",
+    "timestamp": 1772737767762,
+    "category": "learning",
+    "content": "If a search returns no results, Charbi retries with different phrasing and date formats before giving up.",
+    "metadata": {}
+  },
+  {
+    "id": "cgg30u7",
+    "timestamp": 1772737767782,
+    "category": "learning",
+    "content": "The user explicitly wants three relevant AI news items from the current day (2024-03-05) and a summarized version stored in persistent memory.",
+    "metadata": {}
+  },
+  {
+    "id": "26wdhr3",
+    "timestamp": 1772737767783,
+    "category": "learning",
+    "content": "Charbi's current toolset (system.search, system.fetch, cognitive.store) may not retrieve recent news reliably, indicating a need for improved search integration or fallback strategies.",
+    "metadata": {}
   }
 ]

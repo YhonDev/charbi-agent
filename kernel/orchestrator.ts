@@ -47,14 +47,19 @@ export class Orchestrator {
         const analysis = await analyzeTask(text);
         console.log(`[Orchestrator] Specialist: ${analysis.specialist} | Complexity: ${analysis.complexity}`);
 
-        // DECISION: Simple Task vs. Complex Project
-        if (analysis.complexity > COMPLEXITY_THRESHOLD) {
-          console.log('[Orchestrator] Iniciando modo PROYECTO (Task Graph)');
+        // IMPROVED DECISION: Use heuristic as a safety floor for known action keywords
+        const finalComplexity = (analysis.complexity < 0.5 && complexity > 0.5) ? complexity : analysis.complexity;
+
+        if (finalComplexity > COMPLEXITY_THRESHOLD) {
+          console.log(`[Orchestrator] Iniciando modo PROYECTO (Task Graph) - Comp: ${finalComplexity}`);
           this.emitStatus(chatId, 'PLANNING', 'Planificando proyecto complejo...');
 
           const graph = await taskPlanner.plan(text);
           await taskExecutor.execute(graph, this);
-          return; // Fin del modo proyecto
+
+          const finalStatus = graph.isCompleted() ? '✅ Proyecto completado con éxito.' : '⚠️ Proyecto terminado con algunas incidencias.';
+          this.sendResponse(origin, chatId, `${finalStatus}\n\nObjetivo: ${text}`);
+          return;
         }
 
         const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
@@ -115,7 +120,7 @@ export class Orchestrator {
             continue;
           } else {
             // 5. RESPOND: No more tools
-            // SI LA TAREA REQUIERE HERRAMIENTAS Y NO SE HA USADO NINGUNA, FORZAR RE-RAZONAMIENTO O BLOQUEAR
+            // SI LA TAREA REQUIERE HERRAMIENTAS Y NO SE HA USADO NINGUNA, FORZAR RE-RAZONAMIENTO
             if (analysis.requiresTools && step === 1 && !content.includes('{')) {
               console.warn('[Orchestrator] Direct response detected for action task. Forcing cognitive loop...');
               conversation.push("System: Has respondido directamente pero esta tarea requiere el uso de herramientas. PLANIFICA Y ACTUA usando el formato JSON.");
@@ -123,6 +128,10 @@ export class Orchestrator {
             }
 
             finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
+            // Fallback: Si no hay JSON pero hay contenido y hemos intentado forzarlo una vez, aceptamos el contenido
+            if (!finalResponse && content && !content.includes('{')) {
+              finalResponse = content;
+            }
             if (!finalResponse && parsed && parsed.thought) {
               finalResponse = parsed.thought;
             }
