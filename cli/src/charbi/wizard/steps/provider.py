@@ -15,7 +15,8 @@ PROVIDERS = [
     {"name": "openai",     "label": " OpenAI",               "auth": "api_key", "endpoint": "https://api.openai.com/v1"},
     {"name": "anthropic",  "label": " Anthropic (Claude)",    "auth": "api_key", "endpoint": "https://api.anthropic.com"},
     {"name": "google",     "label": "✨ Google (Gemini)",       "auth": "api_key", "endpoint": "https://generativelanguage.googleapis.com"},
-    {"name": "qwen",       "label": "🧠 Qwen (Chat OAuth)",    "auth": "oauth",   "endpoint": "https://chat.qwen.ai/api/v1"},
+    {"name": "qwen",       "label": "🧠 Qwen Auth (OAuth)",    "auth": "oauth",   "endpoint": "https://chat.qwen.ai/api/v1"},
+    {"name": "qwen",       "label": "🧠 Qwen (with API Key)",  "auth": "api_key", "endpoint": "https://chat.qwen.ai/api/v1"},
     {"name": "openrouter", "label": " OpenRouter (Multi)",    "auth": "api_key", "endpoint": "https://openrouter.ai/api/v1"},
 ]
 
@@ -72,13 +73,19 @@ def provider_step(options: dict = None) -> dict:
             print_status("API Key requerida. Puedes configurarla después con 'charbi auth'.", "warning")
             
     elif provider["auth"] == "oauth":
-        print_status(f"Iniciando flujo de autenticación interactiva para {provider['name'].upper()}...", "info")
+        from pathlib import Path
+        charbi_home = Path.home() / ".charbi-agent"
+        
+        print_status(f"Iniciando flujo de autenticación [bold]OAuth Device Flow[/bold] para {provider['name'].upper()}...", "info")
+        console.print(f"[dim]Ejecutando: npx ts-node kernel/auth_cli.ts {provider['name']}[/dim]\n")
+        
         try:
-            # Usar sys.executable -m charbi.cli para asegurar que usamos el mismo entorno
-            import sys
-            subprocess.run([sys.executable, "-m", "charbi.cli", "auth", provider["name"]], check=False)
-        except Exception:
-            print_status(f"No se pudo iniciar el flujo automático. Ejecuta 'charbi auth {provider['name']}' después.", "warning")
+            # Ejecutar el puente TS directamente para asegurar interactividad completa
+            subprocess.run(["npx", "ts-node", "kernel/auth_cli.ts", provider["name"]], cwd=str(charbi_home), check=True)
+            print_status(f"Autenticación para {provider['name'].upper()} completada con éxito.", "success")
+        except Exception as e:
+            print_status(f"No se pudo completar el flujo automático: {e}", "warning")
+            print_status(f"Por favor, completa la autenticación después con: [bold]charbi auth {provider['name']}[/bold]", "info")
 
     # --- Seleccionar Modelo ---
     console.print(f"\n[{COLORS['header']}]Selecciona el modelo:[/{COLORS['header']}]")
