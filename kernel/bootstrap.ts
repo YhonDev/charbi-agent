@@ -108,6 +108,21 @@ async function boot(): Promise<void> {
     running: false
   });
 
+  // Register Gateway Service (CLI API)
+  ServiceManager.register({
+    name: 'gateway',
+    type: 'core',
+    start: async () => {
+      const { gateway } = await import('./gateway');
+      await gateway.start();
+    },
+    stop: async () => {
+      const { gateway } = await import('./gateway');
+      await gateway.stop();
+    },
+    running: false
+  });
+
   // Register Channel Service (as an aggregate)
   ServiceManager.register({
     name: 'channels',

@@ -40,13 +40,33 @@ class ToolRegistry {
       const modulePath = path.resolve(dir, file);
       try {
         const mod = await import(modulePath);
-        const tool: CharbiTool = mod.default;
 
-        if (tool && tool.schema && tool.schema.name) {
-          // El nombre interno es skill.tool para evitar colisiones
-          const fullName = `${skillName}.${tool.schema.name}`;
-          this.tools.set(fullName, tool);
-          console.log(`[ToolRegistry] ✓ Herramienta cargada: ${fullName}`);
+        let toolsToRegister: CharbiTool[] = [];
+
+        // 1. Manejar export default (objeto único o array)
+        if (mod.default) {
+          if (Array.isArray(mod.default)) {
+            toolsToRegister.push(...mod.default);
+          } else {
+            toolsToRegister.push(mod.default);
+          }
+        }
+
+        // 2. Manejar otras exportaciones con nombre (opcional)
+        for (const key in mod) {
+          if (key === 'default') continue;
+          const item = mod[key];
+          if (item && item.schema && item.handler) {
+            toolsToRegister.push(item);
+          }
+        }
+
+        for (const tool of toolsToRegister) {
+          if (tool && tool.schema && tool.schema.name) {
+            const fullName = `${skillName}.${tool.schema.name}`;
+            this.tools.set(fullName, tool);
+            console.log(`[ToolRegistry] ✓ Herramienta cargada: ${fullName}`);
+          }
         }
       } catch (e: any) {
         console.error(`[ToolRegistry] Error cargando ${file} en ${skillName}:`, e.message);
@@ -59,9 +79,12 @@ class ToolRegistry {
     return this.tools.get(fullName);
   }
 
-  /** Lista todos los schemas de las herramientas disponibles */
+  /** Lista todos los schemas de las herramientas con sus nombres completos */
   getAllSchemas(): ToolSchema[] {
-    return Array.from(this.tools.values()).map(t => t.schema);
+    return Array.from(this.tools.entries()).map(([fullName, tool]) => ({
+      ...tool.schema,
+      name: fullName
+    }));
   }
 
   /** Lista los nombres de las herramientas disponibles */

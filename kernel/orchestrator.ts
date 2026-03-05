@@ -17,7 +17,7 @@ import { taskExecutor } from './task_graph/task_executor';
 import { Task } from './task_graph/task_types';
 
 const MAX_COGNITIVE_STEPS = 10;
-const COMPLEXITY_THRESHOLD = 0.5;
+const COMPLEXITY_THRESHOLD = 0.3;
 
 export class Orchestrator {
   constructor() {

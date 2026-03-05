@@ -36,7 +36,8 @@ export const queryGraph: CharbiTool = {
       properties: {
         entity: { type: "string", description: "Nombre de la entidad a buscar" },
         relation: { type: "string", description: "Tipo de relación a filtrar" }
-      }
+      },
+      required: []
     }
   },
   handler: async (params: any) => {

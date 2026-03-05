@@ -20,17 +20,23 @@ export async function analyzeTask(userInput: string): Promise<TaskAnalysis> {
 
   try {
     const triagePrompt = `
-Analiza la siguiente solicitud del usuario y clasifícala para el sistema multi-agente de Charbi.
-Determina quién es el mejor especialista:
-- 'director': Coordinador general, tareas de conversación simple o orquestación.
-- 'coder': Programación, debugging, creación de scripts o análisis de código.
-- 'researcher': Búsqueda de información, noticias o investigación web.
-- 'operator': Operaciones de sistema, instalaciones, configuraciones de entorno o shell.
+Analiza la solicitud del usuario y determina el especialista y la complejidad del proyecto.
+
+ESPECIALISTAS:
+- 'director': Saludos, charla general, ayuda sobre Charbi, o cuando no se requiere ninguna herramienta.
+- 'coder': Creación, modificación o análisis de código fuente y scripts.
+- 'researcher': Búsqueda de información externa, noticias, datos de internet o investigación de temas.
+- 'operator': Comandos de shell, instalaciones, gestión de archivos o sistema operativo.
+
+COMPLEJIDAD (0.0 a 1.0):
+- 0.1: Pregunta directa de conocimiento general.
+- 0.3: Tarea que requiere usar una herramienta (ej: buscar algo, crear un archivo).
+- 0.6+: Tarea multi-paso que requiere un plan (ej: "investiga X y crea un informe Y").
 
 SOLICITUD: "${userInput}"
 
 Responde UNICAMENTE en formato JSON:
-{"specialist": "...", "reasoning": "...", "risk": "low|medium|high", "complexity": 0.0-1.0}
+{"specialist": "director|coder|researcher|operator", "reasoning": "...", "risk": "low|medium|high", "complexity": 0.X}
 `;
 
     const res = await queryLLM(triagePrompt, "System Triage Engine");

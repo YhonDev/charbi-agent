@@ -6,6 +6,7 @@ export interface ToolParameter {
   type: 'string' | 'number' | 'boolean' | 'object' | 'array';
   description: string;
   required?: boolean;
+  [key: string]: any;
 }
 
 export interface ToolSchema {
