@@ -34,7 +34,7 @@ class PluginLoader {
   /** Escanea y carga todos los plugins habilitados */
   async scan(): Promise<void> {
     const skillsConfig = this.configService.getSkills();
-    const agentsDir = path.join(CHARBI_HOME, skillsConfig?.auto_load_directory || 'agents');
+    const agentsDir = path.join(CHARBI_HOME, 'agents');
 
     console.log('[PluginLoader] Scanning:', agentsDir);
 

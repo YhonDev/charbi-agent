@@ -50,12 +50,36 @@ class ChannelRegistry extends EventEmitter {
     const adapterPath = path.join(CHARBI_HOME, 'channels', name, 'adapter.ts');
 
     try {
-      const module = require(adapterPath);
-      const AdapterClass = module.default || module[Object.keys(module)[0]];
-      return new AdapterClass(config, this);
+      const mod = require(adapterPath);
+
+      // Case 1: Default export is a class with start/stop
+      if (mod.default && typeof mod.default === 'function') {
+        const instance = new mod.default(config, this);
+        if (typeof instance.start === 'function') return instance;
+      }
+
+      // Case 2: Module exports a class directly
+      for (const key of Object.keys(mod)) {
+        if (typeof mod[key] === 'function' && mod[key].prototype?.start) {
+          return new mod[key](config, this);
+        }
+      }
+
+      // Case 3: Function-based adapter (like Telegram's onTelegramMessage/sendTelegramResponse)
+      const onMessage = mod.onTelegramMessage || mod.onMessage || mod.handleMessage;
+      const sendFn = mod.sendTelegramResponse || mod.sendResponse || mod.send;
+      return {
+        name,
+        start: async () => { console.log('[Channel:' + name + '] Started (functional adapter)'); },
+        stop: async () => { console.log('[Channel:' + name + '] Stopped'); },
+        send: async (msg: string, target?: string) => {
+          if (sendFn) sendFn(target || '', msg);
+          else console.log('[Channel:' + name + '] -> ' + msg);
+        },
+      };
     } catch (e) {
-      // Si no existe un adapter custom, usar stub
-      console.warn(`[ChannelRegistry] No adapter found at ${adapterPath}, using stub`);
+      // No adapter file exists, use stub
+      console.warn('[ChannelRegistry] No adapter at ' + adapterPath + ', using stub');
       return {
         name,
         start: async () => { console.log('[Channel:' + name + '] Started (stub)'); },
