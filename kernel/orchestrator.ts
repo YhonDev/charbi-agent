@@ -7,6 +7,7 @@ import { analyzeTask } from './router';
 import { queryLLM } from './llm_connector';
 import { executeAction, getAvailableTools } from './action_handlers';
 import { v4 as uuidv4 } from 'uuid';
+import { SkillRegistry } from './skill_registry';
 
 const MAX_TOOL_LOOPS = 5; // Máximo de iteraciones tool-calling
 
@@ -74,12 +75,16 @@ export class Orchestrator {
           if (toolCall) {
             console.log(`[Orchestrator] Tool call: ${toolCall.tool}(${JSON.stringify(toolCall.params)})`);
 
+            // Obtener permisos reales de la skill
+            const skillMetadata = SkillRegistry.getInstance().get(analysis.specialist);
+            const permissions = skillMetadata?.manifest.permissions || [];
+
             // Ejecutar la herramienta
             const result = await executeAction({
               type: toolCall.tool,
               origin: `orchestrator:${analysis.specialist}`,
               params: toolCall.params,
-              permissions: ['filesystem.read', 'filesystem.write', 'shell.execute', 'network.access'],
+              permissions,
             });
 
             console.log(`[Orchestrator] Tool result: ${result.success ? 'OK' : 'FAIL'}`);

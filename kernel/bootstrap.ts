@@ -68,7 +68,7 @@ async function boot(): Promise<void> {
 
   // Step 5: Register in SkillRegistry
   console.log('[Boot] Step 4/5: Registering skills...');
-  const skillRegistry = new SkillRegistry();
+  const skillRegistry = SkillRegistry.getInstance();
   for (const plugin of plugins) {
     skillRegistry.register(plugin.manifest as any, plugin.path);
   }

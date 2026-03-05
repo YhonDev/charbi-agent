@@ -5,7 +5,7 @@ export type TaskAnalysis = {
   id: string;
   complexity: number;
   risk: 'low' | 'medium' | 'high';
-  specialist: 'coder' | 'scholar' | 'scout' | 'director';
+  specialist: 'coder' | 'scholar' | 'scout' | 'main';
   requiresTools: boolean;
 };
 
@@ -16,8 +16,8 @@ export type TaskAnalysis = {
 export async function analyzeTask(userInput: string): Promise<TaskAnalysis> {
   const complexity = guessComplexity(userInput);
 
-  // Basic heuristic: logic -> coder, study/info -> scholar, system -> scout, simple -> director
-  let specialist: TaskAnalysis['specialist'] = 'director';
+  // Basic heuristic: logic -> coder, study/info -> scholar, system -> scout, simple -> main
+  let specialist: TaskAnalysis['specialist'] = 'main';
 
   if (userInput.match(/program|sima|clase|universidad|estudio|investigar|code|debug|script|config|update|install/i)) {
     if (userInput.match(/program|code|debug|script/i)) specialist = 'coder';

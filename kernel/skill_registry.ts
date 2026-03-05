@@ -12,7 +12,17 @@ export interface RegisteredSkill {
 }
 
 class SkillRegistry {
+  private static instance: SkillRegistry;
   private skills: Map<string, RegisteredSkill> = new Map();
+
+  private constructor() { }
+
+  static getInstance(): SkillRegistry {
+    if (!SkillRegistry.instance) {
+      SkillRegistry.instance = new SkillRegistry();
+    }
+    return SkillRegistry.instance;
+  }
 
   /** Registra una skill en el kernel */
   register(manifest: SkillManifest, skillPath: string): void {
@@ -21,7 +31,7 @@ class SkillRegistry {
       path: skillPath,
       active: true,
     });
-    console.log('[SkillRegistry] Registered: ' + manifest.name + ' (' + manifest.type + ')');
+    console.log(`[SkillRegistry] Registered: ${manifest.name} (${manifest.type})`);
   }
 
   /** Obtiene una skill por nombre */

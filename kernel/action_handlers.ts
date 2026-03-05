@@ -216,7 +216,17 @@ export async function executeAction(action: ActionRequest): Promise<ActionResult
     return { success: false, error: `Unknown action type: ${action.type}` };
   }
 
-  // 2. Ejecutar
+  // 2. Verificar permisos
+  if (!checkPermission(action)) {
+    const required = PERMISSION_MAP[action.type] || 'unknown';
+    console.warn(`[ActionHandler] [SECURITY] Permission denied for ${action.type}. Origin: ${action.origin}. Required: ${required}`);
+    return {
+      success: false,
+      error: `Permission denied: Origin '${action.origin}' lacks required permission '${required}' for action '${action.type}'`
+    };
+  }
+
+  // 3. Ejecutar
   try {
     const result = await handler(action.params);
     console.log(`[ActionHandler] ${action.type}: ${result.success ? 'OK' : 'FAIL'}`);
