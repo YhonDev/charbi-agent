@@ -31,6 +31,9 @@ def skills_step(options: dict = None) -> dict:
     """Configura skills y muestra agentes disponibles"""
     clear_and_header(4, "Skills y Agentes", "Configura las habilidades del sistema y revisa los agentes")
 
+    if not questionary.confirm("¿Deseas configurar Skills ahora o saltar este paso? (Next)", default=True).ask():
+        return {}
+
     # --- Skills ---
     console.print(f"[{COLORS['header']}]Skills disponibles:[/{COLORS['header']}]\n")
 

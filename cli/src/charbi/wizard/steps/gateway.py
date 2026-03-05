@@ -14,6 +14,9 @@ def gateway_step(options: dict = None) -> dict:
     """Configura el gateway del kernel"""
     clear_and_header(2, "Gateway del Kernel", "Configura cómo se expone el servidor interno de Charbi")
 
+    if not questionary.confirm("¿Deseas configurar el Gateway ahora o saltar este paso? (Next)", default=True).ask():
+        return {}
+
     # Puerto
     port_str = questionary.text(
         "Puerto del Gateway:",

@@ -14,6 +14,9 @@ def security_step(options: dict = None) -> dict:
     """Configura seguridad, autonomía y límites del runtime"""
     clear_and_header(5, "Seguridad y Runtime", "Define los límites y el nivel de autonomía del kernel")
 
+    if not questionary.confirm("¿Deseas configurar Seguridad y Runtime ahora o saltar? (Next)", default=True).ask():
+        return {}
+
     # --- Supervisor ---
     print_section("Supervisor")
 

@@ -21,6 +21,9 @@ def channels_step(options: dict = None) -> dict:
     """Configura los canales de comunicación"""
     clear_and_header(3, "Canales de Comunicación", "Selecciona cómo te comunicarás con Charbi")
 
+    if not questionary.confirm("¿Deseas configurar Canales (Telegram/Discord) ahora o saltar? (Next)", default=True).ask():
+        return {}
+
     if options and options.get("skip_channels"):
         print_status("Canales omitidos (flag --skip-channels)", "info")
         return {"channels": {"cli": {"enabled": True}}}

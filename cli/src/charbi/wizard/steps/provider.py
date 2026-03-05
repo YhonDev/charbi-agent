@@ -38,7 +38,7 @@ def provider_step(options: dict = None) -> dict:
         provider = None
 
     if not provider:
-        choices = [p["label"] for p in PROVIDERS]
+        choices = [p["label"] for p in PROVIDERS] + ["⏩ Saltar / Mantener actual (Next)"]
         selected_label = questionary.select(
             "Selecciona tu proveedor de IA:",
             choices=choices,
@@ -48,7 +48,7 @@ def provider_step(options: dict = None) -> dict:
             ])
         ).ask()
 
-        if not selected_label:
+        if not selected_label or "Saltar" in selected_label:
             return {}
 
         provider = next(p for p in PROVIDERS if p["label"] == selected_label)
