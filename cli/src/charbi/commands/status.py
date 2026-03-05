@@ -55,7 +55,7 @@ def main():
             (" CHARBI AGENT ", "bold white on blue"),
             (" RUNTIME STATUS ", "bold cyan")
         ),
-        box=None
+        border_style="cyan"
     ))
 
     if not data:
