@@ -1,0 +1,14 @@
+{
+  "name": "system",
+  "description": "Core Tools — Herramientas del sistema: filesystem, shell, network",
+  "version": "1.0.0",
+  "entry": "index.ts",
+  "type": "skill",
+  "permissions": [
+    "filesystem.read",
+    "filesystem.write",
+    "shell.execute",
+    "network.access"
+  ],
+  "builtin": true
+}

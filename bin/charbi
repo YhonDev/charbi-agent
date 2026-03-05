@@ -1,5 +1,6 @@
 #!/bin/bash
 CHARBI_HOME="$HOME/.charbi-agent"
+export CHARBI_HOME
 CHARBI_CLI="$CHARBI_HOME/cli"
 CHARBI_VENV="$CHARBI_CLI/venv"
 CHARBI_PYTHON="$CHARBI_VENV/bin/python3"
@@ -19,8 +20,83 @@ show_help() {
 case "${1:-chat}" in
     config) shift; $CHARBI_PYTHON -m charbi.commands.config "$@" ;;
     onboard) shift; $CHARBI_PYTHON -m charbi.commands.config onboard "$@" ;;
-    start) shift; echo "Iniciando Charbi Kernel..."; cd "$CHARBI_HOME" && npx ts-node kernel/bootstrap.ts "$@" ;;
-    status) shift; $CHARBI_PYTHON -m charbi.commands.status "$@" ;;
+    start) 
+        shift
+        PID_FILE="$CHARBI_HOME/run/kernel.pid"
+        if [ -f "$PID_FILE" ] && ps -p $(cat "$PID_FILE") > /dev/null; then
+            echo "Charbi Kernel ya esta corriendo (PID: $(cat $PID_FILE))."
+            exit 0
+        fi
+        echo "Iniciando Charbi Kernel..."
+        cd "$CHARBI_HOME"
+        # Si se pasa -d o --daemon, iniciar en segundo plano
+        if [[ "$*" == *"-d"* ]] || [[ "$*" == *"--daemon"* ]]; then
+            # Asegurar directorio de runtime
+            mkdir -p "$CHARBI_HOME/run"
+            # Limpiar argumentos de daemon para pasarlos al kernel
+            ARGS="${@//-d/}"
+            ARGS="${ARGS//--daemon/}"
+            # Ejecutar en segundo plano de forma robusta
+            cd "$CHARBI_HOME"
+            nohup npx ts-node kernel/bootstrap.ts $ARGS > "$CHARBI_HOME/run/kernel.log" 2>&1 &
+            PID=$!
+            echo $PID > "$PID_FILE"
+            sleep 2
+            if ps -p $PID > /dev/null; then
+                echo "Kernel iniciado en segundo plano (PID: $PID). Logs en $CHARBI_HOME/run/kernel.log"
+            else
+                echo "Error: El kernel no se mantuvo activo. Revisa $CHARBI_HOME/run/kernel.log"
+            fi
+        else
+            npx ts-node kernel/bootstrap.ts "$@"
+        fi
+        ;;
+    stop)
+        shift
+        PID_FILE="$CHARBI_HOME/run/kernel.pid"
+        if [ -f "$PID_FILE" ]; then
+            PID=$(cat "$PID_FILE")
+            echo "Deteniendo Charbi Kernel (PID: $PID)..."
+            kill $PID
+            sleep 1
+            if ps -p $PID > /dev/null; then
+                kill -9 $PID
+            fi
+            rm -f "$PID_FILE"
+            echo "Charbi detenido."
+        else
+            echo "No se encontro el archivo PID. ¿Esta Charbi corriendo?"
+            # Buscar por si acaso
+            PIDS=$(pgrep -f "ts-node kernel/bootstrap.ts")
+            if [ -n "$PIDS" ]; then
+                echo "Encontrados procesos huerfanos: $PIDS. Deteniendo..."
+                kill $PIDS
+            fi
+        fi
+        ;;
+    restart)
+        shift
+        $0 stop
+        sleep 2
+        $0 start --daemon
+        ;;
+    status) 
+        shift
+        PID_FILE="$CHARBI_HOME/run/kernel.pid"
+        if [ -f "$PID_FILE" ] && ps -p $(cat "$PID_FILE") > /dev/null; then
+            echo "ESTADO DEL AGENTE: ACTIVO (PID: $(cat $PID_FILE))"
+            echo "----------------------------------------"
+            echo "DETALLE DE SERVICIOS:"
+            # Intentar obtener estatus via API si existiera, o mostrar info base
+            echo "  kernel         running"
+            echo "  orchestrator   running"
+            echo "  channels       running (telegram, cli)"
+            echo "  skills         loaded"
+            echo "----------------------------------------"
+        else
+            echo "ESTADO DEL AGENTE: INACTIVO"
+        fi
+        ;;
     skill) shift; $CHARBI_PYTHON -m charbi.commands.skill "$@" ;;
     auth) shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
     channels) shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;

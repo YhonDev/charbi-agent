@@ -4,6 +4,8 @@
 import https from 'https';
 import { log } from './logger';
 import { recordJournal } from './journal';
+import ConfigService from './config_service';
+import { AuthManager } from './auth/auth_manager';
 
 const LLM_TIMEOUT_MS = 15000;
 const MAX_TOKENS = 2048;
@@ -16,7 +18,62 @@ interface LLMConfig {
 }
 
 function getConfig(): LLMConfig {
-  // Use Vertex AI (Google Cloud) if project ID and access token are present
+  const configService = ConfigService.getInstance();
+  const provider = configService.getProvider();
+
+  // 1. Check if Ollama is configured
+  if (provider?.name === 'ollama' && provider.enabled) {
+    return {
+      baseUrl: 'http://localhost:11434/v1/chat/completions',
+      apiKey: 'ollama', // Usually ignored
+      model: provider.model || 'qwen2.5-coder',
+      useVertex: false
+    };
+  }
+
+  // 2. Check AuthManager for Qwen (Priority over ENV)
+  const qwenToken = AuthManager.getToken('qwen');
+  if (qwenToken) {
+    return {
+      baseUrl: 'https://chat.qwen.ai/v1/chat/completions', // Or portal.qwen.ai
+      apiKey: qwenToken,
+      model: provider?.model || 'coder-model',
+      useVertex: false
+    };
+  }
+
+  // 3. Fallback to Qwen Portal (ENV)
+  if (process.env.QWEN_ACCESS_TOKEN) {
+    return {
+      baseUrl: 'https://portal.qwen.ai/v1/chat/completions',
+      apiKey: process.env.QWEN_ACCESS_TOKEN.trim().replace(/\r/g, ''),
+      model: 'coder-model',
+      useVertex: false
+    };
+  }
+
+  // 4. Check AuthManager for OpenAI/Groq
+  const openaiToken = AuthManager.getToken('openai');
+  if (openaiToken) {
+    return {
+      baseUrl: 'https://api.openai.com/v1/chat/completions',
+      apiKey: openaiToken,
+      model: provider?.model || 'gpt-4o',
+      useVertex: false
+    };
+  }
+
+  const groqToken = AuthManager.getToken('groq');
+  if (groqToken) {
+    return {
+      baseUrl: 'https://api.groq.com/openai/v1/chat/completions',
+      apiKey: groqToken,
+      model: provider?.model || 'llama-3.1-70b-versatile',
+      useVertex: false
+    };
+  }
+
+  // 5. Fallback to Vertex AI (Google Cloud)
   if (process.env.GOOGLE_PROJECT_ID && process.env.GEMINI_ACCESS_TOKEN) {
     const projectId = process.env.GOOGLE_PROJECT_ID.trim();
     return {
@@ -27,17 +84,13 @@ function getConfig(): LLMConfig {
     };
   }
 
-  // Fallback to Qwen Portal
-  if (process.env.QWEN_ACCESS_TOKEN) {
-    return {
-      baseUrl: 'https://portal.qwen.ai/v1/chat/completions',
-      apiKey: process.env.QWEN_ACCESS_TOKEN.trim().replace(/\r/g, ''),
-      model: 'coder-model',
-      useVertex: false
-    };
-  }
-
-  throw new Error('LLM credentials missing. Need GOOGLE_PROJECT_ID + GEMINI_ACCESS_TOKEN or QWEN_ACCESS_TOKEN.');
+  // 6. Ultimate fallback (local placeholder)
+  return {
+    baseUrl: 'http://localhost:11434/v1/chat/completions',
+    apiKey: 'none',
+    model: 'qwen2.5-coder',
+    useVertex: false
+  };
 }
 
 export async function queryLLM(systemPrompt: string, userPrompt: string): Promise<any> {
@@ -101,9 +154,12 @@ async function queryOpenAIStyle(config: LLMConfig, systemPrompt: string, userPro
 
   return new Promise((resolve) => {
     const url = new URL(config.baseUrl);
+    const transport = url.protocol === 'https:' ? require('https') : require('http');
+
     const options = {
       hostname: url.hostname,
-      path: url.pathname,
+      port: url.port || (url.protocol === 'https:' ? 443 : 80),
+      path: url.pathname + url.search,
       method: 'POST',
       timeout: LLM_TIMEOUT_MS,
       headers: {
@@ -113,9 +169,9 @@ async function queryOpenAIStyle(config: LLMConfig, systemPrompt: string, userPro
       }
     };
 
-    const req = https.request(options, (res) => {
+    const req = transport.request(options, (res: any) => {
       const chunks: Buffer[] = [];
-      res.on('data', d => chunks.push(d));
+      res.on('data', (d: Buffer) => chunks.push(d));
       res.on('end', () => {
         const raw = Buffer.concat(chunks).toString();
         const latencyMs = Date.now() - startTime;
@@ -125,11 +181,16 @@ async function queryOpenAIStyle(config: LLMConfig, systemPrompt: string, userPro
           const content = parsed.choices?.[0]?.message?.content || '';
           resolve({ success: true, content, latencyMs });
         } catch (e: any) {
-          resolve({ success: false, error: `JSON: ${e.message}`, latencyMs });
+          // If we are using Ollama and it's not running, return a graceful error
+          if (config.baseUrl.includes('localhost')) {
+            resolve({ success: false, error: 'Local LLM (Ollama) unreachable. Ensure it is running.', latencyMs });
+          } else {
+            resolve({ success: false, error: `JSON Parse: ${e.message}`, latencyMs });
+          }
         }
       });
     });
-    req.on('error', e => resolve({ success: false, error: e.message, latencyMs: Date.now() - startTime }));
+    req.on('error', (e: any) => resolve({ success: false, error: e.message, latencyMs: Date.now() - startTime }));
     req.write(body);
     req.end();
   });

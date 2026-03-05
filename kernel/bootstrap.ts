@@ -7,16 +7,29 @@ import ConfigService from './config_service';
 import { ChannelRegistry } from './channel_registry';
 import { PluginLoader } from './plugin_loader';
 import { SkillRegistry } from './skill_registry';
+import { Orchestrator } from './orchestrator';
 import { emitEvent } from './event_bus';
+import { ServiceManager } from './runtime/service_manager';
+import fs from 'fs';
+import path from 'path';
+
+const PID_FILE = path.join(process.env.CHARBI_HOME || path.join(require('os').homedir(), '.charbi-agent'), 'run', 'kernel.pid');
 
 async function boot(): Promise<void> {
   const startTime = Date.now();
 
   console.log('');
   console.log('========================================');
-  console.log('     CHARBI KERNEL BOOTSTRAP');
-  console.log('========================================');
   console.log('');
+
+  // Guardar PID para control de daemon
+  try {
+    const runDir = path.dirname(PID_FILE);
+    if (!fs.existsSync(runDir)) fs.mkdirSync(runDir, { recursive: true });
+    fs.writeFileSync(PID_FILE, process.pid.toString());
+  } catch (e) {
+    console.warn('[Boot] Could not write PID file:', e);
+  }
 
   // Step 1: Load Configuration
   console.log('[Boot] Step 1/4: Loading configuration...');
@@ -55,8 +68,33 @@ async function boot(): Promise<void> {
   }
   console.log('[Boot] Registered skills: ' + skillRegistry.count());
 
-  // Step 5: Emit READY
-  console.log('[Boot] Step 5/5: Emitting READY event...');
+  // Step 5: Initialize Services
+  console.log('[Boot] Step 5/6: Registering services...');
+
+  // Register Orchestrator Service
+  ServiceManager.register({
+    name: 'orchestrator',
+    type: 'core',
+    start: async () => { new Orchestrator(); },
+    stop: async () => { /* Orchestrator is event-based, nothing specific to stop yet */ },
+    running: false
+  });
+
+  // Register Channel Service (as an aggregate)
+  ServiceManager.register({
+    name: 'channels',
+    type: 'core',
+    start: async () => {
+      // Logic handled in registry but we keep the manager aware
+    },
+    stop: async () => { await channelRegistry.stopAll(); },
+    running: true // Assume already started by channelRegistry.startAll() for now
+  });
+
+  await ServiceManager.start('orchestrator');
+
+  // Step 6: Emit READY
+  console.log('[Boot] Step 6/6: Emitting READY event...');
   const bootTimeMs = Date.now() - startTime;
   emitEvent({
     id: uuidv4(),
@@ -77,11 +115,16 @@ async function boot(): Promise<void> {
   console.log('[Boot] Charbi Kernel is READY (' + bootTimeMs + 'ms)');
   console.log('[Boot] Channels: ' + (activeChannels.length > 0 ? activeChannels.join(', ') : 'CLI only'));
   console.log('[Boot] Skills: ' + (skillRegistry.count() > 0 ? skillRegistry.listAll().map(s => s.manifest.name).join(', ') : 'none'));
+  console.log('[Boot] Listening for requests...');
   console.log('');
+
 
   // Graceful Shutdown
   const shutdown = async () => {
     console.log('\n[Boot] Shutting down...');
+    if (fs.existsSync(PID_FILE)) {
+      try { fs.unlinkSync(PID_FILE); } catch (e) { }
+    }
     configService.disableHotReload();
     await channelRegistry.stopAll();
     console.log('[Boot] Goodbye');

@@ -4,15 +4,16 @@
   "description": "Professional Cognitive Kernel for Autonomous Agents",
   "main": "charbi/kernel/event_bus.ts",
   "dependencies": {
+    "events": "^3.3.0",
     "js-yaml": "^4.1.0",
-    "uuid": "^9.0.0",
-    "events": "^3.3.0"
+    "node-telegram-bot-api": "^0.67.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "ts-node": "^10.9.0",
-    "@types/node": "^18.0.0",
     "@types/js-yaml": "^4.0.0",
-    "@types/uuid": "^9.0.0"
+    "@types/node": "^18.0.0",
+    "@types/uuid": "^9.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
   }
 }
