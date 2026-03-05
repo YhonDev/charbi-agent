@@ -36,10 +36,12 @@ def channels_step(options: dict = None) -> dict:
             for c in AVAILABLE_CHANNELS
         ],
         style=questionary.Style([
-            ("selected", "fg:cyan bold"),
+            ("selected", "fg:white"),
             ("pointer", "fg:cyan bold"),
-            ("highlighted", "fg:cyan"),
-        ])
+            ("highlighted", "fg:white"),
+            ("answer", "fg:cyan bold"),
+        ]),
+        pointer="● "
     ).ask()
 
     if not selected:
