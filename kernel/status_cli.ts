@@ -5,7 +5,7 @@ import { StatusService } from './services/status_service';
 
 async function main() {
   try {
-    const status = StatusService.getFullStatus();
+    const status = await StatusService.getFullStatus();
     console.log(JSON.stringify(status, null, 2));
     process.exit(0);
   } catch (e: any) {

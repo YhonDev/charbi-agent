@@ -117,8 +117,20 @@ def main():
 
     # 4. MEMORY
     mem = data.get("memory", {})
+    hybrid = mem.get("hybrid", {})
+    
     console.print(f"\n[bold green]🧠 MEMORY[/bold green]")
-    console.print(f"  • Entries: [bold]{mem.get('count', 0)}[/bold]")
+    
+    # Grid de memoria para mejor lectura
+    mem_table = Table(box=None, show_header=False)
+    mem_table.add_column("Type", style="cyan")
+    mem_table.add_column("Value", style="bold")
+    
+    mem_table.add_row("JSON Entries", str(mem.get('count', 0)))
+    mem_table.add_row("Vector Embeddings", f"[bold magenta]{hybrid.get('vectors', 0)}[/bold magenta]")
+    mem_table.add_row("Knowledge Graph", f"[bold yellow]{hybrid.get('nodes', 0)} nodes, {hybrid.get('edges', 0)} edges[/bold yellow]")
+    
+    console.print(mem_table)
     console.print(f"  • Storage: [dim]{mem.get('path', '-')}[/dim]")
     
     # Footer

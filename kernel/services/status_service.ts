@@ -8,10 +8,20 @@ import { pluginLoader } from '../bootstrap';
 import { memoryManager } from '../cognition/memory_manager';
 import { AuthManager } from '../auth/auth_manager';
 
+import { memoryClient } from '../cognition/memory_client';
+
 export class StatusService {
-  static getFullStatus() {
+  static async getFullStatus() {
     const config = ConfigService.getInstance();
     const provider = config.getProvider();
+
+    let hybridStatus = { vectors: 0, nodes: 0, edges: 0 };
+    try {
+      const res = await memoryClient.call('system.status');
+      hybridStatus = res;
+    } catch (e) {
+      // Silently fail if server not ready
+    }
 
     return {
       system: {
@@ -32,7 +42,10 @@ export class StatusService {
         version: p.manifest.version
       })) || [],
       tools: toolRegistry.listNames(),
-      memory: memoryManager.status()
+      memory: {
+        ...memoryManager.status(),
+        hybrid: hybridStatus
+      }
     };
   }
 }

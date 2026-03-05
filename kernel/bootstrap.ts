@@ -85,6 +85,20 @@ async function boot(): Promise<void> {
   // Step 7: Initialize Services
   console.log('[Boot] Step 7/7: Registering services...');
 
+  // Register Memory Service
+  ServiceManager.register({
+    name: 'memory',
+    type: 'core',
+    start: async () => {
+      const { memoryClient } = await import('./cognition/memory_client');
+      // El constructor ya inicia el proceso, pero aquí podemos validar
+      await memoryClient.call('system.status');
+      console.log('[Boot] MemoryServer (Hybrid) is ACTIVE');
+    },
+    stop: async () => { /* El proceso se cerrará al salir del kernel */ },
+    running: false
+  });
+
   // Register Orchestrator Service
   ServiceManager.register({
     name: 'orchestrator',
@@ -105,6 +119,7 @@ async function boot(): Promise<void> {
     running: true // Assume already started by channelRegistry.startAll() for now
   });
 
+  await ServiceManager.start('memory');
   await ServiceManager.start('orchestrator');
 
   // Emit READY
