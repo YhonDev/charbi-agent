@@ -43,7 +43,8 @@ export class Orchestrator {
         while (step < MAX_COGNITIVE_STEPS) {
           step++;
 
-          // 1. THINK: Build complex context with memory, soul and tools
+          // 1. THINK: Context Assembly
+          this.emitStatus(chatId, 'THINKING', `Ciclo cognitivo: Paso ${step}`);
           const systemPrompt = await contextBuilder.build({
             agentName: analysis.specialist,
             toolsSchema,
@@ -58,41 +59,43 @@ export class Orchestrator {
           }
 
           const content = (llmRes.content || '').trim();
+          const parsed = this.parseCognitiveJSON(content);
 
-          // 2. PARSE: Extract reasoning and tools
-          const toolCall = this.parseToolCall(content);
-
-          // Log thought if present
-          const thoughtMatch = content.match(/\{[\s\S]*"thought"\s*:\s*"([\s\S]*?)"/);
-          if (thoughtMatch) {
-            console.log(`[Orchestrator] Thought (Step ${step}): ${thoughtMatch[1].substring(0, 100)}...`);
-            conversation.push(`Thought: ${thoughtMatch[1]}`);
+          // Log Reasoning
+          if (parsed && parsed.thought) {
+            console.log(`[Orchestrator] Thought (${step}): ${parsed.thought.substring(0, 100)}...`);
+            conversation.push(`Thought: ${parsed.thought}`);
+            if (parsed.plan) conversation.push(`Plan: ${JSON.stringify(parsed.plan)}`);
           }
 
-          if (toolCall) {
-            console.log(`[Orchestrator] Tool call (${step}): ${toolCall.tool}`);
+          // 2. ACT: Check for tool calls
+          if (parsed && parsed.tool) {
+            this.emitStatus(chatId, 'ACTING', `Ejecutando herramienta: ${parsed.tool}`);
+            console.log(`[Orchestrator] Actuating: ${parsed.tool}`);
 
-            // 3. ACT: Execute tool
             const skillMetadata = SkillRegistry.getInstance().get(analysis.specialist);
             const permissions = skillMetadata?.manifest.permissions || ['filesystem.read', 'shell.execute', 'network.access'];
 
+            // 3. OBSERVE: Execute tool and add result to context
             const result = await executeAction({
-              type: toolCall.tool,
+              type: parsed.tool,
               origin: `orchestrator:${analysis.specialist}`,
-              params: toolCall.params,
+              params: parsed.params || {},
               permissions,
             });
 
-            // 4. OBSERVE: Add result to context
             const resultStr = JSON.stringify(result.data || { error: result.error });
-            conversation.push(`Observation (${toolCall.tool}): ${resultStr}`);
+            conversation.push(`Observation (${parsed.tool}): ${resultStr}`);
 
-            // Re-loop for reflection
+            // 4. REFLECT: The next loop iteration will effectively be the reflection phase
+            // as the LLM sees the observation and "thinks" again.
             continue;
           } else {
-            // Final response (remove JSON if any)
+            // 5. RESPOND: No more tools, final answer
             finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
-            if (!finalResponse && thoughtMatch) finalResponse = thoughtMatch[1];
+            if (!finalResponse && parsed && parsed.thought) {
+              finalResponse = parsed.thought;
+            }
             break;
           }
         }
@@ -107,17 +110,24 @@ export class Orchestrator {
     });
   }
 
-  private parseToolCall(content: string): { tool: string; params: any } | null {
+  private parseCognitiveJSON(content: string): any | null {
     try {
       const braceMatch = content.match(/\{[\s\S]*\}/);
       if (!braceMatch) return null;
+      return JSON.parse(braceMatch[0]);
+    } catch {
+      return null;
+    }
+  }
 
-      const parsed = JSON.parse(braceMatch[0]);
-      if (parsed.tool && typeof parsed.tool === 'string') {
-        return { tool: parsed.tool, params: parsed.params || {} };
-      }
-    } catch { }
-    return null;
+  private emitStatus(chatId: string, status: string, message: string) {
+    emitEvent({
+      id: uuidv4(),
+      type: 'AGENT_STATUS',
+      timestamp: Date.now(),
+      origin: 'orchestrator',
+      payload: { chatId, status, message }
+    });
   }
 
   private sendResponse(origin: string, chatId: string, text: string) {
