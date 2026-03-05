@@ -10,7 +10,7 @@ from charbi.wizard.ui_helpers import clear_and_header, print_status, print_secti
 console = Console()
 
 
-async def security_step(options: dict = None) -> dict:
+def security_step(options: dict = None) -> dict:
     """Configura seguridad, autonomía y límites del runtime"""
     clear_and_header(5, "Seguridad y Runtime", "Define los límites y el nivel de autonomía del kernel")
 

@@ -17,7 +17,7 @@ AVAILABLE_CHANNELS = [
 ]
 
 
-async def channels_step(options: dict = None) -> dict:
+def channels_step(options: dict = None) -> dict:
     """Configura los canales de comunicación"""
     clear_and_header(3, "Canales de Comunicación", "Selecciona cómo te comunicarás con Charbi")
 

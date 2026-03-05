@@ -20,7 +20,7 @@ PROVIDERS = [
 ]
 
 
-async def provider_step(options: dict = None) -> dict:
+def provider_step(options: dict = None) -> dict:
     """Ejecuta el paso de selección de proveedor y modelo"""
     clear_and_header(1, "Proveedor de IA", "Selecciona qué motor de inteligencia usará Charbi")
 

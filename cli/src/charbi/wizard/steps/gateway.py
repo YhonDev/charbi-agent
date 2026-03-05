@@ -10,7 +10,7 @@ from charbi.wizard.ui_helpers import clear_and_header, print_status, COLORS
 console = Console()
 
 
-async def gateway_step(options: dict = None) -> dict:
+def gateway_step(options: dict = None) -> dict:
     """Configura el gateway del kernel"""
     clear_and_header(2, "Gateway del Kernel", "Configura cómo se expone el servidor interno de Charbi")
 

@@ -19,7 +19,7 @@ runtime:
   session_path: charbi/runtime/sessions
   isolate_workspace: true
   autonomy:
-    enabled: false
+    enabled: true
     mode: governed
     maxDepth: 2
     maxActionsPerSession: 15
@@ -33,14 +33,24 @@ channels:
     bot_token: 8474865879:AAFT9tGh5VAThl7SOl1mKOOFTS1a5a9gOmk
   whatsapp:
     enabled: false
+  cli:
+    enabled: true
 skills:
   allow_openclaw: true
   auto_load_directory: charbi/agents
   clawhub: true
   github: true
+  web_search: true
+  filesystem: true
+  shell: true
 provider:
   name: ollama
   enabled: true
   model: gpt-oss:120b-cloud
   auth_type: none
   endpoint: http://localhost:11434/v1
+gateway:
+  port: 18789
+  host: 127.0.0.1
+  auth_enabled: true
+  auth_token: 62a41200307813f6b463f21349a54378

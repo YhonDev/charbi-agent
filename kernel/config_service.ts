@@ -6,76 +6,24 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { EventEmitter } from 'events';
 
-// ---------- Tipos ----------
+export const CHARBI_HOME = process.env.CHARBI_HOME || path.join(require('os').homedir(), '.charbi-agent');
+export const CONFIG_PATH = path.join(CHARBI_HOME, 'config', 'charbi-agent.yaml');
 
 export interface CharbiConfig {
-  system: {
-    name: string;
-    version: number;
-    mode: 'development' | 'production' | 'safe';
-  };
-  provider: {
-    name: string;
-    enabled: boolean;
-    model: string;
-    auth_type: string;
-    endpoint: string;
-    api_key_env?: string;
-  };
-  models: {
-    router: string;
-    fallback: string;
-  };
-  gateway?: {
-    port: number;
-    host: string;
-    auth_enabled: boolean;
-    auth_token?: string;
-  };
-  channels: {
-    [name: string]: {
-      enabled: boolean;
-      bot_token?: string;
-      token_env?: string;
-      [key: string]: any;
-    };
-  };
-  skills: {
-    [key: string]: any;
-  };
-  supervisor: {
-    enabled: boolean;
-    policy_file: string;
-    max_cpu_time: number;
-    max_tool_calls?: number;
-    emergency_kill: boolean;
-  };
-  runtime: {
-    session_path: string;
-    isolate_workspace: boolean;
-    autonomy?: {
-      enabled: boolean;
-      mode?: string;
-      maxDepth?: number;
-      maxActionsPerSession?: number;
-      maxExecutionTimeMs?: number;
-      allowShell?: boolean;
-      allowNetwork?: boolean;
-    };
-  };
-  memory?: {
-    kernel_db: string;
-    sessions_db: string;
-  };
+  system: { name: string; version: number; mode: string };
+  provider: { name: string; enabled: boolean; model: string; auth_type: string; endpoint: string; api_key_env?: string };
+  models: { router: string; fallback: string };
+  gateway?: { port: number; host: string; auth_enabled: boolean; auth_token?: string };
+  channels: { [name: string]: { enabled: boolean; bot_token?: string; token_env?: string;[key: string]: any } };
+  skills: { [key: string]: any };
+  supervisor: { enabled: boolean; policy_file: string; max_cpu_time: number; max_tool_calls?: number; emergency_kill: boolean };
+  runtime: { session_path: string; isolate_workspace: boolean; autonomy?: any };
+  memory?: { kernel_db: string; sessions_db: string };
 }
-
-// ---------- Servicio ----------
-
-const CHARBI_HOME = process.env.CHARBI_HOME || path.join(require('os').homedir(), '.charbi-agent');
-const CONFIG_PATH = path.join(CHARBI_HOME, 'config', 'charbi-agent.yaml');
 
 class ConfigService extends EventEmitter {
   private static instance: ConfigService;
+  private config!: CharbiConfig;
   private watcher: fs.FSWatcher | null = null;
 
   private constructor() {
@@ -84,12 +32,12 @@ class ConfigService extends EventEmitter {
   }
 
   static getInstance(): ConfigService {
+    if (!ConfigService.instance) {
       ConfigService.instance = new ConfigService();
     }
     return ConfigService.instance;
   }
 
-  /** Carga la configuración desde disco */
   load(): CharbiConfig {
     try {
       const raw = fs.readFileSync(CONFIG_PATH, 'utf8');
@@ -102,12 +50,7 @@ class ConfigService extends EventEmitter {
     }
   }
 
-  /** Retorna una copia de la config completa */
-  getAll(): CharbiConfig {
-    return { ...this.config };
-  }
-
-  /** Acceso tipado a secciones */
+  getAll(): CharbiConfig { return { ...this.config }; }
   getSystem() { return this.config.system; }
   getProvider() { return this.config.provider; }
   getModels() { return this.config.models; }
@@ -118,20 +61,15 @@ class ConfigService extends EventEmitter {
   getRuntime() { return this.config.runtime; }
   getMemory() { return this.config.memory; }
 
-  /** Acceso por clave con notación de punto */
-  get(path: string): any {
-    const keys = path.split('.');
+  get(dotPath: string): any {
+    const keys = dotPath.split('.');
     let ref: any = this.config;
-    for (const k of keys) {
-      ref = ref?.[k];
-    }
+    for (const k of keys) { ref = ref?.[k]; }
     return ref;
   }
 
-  /** Hot-reload: observa cambios en el archivo */
   enableHotReload(): void {
     if (this.watcher) return;
-
     this.watcher = fs.watch(CONFIG_PATH, (eventType) => {
       if (eventType === 'change') {
         console.log('[ConfigService] Config file changed, reloading...');
@@ -144,11 +82,9 @@ class ConfigService extends EventEmitter {
         }
       }
     });
-
     console.log('[ConfigService] Hot-reload enabled');
   }
 
-  /** Detiene el hot-reload */
   disableHotReload(): void {
     if (this.watcher) {
       this.watcher.close();
@@ -158,4 +94,4 @@ class ConfigService extends EventEmitter {
 }
 
 export default ConfigService;
-export { ConfigService, CONFIG_PATH, CHARBI_HOME };
+export { ConfigService };

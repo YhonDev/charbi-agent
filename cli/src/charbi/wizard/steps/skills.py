@@ -27,7 +27,7 @@ DEFAULT_AGENTS = [
 ]
 
 
-async def skills_step(options: dict = None) -> dict:
+def skills_step(options: dict = None) -> dict:
     """Configura skills y muestra agentes disponibles"""
     clear_and_header(4, "Skills y Agentes", "Configura las habilidades del sistema y revisa los agentes")
 

@@ -4,7 +4,7 @@ Ejecuta los 5 steps en secuencia, merge la config y guarda.
 Equivalente al runWizard() de OpenClaw.
 """
 
-import asyncio
+
 import os
 from pathlib import Path
 from rich.console import Console
@@ -52,7 +52,7 @@ def save_env_vars(env_vars: dict):
             f.write(f"{k}={v}\n")
 
 
-async def run_wizard(options: dict = None):
+def run_wizard(options: dict = None):
     """
     Ejecuta el wizard completo paso a paso.
     Cada step retorna un dict parcial que se merge en la config final.
@@ -70,29 +70,29 @@ async def run_wizard(options: dict = None):
     env_vars = {}
 
     # === PASO 1: Proveedor ===
-    result = await provider_step(options)
+    result = provider_step(options)
     if result:
         if "_env" in result:
             env_vars.update(result["_env"])
         state = deep_merge(state, result)
 
     # === PASO 2: Gateway ===
-    result = await gateway_step(options)
+    result = gateway_step(options)
     if result:
         state = deep_merge(state, result)
 
     # === PASO 3: Canales ===
-    result = await channels_step(options)
+    result = channels_step(options)
     if result:
         state = deep_merge(state, result)
 
     # === PASO 4: Skills ===
-    result = await skills_step(options)
+    result = skills_step(options)
     if result:
         state = deep_merge(state, result)
 
     # === PASO 5: Seguridad ===
-    result = await security_step(options)
+    result = security_step(options)
     if result:
         state = deep_merge(state, result)
 
@@ -110,4 +110,4 @@ async def run_wizard(options: dict = None):
 
 def run_wizard_sync(options: dict = None):
     """Wrapper sincrónico para el wizard"""
-    return asyncio.run(run_wizard(options))
+    return run_wizard(options)
