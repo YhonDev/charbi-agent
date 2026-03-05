@@ -11,13 +11,18 @@ import { SkillRegistry } from './skill_registry';
 import { cognitionLoader } from './cognition_loader';
 
 import { contextBuilder } from './cognition/context_builder';
+import { memoryClient } from './cognition/memory_client';
+import { taskPlanner } from './task_graph/task_planner';
+import { taskExecutor } from './task_graph/task_executor';
+import { Task } from './task_graph/task_types';
 
 const MAX_COGNITIVE_STEPS = 10;
+const COMPLEXITY_THRESHOLD = 0.5;
 
 export class Orchestrator {
   constructor() {
     this.setupListeners();
-    console.log('[Orchestrator] Online (Cognitive Loop Enabled)');
+    console.log('[Orchestrator] Online (Cognitive Loop & Task Graph Enabled)');
   }
 
   private setupListeners() {
@@ -32,6 +37,16 @@ export class Orchestrator {
       try {
         const analysis = await analyzeTask(text);
         console.log(`[Orchestrator] Specialist: ${analysis.specialist} | Complexity: ${analysis.complexity}`);
+
+        // DECISION: Simple Task vs. Complex Project
+        if (analysis.complexity > COMPLEXITY_THRESHOLD) {
+          console.log('[Orchestrator] Iniciando modo PROYECTO (Task Graph)');
+          this.emitStatus(chatId, 'PLANNING', 'Planificando proyecto complejo...');
+
+          const graph = await taskPlanner.plan(text);
+          await taskExecutor.execute(graph, this);
+          return; // Fin del modo proyecto
+        }
 
         const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
 
@@ -113,6 +128,54 @@ export class Orchestrator {
         this.sendResponse(origin, chatId, '❌ Error interno al procesar tu mensaje.');
       }
     });
+  }
+
+  /** Procesa una tarea interna generada por el Task Graph Engine */
+  async processInternalTask(task: Task): Promise<any> {
+    const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
+    let conversation: string[] = [`Task Goal: ${task.description}`];
+    let step = 0;
+
+    console.log(`[Orchestrator] Agente ${task.agent} iniciando tarea: ${task.id}`);
+
+    while (step < MAX_COGNITIVE_STEPS) {
+      step++;
+
+      const systemPrompt = await contextBuilder.build({
+        agentName: task.agent,
+        toolsSchema,
+        userInput: task.description,
+        history: conversation
+      });
+
+      const llmRes = await queryLLM(systemPrompt, conversation.join('\n'));
+      if (!llmRes.success) throw new Error(llmRes.error);
+
+      const content = (llmRes.content || '').trim();
+      const parsed = this.parseCognitiveJSON(content);
+
+      if (parsed && parsed.thought) {
+        conversation.push(`Thought: ${parsed.thought}`);
+      }
+
+      if (parsed && parsed.tool) {
+        const skillMetadata = SkillRegistry.getInstance().get(task.agent);
+        const permissions = skillMetadata?.manifest.permissions || ['filesystem.read', 'shell.execute', 'network.access'];
+
+        const result = await executeAction({
+          type: parsed.tool,
+          origin: `orchestrator:internal:${task.agent}`,
+          params: parsed.params || {},
+          permissions,
+        });
+
+        conversation.push(`Observation (${parsed.tool}): ${JSON.stringify(result.data || result.error)}`);
+        continue; // Re-evaluar con el resultado
+      } else {
+        // Tarea terminada
+        return content.replace(/\{[\s\S]*\}/, '').trim() || (parsed ? parsed.thought : content);
+      }
+    }
   }
 
   /** Extrae aprendizajes y los persiste en la memoria híbrida */
