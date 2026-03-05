@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+cli/venv/
+
+# Build
+dist/
+
+# Cache
+__pycache__/
+*.pyc
+
+# Secretos
+.env
+.env.bak
+
+# Backups de config
+config/backups/
+
+# Logs y runtime
+logs/
+runtime/sessions/
+metrics/
+
+# Cookies y estado
+cookies.json
+state.json
+
+# OS
+.DS_Store
+Thumbs.db

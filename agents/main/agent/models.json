@@ -1,0 +1,30 @@
+{
+  "providers": {
+    "qwen-portal": {
+      "baseUrl": "https://portal.qwen.ai/v1",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "coder-model",
+          "name": "Qwen Coder"
+        },
+        {
+          "id": "vision-model",
+          "name": "Qwen Vision"
+        }
+      ],
+      "apiKey": "qwen-oauth"
+    },
+    "openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "auto",
+          "name": "OpenRouter Auto"
+        }
+      ],
+      "apiKey": "OPENROUTER_API_KEY"
+    }
+  }
+}

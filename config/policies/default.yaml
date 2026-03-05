@@ -1,0 +1,36 @@
+rules:
+  - id: forbid_rm_root
+    deny: true
+    action: shell.execute
+    condition: "command contains 'rm -rf /'"
+
+  - id: deny_kernel_write
+    deny: true
+    action: filesystem.write
+    condition: "path starts_with '/charbi/kernel'"
+
+  - id: allow_network_whitelist
+    deny: false
+    action: network.access
+    condition: "dest_in_whitelist"
+
+  - id: sensitive_file_access
+    escalate: true
+    action: filesystem.read
+    condition: "path contains 'credentials'"
+  - id: allow_session_write
+    deny: false
+    action: filesystem.write
+    condition: "path starts_with 'sessions/'"
+  - id: allow_session_read
+    deny: false
+    action: filesystem.read
+    condition: "path starts_with 'sessions/'"
+  - id: allow_trial_sleep
+    deny: false
+    action: shell.execute
+    condition: "command contains 'sleep'"
+  - id: allow_network_fetch
+    deny: false
+    action: network.fetch
+    condition: "path starts_with 'sessions/'"

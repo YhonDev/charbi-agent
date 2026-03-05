@@ -1,0 +1,46 @@
+system:
+  name: Charbi
+  version: 1.0
+  mode: development
+models:
+  router: gpt-oss:120b-cloud
+  fallback: openrouter-auto
+  test_role: test_model
+memory:
+  kernel_db: charbi/memory/kernel.db
+  sessions_db: charbi/memory/sessions.db
+supervisor:
+  enabled: true
+  policy_file: charbi/config/policies/default.yaml
+  max_cpu_time: 5000
+  max_tool_calls: 20
+  emergency_kill: true
+runtime:
+  session_path: charbi/runtime/sessions
+  isolate_workspace: true
+  autonomy:
+    enabled: false
+    mode: governed
+    maxDepth: 2
+    maxActionsPerSession: 15
+    maxExecutionTimeMs: 30000
+    allowShell: false
+    allowNetwork: false
+channels:
+  telegram:
+    enabled: true
+    token_env: TELEGRAM_TOKEN
+    bot_token: 8474865879:AAFT9tGh5VAThl7SOl1mKOOFTS1a5a9gOmk
+  whatsapp:
+    enabled: false
+skills:
+  allow_openclaw: true
+  auto_load_directory: charbi/agents
+  clawhub: true
+  github: true
+provider:
+  name: ollama
+  enabled: true
+  model: gpt-oss:120b-cloud
+  auth_type: none
+  endpoint: http://localhost:11434/v1

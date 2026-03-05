@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "daily_morning_briefing",
+      "schedule": "0 7 * * *",
+      "timezone": "America/Bogota",
+      "action": "/home/ubuntu/.openclaw/workspace/skills/morning_briefing/briefing.js",
+      "params": {
+        "country_news": "colombia",
+        "global_news": true,
+        "weather_city": "Cartagena,CO",
+        "limit_country": 5,
+        "limit_global": 5
+      },
+      "state": {},
+      "name": "Cron job",
+      "enabled": true,
+      "wakeMode": "now"
+    },
+    {
+      "id": "sima_daily_check",
+      "schedule": "0 12 * * *",
+      "timezone": "America/Bogota",
+      "action": "bash /home/ubuntu/.openclaw/workspace/skills/sima/check-sima.sh check --notify true --horizon 7",
+      "name": "SIMA Daily Check",
+      "state": {},
+      "enabled": true,
+      "wakeMode": "now"
+    }
+  ]
+}

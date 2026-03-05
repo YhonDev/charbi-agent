@@ -1,0 +1,12 @@
+network:
+  allowed_domains:
+    - api.github.com
+    - jsonplaceholder.typicode.com
+    - httpbin.org
+  methods: ["GET"]
+  maxResponseSizeKB: 100
+  timeoutMs: 3000
+  followRedirects: false
+  allowIPs: false
+  maxRequestsPerSession: 5
+  cooldownMs: 1000

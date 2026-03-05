@@ -1,0 +1,28 @@
+#!/bin/bash
+CHARBI_HOME="$HOME/.charbi-agent"
+CHARBI_CLI="$CHARBI_HOME/cli"
+CHARBI_VENV="$CHARBI_CLI/venv"
+CHARBI_PYTHON="$CHARBI_VENV/bin/python3"
+export PYTHONPATH="$CHARBI_CLI/src"
+show_help() {
+    echo "CHARBI CLI - Comandos Disponibles:"
+    echo "  charbi config    - Wizard de configuracion"
+    echo "  charbi onboard   - Setup inicial completo"
+    echo "  charbi start     - Iniciar kernel"
+    echo "  charbi status    - Ver estado del sistema"
+    echo "  charbi auth      - Gestionar autenticacion"
+    echo "  charbi channels  - Gestionar canales"
+    echo "  charbi chat      - Interactuar con el agente"
+    echo "  charbi help      - Mostrar esta ayuda"
+}
+case "${1:-chat}" in
+    config) shift; $CHARBI_PYTHON -m charbi.commands.config "$@" ;;
+    onboard) shift; $CHARBI_PYTHON -m charbi.commands.config onboard "$@" ;;
+    start) shift; echo "Iniciando Charbi Kernel..."; cd "$CHARBI_HOME" && npx ts-node kernel/bootstrap.ts "$@" ;;
+    status) shift; $CHARBI_PYTHON -m charbi.commands.status "$@" ;;
+    auth) shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
+    channels) shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;
+    chat) shift; $CHARBI_PYTHON -m charbi.commands.chat "$@" ;;
+    help|-h|--help) show_help ;;
+    *) echo "Comando desconocido: $1"; show_help ;;
+esac

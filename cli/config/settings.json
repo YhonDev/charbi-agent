@@ -1,0 +1,21 @@
+{
+  "default_provider": "openai",
+  "providers": {
+    "openai": {
+      "model": "gpt-4",
+      "api_key": ""
+    },
+    "anthropic": {
+      "model": "claude-3-opus",
+      "api_key": ""
+    },
+    "local": {
+      "endpoint": "http://localhost:11434/v1",
+      "model": "llama3"
+    }
+  },
+  "ui": {
+    "theme": "dark",
+    "show_welcome": true
+  }
+}

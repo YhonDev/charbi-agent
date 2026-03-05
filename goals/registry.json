@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "goals": [
+    {
+      "id": "goal-1772648221763-p4ib",
+      "schemaVersion": 1,
+      "objective": "Audit all kernel modules for consistency",
+      "agent": "auditor",
+      "status": "completed",
+      "priority": 1,
+      "checkpoints": [
+        {
+          "stepId": "step-1",
+          "status": "success",
+          "timestamp": 1772648221769
+        },
+        {
+          "stepId": "step-2",
+          "status": "success",
+          "timestamp": 1772648221770
+        }
+      ],
+      "lastStepId": "step-2",
+      "dependencies": [],
+      "createdAt": 1772648221763,
+      "updatedAt": 1772648221773,
+      "metadata": {
+        "category": "maintenance"
+      },
+      "hash": "74cd8170d30e194452cac65a277971f8ab379f0be76631dff7a0be7ead9d84db",
+      "completedAt": 1772648221773
+    },
+    {
+      "id": "goal-1772648221766-shnd",
+      "schemaVersion": 1,
+      "objective": "Generate weekly performance report",
+      "agent": "scholar",
+      "status": "pending",
+      "priority": 3,
+      "checkpoints": [],
+      "lastStepId": null,
+      "dependencies": [
+        "goal-1772648221763-p4ib"
+      ],
+      "createdAt": 1772648221766,
+      "updatedAt": 1772648221766,
+      "metadata": {
+        "category": "reporting"
+      },
+      "hash": "9593c57cf4cb2c882b50fede22cdcb06b2a9c8174d4b71b70c8dedfe15d6b452"
+    },
+    {
+      "id": "goal-1772648221768-xyc2",
+      "schemaVersion": 1,
+      "objective": "Scout public API changes on GitHub",
+      "agent": "scout",
+      "status": "pending",
+      "priority": 5,
+      "checkpoints": [],
+      "lastStepId": null,
+      "dependencies": [],
+      "createdAt": 1772648221768,
+      "updatedAt": 1772648221768,
+      "metadata": {
+        "category": "intelligence"
+      },
+      "hash": "2aa5d7815fff00303da486af67c8f950028da6f37bdf3138a7d4dd5bd3445358"
+    },
+    {
+      "id": "goal-1772649417767-h85t",
+      "schemaVersion": 1,
+      "objective": "Monitor releases for nodejs/node",
+      "agent": "version-monitor",
+      "status": "failed",
+      "priority": 2,
+      "checkpoints": [
+        {
+          "stepId": "generate-report",
+          "status": "failed",
+          "timestamp": 1772649417799
+        }
+      ],
+      "lastStepId": "generate-report",
+      "dependencies": [],
+      "createdAt": 1772649417767,
+      "updatedAt": 1772649417800,
+      "metadata": {
+        "repo": "nodejs/node",
+        "type": "version-monitor"
+      },
+      "hash": "7bb6a1e312fb772bbe0509ed3001ec1c4b4547c0e7b49a73c7a01e572d6bd631",
+      "completedAt": 1772649417800
+    },
+    {
+      "id": "goal-1772649486392-a51k",
+      "schemaVersion": 1,
+      "objective": "Monitor releases for nodejs/node",
+      "agent": "version-monitor",
+      "status": "failed",
+      "priority": 2,
+      "checkpoints": [
+        {
+          "stepId": "generate-report",
+          "status": "failed",
+          "timestamp": 1772649486880
+        }
+      ],
+      "lastStepId": "generate-report",
+      "dependencies": [],
+      "createdAt": 1772649486392,
+      "updatedAt": 1772649486881,
+      "metadata": {
+        "repo": "nodejs/node",
+        "type": "version-monitor"
+      },
+      "hash": "79003ae5d8c9afa8c91b9c9637d2ea1c1ebc3f67743e5bc7f249e55cdbdff326",
+      "completedAt": 1772649486881
+    },
+    {
+      "id": "goal-1772649613108-fsvf",
+      "schemaVersion": 1,
+      "objective": "Monitor releases for nodejs/node",
+      "agent": "version-monitor",
+      "status": "completed",
+      "priority": 2,
+      "checkpoints": [
+        {
+          "stepId": "generate-report",
+          "status": "success",
+          "timestamp": 1772649613502
+        }
+      ],
+      "lastStepId": "generate-report",
+      "dependencies": [],
+      "createdAt": 1772649613108,
+      "updatedAt": 1772649613502,
+      "metadata": {
+        "repo": "nodejs/node",
+        "type": "version-monitor"
+      },
+      "hash": "51d8bd2c8ae9438d7f0fc480107f03e278807a7f64a36e5f67e65b7f7cbb0775",
+      "completedAt": 1772649613502
+    },
+    {
+      "id": "goal-1772650094160-uw9v",
+      "schemaVersion": 1,
+      "objective": "Monitor releases for nodejs/node",
+      "agent": "version-monitor",
+      "status": "completed",
+      "priority": 2,
+      "checkpoints": [
+        {
+          "stepId": "generate-report",
+          "status": "success",
+          "timestamp": 1772650094721
+        }
+      ],
+      "lastStepId": "generate-report",
+      "dependencies": [],
+      "createdAt": 1772650094160,
+      "updatedAt": 1772650094721,
+      "metadata": {
+        "repo": "nodejs/node",
+        "type": "version-monitor"
+      },
+      "hash": "7f6fd16cab895287583fd61c27a47d26c702831c8b3e863863135cb9e3cd74fc",
+      "completedAt": 1772650094721
+    },
+    {
+      "id": "goal-1772650307732-8k8k",
+      "schemaVersion": 1,
+      "objective": "Monitor releases for nodejs/node",
+      "agent": "version-monitor",
+      "status": "completed",
+      "priority": 2,
+      "checkpoints": [
+        {
+          "stepId": "generate-report",
+          "status": "success",
+          "timestamp": 1772650308189
+        }
+      ],
+      "lastStepId": "generate-report",
+      "dependencies": [],
+      "createdAt": 1772650307732,
+      "updatedAt": 1772650308189,
+      "metadata": {
+        "repo": "nodejs/node",
+        "type": "version-monitor"
+      },
+      "hash": "0c5f9acc2f5781abc9ab9988b07e763cbcbe8b44edc5053b413708c6d7e17244",
+      "completedAt": 1772650308189
+    }
+  ],
+  "lastModified": 1772650308190
+}

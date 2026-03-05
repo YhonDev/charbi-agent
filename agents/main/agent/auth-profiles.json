@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "profiles": {
+    "google:default": {
+      "type": "api_key",
+      "provider": "google",
+      "key": "GOOGLE_API_KEY"
+    },
+    "qwen-portal:default": {
+      "type": "oauth",
+      "provider": "qwen-portal",
+      "access": "GixAwP91S1hPQFQzfTbyMEWSTuLRyqiASeePoFRhSinYrL-GPht-nhE1hHkQLo4dJgRucghqWePBl0HICaIm6g",
+      "refresh": "G2nMEGjCYeE1JNU857h_eywpqpSEIBHpaQNjqD3aYhlq0iAg7ZM9MYs0p6klh-ikZWpF81QbD5iXNSQ7V2RrSQ",
+      "expires": 1772515320586
+    },
+    "openrouter:default": {
+      "type": "api_key",
+      "provider": "openrouter",
+      "key": "OPENROUTER_API_KEY"
+    }
+  },
+  "usageStats": {
+    "google:default": {
+      "lastUsed": 1772561333978,
+      "errorCount": 0
+    },
+    "qwen-portal:default": {
+      "lastUsed": 1772515353675,
+      "errorCount": 0
+    },
+    "openrouter:default": {
+      "lastUsed": 1772548507232,
+      "errorCount": 0
+    }
+  }
+}

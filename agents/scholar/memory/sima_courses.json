@@ -1,0 +1,41 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "name": "Nombre del curso\nCURSOS DE INGLES - INGLÉS III - B9 - 2026 - 1",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2040",
+      "id": "2040"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - ANÁLISIS Y DISEÑO DE SOFTWARE - G2 - ...",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2966",
+      "id": "2966"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - BASE DE DATOS I - G2 - 2026 - 1",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2967",
+      "id": "2967"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - CÁLCULO VECTORIAL - B1 - 2026 - 1",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2150",
+      "id": "2150"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - DESARROLLO DE SOFTWARE - B1 - 2026 - 1",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2151",
+      "id": "2151"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - FÍSICA I [FÍSICA-MECÁNICA Y ...",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2152",
+      "id": "2152"
+    },
+    {
+      "name": "Nombre del curso\nINGENIERÍA DE SOFTWARE - CARTAGENA - PRODUCCIÓN Y COMPRENSIÓN TEXTUAL II - B1 ...",
+      "link": "https://sima.unicartagena.edu.co/course/view.php?id=2153",
+      "id": "2153"
+    }
+  ],
+  "timestamp": "2026-03-03T01:13:09.523Z"
+}
