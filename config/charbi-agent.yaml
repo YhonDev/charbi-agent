@@ -3,7 +3,7 @@ system:
   version: 1.0
   mode: development
 models:
-  router: qwen-max
+  router: gpt-oss:120b-cloud
   fallback: openrouter-auto
   test_role: test_model
 memory:
@@ -12,8 +12,8 @@ memory:
 supervisor:
   enabled: true
   policy_file: charbi/config/policies/default.yaml
-  max_cpu_time: 3000
-  max_tool_calls: 10
+  max_cpu_time: 5000
+  max_tool_calls: 20
   emergency_kill: true
 runtime:
   session_path: charbi/runtime/sessions
@@ -42,15 +42,15 @@ skills:
   github: true
   web_search: true
   filesystem: true
-  shell: false
+  shell: true
 provider:
-  name: qwen
+  name: ollama
   enabled: true
-  model: qwen-max
-  auth_type: oauth
-  endpoint: https://chat.qwen.ai/api/v1
+  model: gpt-oss:120b-cloud
+  auth_type: none
+  endpoint: http://localhost:11434/v1
 gateway:
   port: 18789
   host: 127.0.0.1
   auth_enabled: true
-  auth_token: 6cb03826d07bbfcb1a9e0fa7b747f669
+  auth_token: 9ec6604dd739abb65f6d240e02cc987c

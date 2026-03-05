@@ -101,6 +101,11 @@ export class Orchestrator {
         }
 
         if (!finalResponse) finalResponse = '⚠️ No se pudo generar una respuesta.';
+
+        // 6. LEARN: Post-task reflection and storage
+        this.emitStatus(chatId, 'LEARNING', 'Extrayendo conocimientos de la tarea...');
+        this.learnFromInteraction(text, finalResponse, conversation);
+
         this.sendResponse(origin, chatId, finalResponse);
 
       } catch (error: any) {
@@ -108,6 +113,50 @@ export class Orchestrator {
         this.sendResponse(origin, chatId, '❌ Error interno al procesar tu mensaje.');
       }
     });
+  }
+
+  /** Extrae aprendizajes y los persiste en la memoria híbrida */
+  private async learnFromInteraction(input: string, output: string, history: string[]) {
+    try {
+      const learningPrompt = `
+Eres el sistema de aprendizaje de Charbi. Analiza esta interacción y extrae:
+1. Hechos nuevos sobre el usuario o el sistema.
+2. Relaciones (Sujeto -> Relación -> Objeto).
+3. Lecciones aprendidas (ej: "cuando el usuario pide X, prefiere Y").
+
+INTERACCIÓN:
+Usuario: ${input}
+Charbi: ${output}
+Historial detallado: ${history.join('\n')}
+
+Responde únicamente con un objeto JSON:
+{"learnings": ["..."], "relations": [{"s": "...", "r": "...", "o": "..."}]}
+`;
+      const res = await queryLLM(learningPrompt, "Sistema de Aprendizaje Activo");
+      if (res.success && res.content) {
+        const learned = this.parseCognitiveJSON(res.content);
+        if (learned) {
+          const { memoryManager } = await import('./cognition/memory_manager');
+
+          // Guardar aprendizajes en memoria vectorial (vía bridge)
+          for (const l of learned.learnings || []) {
+            await memoryManager.store(l, 'learning');
+          }
+
+          // Guardar relaciones en el grafo
+          for (const rel of learned.relations || []) {
+            await memoryClient.call('graph.add_relation', {
+              subject: rel.s,
+              relation: rel.r,
+              object: rel.o
+            });
+          }
+          console.log(`[Orchestrator] Aprendizaje completado: ${learned.learnings?.length || 0} lecciones, ${learned.relations?.length || 0} relaciones.`);
+        }
+      }
+    } catch (e) {
+      console.error('[Orchestrator] Error en fase de aprendizaje:', e);
+    }
   }
 
   private parseCognitiveJSON(content: string): any | null {
