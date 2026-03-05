@@ -62,22 +62,36 @@ def provider_step(options: dict = None) -> dict:
             f"API Key de {provider['name'].upper()}:"
         ).ask()
 
-        if not api_key:
-            print_status("API Key requerida. Puedes configurarla después con 'charbi config set'.", "warning")
+        if api_key:
+            # Guardar en TokenStore vía charbi auth
+            try:
+                subprocess.run(["charbi", "auth", provider["name"], "--key", api_key], check=False)
+            except Exception:
+                pass
+        else:
+            print_status("API Key requerida. Puedes configurarla después con 'charbi auth'.", "warning")
+            
     elif provider["auth"] == "oauth":
-        print_status("Este proveedor usa OAuth. Ejecuta 'charbi auth qwen' después.", "info")
+        if questionary.confirm("¿Deseas iniciar sesión ahora interactivamente?").ask():
+            try:
+                subprocess.run(["charbi", "auth", provider["name"]], check=False)
+            except Exception:
+                print_status(f"No se pudo iniciar el flujo automático. Ejecuta 'charbi auth {provider['name']}' después.", "warning")
+        else:
+            print_status(f"Recuerda ejecutar 'charbi auth {provider['name']}' para habilitar este proveedor.", "info")
 
     # --- Seleccionar Modelo ---
     console.print(f"\n[{COLORS['header']}]Selecciona el modelo:[/{COLORS['header']}]")
 
     with console.status(f"[{COLORS['accent']}]Buscando modelos disponibles...[/{COLORS['accent']}]", spinner="dots"):
+        # Intentar obtener modelos. Si no hay API key todavía (OAuth), esto puede fallar
         models = ModelFetcher.fetch_models(provider["name"], api_key)
 
     if not models:
-        print_status("No se encontraron modelos. Usando configuración manual.", "warning")
+        print_status("No se pudieron auto-detectar modelos. Usando configuración manual.", "warning")
         model_id = questionary.text(
-            "Nombre del modelo (ej: llama3.2, gpt-4):"
-        ).ask() or "default"
+            "Nombre del modelo (ej: llama3.2, gpt-4, gpt-4o, qwen2.5-coder):"
+        ).ask() or ( "qwen2.5-coder" if provider["name"] == "ollama" else "default")
     else:
         model_choices = [f"{m['name']} ({m['id']})" for m in models]
         selected_model = questionary.select(
@@ -112,9 +126,9 @@ def provider_step(options: dict = None) -> dict:
         }
     }
 
+    # Mantener env para compatibilidad si el usuario lo prefiere
     if api_key:
         result["provider"]["api_key_env"] = f"{provider['name'].upper()}_API_KEY"
-        # Guardar en .env también
         result["_env"] = {f"{provider['name'].upper()}_API_KEY": api_key}
 
     return result

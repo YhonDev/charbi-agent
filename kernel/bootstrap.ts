@@ -10,6 +10,7 @@ import { SkillRegistry } from './skill_registry';
 import { Orchestrator } from './orchestrator';
 import { emitEvent } from './event_bus';
 import { ServiceManager } from './runtime/service_manager';
+import { providerRegistry } from './providers/provider_registry';
 import fs from 'fs';
 import path from 'path';
 
@@ -60,7 +61,12 @@ async function boot(): Promise<void> {
   const plugins = pluginLoader.listPlugins();
   console.log('[Boot] Discovered plugins: ' + plugins.length);
 
-  // Step 4: Register in SkillRegistry
+  // Step 4: Load LLM Providers
+  console.log('[Boot] Step 4/6: Loading LLM providers...');
+  await providerRegistry.loadProviders();
+  console.log('[Boot] Providers available: ' + providerRegistry.list().join(', '));
+
+  // Step 5: Register in SkillRegistry
   console.log('[Boot] Step 4/5: Registering skills...');
   const skillRegistry = new SkillRegistry();
   for (const plugin of plugins) {
