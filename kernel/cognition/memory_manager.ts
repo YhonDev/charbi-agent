@@ -4,6 +4,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { memoryClient } from './memory_client';
 
 export interface MemoryEntry {
   id: string;
@@ -48,7 +49,7 @@ class MemoryManager {
     }
   }
 
-  store(content: string, category: string = 'general', metadata: any = {}): string {
+  async store(content: string, category: string = 'general', metadata: any = {}): Promise<string> {
     const id = Math.random().toString(36).substring(2, 9);
     const entry: MemoryEntry = {
       id,
@@ -59,6 +60,20 @@ class MemoryManager {
     };
     this.memories.push(entry);
     this.save();
+
+    // Integración con Memoria Híbrida (Vectores)
+    if (metadata.vector) {
+      try {
+        await memoryClient.call('memory.store', {
+          text: content,
+          vector: metadata.vector,
+          metadata: { id, category, ...metadata }
+        });
+      } catch (e) {
+        console.error('[MemoryManager] Error sync with HybridMemory:', e);
+      }
+    }
+
     console.log(`[MemoryManager] Memorizado en ${category}: ${content.substring(0, 50)}...`);
     return id;
   }
