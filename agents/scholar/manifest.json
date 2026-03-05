@@ -1,0 +1,11 @@
+{
+  "name": "scholar",
+  "description": "Scholar Specialist — monitorea SIMA, genera briefings académicos",
+  "version": "1.0.0",
+  "entry": "SOUL.md",
+  "type": "agent",
+  "permissions": [
+    "network.access",
+    "filesystem.read"
+  ]
+}

@@ -10,6 +10,7 @@ show_help() {
     echo "  charbi onboard   - Setup inicial completo"
     echo "  charbi start     - Iniciar kernel"
     echo "  charbi status    - Ver estado del sistema"
+    echo "  charbi skill     - Gestionar skills y plugins"
     echo "  charbi auth      - Gestionar autenticacion"
     echo "  charbi channels  - Gestionar canales"
     echo "  charbi chat      - Interactuar con el agente"
@@ -20,6 +21,7 @@ case "${1:-chat}" in
     onboard) shift; $CHARBI_PYTHON -m charbi.commands.config onboard "$@" ;;
     start) shift; echo "Iniciando Charbi Kernel..."; cd "$CHARBI_HOME" && npx ts-node kernel/bootstrap.ts "$@" ;;
     status) shift; $CHARBI_PYTHON -m charbi.commands.status "$@" ;;
+    skill) shift; $CHARBI_PYTHON -m charbi.commands.skill "$@" ;;
     auth) shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
     channels) shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;
     chat) shift; $CHARBI_PYTHON -m charbi.commands.chat "$@" ;;

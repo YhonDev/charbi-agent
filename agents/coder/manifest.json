@@ -1,0 +1,12 @@
+{
+  "name": "coder",
+  "description": "Coder Specialist — genera y modifica código bajo demanda",
+  "version": "1.0.0",
+  "entry": "SOUL.md",
+  "type": "agent",
+  "permissions": [
+    "filesystem.read",
+    "filesystem.write",
+    "shell.execute"
+  ]
+}

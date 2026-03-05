@@ -1,11 +1,12 @@
 // kernel/bootstrap.ts
 // Boot sequence para Charbi Kernel.
-// Config -> Channels -> Plugins -> EventBus -> READY
+// Config -> Channels -> Plugins -> SkillRegistry -> EventBus -> READY
 
 import { v4 as uuidv4 } from 'uuid';
 import ConfigService from './config_service';
 import { ChannelRegistry } from './channel_registry';
 import { PluginLoader } from './plugin_loader';
+import { SkillRegistry } from './skill_registry';
 import { emitEvent } from './event_bus';
 
 async function boot(): Promise<void> {
@@ -40,14 +41,23 @@ async function boot(): Promise<void> {
   console.log('[Boot] Active channels: ' + (activeChannels.length > 0 ? activeChannels.join(', ') : 'none'));
 
   // Step 3: Load Plugins
-  console.log('[Boot] Step 3/4: Scanning plugins...');
+  console.log('[Boot] Step 3/5: Scanning plugins...');
   const pluginLoader = new PluginLoader();
   await pluginLoader.scan();
   const plugins = pluginLoader.listPlugins();
-  console.log('[Boot] Registered plugins: ' + plugins.length);
+  console.log('[Boot] Discovered plugins: ' + plugins.length);
 
-  // Step 4: Emit READY
-  console.log('[Boot] Step 4/4: Emitting READY event...');
+  // Step 4: Register in SkillRegistry
+  console.log('[Boot] Step 4/5: Registering skills...');
+  const skillRegistry = new SkillRegistry();
+  for (const plugin of plugins) {
+    skillRegistry.register(plugin.manifest as any, plugin.path);
+  }
+  console.log('[Boot] Registered skills: ' + skillRegistry.count());
+
+  // Step 5: Emit READY
+  console.log('[Boot] Step 5/5: Emitting READY event...');
+  const bootTimeMs = Date.now() - startTime;
   emitEvent({
     id: uuidv4(),
     type: 'SYSTEM_READY',
@@ -58,14 +68,15 @@ async function boot(): Promise<void> {
       version: system.version,
       channels: activeChannels,
       plugins: plugins.map(p => p.manifest.name),
-      bootTimeMs: Date.now() - startTime,
+      skills: skillRegistry.listAll().map(s => s.manifest.name),
+      bootTimeMs,
     }
   });
 
-  const elapsed = Date.now() - startTime;
   console.log('');
-  console.log('[Boot] Charbi Kernel is READY (' + elapsed + 'ms)');
+  console.log('[Boot] Charbi Kernel is READY (' + bootTimeMs + 'ms)');
   console.log('[Boot] Channels: ' + (activeChannels.length > 0 ? activeChannels.join(', ') : 'CLI only'));
+  console.log('[Boot] Skills: ' + (skillRegistry.count() > 0 ? skillRegistry.listAll().map(s => s.manifest.name).join(', ') : 'none'));
   console.log('');
 
   // Graceful Shutdown
