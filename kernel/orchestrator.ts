@@ -8,36 +8,11 @@ import { queryLLM } from './llm_connector';
 import { executeAction, getAvailableTools } from './action_handlers';
 import { v4 as uuidv4 } from 'uuid';
 import { SkillRegistry } from './skill_registry';
+import { cognitionLoader } from './cognition_loader';
 
 const MAX_TOOL_LOOPS = 5; // Máximo de iteraciones tool-calling
 
-// Prompt del sistema con las herramientas disponibles (schemas estructurados)
-function buildSystemPrompt(): string {
-  const tools = getAvailableTools();
-  const toolSchemas = JSON.stringify(tools, null, 2);
-
-  return `Eres Charbi, un agente de IA operativo con acceso a herramientas del sistema.
-Tu objetivo es ayudar al usuario realizando acciones reales cuando sea necesario.
-
-HERRAMIENTAS DISPONIBLES (JSON Schema):
-${toolSchemas}
-
-INSTRUCCIONES DE USO:
-1. Si necesitas realizar una acción, responde ÚNICAMENTE con la herramienta en formato JSON.
-2. Formato de respuesta para herramientas:
-{"tool": "nombre.herramienta", "params": {"param1": "valor1", ...}}
-
-3. Ejemplos críticos:
-- Para listar archivos: {"tool": "system.read", "params": {"path": "/home/yhondev/.charbi-agent"}}
-- Para escribir: {"tool": "system.write", "params": {"path": "ejemplo.txt", "content": "hola"}}
-- Para buscar: {"tool": "system.search", "params": {"query": "clima en medellin"}}
-
-REGLAS:
-- No inventes herramientas. Solo usa las listadas arriba.
-- Si no necesitas herramientas, responde normalmente en texto plano (español).
-- Después de una acción, analiza el resultado y finaliza la tarea.
-- Sé conciso y eficiente.`;
-}
+// The static buildSystemPrompt is removed in favor of cognitionLoader.buildSystemPrompt()
 
 export class Orchestrator {
   constructor() {
@@ -57,8 +32,11 @@ export class Orchestrator {
         const analysis = await analyzeTask(text);
         console.log(`[Orchestrator] Specialist: ${analysis.specialist} | Complexity: ${analysis.complexity}`);
 
+        // Build dynamic system prompt using Cognition Layer
+        const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
+        const systemPrompt = cognitionLoader.buildSystemPrompt(analysis.specialist, toolsSchema);
+
         // Tool calling loop
-        const systemPrompt = buildSystemPrompt();
         let conversation = text;
         let finalResponse = '';
 
