@@ -23,17 +23,19 @@ export async function analyzeTask(userInput: string): Promise<TaskAnalysis> {
 Analiza la solicitud del usuario y determina el especialista y la complejidad del proyecto.
 
 ESPECIALISTAS:
-- 'director': Saludos, charla general o ayuda.
-- 'coder': Programación, scripts o análisis de código.
-- 'researcher': Búsqueda de información, noticias o investigación web.
-- 'operator': Comandos de shell, archivos o sistema.
+- 'director': Saludos, charla general, ayuda sobre Charbi o supervisión de tareas. Es capaz de usar herramientas de sistema para obtener contexto si lo cree necesario.
+- 'coder': Consultas de programación, depuración, creación de scripts o proyectos de código.
+- 'researcher': Búsqueda de información, noticias o investigación profunda.
+- 'operator': Comandos de shell, gestión de archivos y sistema.
 
 COMPLEJIDAD (0.0 a 1.0):
-- 0.1: Pregunta de conocimiento general que PUEDES responder directamente.
-- 0.5+: Tarea que requiere usar UNA herramienta (buscar, leer archivo). DEBE ser >= 0.5.
-- 0.8+: Tarea de múltiples pasos o investigación profunda.
+- 0.1: Pregunta directa de conocimiento (incluyendo "cómo funciona X" o "resumen de Y"). Charla educativa.
+- 0.6+: Solicitud de ACCIÓN (ej: "crea un archivo", "investiga y guarda", "haz un proyecto"). 
+- 0.8+: Proyectos multi-paso complejos.
 
-IMPORTANTE: Si el usuario pide investigar, crear archivos o ejecutar comandos, la complejidad DEBE ser alta para activar el MOTOR DE PROYECTOS.
+REGLA CRÍTICA PARA CODER:
+- Si el usuario pregunta "qué es Java" o "cómo funciona un bucle", complejidad = 0.1 (Simple Chat).
+- Si el usuario dice "crea un script en Java" o "ejecuta este código", complejidad = 0.7 (Modo Proyecto).
 
 SOLICITUD: "${userInput}"
 
