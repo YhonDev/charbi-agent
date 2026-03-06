@@ -6,20 +6,23 @@
 import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
 import {
   TaskGraphTestHelper,
-  createTestTask,
-  createTestTaskGraph,
   waitForCondition
 } from './helpers/task-graph-test-helpers';
 
 // ✅ Helper global para todos los tests
 const testHelper = new TaskGraphTestHelper();
 
-// ✅ Mock de EventBus CON LOGGING
-jest.mock('../../../kernel/event_bus', () => ({
-  eventBus: testHelper.createMockEventBus(),
-  EventType: jest.requireActual('../../../kernel/event_bus').EventType,
-  emitEvent: jest.fn((e) => testHelper.getEmitter().emit(e.type, e))
-}));
+// ✅ Mock de EventBus CON LOGGING (Usando la implementación real del helper)
+jest.mock('../../../kernel/event_bus', () => {
+  const actual = jest.requireActual('../../../kernel/event_bus');
+  return {
+    ...actual,
+    eventBus: testHelper.createMockEventBus(),
+    emitEvent: jest.fn((e) => {
+      testHelper.getEmitter().emit(e.type, e);
+    })
+  };
+});
 
 // ✅ Mock de IntelligenceProxy
 jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
@@ -35,11 +38,19 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
           content: JSON.stringify({
             tasks: [
               {
+                id: 'task_1',
                 description: 'Create test file',
                 tool: 'system.write',
                 toolArgs: { path: '/tmp/test.txt', content: 'test' },
                 dependencies: [],
               },
+              {
+                id: 'task_2',
+                description: 'List files',
+                tool: 'system.list',
+                toolArgs: { path: '/tmp' },
+                dependencies: ['task_1'],
+              }
             ],
           }),
           toolCalls: [],
@@ -50,10 +61,13 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
   },
 }));
 
-// Mock de ToolRegistry para evitar escaneo real
+// Mock de ToolRegistry
 jest.mock('../../../kernel/tool_registry', () => ({
   toolRegistry: {
-    getTool: jest.fn((name) => ({ schema: { name }, handler: jest.fn() })),
+    getTool: jest.fn((name) => ({
+      schema: { name, description: 'mock tool' },
+      handler: jest.fn().mockResolvedValue({ success: true, data: {} })
+    })),
     getAllSchemas: jest.fn(() => []),
     listNames: jest.fn(() => [])
   }
@@ -74,10 +88,26 @@ describe('TaskGraphEngine', () => {
     // ✅ Obtener instancia fresca
     taskGraphEngine = TaskGraphEngine.getInstance();
     correlationId = `test_${Date.now()}`;
+
+    console.log('\n' + '='.repeat(80));
+    console.log(`STARTING TEST: ${expect.getState().currentTestName}`);
+    console.log('='.repeat(80) + '\n');
   });
 
   afterEach(() => {
+    console.log('\n' + '='.repeat(80));
+    console.log(`ENDING TEST: ${expect.getState().currentTestName}`);
+
+    // ✅ Imprimir flujo de eventos si el test falló
+    if (expect.getState().numFailedTests && expect.getState().numFailedTests > 0) {
+      console.log('\n⚠️  TEST FAILED - EVENT FLOW:\n');
+      testHelper.printFlow(correlationId);
+    }
+
+    console.log('='.repeat(80) + '\n');
+
     testHelper.reset();
+    jest.clearAllMocks();
   });
 
   // ═══════════════════════════════════════════════════════════════════════
@@ -85,21 +115,16 @@ describe('TaskGraphEngine', () => {
   // ═══════════════════════════════════════════════════════════════════════
 
   describe('Complexity Assessment', () => {
-    it('should detect simple tasks (score < 40/60 threshold)', async () => {
-      // Usamos una cadena simple que no dispare patrones
+    it('should detect simple tasks (score < 40 threshold)', async () => {
       const result = await taskGraphEngine.assessComplexity('Hola');
-
-      expect(result).toBeDefined();
       expect(result.isComplex).toBe(false);
       expect(result.score).toBeLessThan(40);
-
       console.log(`✅ Simple prompt detected: "Hola" (score: ${result.score})`);
     });
 
     it('should detect complex tasks using patterns', async () => {
-      // Cadena con muchos verbos de acción
-      const prompt = 'Crea, analiza, investiga y luego escribe un reporte';
-      const result = await taskGraphEngine.assessComplexity(prompt);
+      const prompt = 'Crea, analiza, investiga y luego escribe un reporte en /home/yhondev/reporte.txt';
+      const result = await taskGraphEngine.assessComplexity(prompt, correlationId);
 
       expect(result.isComplex).toBe(true);
       expect(result.score).toBeGreaterThanOrEqual(40);
@@ -123,7 +148,7 @@ describe('TaskGraphEngine', () => {
 
       expect(graph).toBeDefined();
       expect(graph.objective).toBe('Create a simple website');
-      expect(graph.tasks.length).toBeGreaterThan(0);
+      expect(graph.tasks.length).toBe(2);
       expect(graph.correlationId).toBe(correlationId);
       expect(graph.status).toBe('executing');
 
@@ -132,10 +157,7 @@ describe('TaskGraphEngine', () => {
 
     it('should emit task.created event', async () => {
       await taskGraphEngine.create('Test task', correlationId, 'chat-1', 'web');
-
-      // ✅ Usar helper para verificar evento (usando nombres de eventos reales de event_bus.ts)
       testHelper.assertEventOccurred('task.created', correlationId);
-
       console.log('✅ task.created event emitted');
     });
   });
@@ -145,46 +167,68 @@ describe('TaskGraphEngine', () => {
   // ═══════════════════════════════════════════════════════════════════════
 
   describe('Task Execution', () => {
-    it('should get next pending task', async () => {
-      const graph = await taskGraphEngine.create('Test task', correlationId, 'chat-1', 'web');
-      const task = taskGraphEngine.getNextTask(graph.id);
+    it('should respect task dependencies', async () => {
+      const graph = await taskGraphEngine.create('Multi-step task', correlationId, 'chat-1', 'web');
 
-      expect(task).toBeDefined();
-      expect(task!.status).toBe('in_progress');
+      // La primera tarea debe ser task_1 (sin dependencias)
+      const task1 = taskGraphEngine.getNextTask(graph.id);
+      expect(task1!.id).toBe('task_1');
 
-      console.log(`✅ Task retrieved: ${task!.id}`);
+      // La segunda tarea (task_2) no debería estar disponible aún
+      const task2Placeholder = taskGraphEngine.getNextTask(graph.id);
+      expect(task2Placeholder).toBeNull(); // Porque task_1 está in_progress
+
+      // Completamos task_1
+      taskGraphEngine.completeTask(graph.id, 'task_1', { success: true });
+
+      // Ahora task_2 debería estar disponible
+      const task2 = taskGraphEngine.getNextTask(graph.id);
+      expect(task2!.id).toBe('task_2');
+
+      console.log('✅ Dependencies respected correctly');
     });
 
-    it('should complete task successfully', async () => {
-      const graph = await taskGraphEngine.create('Test task', correlationId, 'chat-1', 'web');
+    it('should complete graph when all tasks succeed', async () => {
+      const graph = await taskGraphEngine.create('Full project', correlationId, 'chat-1', 'web');
+
+      // Completar task_1
+      const t1 = taskGraphEngine.getNextTask(graph.id);
+      taskGraphEngine.completeTask(graph.id, t1!.id, { success: true });
+
+      // Completar task_2
+      const t2 = taskGraphEngine.getNextTask(graph.id);
+      taskGraphEngine.completeTask(graph.id, t2!.id, { success: true });
+
+      // ✅ Esperar a que el grafo se complete (async internal event handling)
+      await waitForCondition(
+        () => taskGraphEngine.getGraph(graph.id)?.status === 'completed',
+        2000,
+        'graph completion'
+      );
+
+      const finalGraph = taskGraphEngine.getGraph(graph.id);
+      expect(finalGraph!.status).toBe('completed');
+
+      testHelper.assertEventOccurred('agent.response', correlationId);
+      testHelper.printFlow(correlationId);
+
+      console.log('✅ Graph completed successfully');
+    });
+
+    it('should fail task and retry', async () => {
+      const graph = await taskGraphEngine.create('Retry test', correlationId, 'chat-1', 'web');
       const task = taskGraphEngine.getNextTask(graph.id);
 
-      const result = { success: true, data: 'test data' };
-      taskGraphEngine.completeTask(graph.id, task!.id, result);
+      taskGraphEngine.failTask(graph.id, task!.id, 'Network error');
 
       const updatedGraph = taskGraphEngine.getGraph(graph.id);
-      const completedTask = updatedGraph!.tasks.find(t => t.id === task!.id);
+      const failedTask = updatedGraph!.tasks.find(t => t.id === task!.id);
 
-      expect(completedTask!.status).toBe('completed');
+      expect(failedTask!.status).toBe('failed');
+      expect(failedTask!.retryCount).toBe(1);
 
-      // ✅ Verificar evento emitido
-      testHelper.assertEventOccurred('task.completed', correlationId);
-
-      console.log('✅ Task completed successfully');
-    });
-
-    it('should fail task and increment retryCount', async () => {
-      const graph = await taskGraphEngine.create('Test task', correlationId, 'chat-1', 'web');
-      const task = taskGraphEngine.getNextTask(graph.id);
-
-      taskGraphEngine.failTask(graph.id, task!.id, 'Error 1');
-
-      const updatedTask = taskGraphEngine.getGraph(graph.id)!.tasks.find(t => t.id === task!.id);
-      expect(updatedTask!.retryCount).toBe(1);
-      expect(updatedTask!.status).toBe('failed');
-
-      // ✅ Verificar evento de fallo
       testHelper.assertEventOccurred('task.failed', correlationId);
+      console.log('✅ Task failed and retry count incremented');
     });
   });
 });

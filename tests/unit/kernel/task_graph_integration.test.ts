@@ -28,6 +28,7 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
         content: JSON.stringify({
           tasks: [
             {
+              id: 'int_task_1',
               description: 'Integration test task',
               tool: 'system.write',
               toolArgs: { path: '/tmp/integration.txt', content: 'integration' },
@@ -44,7 +45,10 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
 // Mock de ToolRegistry
 jest.mock('../../../kernel/tool_registry', () => ({
   toolRegistry: {
-    getTool: jest.fn((name) => ({ schema: { name }, handler: jest.fn() })),
+    getTool: jest.fn((name) => ({
+      schema: { name, description: 'mock tool' },
+      handler: jest.fn().mockResolvedValue({ success: true, data: {} })
+    })),
     getAllSchemas: jest.fn(() => []),
     listNames: jest.fn(() => [])
   }
@@ -72,7 +76,8 @@ describe('TaskGraph Integration', () => {
 
     // Buscar el evento de creación de grafo/tarea
     const emitCalls = mockEventBus.emit.mock.calls;
-    const eventTypes = emitCalls.map((call: any[]) => call[0]);
+    // @ts-ignore
+    const eventTypes = emitCalls.map(call => call[0]);
 
     expect(eventTypes).toContain('task.created');
 
@@ -84,7 +89,7 @@ describe('TaskGraph Integration', () => {
     const graph = await taskGraphEngine.create('Event test', correlationId, 'chat-1', 'web');
     const task = taskGraphEngine.getNextTask(graph.id);
 
-    // ✅ Simular evento tool.result de otro componente (Orchestrator)
+    // ✅ Simular evento tool.result de otro componente (Orchestrator/Executor)
     testHelper.getEmitter().emit('tool.result', {
       payload: {
         graphId: graph.id,

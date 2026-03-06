@@ -36,7 +36,8 @@ export class TaskGraphTestHelper {
       'tool.called',
       'tool.result',
       'agent.response',
-      'agent.status'
+      'agent.status',
+      'system.ready'
     ];
 
     for (const eventType of criticalEvents) {
@@ -50,10 +51,14 @@ export class TaskGraphTestHelper {
    * ✅ Loguea evento con timestamp relativo
    */
   private logEvent(eventType: string, event: any): void {
+    // Si es un KernelEvent, el payload está en .payload
+    const payload = event.payload || event;
+    const corrId = event.correlationId || payload.correlationId || 'unknown';
+
     const entry: TestEvent = {
       type: eventType,
-      payload: event.payload || event,
-      correlationId: (event.payload?.correlationId || event.correlationId || 'unknown'),
+      payload: payload,
+      correlationId: corrId,
       timestamp: Date.now() - this.startTime,
     };
 
@@ -63,8 +68,8 @@ export class TaskGraphTestHelper {
     console.log(
       `[EVENT ${entry.timestamp.toString().padStart(5, '0')}ms]`,
       eventType.padEnd(20, ' '),
-      `| CorrID: ${entry.correlationId.substring(0, 8)}`,
-      `| ${JSON.stringify(entry.payload).substring(0, 100)}`
+      `| CorrID: ${corrId.substring(0, 8)}`,
+      `| ${JSON.stringify(payload).substring(0, 100)}`
     );
   }
 
@@ -114,14 +119,14 @@ export class TaskGraphTestHelper {
   private getEventIcon(eventType: string): string {
     const icons: Record<string, string> = {
       'user.request': '📩',
-      'task.created': '📋',
+      'task.created': '✅',
       'task.started': '▶️',
       'task.completed': '✓',
       'task.failed': '✗',
       'tool.called': '🔧',
       'tool.result': '📤',
       'agent.response': '🎉',
-      'agent.status': '💡'
+      'agent.status': '💡',
     };
     return icons[eventType] || '•';
   }
@@ -220,8 +225,8 @@ export function createTestTask(overrides: Partial<any> = {}): any {
   return {
     id: `task_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
     description: 'Test task description',
-    tool: 'file_manager',
-    toolArgs: { action: 'write', path: '/tmp/test.txt', content: 'test' },
+    tool: 'system.write',
+    toolArgs: { path: '/tmp/test.txt', content: 'test' },
     status: 'pending',
     dependencies: [],
     retryCount: 0,
@@ -247,6 +252,8 @@ export function createTestTaskGraph(overrides: Partial<any> = {}): any {
       complexityReasons: ['Test reason'],
       estimatedTasks: 1,
       actualTasks: 1,
+      chatId: 'chat-1',
+      origin: 'web'
     },
     ...overrides,
   };
