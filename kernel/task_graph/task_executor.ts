@@ -33,9 +33,17 @@ export class TaskExecutor {
       task.status = "running";
 
       try {
-        // Delegar la ejecución de la tarea al Orchestrator (que maneja el Cognitive Loop del agente)
-        // Simulamos una petición de usuario interna para ese agente concreto
-        const result = await orchestrator.processInternalTask(task);
+        // Recopilar resultados de dependencias para dar contexto al agente
+        const dependencies = task.depends_on || [];
+        const depResults = dependencies.map(id => {
+          const t = graph.getTask(id);
+          return t ? `[Result of ${t.id} (${t.description})]: ${t.result}` : '';
+        }).join('\n\n');
+
+        const context = depResults ? `PREVIOUS CONTEXT:\n${depResults}` : '';
+
+        // Delegar la ejecución de la tarea al Orchestrator
+        const result = await orchestrator.processInternalTask(task, context);
 
         graph.updateStatus(task.id, "completed", result);
         this.emitEvent('TASK_COMPLETED', { taskId: task.id, result });

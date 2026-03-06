@@ -1,7 +1,7 @@
 // kernel/gateway.ts
 import http from 'http';
 import { v4 as uuidv4 } from 'uuid';
-import { emitEvent, eventBus } from './event_bus';
+import { emitEvent, eventBus, EventType } from './event_bus';
 
 export class Gateway {
   private static instance: Gateway;
@@ -10,6 +10,15 @@ export class Gateway {
 
   private constructor() {
     this.server = http.createServer(this.handleRequest.bind(this));
+    try {
+      const { ConfigService } = require('./config_service');
+      const gwConfig = ConfigService.getInstance().getGateway();
+      if (gwConfig && gwConfig.port) {
+        this.port = gwConfig.port;
+      }
+    } catch (e) {
+      console.warn('[Gateway] Could not load port from config, using default 5005');
+    }
   }
 
   public static getInstance(): Gateway {
@@ -89,23 +98,23 @@ export class Gateway {
       // 1. Escuchar la respuesta del agente
       const onResponse = (event: any) => {
         if (event.payload.chatId === chatId) {
-          eventBus.off('AGENT_RESPONSE', onResponse);
+          eventBus.off(EventType.AGENT_RESPONSE, onResponse);
           resolve(event.payload.text);
         }
       };
 
-      eventBus.on('AGENT_RESPONSE', onResponse);
+      eventBus.on(EventType.AGENT_RESPONSE, onResponse);
 
-      // Timeout de seguridad
+      // Timeout de seguridad (Largo para permitir Modo Proyecto completo)
       setTimeout(() => {
-        eventBus.off('AGENT_RESPONSE', onResponse);
-        reject(new Error('Kernel request timeout (60s)'));
-      }, 60000);
+        eventBus.off(EventType.AGENT_RESPONSE, onResponse);
+        reject(new Error('Kernel request timeout (180s) - El proceso autónomo tardó demasiado.'));
+      }, 180000);
 
       // 2. Emitir la solicitud al bus
       emitEvent({
         id: requestId,
-        type: 'USER_REQUEST',
+        type: EventType.USER_REQUEST,
         timestamp: Date.now(),
         origin: 'cli_gateway',
         payload: { text, chatId }

@@ -2,7 +2,7 @@
 // Orquestador central del kernel con Tool Calling Loop.
 // Flujo: USER_REQUEST → Router → LLM (con tools) → ActionHandler → Response
 
-import { eventBus, emitEvent } from './event_bus';
+import { eventBus, emitEvent, EventType } from './event_bus';
 import { analyzeTask, guessComplexity } from './router';
 import { queryLLM } from './llm_connector';
 import { executeAction, getAvailableTools } from './action_handlers';
@@ -12,9 +12,7 @@ import { cognitionLoader } from './cognition_loader';
 
 import { contextBuilder } from './cognition/context_builder';
 import { memoryClient } from './cognition/memory_client';
-import { taskPlanner } from './task_graph/task_planner';
-import { taskExecutor } from './task_graph/task_executor';
-import { Task } from './task_graph/task_types';
+import { taskGraphEngine, Task } from './task_graph/task_graph_engine';
 
 const MAX_COGNITIVE_STEPS = 10;
 const COMPLEXITY_THRESHOLD = 0.15;
@@ -35,7 +33,7 @@ export class Orchestrator {
   }
 
   private setupListeners() {
-    eventBus.on('USER_REQUEST', async (event: any) => {
+    eventBus.on(EventType.USER_REQUEST, async (event: any) => {
       const origin = event.payload?.origin || event.origin || 'unknown';
       const { text, chatId } = event.payload;
 
@@ -48,17 +46,35 @@ export class Orchestrator {
         console.log(`[Orchestrator] Specialist: ${analysis.specialist} | Complexity: ${analysis.complexity}`);
 
         // IMPROVED DECISION: Use heuristic as a safety floor for known action keywords
-        const finalComplexity = (analysis.complexity < 0.5 && complexity > 0.5) ? complexity : analysis.complexity;
+        const heuristicComplexity = guessComplexity(text);
+        const finalComplexity = (analysis.complexity < 0.5 && heuristicComplexity > 0.5) ? heuristicComplexity : analysis.complexity;
 
-        if (finalComplexity > COMPLEXITY_THRESHOLD) {
-          console.log(`[Orchestrator] Iniciando modo PROYECTO (Task Graph) - Comp: ${finalComplexity}`);
+        const complexityAnalysis = await taskGraphEngine.assessComplexity(text, event.id);
+
+        if (complexityAnalysis.isComplex) {
+          console.log(`[Orchestrator] Complex task detected (Score: ${complexityAnalysis.score}) → Creating TaskGraph...`);
           this.emitStatus(chatId, 'PLANNING', 'Planificando proyecto complejo...');
 
-          const graph = await taskPlanner.plan(text);
-          await taskExecutor.execute(graph, this);
+          // 1. Obtener historial reciente para el contexto
+          let recentContext = '';
+          try {
+            const recentMemories = await memoryClient.call('memory.get_recent', { k: 10 });
+            if (recentMemories && recentMemories.length > 0) {
+              recentContext = recentMemories.map((m: any) => m.text).join('\n');
+            }
+          } catch (e) {
+            console.warn('[Orchestrator] Error fetching context for TaskGraph:', e);
+          }
 
-          const finalStatus = graph.isCompleted() ? '✅ Proyecto completado con éxito.' : '⚠️ Proyecto terminado con algunas incidencias.';
-          this.sendResponse(origin, chatId, `${finalStatus}\n\nObjetivo: ${text}`);
+          const graph = await taskGraphEngine.create(text, event.id, chatId, event.origin || origin, recentContext);
+
+          // Vincular el chatId al grafo para respuestas (vía metadatos o correlationId)
+          // El TaskGraphEngine ya emite eventos que el Gateway/Channels escuchan.
+
+          const firstTask = taskGraphEngine.getNextTask(graph.id);
+          if (firstTask) {
+            taskGraphEngine.executeTask(firstTask, graph.id);
+          }
           return;
         }
 
@@ -152,12 +168,55 @@ export class Orchestrator {
         this.sendResponse(origin, chatId, '❌ Error interno al procesar tu mensaje.');
       }
     });
+
+    // Event listener for Tool Calls (emitted by TaskGraphEngine)
+    eventBus.on(EventType.TOOL_CALLED, async (event: any) => {
+      const { toolName, arguments: toolArgs, taskId, graphId } = event.payload;
+      console.log(`[Orchestrator] Executing tool for TaskGraph: ${toolName} (${taskId})`);
+
+      try {
+        const result = await executeAction({
+          type: toolName,
+          origin: `task_graph:${graphId}`,
+          params: toolArgs || {},
+          permissions: ['filesystem.read', 'filesystem.write', 'shell.execute', 'network.access']
+        });
+
+        emitEvent({
+          id: uuidv4(),
+          type: EventType.TOOL_RESULT,
+          timestamp: Date.now(),
+          origin: 'orchestrator',
+          payload: {
+            graphId,
+            taskId,
+            result: result.data || result.error,
+            success: result.success
+          }
+        });
+      } catch (error: any) {
+        console.error(`[Orchestrator] Tool execution error (${toolName}):`, error);
+        emitEvent({
+          id: uuidv4(),
+          type: EventType.TOOL_RESULT,
+          timestamp: Date.now(),
+          origin: 'orchestrator',
+          payload: {
+            graphId,
+            taskId,
+            error: error.message,
+            success: false
+          }
+        });
+      }
+    });
   }
 
   /** Procesa una tarea interna generada por el Task Graph Engine */
-  async processInternalTask(task: Task): Promise<any> {
+  async processInternalTask(task: Task, context?: string): Promise<any> {
     const toolsSchema = JSON.stringify(getAvailableTools(), null, 2);
     let conversation: string[] = [`Task Goal: ${task.description}`];
+    if (context) conversation.push(context);
     let step = 0;
 
     console.log(`[Orchestrator] Agente ${task.agent} iniciando tarea: ${task.id}`);
@@ -197,7 +256,9 @@ export class Orchestrator {
         continue; // Re-evaluar con el resultado
       } else {
         // Tarea terminada
-        return content.replace(/\{[\s\S]*\}/, '').trim() || (parsed ? parsed.thought : content);
+        const result = content.replace(/\{[\s\S]*\}/, '').trim() || (parsed ? parsed.thought : content);
+        console.log(`[Orchestrator] Internal task ${task.id} completed.`);
+        return result;
       }
     }
   }
@@ -259,7 +320,7 @@ Responde únicamente con un objeto JSON:
   private emitStatus(chatId: string, status: string, message: string) {
     emitEvent({
       id: uuidv4(),
-      type: 'AGENT_STATUS',
+      type: EventType.AGENT_STATUS,
       timestamp: Date.now(),
       origin: 'orchestrator',
       payload: { chatId, status, message }
@@ -270,7 +331,7 @@ Responde únicamente con un objeto JSON:
     console.log(`[Orchestrator] Response to ${origin} (${text.length} chars)`);
     emitEvent({
       id: uuidv4(),
-      type: 'AGENT_RESPONSE',
+      type: EventType.AGENT_RESPONSE,
       timestamp: Date.now(),
       origin: 'orchestrator',
       payload: { text, chatId, channel: origin }

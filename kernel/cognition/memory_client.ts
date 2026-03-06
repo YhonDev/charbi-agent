@@ -16,7 +16,7 @@ export class MemoryClient {
   }
 
   private init() {
-    const venvPython = path.join(this.charbiHome, 'cli', 'venv', 'bin', 'python');
+    const venvPython = path.join(this.charbiHome, 'cli', 'venv', 'bin', 'python3');
 
     console.log('[MemoryClient] Inciando MemoryServer (Python Lite)...');
 

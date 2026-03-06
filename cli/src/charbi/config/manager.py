@@ -116,3 +116,5 @@ class ConfigManager:
             self.config["skills"] = {}
         self.config["skills"][skill_name] = enabled
         self.save_config()
+    def get_gateway(self) -> Dict:
+        return self.config.get("gateway", {})

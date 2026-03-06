@@ -60,4 +60,6 @@ class VectorStore:
                 "metadata": self.vectors[idx]["metadata"]
             })
         
-        return results
+    def get_recent(self, k=10):
+        """Retorna los últimos k eventos guardados (cronológico)"""
+        return self.vectors[-k:] if self.vectors else []

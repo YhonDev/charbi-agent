@@ -3,7 +3,7 @@
 
 import TelegramBot from 'node-telegram-bot-api';
 import { v4 as uuid } from 'uuid';
-import { emitEvent, eventBus } from '../../kernel/event_bus';
+import { emitEvent, eventBus, EventType } from '../../kernel/event_bus';
 import { log } from '../../kernel/logger';
 
 let bot: TelegramBot | null = null;
@@ -55,10 +55,13 @@ export class TelegramAdapter {
 
       console.log('[Telegram] Message from ' + (msg.from?.first_name || msg.from?.id) + ': ' + msg.text);
 
+      // Mejorar UX: Enviar indicador de "escribiendo..." inmediatamente
+      bot?.sendChatAction(msg.chat.id, 'typing').catch(() => { });
+
       // Emitir al EventBus del kernel
       emitEvent({
         id: uuid(),
-        type: 'USER_REQUEST',
+        type: EventType.USER_REQUEST,
         timestamp: Date.now(),
         origin: 'telegram',
         payload: {
@@ -77,8 +80,16 @@ export class TelegramAdapter {
       console.error('[Telegram] Polling error:', err.message);
     });
 
+    // Escuchar cambios de estado del agente para mantener el "escribiendo..."
+    eventBus.on(EventType.AGENT_STATUS, (event: any) => {
+      const chatId = event.payload?.chatId;
+      if (bot && chatId && (event.payload?.status === 'THINKING' || event.payload?.status === 'ACTING' || event.payload?.status === 'PLANNING')) {
+        bot.sendChatAction(chatId, 'typing').catch(() => { });
+      }
+    });
+
     // Escuchar respuestas del kernel para enviar a Telegram (vía AGENT_RESPONSE genérico)
-    eventBus.on('AGENT_RESPONSE', (event: any) => {
+    eventBus.on(EventType.AGENT_RESPONSE, (event: any) => {
       if (event.payload?.origin === 'telegram' || event.payload?.channel === 'telegram') {
         const chatId = event.payload?.chatId;
         const text = event.payload?.text || event.payload?.message;
@@ -123,7 +134,7 @@ export default TelegramAdapter;
 export function onTelegramMessage(msg: any) {
   emitEvent({
     id: uuid(),
-    type: 'USER_REQUEST',
+    type: EventType.USER_REQUEST,
     timestamp: Date.now(),
     origin: 'telegram',
     payload: {
@@ -145,7 +156,7 @@ export function sendTelegramResponse(chatId: string, text: string) {
 export function replyToTelegram(chatId: number | string, text: string) {
   emitEvent({
     id: uuid(),
-    type: 'TELEGRAM_RESPONSE',
+    type: EventType.AGENT_RESPONSE, // Using the standard response type
     timestamp: Date.now(),
     origin: 'kernel',
     payload: { chatId, text }

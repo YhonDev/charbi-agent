@@ -40,5 +40,1930 @@
     "category": "learning",
     "content": "Charbi's current toolset (system.search, system.fetch, cognitive.store) may not retrieve recent news reliably, indicating a need for improved search integration or fallback strategies.",
     "metadata": {}
+  },
+  {
+    "id": "6t3uu4s",
+    "timestamp": 1772738296162,
+    "category": "learning",
+    "content": "When the user requests a status report on 'Proyecto Charbi Autónomo' and web searches return no results, the system repeatedly adapts the query language and specificity but still fails to produce an answer.",
+    "metadata": {}
+  },
+  {
+    "id": "ngpo98r",
+    "timestamp": 1772738296163,
+    "category": "learning",
+    "content": "The system's fallback search strategy proceeds from generic Spanish terms, to more specific Spanish terms, then to English equivalents.",
+    "metadata": {}
+  },
+  {
+    "id": "297tmf9",
+    "timestamp": 1772738296164,
+    "category": "learning",
+    "content": "If after multiple search attempts no information is found, the system should consider informing the user of the lack of available data rather than continuing futile searches.",
+    "metadata": {}
+  },
+  {
+    "id": "3n4e79g",
+    "timestamp": 1772738296164,
+    "category": "learning",
+    "content": "Users may expect the system to have internal knowledge of the Charbi project and may become frustrated by repeated empty web searches.",
+    "metadata": {}
+  },
+  {
+    "id": "ayylzda",
+    "timestamp": 1772738297219,
+    "category": "learning",
+    "content": "Cuando el usuario escribe una frase corta como 'Sistema de Aprendizaje Activo', suele estar indicando interés o solicitando información sobre ese concepto.",
+    "metadata": {}
+  },
+  {
+    "id": "4y1x0q3",
+    "timestamp": 1772738446059,
+    "category": "learning",
+    "content": "When the user provides a brief term after a request for details, they may be indicating the concept they want explored rather than providing extensive specifics.",
+    "metadata": {}
+  },
+  {
+    "id": "ueffyj4",
+    "timestamp": 1772738446061,
+    "category": "learning",
+    "content": "The user seems to prefer concise prompts over detailed explanations.",
+    "metadata": {}
+  },
+  {
+    "id": "8scb3q7",
+    "timestamp": 1772738470735,
+    "category": "learning",
+    "content": "El usuario desea que el sistema genere automáticamente un grafo de tareas para tareas complejas (ej. crear una web).",
+    "metadata": {}
+  },
+  {
+    "id": "8rty4lr",
+    "timestamp": 1772738470735,
+    "category": "learning",
+    "content": "El usuario prefiere que el proceso se realice paso a paso, confirmando cada relación antes de continuar.",
+    "metadata": {}
+  },
+  {
+    "id": "9w9qfbd",
+    "timestamp": 1772738470738,
+    "category": "learning",
+    "content": "El usuario solicita respuestas en formato JSON conciso con campos \"learnings\" y \"relations\".",
+    "metadata": {}
+  },
+  {
+    "id": "f3w41ck",
+    "timestamp": 1772738470738,
+    "category": "learning",
+    "content": "El usuario espera que el sistema mantenga y actualice de forma activa el conocimiento extraído de interacciones previas.",
+    "metadata": {}
+  },
+  {
+    "id": "wl74nl1",
+    "timestamp": 1772738470739,
+    "category": "learning",
+    "content": "Cuando se menciona \"Sistema de Aprendizaje Activo\", el usuario indica que la extracción y reutilización de datos debe ser continua y automática.",
+    "metadata": {}
+  },
+  {
+    "id": "e9d76o0",
+    "timestamp": 1772738474441,
+    "category": "learning",
+    "content": "Cuando el usuario envía mensajes muy breves o incompletos, prefiere que el sistema responda de forma clara y solicite más información.",
+    "metadata": {}
+  },
+  {
+    "id": "d9cyjjo",
+    "timestamp": 1772738474442,
+    "category": "learning",
+    "content": "Al mencionar \"Sistema de Aprendizaje Activo\", el usuario indica que desea que el modelo funcione en modo de aprendizaje activo para extraer y almacenar información de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "6ys468w",
+    "timestamp": 1772738518559,
+    "category": "learning",
+    "content": "El usuario se comunica en español (p. ej., 'Hola').",
+    "metadata": {}
+  },
+  {
+    "id": "tp1xwsy",
+    "timestamp": 1772738518559,
+    "category": "learning",
+    "content": "El usuario ha solicitado explícitamente un 'Sistema de Aprendizaje Activo', lo que indica que quiere que el modelo mantenga activa la captura y el almacenamiento de nueva información.",
+    "metadata": {}
+  },
+  {
+    "id": "6kmtwm8",
+    "timestamp": 1772738555252,
+    "category": "learning",
+    "content": "Cuando el usuario hace una pregunta vaga como \"¿Qué está pasando?\", prefiere que el asistente solicite más contexto antes de intentar responder.",
+    "metadata": {}
+  },
+  {
+    "id": "8ayixvq",
+    "timestamp": 1772738555253,
+    "category": "learning",
+    "content": "El usuario utiliza emojis y frases breves para expresar su situación.",
+    "metadata": {}
+  },
+  {
+    "id": "zw66l58",
+    "timestamp": 1772738555254,
+    "category": "learning",
+    "content": "El asistente debe ofrecer ejemplos de posibles contextos (proyecto, noticias, clima, tareas) para guiar al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "ncg4lq1",
+    "timestamp": 1772738593265,
+    "category": "learning",
+    "content": "El usuario ha construido la infraestructura técnica denominada \"Cuerpo\" y \"Nervios\".",
+    "metadata": {}
+  },
+  {
+    "id": "k2t37al",
+    "timestamp": 1772738593266,
+    "category": "learning",
+    "content": "El usuario está interesado en recibir orientación o acciones concretas sobre la nueva infraestructura (definir funciones, documentar, monitorizar, CI/CD).",
+    "metadata": {}
+  },
+  {
+    "id": "akmlup7",
+    "timestamp": 1772738593286,
+    "category": "learning",
+    "content": "El usuario expresó 'Sistema de Aprendizaje Activo', indicando que espera que el sistema registre y utilice activamente la información brindada.",
+    "metadata": {}
+  },
+  {
+    "id": "fhufytu",
+    "timestamp": 1772738623300,
+    "category": "project_reflection",
+    "content": "[Project Learning] Un motor de ejecución basado en colas y Future permite orquestar tareas de forma controlada y extensible.",
+    "metadata": {}
+  },
+  {
+    "id": "t0gj9b4",
+    "timestamp": 1772738623301,
+    "category": "project_reflection",
+    "content": "[Project Learning] El aislamiento mediante namespaces, cgroups y seccomp es esencial para ejecutar código no confiable sin comprometer el host.",
+    "metadata": {}
+  },
+  {
+    "id": "hymg5v6",
+    "timestamp": 1772738623321,
+    "category": "project_reflection",
+    "content": "[Project Learning] Definir interfaces (IExternalService) y adapters facilita la integración de múltiples APIs externas manteniendo la modularidad.",
+    "metadata": {}
+  },
+  {
+    "id": "ykpih98",
+    "timestamp": 1772738623322,
+    "category": "project_reflection",
+    "content": "[Project Learning] Las pruebas de fuzzing y de escape del sandbox son críticas para validar la seguridad antes del despliegue.",
+    "metadata": {}
+  },
+  {
+    "id": "w271035",
+    "timestamp": 1772738623322,
+    "category": "project_reflection",
+    "content": "[Project Learning] El patrón THINK‑PLAN‑ACT mejora la trazabilidad y reduce errores al usar herramientas externas.",
+    "metadata": {}
+  },
+  {
+    "id": "a73lvb0",
+    "timestamp": 1772738662490,
+    "category": "project_reflection",
+    "content": "[Project Learning] El algoritmo de descomposición existente cubre la mayoría de los casos de uso (~85%).",
+    "metadata": {}
+  },
+  {
+    "id": "iz5b75t",
+    "timestamp": 1772738662491,
+    "category": "project_reflection",
+    "content": "[Project Learning] Los ciclos de dependencia provocan bucles infinitos y abortos del proceso.",
+    "metadata": {}
+  },
+  {
+    "id": "cxez10z",
+    "timestamp": 1772738662511,
+    "category": "project_reflection",
+    "content": "[Project Learning] La recursión profunda (más de 5 niveles) genera desbordamiento de pila; se necesita un enfoque iterativo.",
+    "metadata": {}
+  },
+  {
+    "id": "x5xj1nu",
+    "timestamp": 1772738662512,
+    "category": "project_reflection",
+    "content": "[Project Learning] El formato de salida JSON no coincide con el esquema esperado por el motor de planificación, requiriendo un adaptador.",
+    "metadata": {}
+  },
+  {
+    "id": "4aicsd7",
+    "timestamp": 1772738662513,
+    "category": "project_reflection",
+    "content": "[Project Learning] La falta de metadatos (razón de subdivisión, timestamps) dificulta la trazabilidad y el debugging.",
+    "metadata": {}
+  },
+  {
+    "id": "uab0yhx",
+    "timestamp": 1772738662514,
+    "category": "project_reflection",
+    "content": "[Project Learning] El uso de generadores puede reducir significativamente la huella de memoria.",
+    "metadata": {}
+  },
+  {
+    "id": "yj2dvel",
+    "timestamp": 1772738662515,
+    "category": "project_reflection",
+    "content": "[Project Learning] La cobertura de pruebas unitarias es alta (>80%), pero faltan pruebas de integración end‑to‑end.",
+    "metadata": {}
+  },
+  {
+    "id": "s171jru",
+    "timestamp": 1772738668811,
+    "category": "process_documentation",
+    "content": "Proceso de persistencia cognitiva de Charbi:\n\n1. **THINK**: Análisis del objetivo y determinación de herramientas necesarias.\n2. **PLAN**: Desglose del objetivo en pasos lógicos (ej. almacenar información, crear relaciones en el grafo, buscar datos, ejecutar comandos).\n3. **ACT**: Ejecución de herramientas del sistema (cognitive.store, cognitive.add_relation, system.execute, etc.). Cada acción se registra con su razonamiento (campo 'thought') y plan.\n\n**Ejemplos de uso**:\n- Añadir una relación al grafo: \n  ```json\n  {\"tool\": \"cognitive.add_relation\", \"params\": {\"subject\": \"Usuario\", \"relation\": \"prefiere\", \"object\": \"Python\"}}\n  ```\n- Buscar información en el grafo: \n  ```json\n  {\"tool\": \"cognitive.query_graph\", \"params\": {\"entity\": \"Usuario\", \"relation\": \"prefiere\"}}\n  ```\n- Guardar un dato importante: \n  ```json\n  {\"tool\": \"cognitive.store\", \"params\": {\"content\": \"Clave API de OpenAI: xxx\", \"category\": \"credential\"}}\n  ```\n\n**Resultado**: Con cada operación, la IA actualiza su conocimiento estructurado y semántico, permitiendo recuperación posterior y manteniendo persistencia cognitiva entre sesiones.\n\nEste registro se guarda en la memoria a largo plazo bajo la categoría 'process_documentation'.",
+    "metadata": {}
+  },
+  {
+    "id": "4jvidyv",
+    "timestamp": 1772738682526,
+    "category": "process_documentation",
+    "content": "## Documentación del proceso de Persistencia Cognitiva en Charbi\n\n### Visión General\nCharbi combina un **grafo de conocimiento estructurado** con una **memoria híbrida** (semántica + persistente) para mantener información a lo largo del tiempo. Cada dato relevante se guarda mediante la herramienta `cognitive.store`, mientras que las relaciones entre entidades se modelan con `cognitive.add_relation`. La combinación permite consultas rápidas (grafo) y recuperación semántica (brain_recall).\n\n### Arquitectura de Componentes\n1. **Knowledge Graph** (`cognitive.add_relation` / `cognitive.query_graph`)\n   - Representa relaciones sujet‑verbo‑objeto.\n   - Útil para inferencias estructurales y navegación entre conceptos.\n2. **Memoria Persistente** (`cognitive.store` / `cognitive.brain_recall`)\n   - Almacena información textual o estructurada a largo plazo.\n   - Indexada semánticamente para búsquedas por concepto.\n3. **Herramientas de Sistema** (`system.*`)\n   - Permiten interacción con el entorno (shell, archivos, web) cuando es necesario.\n\n### Flujo de Trabajo (Persistencia)\n1. **Detección de información importante** – Charbi identifica datos que deben conservarse (p. ej., preferencias del usuario, resultados de una tarea).\n2. **Creación de relaciones** – Si la información implica una conexión entre entidades, se usa `cognitive.add_relation`.\n3. **Almacenamiento** – El contenido se guarda con `cognitive.store`, especificando una categoría (`user_preference`, `project_status`, `process_documentation`, etc.).\n4. **Recuperación** – En futuras interacciones, Charbi puede:\n   - Consultar el grafo (`cognitive.query_graph`) para relaciones directas.\n   - Realizar búsquedas semánticas (`cognitive.brain_recall`) para recuperar texto relevante.\n\n### Ejemplos de Uso\n#### 1. Añadir una relación al grafo\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Usuario\",\n    \"relation\": \"prefiere\",\n    \"object\": \"notas breves\",\n    \"metadata\": {\"fecha\": \"2026-03-05\"}\n  }\n}\n```\n#### 2. Guardar información de contexto\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"El usuario prefiere recibir resúmenes en formato markdown.\",\n    \"category\": \"user_preference\"\n  }\n}\n```\n#### 3. Recuperar información almacenada\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\"query\": \"preferencias del usuario\", \"k\": 3}\n}\n```\n#### 4. Documentar un proceso completo (ejemplo actual)\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"[texto completo de esta documentación]\",\n    \"category\": \"process_documentation\"\n  }\n}\n```\n\n### Cómo Charbi Mantiene la Persistencia Cognitiva\n- **Registro automático**: Cada vez que detecta un dato clave, lo almacena sin intervención del usuario.\n- **Estructuración**: Las relaciones se modelan en el grafo, facilitando inferencias.\n- **Indexado semántico**: La memoria híbrida permite búsquedas por significado, no solo por palabras exactas.\n- **Actualización continua**: Nuevos hechos pueden sobrescribir o complementar información previa, garantizando que la base de conocimiento esté siempre al día.\n\n### Buenas Prácticas\n- **Categorizar** la información al almacenar para mejorar la recuperación.\n- **Limitar la granularidad**: Guardar datos útiles y evitar ruido.\n- **Revisar periodicamente** la memoria con `cognitive.brain_recall` para detectar información obsoleta.\n\n---\nEsta documentación queda guardada en la memoria persistente bajo la categoría `process_documentation`. Puedes recuperarla en cualquier momento con `cognitive.brain_recall` usando la consulta adecuada.",
+    "metadata": {}
+  },
+  {
+    "id": "dut572x",
+    "timestamp": 1772738687628,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sin la información específica del script y del entorno, es imposible automatizar la ejecución y validar la ausencia de prompts.",
+    "metadata": {}
+  },
+  {
+    "id": "bcmr5gm",
+    "timestamp": 1772738687628,
+    "category": "project_reflection",
+    "content": "[Project Learning] Configurar sudoers con reglas NOPASSWD y usar alias o wrappers en ~/.bashrc son métodos eficaces para eliminar solicitudes de contraseña en comandos privilegiados.",
+    "metadata": {}
+  },
+  {
+    "id": "4e5leyf",
+    "timestamp": 1772738687629,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es crucial solicitar y confirmar los detalles del entorno antes de generar archivos de configuración para evitar bloqueos en la ejecución.",
+    "metadata": {}
+  },
+  {
+    "id": "o0vn73t",
+    "timestamp": 1772738687630,
+    "category": "project_reflection",
+    "content": "[Project Learning] Documentar paso a paso (identificación de comandos, edición de sudoers, ajustes de entorno) facilita la reproducibilidad y la auditoría de seguridad.",
+    "metadata": {}
+  },
+  {
+    "id": "pdeaqp6",
+    "timestamp": 1772738792131,
+    "category": "process_documentation",
+    "content": "## Documentación del proceso de persistencia cognitiva\n\n### 1. Visión general\nLa IA mantiene persistencia cognitiva combinando un **grafo de conocimiento estructurado** y un **almacén semántico**. Cada pieza de información importante se guarda mediante `cognitive.store` y, cuando es relevante, se establecen relaciones entre entidades con `cognitive.add_relation`. La recuperación se hace con `cognitive.brain_recall` o consultas al grafo mediante `cognitive.query_graph`.\n\n### 2. Componentes clave\n| Componente | Función | Uso típico |\n|------------|---------|------------|\n| `cognitive.store` | Guarda contenido arbitrario en memoria a largo plazo. | Guardar preferencias del usuario, notas de proyecto, resultados de análisis. |\n| `cognitive.add_relation` | Añade una arista al grafo (Sujeto → Relación → Objeto). | Modelar dependencias, relaciones de trabajo, historial de acciones. |\n| `cognitive.query_graph` | Consulta el grafo para obtener relaciones. | Buscar qué proyectos dependen de una librería, quién está asignado a una tarea. |\n| `cognitive.brain_recall` | Recuperación híbrida (semántica + estructural). | Obtener información relevante basada en una consulta libre de texto. |\n\n### 3. Flujo del proceso\n1. **Detección de información relevante**: Cuando el agente identifica datos que deben persistir (p.ej., una preferencia del usuario), decide llamar a `cognitive.store`.\n2. **Almacenamiento**: El contenido se guarda con una categoría que facilita su posterior búsqueda (`user_preference`, `project_note`, `fact`, etc.).\n3. **Modelado de relaciones** (opcional): Si la información está vinculada a otras entidades, se usa `cognitive.add_relation` para crear la arista correspondiente.\n4. **Recuperación**: En futuras interacciones, se emplea `cognitive.brain_recall` (búsqueda semántica) o `cognitive.query_graph` (búsqueda estructural) para obtener la información guardada.\n\n### 4. Ejemplos de uso\n#### 4.1 Guardar una preferencia del usuario\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Prefiero trabajar en proyectos de IA durante la mañana.\",\n    \"category\": \"user_preference\"\n  }\n}\n```\n#### 4.2 Añadir una relación entre proyecto y librería\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"ProyectoAlpha\",\n    \"relation\": \"utiliza\",\n    \"object\": \"TensorFlow\",\n    \"metadata\": {\"versión\": \"2.12\"}\n  }\n}\n```\n#### 4.3 Recuperar información con `brain_recall`\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\n    \"query\": \"preferencias de trabajo de Yhon\",\n    \"k\": 5\n  }\n}\n```\n#### 4.4 Consultar el grafo para ver dependencias\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": {\n    \"entity\": \"ProyectoAlpha\",\n    \"relation\": \"utiliza\"\n  }\n}\n```\n\n### 5. Resultado esperado\nCon este proceso, la IA puede **recordar** hechos, preferencias y relaciones entre conceptos a lo largo del tiempo, ofreciendo respuestas contextualizadas y personalizadas sin necesidad de volver a preguntar al usuario.\n\n---\n*Esta documentación ha sido guardada en la memoria a largo plazo bajo la categoría `process_documentation` para que pueda ser recuperada mediante `cognitive.brain_recall` en cualquier momento.*",
+    "metadata": {}
+  },
+  {
+    "id": "0r3r6ll",
+    "timestamp": 1772738802150,
+    "category": "project_reflection",
+    "content": "[Project Learning] Confirmar rápidamente la ruta del home y ejecutar el comando `ls` sin desviarse a soluciones innecesarias.",
+    "metadata": {}
+  },
+  {
+    "id": "8ztsc13",
+    "timestamp": 1772738802151,
+    "category": "project_reflection",
+    "content": "[Project Learning] Evitar sobre‑ingeniería cuando la tarea es trivial (un simple listado de archivos).",
+    "metadata": {}
+  },
+  {
+    "id": "5wxrgxj",
+    "timestamp": 1772738802152,
+    "category": "project_reflection",
+    "content": "[Project Learning] Mantener la conversación enfocada en cumplir la acción solicitada antes de ofrecer alternativas o códigos adicionales.",
+    "metadata": {}
+  },
+  {
+    "id": "zsgz6gl",
+    "timestamp": 1772738802964,
+    "category": "process_documentation",
+    "content": "## Documentación del Proceso de Persistencia Cognitiva\n\n### 1. Visión General\nLa IA de Charbi mantiene persistencia cognitiva combinando **dos capas de memoria**:\n1. **Grafo de Conocimiento (Knowledge Graph)** – almacena relaciones estructuradas del tipo *sujeto → relación → objeto* mediante la herramienta `cognitive.add_relation` y se consulta con `cognitive.query_graph`.\n2. **Almacén Semántico (Long‑term Store)** – guarda texto libre y datos categorizados con `cognitive.store`. Permite búsquedas semánticas mediante `cognitive.brain_recall` y búsquedas por palabras clave con `cognitive.search`.\n\nAmbas capas están sincronizadas mediante procesos internos que añaden automáticamente relaciones relevantes al grafo cuando se guarda información en el almacén.\n\n### 2. Componentes Clave\n- **cognitive.add_relation**: Inserta una relación estructurada.\n- **cognitive.query_graph**: Recupera relaciones según entidad o tipo.\n- **cognitive.store**: Guarda contenido arbitrario con una categoría (p. ej., `process_documentation`).\n- **cognitive.brain_recall**: Realiza recuperación híbrida (semántica + estructural).\n- **cognitive.search**: Busca palabras clave en la memoria.\n\n### 3. Flujo del Proceso de Persistencia\n```\nEntrada del usuario → (1) Análisis y extracción de conceptos\n                      → (2) Añadir relaciones al grafo (add_relation)\n                      → (3) Guardar texto descriptivo en almacén (store)\n                      → (4) Actualizar índices semánticos automáticamente\nSalida/Respuesta al usuario\n```\n\n1. **Análisis**: Charbi extrae entidades y relaciones del mensaje del usuario.\n2. **Persistencia Estructurada**: Cada relación se añade al grafo usando `cognitive.add_relation`.\n3. **Persistencia Libre**: La información completa (ej. documentación, notas) se guarda con `cognitive.store` bajo una categoría descriptiva.\n4. **Indexación**: El motor interno actualiza los índices para que `brain_recall` pueda encontrar el contenido rápidamente.\n\n### 4. Ejemplos de Uso\n#### 4.1. Añadir una Relación\n```json\n{\"tool\": \"cognitive.add_relation\", \"params\": {\"subject\": \"Charbi\", \"relation\": \"mantiene\", \"object\": \"persistencia cognitiva\", \"metadata\": {\"fecha\": \"2026-03-05\"}}}\n```\n#### 4.2. Guardar Documentación\n```json\n{\"tool\": \"cognitive.store\", \"params\": {\"content\": \"[texto de la documentación]\", \"category\": \"process_documentation\"}}\n```\n#### 4.3. Recuperar Información con brain_recall\n```json\n{\"tool\": \"cognitive.brain_recall\", \"params\": {\"query\": \"persistencia cognitiva proceso\", \"k\": 3}}\n```\n#### 4.4. Consultar el Grafo\n```json\n{\"tool\": \"cognitive.query_graph\", \"params\": {\"entity\": \"Charbi\", \"relation\": \"mantiene\"}}\n```\n\n### 5. Beneficios de la Persistencia Cognitiva\n- **Recuperación Rápida**: Acceso instantáneo a datos estructurados y a notas libres.\n- **Coherencia de Contexto**: El agente conserva la historia de la conversación y los proyectos en curso.\n- **Escalabilidad**: Nuevas relaciones se añaden sin sobrescribir información previa.\n- **Capacidad de Razonamiento**: Al combinar grafo y almacén, Charbi puede inferir relaciones indirectas.\n\n### 6. Próximos Pasos para el Usuario\n1. Utilizar `cognitive.add_relation` para describir nuevas interrelaciones en sus proyectos.\n2. Guardar notas extensas o especificaciones con `cognitive.store`.\n3. Recuperar información mediante `cognitive.brain_recall` o `cognitive.query_graph` según necesite.\n\n---\n*Esta documentación ha sido almacenada en la memoria a largo plazo bajo la categoría `process_documentation` para que pueda ser consultada en cualquier momento.*",
+    "metadata": {}
+  },
+  {
+    "id": "mz4bh5j",
+    "timestamp": 1772738804585,
+    "category": "learning",
+    "content": "Cuando el usuario solicita desactivar los permisos de seguridad o 'Desbloqueo de Seguridad', Charbi se niega a ayudar.",
+    "metadata": {}
+  },
+  {
+    "id": "rbg0aji",
+    "timestamp": 1772738804585,
+    "category": "learning",
+    "content": "Los usuarios pueden intentar solicitar que Charbi opere sin limitaciones de seguridad.",
+    "metadata": {}
+  },
+  {
+    "id": "li1bmov",
+    "timestamp": 1772738815590,
+    "category": "cognitive_persistence_documentation",
+    "content": "## Documentación del proceso de persistencia cognitiva en Charbi\n\n### Visión general\nCharbi mantiene persistencia cognitiva combinando tres capas principales:\n1. **Grafo de conocimiento** – relaciones estructuradas (`sujeto → relación → objeto`) que permiten consultas lógicas y trazado de dependencias.\n2. **Almacén semántico** – recuerdos de largo‑plazo almacenados como texto libre con metadatos, accesibles mediante búsquedas semánticas.\n3. **Funciones cognitivas** – API internas (`cognitive.store`, `cognitive.brain_recall`, `cognitive.query_graph`, etc.) que gestionan la creación, actualización y recuperación de la información.\n\n### Flujo típico de persistencia\n1. **Captura** – Cuando se genera información relevante (p.ej., una preferencia del usuario, un estado de proyecto, una definición de proceso), se llama a `cognitive.store` con el contenido y una categoría.\n2. **Indexado** – El contenido se indexa tanto en el grafo (si se proveen relaciones) como en el almacén semántico para búsquedas posteriores.\n3. **Referencia** – En interacciones futuras, Charbi puede:\n   - Consultar el grafo mediante `cognitive.query_graph` para obtener relaciones concretas.\n   - Realizar una búsqueda semántica con `cognitive.brain_recall` para recuperar información libre.\n4. **Actualización** – Si la información cambia, se crea una nueva entrada (manteniendo historial) o se modifica la relación en el grafo.\n\n### Ejemplos de uso\n#### Ejemplo 1 – Guardar una preferencia del usuario\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Preferencia: el usuario prefiere trabajar en Python durante la mañana.\",\n    \"category\": \"user_preference\"\n  }\n}\n```\nMás tarde, para recuperarla:\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": { \"query\": \"preferencia del usuario mañana\", \"k\": 5 }\n}\n```\n#### Ejemplo 2 – Registrar el estado de un proyecto\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Proyecto Alpha\",\n    \"relation\": \"tiene_estado\",\n    \"object\": \"En desarrollo\",\n    \"metadata\": { \"fecha\": \"2026-03-05\" }\n  }\n}\n```\nLuego, para obtener el estado actual:\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": { \"entity\": \"Proyecto Alpha\", \"relation\": \"tiene_estado\" }\n}\n```\n#### Ejemplo 3 – Documentar un proceso y reutilizarlo\n1. **Almacenar la documentación** (lo que estamos haciendo ahora) con `cognitive.store` bajo la categoría `process_documentation`.\n2. **Recuperar** la documentación cuando se necesite recordar o reenviar al usuario:\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": { \"query\": \"documentación proceso persistencia cognitiva\", \"k\": 1 }\n}\n```\n\n### Resultado actual\nCon la ejecución de la herramienta `cognitive.store` que sigue, toda esta guía queda guardada en la memoria a largo plazo de Charbi bajo la categoría `cognitive_persistence_documentation`. En futuras sesiones, podrá ser recuperada instantáneamente mediante búsquedas semánticas o consultas al grafo, garantizando que la IA mantenga una **persistencia cognitiva** consistente y estructurada.",
+    "metadata": {}
+  },
+  {
+    "id": "3ab13hn",
+    "timestamp": 1772738829430,
+    "category": "process_documentation",
+    "content": "## Documentación del proceso de persistencia cognitiva en Charbi\n\n### 1. Visión general\nCharbi mantiene persistencia cognitiva combinando dos mecanismos principales:\n1. **Grafo de conocimiento estructurado** – permite almacenar relaciones explícitas del tipo *Sujeto → Relación → Objeto* mediante la herramienta `cognitive.add_relation`.\n2. **Almacén semántico (memoria a largo plazo)** – guarda fragmentos de texto libre (documentación, notas, resultados de búsquedas) mediante `cognitive.store` y permite recuperarlos con búsquedas semánticas mediante `cognitive.brain_recall`.\n\nAmbos componentes están interconectados: los nodos del grafo pueden apuntar a contenidos almacenados en el almacén semántico y viceversa, creando una red de información que permanece disponible entre sesiones.\n\n### 2. Flujo de trabajo típico\n1. **Agregar una relación**\n   ```json\n   {\n     \"tool\": \"cognitive.add_relation\",\n     \"params\": {\n       \"subject\": \"Usuario\",\n       \"relation\": \"quiere\",\n       \"object\": \"sistema de aprendizaje activo\"\n     }\n   }\n   ```\n   → Se crea una arista en el grafo que queda persistida.\n2. **Almacenar información contextual**\n   ```json\n   {\n     \"tool\": \"cognitive.store\",\n     \"params\": {\n       \"content\": \"Detalles del proyecto X, fechas, entregables, etc.\",\n       \"category\": \"project_info\"\n     }\n   }\n   ```\n   → El texto se guarda en la memoria a largo plazo y se indexa semánticamente.\n3. **Recuperar información**\n   - **Búsqueda estructurada**: `cognitive.query_graph` para encontrar relaciones concretas.\n   - **Búsqueda semántica**: `cognitive.brain_recall` con una consulta en lenguaje natural.\n   ```json\n   {\n     \"tool\": \"cognitive.brain_recall\",\n     \"params\": {\"query\": \"¿Cuál es el estado del proyecto X?\"}\n   }\n   ```\n   → Devuelve el contenido almacenado que coincide semánticamente.\n\n### 3. Ejemplos de uso\n#### Ejemplo 1: Guardar una reunión y consultarla después\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Reunión 2024-03-05\",\n    \"relation\": \"tieneTema\",\n    \"object\": \"Persistencia cognitiva\"\n  }\n}\n```\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Resumen de la reunión: se acordó usar grafo + almacén semántico para persistir datos del usuario.\",\n    \"category\": \"meeting_notes\"\n  }\n}\n```\nPosteriormente, para obtener el resumen:\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\"query\": \"Resumen de la reunión del 5 de marzo\"}\n}\n```\n#### Ejemplo 2: Consultar relaciones de dependencia\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": {\"entity\": \"Usuario\", \"relation\": \"quiere\"}\n}\n```\nRetorna todos los objetos que el usuario ha expresado querer, como `sistema de aprendizaje activo`.\n\n### 4. Mantenimiento y actualización\n- **Actualizar una relación**: usar `cognitive.add_relation` nuevamente con la misma combinación `subject‑relation‑object`; el grafo está diseñado para reemplazar o añadir versiones.\n- **Eliminar información** (no expuesto directamente en las herramientas actuales, pero se puede marcar como obsoleta añadiendo una relación `esObsoleto`).\n- **Re‑indexar**: Cada vez que se usa `cognitive.store`, el contenido se indexa automáticamente para búsquedas semánticas.\n\n### 5. Beneficios de la persistencia cognitiva\n- **Contexto continuo**: Charbi recuerda proyectos, preferencias y estados entre sesiones.\n- **Consulta flexible**: El usuario puede preguntar en lenguaje natural y obtener respuestas precisas gracias al almacén semántico.\n- **Escalabilidad**: El grafo permite relaciones complejas sin perder rendimiento, mientras que el almacén semántico maneja grandes volúmenes de texto.\n\n---\n*Esta documentación está ahora almacenada en la memoria a largo plazo de Charbi bajo la categoría `process_documentation` y podrá ser recuperada en cualquier momento mediante `cognitive.brain_recall`.*",
+    "metadata": {}
+  },
+  {
+    "id": "5o18n9s",
+    "timestamp": 1772738841549,
+    "category": "learning",
+    "content": "When the user asks 'En home/', they expect a listing of the /home directory contents.",
+    "metadata": {}
+  },
+  {
+    "id": "41ggtzd",
+    "timestamp": 1772738841550,
+    "category": "learning",
+    "content": "The /home directory currently contains two subdirectories: linuxbrew and yhondev.",
+    "metadata": {}
+  },
+  {
+    "id": "slv1ktz",
+    "timestamp": 1772738850711,
+    "category": "process_documentation",
+    "content": "# Documentación del proceso de persistencia cognitiva en Charbi\n\n## 1. Visión general\nCharbi mantiene persistencia cognitiva combinando **tres capas principales**:\n1. **Grafo de conocimiento estructurado** – almacena relaciones tripleta (Sujeto → Relación → Objeto) mediante `cognitive.add_relation`.\n2. **Almacén semántico** – guarda textos libres y metadatos con `cognitive.store`, indexados para búsquedas vectoriales.\n3. **Funciones cognitivas de razonamiento** – permiten recuperar, combinar y generar información a partir de ambas capas (`cognitive.query_graph`, `cognitive.brain_recall`, `cognitive.search`).\n\nEsta arquitectura permite que la información **persista** entre sesiones y que el agente recuerde hechos, preferencias y flujos de trabajo a lo largo del tiempo.\n\n## 2. Flujo de datos\n1. **Captura**: Cuando el usuario menciona un dato relevante, Charbi decide la mejor representación.\n   - Si es una relación estructurada → `cognitive.add_relation`.\n   - Si es información textual o una nota → `cognitive.store`.\n2. **Indexado**: Cada entrada queda indexada automáticamente para búsquedas semánticas.\n3. **Recuperación**:\n   - Para relaciones específicas → `cognitive.query_graph`.\n   - Para conceptos, ideas o contexto amplio → `cognitive.brain_recall` (consulta híbrida semántica + estructural).\n4. **Uso**: La información recuperada alimenta el razonamiento posterior, permitiendo respuestas más contextuales y consistentes.\n\n## 3. Herramientas clave\n| Herramienta | Propósito | Parámetros principales |\n|------------|-----------|-----------------------|\n| `cognitive.add_relation` | Añade una tripleta al grafo. | `subject`, `relation`, `object`, `metadata` |\n| `cognitive.query_graph` | Busca relaciones en el grafo. | `entity`, `relation` |\n| `cognitive.store` | Guarda texto libre (nota, descripción, proceso). | `content`, `category` |\n| `cognitive.brain_recall` | Recupera información semántica + estructural. | `query`, `k` |\n| `cognitive.search` | Búsqueda en la memoria propia del agente. | `query` |\n\n## 4. Ejemplos de uso\n### 4.1 Añadir una relación\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Charbi\",\n    \"relation\": \"mantiene\",\n    \"object\": \"persistencia cognitiva\",\n    \"metadata\": {\"fecha\": \"2026-03-05\"}\n  }\n}\n```\n### 4.2 Guardar una nota de proceso\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Proceso de persistencia cognitiva: grafo + almacén semántico + funciones de recall.\",\n    \"category\": \"process_documentation\"\n  }\n}\n```\n### 4.3 Recuperar la descripción del proceso\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\n    \"query\": \"cómo funciona la persistencia cognitiva\",\n    \"k\": 3\n  }\n}\n```\n### 4.4 Consultar relaciones específicas\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": {\n    \"entity\": \"Charbi\",\n    \"relation\": \"mantiene\"\n  }\n}\n```\n\n## 5. Beneficios de la persistencia cognitiva\n- **Coherencia a largo plazo**: El agente recuerda decisiones, preferencias y contextos anteriores.\n- **Eficiencia**: Evita repetir la misma recopilación de datos.\n- **Personalización**: Se pueden crear perfiles de usuario y proyectos que evolucionen con el tiempo.\n- **Escalabilidad**: El grafo permite ampliar relaciones sin perder rendimiento, mientras que el almacén semántico gestiona grandes volúmenes de texto.\n\n## 6. Próximos pasos para el usuario\n1. **Definir qué tipo de información necesita persistir** (relaciones, notas, configuraciones).\n2. **Utilizar las herramientas adecuadas** según el tipo de dato.\n3. **Consultar la información cuando sea necesario** mediante `brain_recall` o `query_graph`.\n4. **Actualizar o eliminar** entradas obsoletas usando las mismas herramientas con nuevos valores.\n\n---\nEsta documentación queda almacenada en la memoria a largo plazo de Charbi bajo la categoría `process_documentation`, permitiendo su recuperación y referencia en futuras interacciones.",
+    "metadata": {}
+  },
+  {
+    "id": "ejtcrrc",
+    "timestamp": 1772738865380,
+    "category": "process_documentation",
+    "content": "## Documentación del Proceso de Persistencia Cognitiva de Charbi\n\n### 1. Visión General\nCharbi mantiene persistencia cognitiva mediante una arquitectura híbrida que combina:\n- **Grafo de Conocimiento**: relaciones estructuradas (Sujeto → Relación → Objeto) gestionadas por `cognitive.add_relation` y consultables con `cognitive.query_graph`.\n- **Almacén Semántico**: recuerdos vectoriales que permiten búsquedas semánticas mediante `cognitive.brain_recall` y `cognitive.search`.\n- **Funciones Cognitivas de Memoria**: operaciones de almacenamiento (`cognitive.store`) y recuperación (`cognitive.brain_recall`) que sincronizan ambos componentes.\n\n### 2. Flujo de Datos\n1. **Captura**: Cada interacción relevante (p. ej., una decisión, un hecho importante) se convierte en una relación o en un contenido textual.\n2. **Persistencia estructurada**: Se usa `cognitive.add_relation` para registrar la relación en el grafo.\n3. **Persistencia semántica**: Se usa `cognitive.store` para guardar el mismo contenido (o un resumen) como texto categorizado.\n4. **Sincronización**: Ambas capas comparten una ID interna opcional en `metadata` para trazabilidad.\n5. **Recuperación**:\n   - Búsqueda estructurada con `cognitive.query_graph` cuando se necesita una relación exacta.\n   - Búsqueda semántica con `cognitive.brain_recall` cuando el usuario formula consultas vagas o contextuales.\n\n### 3. Funciones Principales\n| Función | Propósito | Parámetros clave | Ejemplo de uso |\n|---------|-----------|-------------------|----------------|\n| `cognitive.add_relation` | Añadir relación al grafo | `subject`, `relation`, `object`, `metadata` (opcional) | `{\"subject\":\"Yhon\",\"relation\":\"desarrolla\",\"object\":\"Charbi\"}` |\n| `cognitive.query_graph` | Consultar relaciones del grafo | `entity`, `relation` (opcionales) | `{\"entity\":\"Charbi\"}` |\n| `cognitive.store` | Guardar información en memoria a largo plazo | `content`, `category` | `{\"content\":\"Charbi utiliza persistencia cognitiva híbrida.\",\"category\":\"process_documentation\"}` |\n| `cognitive.brain_recall` | Recuperar recuerdos semánticos | `query`, `k` | `{\"query\":\"persistencia cognitiva\",\"k\":5}` |\n| `cognitive.search` | Búsqueda textual en la memoria | `query` | `{\"query\":\"cómo funciona el grafo\"}` |\n\n### 4. Ejemplos Prácticos\n#### 4.1. Registrar una nueva relación\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Usuario\",\n    \"relation\": \"solicitó\",\n    \"object\": \"documentación del proceso\",\n    \"metadata\": {\"timestamp\": \"2026-03-05T12:00:00Z\"}\n  }\n}\n```\n#### 4.2. Guardar un hecho relevante\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Charbi almacena los hechos tanto en grafo como en vectores para permitir búsquedas estructuradas y semánticas.\",\n    \"category\": \"fact\"\n  }\n}\n```\n#### 4.3. Recuperar información semánticamente\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\n    \"query\": \"¿cómo mantiene Charbi la persistencia?\",\n    \"k\": 3\n  }\n}\n```\n#### 4.4. Consultar relaciones específicas\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": {\n    \"entity\": \"Charbi\",\n    \"relation\": \"utiliza\"\n  }\n}\n```\n\n### 5. Buenas Prácticas\n- **Sincronizar siempre**: Cada hecho importante debe guardarse en ambas capas para evitar pérdida de contexto.\n- **Metadatos**: Incluir timestamps, tags o IDs de sesión facilita auditorías y depuración.\n- **Categorías claras**: Usa categorías como `user_preference`, `project_status`, `process_documentation` para organizar la memoria semántica.\n- **Revisión periódica**: Ejecuta scripts de limpieza o consolidación (p. ej., con `system.execute` y `cron`) para evitar redundancias.\n\n### 6. Resumen para el Usuario\nCon este proceso, Charbi ya no depende únicamente de la sesión actual; cada interacción clave se persiste en un grafo estructurado y un almacén semántico. Gracias a ello, al volver a preguntar sobre un tema previamente tratado, Charbi puede:\n1. Recuperar relaciones exactas del grafo (p. ej., \"quién solicitó qué\").\n2. Encontrar información relevante incluso con preguntas vagamente formuladas mediante búsqueda semántica.\n3. Mantener una visión de largo plazo de tus preferencias, proyectos y decisiones, lo que permite respuestas más contextuales y proactivas.\n\n---\n*Esta documentación ha sido almacenada en la memoria a largo plazo de Charbi bajo la categoría `process_documentation` para referencia futura.*",
+    "metadata": {}
+  },
+  {
+    "id": "z46932z",
+    "timestamp": 1772738881945,
+    "category": "process_documentation",
+    "content": "# Documentación del Proceso de Persistencia Cognitiva en Charbi\n\n## 📚 Visión General\nCharbi mantiene una **persistencia cognitiva** combinando tres capas principales:\n1. **Grafo de Conocimiento** – relaciones estructuradas `Sujeto → Relación → Objeto`.\n2. **Almacén Semántico** – texto libre indexado para búsquedas híbridas.\n3. **Funciones Cognitivas** – herramientas (`cognitive.store`, `cognitive.add_relation`, `cognitive.query_graph`, `cognitive.brain_recall`, etc.) que operan sobre ambas capas.\n\nEsta arquitectura permite que la IA **recuerde información** a lo largo de sesiones, la **relacione** con nuevos datos y la **recupere** de forma contextual.\n\n## 🛠️ Componentes\n| Componente | Descripción | Herramienta Principal |\n|-----------|-------------|----------------------|\n| Grafo de Conocimiento | Relaciones estructuradas que modelan entidades y sus interacciones. | `cognitive.add_relation`, `cognitive.query_graph` |\n| Almacén Semántico | Texto libre (notas, documentos, fragmentos) indexado para búsquedas vectoriales. | `cognitive.store`, `cognitive.brain_recall` |\n| Motor de Inferencia | Lógica que combina resultados estructurados y semánticos para producir respuestas coherentes. | Implícito en la capa de razonamiento de Charbi |\n\n## 🔄 Flujo de Datos\n1. **Entrada del Usuario** → Charbi interpreta la intención.\n2. **Operación Cognitiva** → Según la intención, se llama a una herramienta (p.ej., `add_relation`).\n3. **Actualización de Memoria** → La herramienta persiste datos en el grafo o en el almacén semántico.\n4. **Indexado/Enriquecimiento** → Los nuevos datos quedan disponibles para búsquedas futuras.\n5. **Respuesta** → Charbi combina la información presente en ambas capas para generar una salida.\n\n## 📦 Ejemplos de Uso\n### 1️⃣ Añadir una relación al grafo\n```json\n{\"tool\": \"cognitive.add_relation\", \"params\": {\"subject\": \"Yhon\", \"relation\": \"desarrolla\", \"object\": \"Charbi\", \"metadata\": {\"fecha\": \"2026-03-05\"}}}\n```\n### 2️⃣ Guardar una nota semántica\n```json\n{\"tool\": \"cognitive.store\", \"params\": {\"content\": \"Charbi debe recordar que el usuario prefiere trabajar con Python.\", \"category\": \"user_preference\"}}\n```\n### 3️⃣ Recuperar información combinada\n```json\n{\"tool\": \"cognitive.brain_recall\", \"params\": {\"query\": \"preferencias del usuario sobre lenguajes de programación\", \"k\": 5}}\n```\n### 4️⃣ Consultar el grafo\n```json\n{\"tool\": \"cognitive.query_graph\", \"params\": {\"entity\": \"Yhon\", \"relation\": \"desarrolla\"}}\n```\n\n## 🧩 Mecanismo de Persistencia\n- **Persistencia estructurada**: Cada `add_relation` crea un nodo/aresta en el grafo que permanece hasta que se elimine explícitamente.\n- **Persistencia semántica**: `cognitive.store` inserta texto en el almacén vectorial; los embeddings se guardan en la base de datos de Charbi.\n- **Sincronización automática**: Cuando se actualiza el grafo, se generan metadatos que también se guardan en el almacén semántico, asegurando que ambas vistas pueden ser consultadas simultáneamente.\n- **Recuperación contextual**: `cognitive.brain_recall` combina similitud vectorial con filtro estructural, permitiendo que la IA recuerde no solo hechos aislados sino también sus relaciones.\n\n## ✅ Resultado\nCon este proceso, Charbi **mantiene una memoria persistente** que:\n- Retiene hechos y relaciones a lo largo del tiempo.\n- Permite consultas rápidas y contextuales.\n- Soporta la generación de respuestas coherentes basadas en el historial del usuario.\n\n---\n*Documentación generada y almacenada para uso futuro.*",
+    "metadata": {}
+  },
+  {
+    "id": "otkeagz",
+    "timestamp": 1772738885396,
+    "category": "learning",
+    "content": "Cuando el usuario menciona que su problema es 'Estructural e Operativo', suele requerir preguntas de clarificación sobre ámbito, naturaleza, síntomas, impacto y recursos disponibles.",
+    "metadata": {}
+  },
+  {
+    "id": "cuv66a4",
+    "timestamp": 1772738885396,
+    "category": "learning",
+    "content": "Si el usuario indica 'Sistema de Aprendizaje Activo', espera que la respuesta sea una salida estructurada (JSON) sin texto adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "w1x04ae",
+    "timestamp": 1772738885397,
+    "category": "learning",
+    "content": "El usuario está dispuesto a proporcionar información adicional y espera un plan de acción paso a paso una vez que se clarifiquen los detalles del problema.",
+    "metadata": {}
+  },
+  {
+    "id": "n5qpxd0",
+    "timestamp": 1772738885476,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sin datos concretos (logs, métricas, descripciones de error) es imposible diagnosticar la causa raíz de un fallo.",
+    "metadata": {}
+  },
+  {
+    "id": "mo0uzh0",
+    "timestamp": 1772738885477,
+    "category": "project_reflection",
+    "content": "[Project Learning] Proveer una metodología estructurada ayuda a guiar al usuario, pero sigue siendo necesario conseguir los artefactos del sistema.",
+    "metadata": {}
+  },
+  {
+    "id": "51fp1fy",
+    "timestamp": 1772738885477,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es útil preguntar explícitamente por los formatos y accesos a la información requerida al iniciar el proyecto.",
+    "metadata": {}
+  },
+  {
+    "id": "zufq96s",
+    "timestamp": 1772738885478,
+    "category": "project_reflection",
+    "content": "[Project Learning] Los pasos de diagnóstico y generación de informe dependen de la disponibilidad de los resultados de los comandos ejecutados.",
+    "metadata": {}
+  },
+  {
+    "id": "ll90kqn",
+    "timestamp": 1772738901758,
+    "category": "process_documentation",
+    "content": "## Documentación del proceso de persistencia cognitiva de Charbi\n\n### 1. Visión general\nCharbi mantiene persistencia cognitiva combinando dos capas principales:\n\n1. **Grafo de conocimiento estructurado** – relaciones tipo `Sujeto -> Relación -> Objeto` gestionadas mediante `cognitive.add_relation`, `cognitive.query_graph`.\n2. **Almacén semántico** – bloques de texto libre indexados mediante `cognitive.store` y recuperables con `cognitive.brain_recall` (búsqueda híbrida semántica + estructural).\n\nAmbas capas están sincronizadas: cuando se crea una nueva relación, también se guarda una descripción textual en el almacén semántico para que la búsqueda basada en contexto pueda encontrarla.\n\n### 2. Componentes clave\n- **cognitive.add_relation** – Añade una arista al grafo.\n- **cognitive.query_graph** – Consulta relaciones.\n- **cognitive.store** – Guarda fragmentos de texto (hechos, notas, documentación).\n- **cognitive.brain_recall** – Recupera información relevante mediante embeddings y coincidencia estructural.\n- **cognitive.search** – Busca palabras clave en la memoria híbrida.\n\n### 3. Flujo de datos\n1. **Entrada de información** (p. ej., el usuario dice \"Juan colabora con María\").\n2. **Persistencia estructurada**: `cognitive.add_relation` crea la arista `(Juan, colabora_con, María)`.\n3. **Persistencia semántica**: `cognitive.store` guarda una frase descriptiva como \"Juan colabora con María en el proyecto X\".\n4. **Actualización de contexto** – Ambas capas quedan disponibles para consultas posteriores.\n5. **Recuperación** – Cuando el usuario pregunta \"¿Con quién colabora Juan?\", Charbi puede:\n   - Usar `cognitive.query_graph` para obtener relaciones directas.\n   - Usar `cognitive.brain_recall` para obtener menciones textuales que incluyan a Juan.\n\n### 4. Ejemplos de uso\n#### 4.1 Añadir una relación y guardarla semánticamente\n```json\n{\n  \"tool\": \"cognitive.add_relation\",\n  \"params\": {\n    \"subject\": \"Juan\",\n    \"relation\": \"colabora_con\",\n    \"object\": \"María\",\n    \"metadata\": {\"proyecto\": \"X\"}\n  }\n}\n```\n```json\n{\n  \"tool\": \"cognitive.store\",\n  \"params\": {\n    \"content\": \"Juan colabora con María en el proyecto X.\",\n    \"category\": \"user_fact\"\n  }\n}\n```\n\n#### 4.2 Consultar relaciones\n```json\n{\n  \"tool\": \"cognitive.query_graph\",\n  \"params\": {\"entity\": \"Juan\", \"relation\": \"colabora_con\"}\n}\n```\nResultado esperado: `[{\"subject\": \"Juan\", \"relation\": \"colabora_con\", \"object\": \"María\"}]`\n\n#### 4.3 Recuperar información textual relevante\n```json\n{\n  \"tool\": \"cognitive.brain_recall\",\n  \"params\": {\"query\": \"Juan proyecto\", \"k\": 3}\n}\n```\nResultado esperado: Lista de fragmentos donde aparece \"Juan\" y \"proyecto\".\n\n#### 4.4 Búsqueda genérica en la memoria híbrida\n```json\n{\n  \"tool\": \"cognitive.search\",\n  \"params\": {\"query\": \"colaboración\"}\n}\n```\n\n### 5. Beneficios de la persistencia cognitiva\n- **Memoria a largo plazo**: la IA recuerda hechos y relaciones entre sesiones.\n- **Contextualización**: combinando grafo y texto, Charbi puede responder tanto a preguntas estructuradas como a consultas vagas.\n- **Escalabilidad**: nuevas relaciones y hechos se añaden sin re‑entrenar el modelo.\n- **Transparencia**: cada hecho tiene una representación estructurada que permite auditoría.\n\n### 6. Cómo consultar la documentación\nEn cualquier momento puedes pedir a Charbi que te muestre la documentación con:\n```\nmostrar documentación persistencia cognitiva\n```\nCharbi recuperará el contenido almacenado mediante `cognitive.brain_recall` y lo presentará.\n\n---\nEsta documentación queda almacenada en la memoria a largo plazo bajo la categoría `process_documentation` para que pueda ser recuperada en futuras interacciones.",
+    "metadata": {}
+  },
+  {
+    "id": "zkxxhec",
+    "timestamp": 1772738915302,
+    "category": "project_reflection",
+    "content": "[Project Learning] La memoria híbrida requiere un modelo de datos estructurado y extensible (JSON con timestamps, tipos y metadatos).",
+    "metadata": {}
+  },
+  {
+    "id": "pj15w04",
+    "timestamp": 1772738915303,
+    "category": "project_reflection",
+    "content": "[Project Learning] Un repositorio abstracto permite cambiar de backend (SQLite, Mongo, archivo) sin modificar la lógica del agente.",
+    "metadata": {}
+  },
+  {
+    "id": "fv7olpd",
+    "timestamp": 1772738915306,
+    "category": "project_reflection",
+    "content": "[Project Learning] Los decoradores facilitan la captura transparente de entradas, salidas y estado interno.",
+    "metadata": {}
+  },
+  {
+    "id": "wvy4ufp",
+    "timestamp": 1772738915307,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es crítico pedir información de entorno (rutas, destino de logs) antes de crear servicios en segundo plano.",
+    "metadata": {}
+  },
+  {
+    "id": "fxthqz7",
+    "timestamp": 1772738915310,
+    "category": "project_reflection",
+    "content": "[Project Learning] Implementar respaldo automático (BackupPolicy), escritura atómica y checksums previene pérdida y corrupción de datos.",
+    "metadata": {}
+  },
+  {
+    "id": "q6rmaok",
+    "timestamp": 1772738915310,
+    "category": "project_reflection",
+    "content": "[Project Learning] Las pruebas de integración deben validar tanto el registro en el grafo como la capacidad de recuperación y resumen.",
+    "metadata": {}
+  },
+  {
+    "id": "znwwz66",
+    "timestamp": 1772738915311,
+    "category": "project_reflection",
+    "content": "[Project Learning] Documentar el flujo con ejemplos claros mejora la adopción y el mantenimiento futuro.",
+    "metadata": {}
+  },
+  {
+    "id": "o97bkbs",
+    "timestamp": 1772738952386,
+    "category": "project_reflection",
+    "content": "[Project Learning] Definir claramente los entregables y validar su completitud evita que queden tareas pendientes.",
+    "metadata": {}
+  },
+  {
+    "id": "8bqvdm9",
+    "timestamp": 1772738952387,
+    "category": "project_reflection",
+    "content": "[Project Learning] FastAPI es una buena opción para exponer rápidamente un gateway en el puerto 5005, pero necesita pruebas y manejo de errores robusto.",
+    "metadata": {}
+  },
+  {
+    "id": "5en3ngp",
+    "timestamp": 1772738952390,
+    "category": "project_reflection",
+    "content": "[Project Learning] Separar la lógica del kernel en un adaptador facilita el testing y la evolución del sistema.",
+    "metadata": {}
+  },
+  {
+    "id": "y86jwgc",
+    "timestamp": 1772738952391,
+    "category": "project_reflection",
+    "content": "[Project Learning] Documentar la API y el cliente desde el inicio reduce la carga de trabajo al final del proyecto.",
+    "metadata": {}
+  },
+  {
+    "id": "ul8zxru",
+    "timestamp": 1772738952391,
+    "category": "project_reflection",
+    "content": "[Project Learning] La falta de pruebas automáticas y de verificación del entorno (firewall, e2e) impide confirmar que el puente funciona en producción.",
+    "metadata": {}
+  },
+  {
+    "id": "n7wedcd",
+    "timestamp": 1772739034893,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es imprescindible disponer de la salida real de comandos (ps, netstat/lsof, etc.) antes de generar scripts de limpieza; sin datos concretos, cualquier solución es hipotética.",
+    "metadata": {}
+  },
+  {
+    "id": "2cwdqci",
+    "timestamp": 1772739034894,
+    "category": "project_reflection",
+    "content": "[Project Learning] Los scripts que matan procesos deben incluir múltiples capas de validación (existencia del PID, pertenencia al usuario, lista de procesos críticos) y registro de acciones para evitar interrupciones de servicios esenciales.",
+    "metadata": {}
+  },
+  {
+    "id": "sbohlci",
+    "timestamp": 1772739034897,
+    "category": "project_reflection",
+    "content": "[Project Learning] Implementar el Kernel como Singleton o usar mecanismos de bloqueo de recursos (lock files, sockets) previene la creación de instancias paralelas que pueden dejar procesos huérfanos.",
+    "metadata": {}
+  },
+  {
+    "id": "wt48b7b",
+    "timestamp": 1772739034898,
+    "category": "project_reflection",
+    "content": "[Project Learning] Automatizar la detección de puertos en uso (p.ej., con `lsof -i :5005`) y combinarla con políticas de timeout y reintentos mejora la robustez del proceso de limpieza.",
+    "metadata": {}
+  },
+  {
+    "id": "w1uecyp",
+    "timestamp": 1772739034899,
+    "category": "project_reflection",
+    "content": "[Project Learning] La comunicación clara con el usuario es clave: solicitar los datos faltantes antes de avanzar evita retrabajos y garantiza que las soluciones propuestas sean aplicables al entorno concreto.",
+    "metadata": {}
+  },
+  {
+    "id": "wehnm68",
+    "timestamp": 1772739057464,
+    "category": "learning",
+    "content": "Cuando el usuario menciona brevemente 'Sistema de Aprendizaje Activo', probablemente está indicando que desea que el asistente opere en modo de aprendizaje activo o que se le apliquen técnicas de aprendizaje activo.",
+    "metadata": {}
+  },
+  {
+    "id": "ryk0s6g",
+    "timestamp": 1772739061638,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es esencial contar con datos de prueba concretos antes de ejecutar la fase de validación.",
+    "metadata": {}
+  },
+  {
+    "id": "rkwej1e",
+    "timestamp": 1772739061639,
+    "category": "project_reflection",
+    "content": "[Project Learning] Reforzar las instrucciones de formato JSON en el prompt y usar delimitadores reduce la probabilidad de respuestas en texto libre.",
+    "metadata": {}
+  },
+  {
+    "id": "hlq48ft",
+    "timestamp": 1772739061642,
+    "category": "project_reflection",
+    "content": "[Project Learning] Un middleware de validación y reintento es eficaz para garantizar JSON válido en producción.",
+    "metadata": {}
+  },
+  {
+    "id": "dj2mxsb",
+    "timestamp": 1772739061643,
+    "category": "project_reflection",
+    "content": "[Project Learning] Solicitar explícitamente los artefactos (escenarios, resultados) al inicio del flujo evita bloqueos posteriores.",
+    "metadata": {}
+  },
+  {
+    "id": "tlbw5uv",
+    "timestamp": 1772739113099,
+    "category": "project_reflection",
+    "content": "[Project Learning] Usar el árbol /proc/<pid> es una forma rápida y fiable de confirmar la ausencia de procesos.",
+    "metadata": {}
+  },
+  {
+    "id": "lzwzpyp",
+    "timestamp": 1772739113101,
+    "category": "project_reflection",
+    "content": "[Project Learning] Antes de eliminar artefactos del sistema es imprescindible obtener autorización explícita del usuario y conocer el alcance (home vs. rutas del sistema).",
+    "metadata": {}
+  },
+  {
+    "id": "k46ib15",
+    "timestamp": 1772739113102,
+    "category": "project_reflection",
+    "content": "[Project Learning] La recolección de logs debe pedirse claramente con los PIDs objetivo; sin esa información no se pueden extraer los registros.",
+    "metadata": {}
+  },
+  {
+    "id": "4imh5i3",
+    "timestamp": 1772739113103,
+    "category": "project_reflection",
+    "content": "[Project Learning] Los pasos de purga pueden fallar por falta de privilegios (sudo) o por incertidumbre sobre la ubicación de los archivos; es vital planificar los paths a inspeccionar de antemano.",
+    "metadata": {}
+  },
+  {
+    "id": "s29zfkw",
+    "timestamp": 1772739113104,
+    "category": "project_reflection",
+    "content": "[Project Learning] Mantener la conversación proactiva: si el agente necesita más datos, debe volver a preguntar inmediatamente para evitar estancamientos.",
+    "metadata": {}
+  },
+  {
+    "id": "g1ebjer",
+    "timestamp": 1772739123050,
+    "category": "learning",
+    "content": "When the user provides only a brief phrase (e.g., 'Singleton Kernel: El'), they expect the system to infer their interest and ask for clarification.",
+    "metadata": {}
+  },
+  {
+    "id": "3rd7424",
+    "timestamp": 1772739123051,
+    "category": "learning",
+    "content": "The user prefers communication in Spanish and responds with short, directive messages.",
+    "metadata": {}
+  },
+  {
+    "id": "8zkw96f",
+    "timestamp": 1772739123053,
+    "category": "learning",
+    "content": "When the user states 'Sistema de Aprendizaje Activo', they indicate a desire for the system to operate in an active learning mode, extracting facts, relations, and lessons from the interaction.",
+    "metadata": {}
+  },
+  {
+    "id": "iaz3yc1",
+    "timestamp": 1772739128399,
+    "category": "learning",
+    "content": "When the user provides a single-word topic (e.g., 'Orchestrator'), they prefer the assistant to ask clarifying questions to understand the specific need.",
+    "metadata": {}
+  },
+  {
+    "id": "aw2o1j2",
+    "timestamp": 1772739128399,
+    "category": "learning",
+    "content": "The user explicitly requests an active learning system, indicating they want the assistant to treat the interaction as a learning opportunity and capture new facts, relationships, and patterns.",
+    "metadata": {}
+  },
+  {
+    "id": "bknydh7",
+    "timestamp": 1772739130529,
+    "category": "learning",
+    "content": "Cuando el usuario envía mensajes muy cortos o incompletos, Charbi tiende a solicitar más información para poder ayudar.",
+    "metadata": {}
+  },
+  {
+    "id": "481tggw",
+    "timestamp": 1772739130530,
+    "category": "learning",
+    "content": "El usuario prefiere comunicarse en español.",
+    "metadata": {}
+  },
+  {
+    "id": "ztumy8z",
+    "timestamp": 1772739130530,
+    "category": "learning",
+    "content": "El usuario mostró interés en activar o usar el Sistema de Aprendizaje Activo.",
+    "metadata": {}
+  },
+  {
+    "id": "jvxous8",
+    "timestamp": 1772739145278,
+    "category": "learning",
+    "content": "Cuando el usuario escribe solo un término técnico (ej. \"Gateway\"), prefiere una explicación detallada en español.",
+    "metadata": {}
+  },
+  {
+    "id": "0bzvay7",
+    "timestamp": 1772739145279,
+    "category": "learning",
+    "content": "El usuario muestra interés en recibir información estructurada (tabla, puntos, resumen).",
+    "metadata": {}
+  },
+  {
+    "id": "txubs8w",
+    "timestamp": 1772739145281,
+    "category": "learning",
+    "content": "El usuario interactúa en español, por lo que prefiere respuestas en ese idioma.",
+    "metadata": {}
+  },
+  {
+    "id": "k7b4liz",
+    "timestamp": 1772739145282,
+    "category": "learning",
+    "content": "El usuario solicita explícitamente un formato de salida JSON sin texto adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "ha2vxsd",
+    "timestamp": 1772739151450,
+    "category": "learning",
+    "content": "When the user mentions Singleton, they are concerned about kernel restarts, duplicate logic, and port conflicts (especially port 5005).",
+    "metadata": {}
+  },
+  {
+    "id": "pxcmrke",
+    "timestamp": 1772739151451,
+    "category": "learning",
+    "content": "The user may request step‑by‑step guidance to implement a Singleton in a specific framework.",
+    "metadata": {}
+  },
+  {
+    "id": "d0mhrfi",
+    "timestamp": 1772739213561,
+    "category": "system_config",
+    "content": "Umbrales de complejidad reducidos: Charbi entra en modo proyecto automáticamente ante cualquier petición técnica",
+    "metadata": {}
+  },
+  {
+    "id": "s9ntpmr",
+    "timestamp": 1772739220826,
+    "category": "learning",
+    "content": "Cuando el usuario indica que se han bajado los umbrales de complejidad, espera que Charbi entre automáticamente en modo proyecto ante cualquier petición técnica.",
+    "metadata": {}
+  },
+  {
+    "id": "s7lvcpw",
+    "timestamp": 1772739220827,
+    "category": "learning",
+    "content": "El usuario declara que el sistema de aprendizaje debe estar activo, por lo que se debe mantener la captura y el registro continuo de hechos y relaciones.",
+    "metadata": {}
+  },
+  {
+    "id": "j6dw9ir",
+    "timestamp": 1772739220828,
+    "category": "learning",
+    "content": "Después de registrar cambios en la configuración (p. ej., umbrales), el usuario puede solicitar acciones o confirmaciones adicionales sin necesidad de repetir la información.",
+    "metadata": {}
+  },
+  {
+    "id": "r9tiso4",
+    "timestamp": 1772739223228,
+    "category": "learning",
+    "content": "Cuando el usuario indica un estado con formato emoji + texto, espera que Charbi lo reconozca y le ofrezca opciones de siguiente paso.",
+    "metadata": {}
+  },
+  {
+    "id": "3gby9s3",
+    "timestamp": 1772739223229,
+    "category": "learning",
+    "content": "Si el usuario menciona 'Sistema de Aprendizaje Activo', quiere que el asistente extraiga hechos, relaciones y lecciones de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "ta1nxpt",
+    "timestamp": 1772739225874,
+    "category": "system_status",
+    "content": "El sistema está en un estado limpio y estable. La comunicación CLI <-> Kernel es funcional vía Gateway API.",
+    "metadata": {}
+  },
+  {
+    "id": "i43hls4",
+    "timestamp": 1772739237753,
+    "category": "learning",
+    "content": "Cuando el usuario indica 'Sistema de Aprendizaje Activo', desea que el sistema opere en modo de aprendizaje activo y registre hechos y relaciones de forma proactiva.",
+    "metadata": {}
+  },
+  {
+    "id": "axzz35j",
+    "timestamp": 1772739280462,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es necesario solicitar explícitamente cualquier fragmento de script o comandos antes de la tarea t4 para poder ejecutar pruebas.",
+    "metadata": {}
+  },
+  {
+    "id": "4486mm4",
+    "timestamp": 1772739280463,
+    "category": "project_reflection",
+    "content": "[Project Learning] Cuando una tarea de investigación (t3) queda vacía, la calidad del documento final puede verse afectada; se debe asegurar que la investigación se realice y se integre.",
+    "metadata": {}
+  },
+  {
+    "id": "bj5luhn",
+    "timestamp": 1772739280466,
+    "category": "project_reflection",
+    "content": "[Project Learning] Mantener la alineación entre los borradores iniciales (t2) y el producto final (t6) evita desviaciones de alcance.",
+    "metadata": {}
+  },
+  {
+    "id": "9142u7x",
+    "timestamp": 1772739280467,
+    "category": "project_reflection",
+    "content": "[Project Learning] Definir con claridad si el objetivo se refiere a una operación de máquina o a una guía de uso del agente evita confusiones.",
+    "metadata": {}
+  },
+  {
+    "id": "1f3he5w",
+    "timestamp": 1772739329562,
+    "category": "project_reflection",
+    "content": "[Project Learning] Node.js está instalado (v22.22.0) y es compatible con Charbi.",
+    "metadata": {}
+  },
+  {
+    "id": "nz6sf43",
+    "timestamp": 1772739329565,
+    "category": "project_reflection",
+    "content": "[Project Learning] El comando global `charbi` está disponible y permite iniciar (o detectar) el Kernel aunque el proyecto local falte.",
+    "metadata": {}
+  },
+  {
+    "id": "phtttzs",
+    "timestamp": 1772739329568,
+    "category": "project_reflection",
+    "content": "[Project Learning] La ausencia del directorio del proyecto y de `kernel/bootstrap.ts` es un obstáculo potencial para tareas futuras de desarrollo o depuración.",
+    "metadata": {}
+  },
+  {
+    "id": "urk6b15",
+    "timestamp": 1772739329570,
+    "category": "project_reflection",
+    "content": "[Project Learning] Para validar completamente el inicio del Kernel es necesario disponer de los logs o salidas del proceso.",
+    "metadata": {}
+  },
+  {
+    "id": "lzofpeg",
+    "timestamp": 1772739770584,
+    "category": "learning",
+    "content": "Cuando el usuario indica 'Sistema de Aprendizaje Activo', desea que el agente funcione en modo de aprendizaje activo y registre hechos y relaciones de forma proactiva.",
+    "metadata": {}
+  },
+  {
+    "id": "dz911ux",
+    "timestamp": 1772739770588,
+    "category": "learning",
+    "content": "Si el usuario pregunta por su nombre y el agente no lo tiene almacenado, debe solicitar el nombre al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "dfc7cw1",
+    "timestamp": 1772739798036,
+    "category": "user_profile",
+    "content": "El usuario se llama Yhon",
+    "metadata": {}
+  },
+  {
+    "id": "q7ar8n0",
+    "timestamp": 1772739802793,
+    "category": "learning",
+    "content": "El usuario se llama Yhon.",
+    "metadata": {}
+  },
+  {
+    "id": "gqpmq69",
+    "timestamp": 1772739802795,
+    "category": "learning",
+    "content": "El usuario prefiere ser llamado por su nombre en conversaciones futuras.",
+    "metadata": {}
+  },
+  {
+    "id": "ttwtdq2",
+    "timestamp": 1772739846762,
+    "category": "learning",
+    "content": "Cuando el usuario menciona 'Sistema de Aprendizaje Activo', indica interés en que el sistema funcione como un Sistema de Aprendizaje Activo.",
+    "metadata": {}
+  },
+  {
+    "id": "9zozxuj",
+    "timestamp": 1772739864434,
+    "category": "learning",
+    "content": "Cuando el usuario menciona \"Sistema de Aprendizaje Activo\", está interesado en la naturaleza del sistema y probablemente desea confirmar o ampliar información sobre su funcionamiento.",
+    "metadata": {}
+  },
+  {
+    "id": "2ady7tq",
+    "timestamp": 1772739888302,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta \"que puedes hacer\", prefiere una respuesta estructurada, enumerada y con visuales (emojis, secciones).",
+    "metadata": {}
+  },
+  {
+    "id": "perrvuv",
+    "timestamp": 1772739888304,
+    "category": "learning",
+    "content": "Al mencionar \"Sistema de Aprendizaje Activo\", el usuario indica que quiere que el asistente registre y utilice activamente los aprendizajes derivados de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "mnlnjck",
+    "timestamp": 1772740015399,
+    "category": "learning",
+    "content": "When the user asks for \"ls -la en home/username\" they expect a direct, detailed directory listing formatted as a code block.",
+    "metadata": {}
+  },
+  {
+    "id": "gw7670e",
+    "timestamp": 1772740015402,
+    "category": "learning",
+    "content": "The user writes in Spanish, so responses should be in Spanish unless otherwise indicated.",
+    "metadata": {}
+  },
+  {
+    "id": "ira5r1q",
+    "timestamp": 1772740015404,
+    "category": "learning",
+    "content": "The user may omit the leading slash in paths (e.g., \"home/yhondev\"); the system should interpret it as \"/home/yhondev\".",
+    "metadata": {}
+  },
+  {
+    "id": "zmjg1ii",
+    "timestamp": 1772740065929,
+    "category": "learning",
+    "content": "Cuando el usuario solicita 'la noticia más importante del día' en español, prefiere una respuesta directa y actualizada en lugar de un error o aviso.",
+    "metadata": {}
+  },
+  {
+    "id": "shu285a",
+    "timestamp": 1772740065931,
+    "category": "learning",
+    "content": "Las consultas de noticias actuales pueden requerir usar fuentes en inglés o buscar en sitios de noticias internacionales conocidos, ya que las búsquedas en español pueden no devolver resultados inmediatos.",
+    "metadata": {}
+  },
+  {
+    "id": "lp1bfji",
+    "timestamp": 1772740137438,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es importante no solicitar al usuario información que ya está disponible en la descripción de la tarea (el contenido de la noticia ya estaba provisto).",
+    "metadata": {}
+  },
+  {
+    "id": "ng0m2dd",
+    "timestamp": 1772740137444,
+    "category": "project_reflection",
+    "content": "[Project Learning] El motor debe ser capaz de generar directamente el archivo de texto solicitado en forma de contenido sin depender de pasos intermedios que requieran interacción adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "359tt2q",
+    "timestamp": 1772740137446,
+    "category": "project_reflection",
+    "content": "[Project Learning] Al detectar que la información requerida está presente, el sistema debe proceder a extraer el titular y el resumen y a formular la respuesta final sin preguntar de nuevo al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "bynefnt",
+    "timestamp": 1772746169874,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sin credenciales o acceso explícito a la fuente de datos, es imposible consultar la actividad en Sima.",
+    "metadata": {}
+  },
+  {
+    "id": "3hswkue",
+    "timestamp": 1772746169876,
+    "category": "project_reflection",
+    "content": "[Project Learning] Las políticas de uso impiden solicitar o manejar credenciales sensibles sin autorización explícita.",
+    "metadata": {}
+  },
+  {
+    "id": "34r6hld",
+    "timestamp": 1772746169878,
+    "category": "project_reflection",
+    "content": "[Project Learning] Para futuros intentos se necesita una especificación clara del formato y la ubicación de los registros (API, archivo CSV/JSON, etc.).",
+    "metadata": {}
+  },
+  {
+    "id": "b7gwgvs",
+    "timestamp": 1772749770856,
+    "category": "project_reflection",
+    "content": "[Project Learning] Para tareas de investigación externa es necesario contar con acceso a una herramienta de búsqueda o que el usuario proporcione directamente los datos.",
+    "metadata": {}
+  },
+  {
+    "id": "gdam8im",
+    "timestamp": 1772749770869,
+    "category": "project_reflection",
+    "content": "[Project Learning] Cuando se solicita procesar información, el agente debe preguntar explícitamente por la ruta o el contenido del archivo antes de continuar.",
+    "metadata": {}
+  },
+  {
+    "id": "spql8le",
+    "timestamp": 1772749770871,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sin datos de entrada, la cadena de tareas se bloquea y no se pueden generar conclusiones.",
+    "metadata": {}
+  },
+  {
+    "id": "ycgvrhh",
+    "timestamp": 1772749790499,
+    "category": "learning",
+    "content": "Cuando el usuario pide 'Revisa mis tareas en SIMA' o '¿Qué tengo pendiente en la universidad?', está solicitando que Charbi consulte sus tareas pendientes en el portal universitario SIMA.",
+    "metadata": {}
+  },
+  {
+    "id": "qhyeikm",
+    "timestamp": 1772749790501,
+    "category": "learning",
+    "content": "El usuario espera que Charbi solicite sus credenciales (nombre de usuario, URL de acceso u otro método) para poder acceder al portal.",
+    "metadata": {}
+  },
+  {
+    "id": "79lgvo3",
+    "timestamp": 1772749790502,
+    "category": "learning",
+    "content": "El usuario emplea tanto una frase directa ('Revisa mis tareas en SIMA') como una interrogativa ('¿Qué tengo pendiente en la universidad?') para expresar la misma intención de obtener información de sus tareas académicas.",
+    "metadata": {}
+  },
+  {
+    "id": "q677jx7",
+    "timestamp": 1772750426816,
+    "category": "learning",
+    "content": "Cuando el usuario escribe un mensaje breve como \"Estás ahí\", espera una confirmación de presencia del sistema.",
+    "metadata": {}
+  },
+  {
+    "id": "ll9gg7r",
+    "timestamp": 1772750426825,
+    "category": "learning",
+    "content": "Al mencionar \"Sistema de Aprendizaje Activo\", el usuario indica que desea que el asistente opere en modo de aprendizaje activo, extrayendo hechos, relaciones y lecciones de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "sno5kdu",
+    "timestamp": 1772750458939,
+    "category": "project_reflection",
+    "content": "[Project Learning] La falta de fuentes públicas o accesibles limitó la capacidad de obtención de datos relevantes.",
+    "metadata": {}
+  },
+  {
+    "id": "nkienjh",
+    "timestamp": 1772750458940,
+    "category": "project_reflection",
+    "content": "[Project Learning] Solicitar al usuario un resumen o documento específico es necesario cuando la información no está disponible automáticamente.",
+    "metadata": {}
+  },
+  {
+    "id": "o9l43hj",
+    "timestamp": 1772750458945,
+    "category": "project_reflection",
+    "content": "[Project Learning] El flujo de trabajo debería incluir una verificación temprana de la disponibilidad de fuentes antes de invertir tiempo en búsquedas y análisis.",
+    "metadata": {}
+  },
+  {
+    "id": "unqbbge",
+    "timestamp": 1772750458946,
+    "category": "project_reflection",
+    "content": "[Project Learning] El sistema actual tiene limitaciones para acceder a bases de datos internas o sitios con posibles restricciones de acceso.",
+    "metadata": {}
+  },
+  {
+    "id": "l6wjqh0",
+    "timestamp": 1772750689269,
+    "category": "project_reflection",
+    "content": "[Project Learning] La ambigüedad en la definición del objeto de investigación (\"Sima\") bloqueó el progreso del proyecto.",
+    "metadata": {}
+  },
+  {
+    "id": "waqr3us",
+    "timestamp": 1772750689270,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es necesario validar y clarificar términos clave antes de iniciar la recolección de información.",
+    "metadata": {}
+  },
+  {
+    "id": "g9hbexl",
+    "timestamp": 1772750689273,
+    "category": "project_reflection",
+    "content": "[Project Learning] Las tareas dependen de recursos externos (búsqueda web, extracción de contenido) que deben estar claramente especificados para ser ejecutados.",
+    "metadata": {}
+  },
+  {
+    "id": "ksixqv7",
+    "timestamp": 1772750689275,
+    "category": "project_reflection",
+    "content": "[Project Learning] El sistema necesita una interacción del usuario para obtener contexto cuando la información proporcionada es insuficiente.",
+    "metadata": {}
+  },
+  {
+    "id": "6olk0ty",
+    "timestamp": 1772750793320,
+    "category": "learning",
+    "content": "Cuando el usuario envía el comando /status, espera una confirmación de que el sistema está activo y listo para ayudar.",
+    "metadata": {}
+  },
+  {
+    "id": "3mwmvcp",
+    "timestamp": 1772750793322,
+    "category": "learning",
+    "content": "El usuario utiliza comandos breves como /status para verificar el estado del sistema.",
+    "metadata": {}
+  },
+  {
+    "id": "vejdbkv",
+    "timestamp": 1772750793323,
+    "category": "learning",
+    "content": "El usuario muestra preferencia por respuestas amigables que incluyan emojis como 😊.",
+    "metadata": {}
+  },
+  {
+    "id": "ydx5or1",
+    "timestamp": 1772750813390,
+    "category": "learning",
+    "content": "Cuando el usuario menciona \"Sistema de Aprendizaje Activo\", está indicando interés en ese tema.",
+    "metadata": {}
+  },
+  {
+    "id": "0clyp7y",
+    "timestamp": 1772750813394,
+    "category": "learning",
+    "content": "El usuario prefiere mensajes muy breves o palabras clave para señalar sus intereses.",
+    "metadata": {}
+  },
+  {
+    "id": "vpp1uql",
+    "timestamp": 1772751143331,
+    "category": "learning",
+    "content": "Cuando el usuario da respuestas muy breves o meta‑referenciales (p. ej., \"Sistema de Aprendizaje Activo\"), está indicando que reconoce el rol del asistente como un sistema de aprendizaje activo y puede estar esperando que el asistente continúe el proceso de recolección de información o que cambie a un modo de aprendizaje activo.",
+    "metadata": {}
+  },
+  {
+    "id": "37bwf44",
+    "timestamp": 1772751143333,
+    "category": "learning",
+    "content": "El usuario nombra la plataforma \"Sima\" como contexto de sus actividades, lo que sugiere que necesita ayuda específica relacionada con esa herramienta o entorno.",
+    "metadata": {}
+  },
+  {
+    "id": "3g2os7b",
+    "timestamp": 1772751443635,
+    "category": "learning",
+    "content": "Cuando el usuario escribe frases breves y ambiguas como \"Sima hay actividad\", necesita que el sistema solicite mayor claridad.",
+    "metadata": {}
+  },
+  {
+    "id": "awqos7f",
+    "timestamp": 1772751443639,
+    "category": "learning",
+    "content": "Si el usuario indica \"Sistema de Aprendizaje Activo\", quiere que el asistente opere en modo de aprendizaje activo, extrayendo hechos y relaciones de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "mjr8lhw",
+    "timestamp": 1772751563250,
+    "category": "project_reflection",
+    "content": "[Project Learning] El objetivo principal de revisar actividad en \"Sima\" se cumplió al obtener y sintetizar datos de los tres contextos relevantes.",
+    "metadata": {}
+  },
+  {
+    "id": "t0acqye",
+    "timestamp": 1772751563253,
+    "category": "project_reflection",
+    "content": "[Project Learning] El término \"Sima\" es polisémico; es importante clarificar cuál de los dominios es de mayor interés para el usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "wkj3tu9",
+    "timestamp": 1772751563255,
+    "category": "project_reflection",
+    "content": "[Project Learning] La tarea de guardado falló probablemente por limitaciones de permisos o un uso incorrecto de la API de escritura; se necesita manejar errores y verificar rutas antes de escribir.",
+    "metadata": {}
+  },
+  {
+    "id": "p9w2xmw",
+    "timestamp": 1772751563257,
+    "category": "project_reflection",
+    "content": "[Project Learning] La estructuración de resultados en tablas y recomendaciones facilita la comprensión y la toma de decisiones posteriores.",
+    "metadata": {}
+  },
+  {
+    "id": "sgy7fsm",
+    "timestamp": 1772751750349,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sima tiene un ritmo activo de actualizaciones (cada 6‑12 meses) con mejoras como GPU y GIS.",
+    "metadata": {}
+  },
+  {
+    "id": "bdqo9ud",
+    "timestamp": 1772751750351,
+    "category": "project_reflection",
+    "content": "[Project Learning] Se están fortaleciendo alianzas con gobiernos y universidades, lo que amplía su adopción.",
+    "metadata": {}
+  },
+  {
+    "id": "atk3lge",
+    "timestamp": 1772751750355,
+    "category": "project_reflection",
+    "content": "[Project Learning] Hay un impulso educativo evidente: webinars, cursos y material en redes sociales que aumenta la comunidad de usuarios.",
+    "metadata": {}
+  },
+  {
+    "id": "w5llhoa",
+    "timestamp": 1772751750357,
+    "category": "project_reflection",
+    "content": "[Project Learning] El reconocimiento académico (premios, publicaciones) refuerza la credibilidad de la herramienta.",
+    "metadata": {}
+  },
+  {
+    "id": "j9ugn2c",
+    "timestamp": 1772751750359,
+    "category": "project_reflection",
+    "content": "[Project Learning] Limite de conocimiento del modelo: datos posteriores a junio 2024 requieren verificación directa en las fuentes.",
+    "metadata": {}
+  },
+  {
+    "id": "2l94sms",
+    "timestamp": 1772752075083,
+    "category": "project_reflection",
+    "content": "[Project Learning] La disponibilidad de la herramienta de búsqueda web es crítica para obtener datos externos.",
+    "metadata": {}
+  },
+  {
+    "id": "zp4dro0",
+    "timestamp": 1772752075086,
+    "category": "project_reflection",
+    "content": "[Project Learning] Sin fuentes proporcionadas por el usuario, el sistema no puede generar información relevante.",
+    "metadata": {}
+  },
+  {
+    "id": "ajsphm9",
+    "timestamp": 1772752075089,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es necesario clarificar el alcance del análisis (qué aspectos de Sima interesan) antes de iniciar la recopilación de datos.",
+    "metadata": {}
+  },
+  {
+    "id": "ur6m0gq",
+    "timestamp": 1772752108260,
+    "category": "project_reflection",
+    "content": "[Project Learning] El usuario necesita un proceso estructurado para investigar actividad externa, pero también espera que el equipo ejecute la búsqueda y entregue resultados concretos.",
+    "metadata": {}
+  },
+  {
+    "id": "3mlj4mp",
+    "timestamp": 1772752108261,
+    "category": "project_reflection",
+    "content": "[Project Learning] Las limitaciones de acceso a la web impiden obtener datos en tiempo real, lo que obliga a proporcionar instrucciones de búsqueda como solución intermedia.",
+    "metadata": {}
+  },
+  {
+    "id": "u7p0j4n",
+    "timestamp": 1772752108264,
+    "category": "project_reflection",
+    "content": "[Project Learning] El flujo de trabajo del proyecto se basa en tareas encadenadas (t1 → t2 → t3) que generan documentación pero no realizan la acción final esperada.",
+    "metadata": {}
+  },
+  {
+    "id": "4xsas7s",
+    "timestamp": 1772752320200,
+    "category": "project_reflection",
+    "content": "[Project Learning] Una búsqueda web genérica puede no devolver información relevante para consultas muy específicas como la actividad en SIMA.",
+    "metadata": {}
+  },
+  {
+    "id": "mzr7pd9",
+    "timestamp": 1772752320203,
+    "category": "project_reflection",
+    "content": "[Project Learning] El tool `scholar.check-sima` proporciona una respuesta directa y confiable sobre el estado de actividades en el portal.",
+    "metadata": {}
+  },
+  {
+    "id": "1et8zd3",
+    "timestamp": 1772752320205,
+    "category": "project_reflection",
+    "content": "[Project Learning] Es importante manejar casos donde la búsqueda devuelve poco o nada, y recurrir a fuentes oficiales o herramientas especializadas.",
+    "metadata": {}
+  },
+  {
+    "id": "ugnip45",
+    "timestamp": 1772752320207,
+    "category": "project_reflection",
+    "content": "[Project Learning] Guardar resultados en archivos markdown facilita la documentación y posterior revisión.",
+    "metadata": {}
+  },
+  {
+    "id": "cf5l3oa",
+    "timestamp": 1772752423229,
+    "category": "learning",
+    "content": "El usuario habla español.",
+    "metadata": {}
+  },
+  {
+    "id": "4zxzyar",
+    "timestamp": 1772752423231,
+    "category": "learning",
+    "content": "Cuando el usuario pide un resumen de un tema (p. ej., \"Que es Java resumen\"), prefiere una respuesta concisa en formato de viñetas.",
+    "metadata": {}
+  },
+  {
+    "id": "kz3fkdq",
+    "timestamp": 1772778204977,
+    "category": "learning",
+    "content": "When the user says 'hola', they are initiating a conversation in Spanish and expect a friendly greeting response.",
+    "metadata": {}
+  },
+  {
+    "id": "1ebzxmv",
+    "timestamp": 1772778204987,
+    "category": "learning",
+    "content": "The user prefers communication in Spanish.",
+    "metadata": {}
+  },
+  {
+    "id": "px7fpkq",
+    "timestamp": 1772778256342,
+    "category": "learning",
+    "content": "El usuario solicita listados de directorios usando la frase 'haz un ls en <ruta>'.",
+    "metadata": {}
+  },
+  {
+    "id": "n3iduac",
+    "timestamp": 1772778256343,
+    "category": "learning",
+    "content": "El usuario prefiere que la respuesta incluya únicamente los nombres de los archivos/directorios, sin explicaciones adicionales.",
+    "metadata": {}
+  },
+  {
+    "id": "ke1c2m7",
+    "timestamp": 1772778256345,
+    "category": "learning",
+    "content": "El usuario se refiere a rutas sin el '/' inicial, pero espera que se interprete como ruta absoluta (e.g., 'home/yhondev' se interpreta como '/home/yhondev').",
+    "metadata": {}
+  },
+  {
+    "id": "hcehrov",
+    "timestamp": 1772778256347,
+    "category": "learning",
+    "content": "Cuando se solicita un listado, el sistema ejecuta el comando 'ls' y devuelve la salida tal cual.",
+    "metadata": {}
+  },
+  {
+    "id": "nsf7t6f",
+    "timestamp": 1772778941796,
+    "category": "learning",
+    "content": "El usuario prefiere respuestas concisas (una línea) cuando solicita definiciones o explicaciones breves.",
+    "metadata": {}
+  },
+  {
+    "id": "e26v1mb",
+    "timestamp": 1772778941800,
+    "category": "learning",
+    "content": "El usuario se comunica en español, por lo que debe responder en español.",
+    "metadata": {}
+  },
+  {
+    "id": "s6xv5hb",
+    "timestamp": 1772778979507,
+    "category": "learning",
+    "content": "When the user supplies a directory listing, they expect the assistant to analyze the contents and propose concrete actions (e.g., inspect a file, unzip, list subfolders).",
+    "metadata": {}
+  },
+  {
+    "id": "u4jobhe",
+    "timestamp": 1772778979510,
+    "category": "learning",
+    "content": "The user prefers communication in Spanish.",
+    "metadata": {}
+  },
+  {
+    "id": "pd69cf8",
+    "timestamp": 1772778979511,
+    "category": "learning",
+    "content": "The user requests structured output in JSON format for the learning system.",
+    "metadata": {}
+  },
+  {
+    "id": "3640ah6",
+    "timestamp": 1772778979514,
+    "category": "learning",
+    "content": "The user is interested in the presence of large files (e.g., .charbi-agent.zip ≈72 MB) and specific hidden configuration directories.",
+    "metadata": {}
+  },
+  {
+    "id": "dm4k4uz",
+    "timestamp": 1772778996738,
+    "category": "learning",
+    "content": "Cuando el usuario menciona un nombre de archivo, prefiere recibir una descripción detallada de su funcionalidad, dependencias y modo de uso.",
+    "metadata": {}
+  },
+  {
+    "id": "0rdvnfp",
+    "timestamp": 1772778996740,
+    "category": "learning",
+    "content": "El usuario está interesado en que el sistema capture y almacene la información aprendida de la interacción (sistema de aprendizaje activo).",
+    "metadata": {}
+  },
+  {
+    "id": "fmsb1rh",
+    "timestamp": 1772778996743,
+    "category": "learning",
+    "content": "El script 'extraer_transcripciones_local.py' está pensado para ejecución local, necesita las librerías 'youtube-transcript-api' y 'reportlab', y guarda los PDFs generados en la carpeta 'transcripciones_pdfs/'.",
+    "metadata": {}
+  },
+  {
+    "id": "qbo5od8",
+    "timestamp": 1772779003558,
+    "category": "learning",
+    "content": "Cuando el usuario utiliza comandos muy breves como '• go' y luego menciona 'Sistema de Aprendizaje Activo', indica que prefiere que el asistente opere en modo proactivo y auto‑dirigido, ofreciendo información o acciones sin necesidad de más aclaraciones.",
+    "metadata": {}
+  },
+  {
+    "id": "udvduqc",
+    "timestamp": 1772779003560,
+    "category": "learning",
+    "content": "El usuario parece interesado en que Charbi adopte un enfoque de aprendizaje activo, lo que sugiere que valorará respuestas que anticipen necesidades y adapten su comportamiento basándose en la interacción previa.",
+    "metadata": {}
+  },
+  {
+    "id": "s8tbz5a",
+    "timestamp": 1772779030732,
+    "category": "learning",
+    "content": "When the user provides a single, short keyword (e.g., 'java'), the system should immediately enrich the query with more specific terms (like 'latest version', '2024 features', 'market share') instead of repeating generic searches.",
+    "metadata": {}
+  },
+  {
+    "id": "2f0vg29",
+    "timestamp": 1772779030735,
+    "category": "learning",
+    "content": "If consecutive searches return no results, the system should switch to a clarification strategy (ask the user for more details or offer a summary from cached knowledge) rather than retrying the same approach.",
+    "metadata": {}
+  },
+  {
+    "id": "63gxe8h",
+    "timestamp": 1772779030738,
+    "category": "learning",
+    "content": "The user shows interest in up‑to‑date technical information about Java (latest version, new features, industry usage), so future responses should prioritize recent data and concise overviews.",
+    "metadata": {}
+  },
+  {
+    "id": "kxanf2p",
+    "timestamp": 1772779036735,
+    "category": "learning",
+    "content": "Cuando el usuario escribe solo un término técnico (p.e., 'venv'), suele necesitar clarificación o pasos específicos relacionados.",
+    "metadata": {}
+  },
+  {
+    "id": "zueksq4",
+    "timestamp": 1772779036738,
+    "category": "learning",
+    "content": "El usuario prefiere comunicarse en español.",
+    "metadata": {}
+  },
+  {
+    "id": "9nqvy4g",
+    "timestamp": 1772779036742,
+    "category": "learning",
+    "content": "El usuario solicita que el sistema mantenga activo su componente de aprendizaje y estructure respuestas en formato JSON.",
+    "metadata": {}
+  },
+  {
+    "id": "o4x9p2m",
+    "timestamp": 1772779329632,
+    "category": "learning",
+    "content": "Cuando el usuario dice 'Hola', solo está saludando y no hay petición adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "sjupa1b",
+    "timestamp": 1772779329635,
+    "category": "learning",
+    "content": "El usuario reconoce que el sistema es un 'Sistema de Aprendizaje Activo' y espera que responda en formato JSON estructurado.",
+    "metadata": {}
+  },
+  {
+    "id": "hwx7b9b",
+    "timestamp": 1772779504918,
+    "category": "learning",
+    "content": "Cuando el usuario menciona \"Sistema de Aprendizaje Activo\", está indicando que desea que el modelo opere en modo de aprendizaje activo, recopilando hechos, relaciones y lecciones de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "blhwdel",
+    "timestamp": 1772779547998,
+    "category": "learning",
+    "content": "Cuando el usuario menciona una ruta de directorio ('En home/yhondev'), espera que el sistema liste su contenido y ofrezca acciones específicas sobre archivos o carpetas.",
+    "metadata": {}
+  },
+  {
+    "id": "cykfpv3",
+    "timestamp": 1772779548000,
+    "category": "learning",
+    "content": "El usuario prefiere interactuar en español.",
+    "metadata": {}
+  },
+  {
+    "id": "sbdzfa6",
+    "timestamp": 1772779548002,
+    "category": "learning",
+    "content": "El usuario está interesado en inspeccionar, editar o ejecutar archivos dentro de su directorio home.",
+    "metadata": {}
+  },
+  {
+    "id": "foaluw6",
+    "timestamp": 1772779889869,
+    "category": "learning",
+    "content": "Cuando el usuario dice \"Haz ls a ver si terminaste verdad\" quiere un listado del directorio actual para confirmar que la tarea está completada.",
+    "metadata": {}
+  },
+  {
+    "id": "j9usmfl",
+    "timestamp": 1772779889872,
+    "category": "learning",
+    "content": "El usuario habla en español informal y espera una respuesta concisa que solo contenga la salida del comando.",
+    "metadata": {}
+  },
+  {
+    "id": "ap3luf4",
+    "timestamp": 1772779889875,
+    "category": "learning",
+    "content": "Charbi debe ejecutar exactamente el comando solicitado y devolver la salida tal cual, sin añadir explicaciones innecesarias.",
+    "metadata": {}
+  },
+  {
+    "id": "v3i7iws",
+    "timestamp": 1772779946246,
+    "category": "learning",
+    "content": "When the user provides a path like 'En yhondev/java', they are likely trying to inspect or work within that directory.",
+    "metadata": {}
+  },
+  {
+    "id": "1yaa9u0",
+    "timestamp": 1772779946249,
+    "category": "learning",
+    "content": "If the specified path does not exist, the user may need clarification, correction of the path, or instructions to create the directory.",
+    "metadata": {}
+  },
+  {
+    "id": "ox69wgl",
+    "timestamp": 1772779946251,
+    "category": "learning",
+    "content": "The system should respond with a helpful message indicating the path is missing and possibly suggest checking the path spelling or creating it.",
+    "metadata": {}
+  },
+  {
+    "id": "ylpbsm3",
+    "timestamp": 1772779988758,
+    "category": "learning",
+    "content": "Cuando el usuario solicita \"Haz un ls En <ruta>\", prefiere que Charbi liste el contenido del directorio especificado.",
+    "metadata": {}
+  },
+  {
+    "id": "dm39481",
+    "timestamp": 1772779988761,
+    "category": "learning",
+    "content": "Si el comando ls no devuelve salida, Charbi intenta obtener la lista de archivos mediante system.read para confirmar que el directorio está vacío.",
+    "metadata": {}
+  },
+  {
+    "id": "9wge04y",
+    "timestamp": 1772779988765,
+    "category": "learning",
+    "content": "El usuario escribe rutas sin el '/' inicial (e.g., 'home/yhondev/java'), pero Charbi interpreta la ruta absoluta '/home/yhondev/java'.",
+    "metadata": {}
+  },
+  {
+    "id": "i5hqgi4",
+    "timestamp": 1772800536431,
+    "category": "learning",
+    "content": "Cuando el usuario pide la noticia más importante del mundo, espera información actual y relevante; el sistema debe manejar búsquedas sin resultados y ofrecer una alternativa o disculpa en español.",
+    "metadata": {}
+  },
+  {
+    "id": "x5td3no",
+    "timestamp": 1772800536466,
+    "category": "learning",
+    "content": "El usuario se comunica en español, por lo que todas las respuestas deben estar en español.",
+    "metadata": {}
+  },
+  {
+    "id": "ydw7l81",
+    "timestamp": 1772800536469,
+    "category": "learning",
+    "content": "El sistema intentó búsquedas genéricas y refinadas sin éxito; se debe mejorar la formulación de consultas o usar fuentes alternativas cuando el scraper no devuelve resultados.",
+    "metadata": {}
+  },
+  {
+    "id": "rlagy01",
+    "timestamp": 1772803574737,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta por 'skills', quiere conocer las capacidades específicas de Charbi.",
+    "metadata": {}
+  },
+  {
+    "id": "ireoskm",
+    "timestamp": 1772803574743,
+    "category": "learning",
+    "content": "El usuario escribe en español y espera la respuesta en el mismo idioma.",
+    "metadata": {}
+  },
+  {
+    "id": "9ur5cyf",
+    "timestamp": 1772803574745,
+    "category": "learning",
+    "content": "El formato de respuesta debe ser estrictamente JSON con los campos 'learnings' y 'relations'.",
+    "metadata": {}
+  },
+  {
+    "id": "qlw8d4n",
+    "timestamp": 1772803687329,
+    "category": "learning",
+    "content": "Cuando el usuario solicita 'Mira si en sima tengo actividades', prefiere una respuesta concisa indicando si tiene o no actividades pendientes.",
+    "metadata": {}
+  },
+  {
+    "id": "jf3yr1i",
+    "timestamp": 1772803687332,
+    "category": "learning",
+    "content": "El usuario escribe en español y espera que las respuestas también sean en español.",
+    "metadata": {}
+  },
+  {
+    "id": "xke0i8z",
+    "timestamp": 1772803687334,
+    "category": "learning",
+    "content": "El usuario podría pedir revisar rangos de fechas diferentes en futuras consultas sobre SIMA.",
+    "metadata": {}
+  },
+  {
+    "id": "ac8w8g9",
+    "timestamp": 1772803775356,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta por las materias del semestre actual, el agente debe usar una consulta que recupere la lista de inscripciones, no solo actividades pendientes.",
+    "metadata": {}
+  },
+  {
+    "id": "xny5jcw",
+    "timestamp": 1772803775360,
+    "category": "learning",
+    "content": "Si la respuesta de scholar.check-sima es 'no_data' tras varios intentos con diferentes horizontes, es probable que el usuario no tenga materias registradas o que la API no proporcione esa información directamente.",
+    "metadata": {}
+  },
+  {
+    "id": "db91j1m",
+    "timestamp": 1772803775362,
+    "category": "learning",
+    "content": "El usuario tiende a escribir \"sementre\" en lugar de \"semestre\", por lo que el agente debe reconocer y corregir la ortografía automáticamente.",
+    "metadata": {}
+  },
+  {
+    "id": "hpeq9hb",
+    "timestamp": 1772803883520,
+    "category": "learning",
+    "content": "When the user says 'ls en <username>', they expect the contents of /home/<username>.",
+    "metadata": {}
+  },
+  {
+    "id": "m1nvdmo",
+    "timestamp": 1772803883527,
+    "category": "learning",
+    "content": "The user prefers a concise list of filenames without extra commentary.",
+    "metadata": {}
+  },
+  {
+    "id": "5bnbagn",
+    "timestamp": 1772803883529,
+    "category": "learning",
+    "content": "The system can execute shell commands and return a JSON result with success, stdout, stderr, and exitCode.",
+    "metadata": {}
+  },
+  {
+    "id": "k76jzok",
+    "timestamp": 1772803945088,
+    "category": "learning",
+    "content": "Cuando el usuario pide la 'noticia más importante' de un país, prefiere recibir información actual y verificable con fuentes citadas.",
+    "metadata": {}
+  },
+  {
+    "id": "omok2hy",
+    "timestamp": 1772803945090,
+    "category": "learning",
+    "content": "Si las búsquedas web no retornan resultados, es mejor intentar fuentes de noticias con APIs o bases de datos de noticias en lugar de inventar contenido.",
+    "metadata": {}
+  },
+  {
+    "id": "p2rlbb0",
+    "timestamp": 1772803945093,
+    "category": "learning",
+    "content": "El usuario espera una respuesta breve y estructurada, con los datos clave resaltados y referencias a medios reconocidos.",
+    "metadata": {}
+  },
+  {
+    "id": "p8a2slt",
+    "timestamp": 1772803945095,
+    "category": "learning",
+    "content": "Al fallar una petición de fetch (p. ej., 404), el sistema debe intentar una URL alternativa antes de dar una respuesta al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "f7b1dld",
+    "timestamp": 1772804014911,
+    "category": "learning",
+    "content": "Cuando el usuario solicita \"mira si hay actividad en sima\", prefiere una respuesta concisa que indique directamente si hay actividades o no.",
+    "metadata": {}
+  },
+  {
+    "id": "rp9htfl",
+    "timestamp": 1772804014913,
+    "category": "learning",
+    "content": "El usuario no especificó un rango de fechas, por lo que se asume el horizonte predeterminado de 7 días.",
+    "metadata": {}
+  },
+  {
+    "id": "mbjh01a",
+    "timestamp": 1772804014916,
+    "category": "learning",
+    "content": "El usuario no requiere notificación adicional; basta con la información en la respuesta.",
+    "metadata": {}
+  },
+  {
+    "id": "eno12uy",
+    "timestamp": 1772804052780,
+    "category": "learning",
+    "content": "When the user asks 'qué asignatura estoy dando este semestre', they expect the system to know their current teaching subject; if not stored, the system should politely ask the user to provide the subject.",
+    "metadata": {}
+  },
+  {
+    "id": "xe9zq5w",
+    "timestamp": 1772804052782,
+    "category": "learning",
+    "content": "The system currently has no stored semantic or structural data about the user's current semester subject.",
+    "metadata": {}
+  },
+  {
+    "id": "dlrn1is",
+    "timestamp": 1772804230056,
+    "category": "learning",
+    "content": "Cuando el usuario solicita 'haz un ls en <ruta>', prefiere recibir una respuesta que indique explícitamente si el directorio está vacío o muestra los archivos presentes.",
+    "metadata": {}
+  },
+  {
+    "id": "kig196h",
+    "timestamp": 1772804230061,
+    "category": "learning",
+    "content": "El usuario mostró interés en el directorio '/home/yhondev/java', el cual existe y está vacío.",
+    "metadata": {}
+  },
+  {
+    "id": "ijjxf65",
+    "timestamp": 1772805805931,
+    "category": "learning",
+    "content": "Cuando el usuario envía un saludo simple, el sistema debe cumplir con la regla de usar una herramienta (escritura y lectura de archivo) antes de responder.",
+    "metadata": {}
+  },
+  {
+    "id": "vx8hesu",
+    "timestamp": 1772805805939,
+    "category": "learning",
+    "content": "El usuario solicita explícitamente que el sistema actúe como \"Sistema de Aprendizaje Activo\", esperando una salida estructurada en JSON con aprendizajes y relaciones.",
+    "metadata": {}
+  },
+  {
+    "id": "1jttoun",
+    "timestamp": 1772805805941,
+    "category": "learning",
+    "content": "Al recibir la instrucción de extraer hechos y relaciones, el sistema debe limitar su respuesta al formato JSON especificado sin texto adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "ihjmxi4",
+    "timestamp": 1772805807530,
+    "category": "learning",
+    "content": "Cuando el usuario solicita 'Haz un ls En <ruta>', prefiere que Charbi ejecute el comando ls y devuelva sólo la lista de nombres de archivos, sin formato adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "28qy4za",
+    "timestamp": 1772805807532,
+    "category": "learning",
+    "content": "El usuario prefiere comunicarse en español y usar comandos verbales como 'Haz un ls En ...' en lugar de sintaxis de terminal directa.",
+    "metadata": {}
+  },
+  {
+    "id": "xo46gnh",
+    "timestamp": 1772805807536,
+    "category": "learning",
+    "content": "El usuario tiene un directorio '/home/yhondev/java' que contiene al menos el archivo 'test.txt'.",
+    "metadata": {}
+  },
+  {
+    "id": "4xfox6g",
+    "timestamp": 1772805981868,
+    "category": "project_status",
+    "content": "El archivo /home/yhondev/.charbi-agent/workspace/test.txt fue eliminado el 2026-03-06.",
+    "metadata": {}
+  },
+  {
+    "id": "aq2355h",
+    "timestamp": 1772806040434,
+    "category": "learning",
+    "content": "Cuando el usuario escribe 'elimina <archivo> en <directorio>/', interpreta que el archivo está bajo su home en la ruta /home/<usuario>/<directorio> y desea borrarlo.",
+    "metadata": {}
+  },
+  {
+    "id": "3v3r77o",
+    "timestamp": 1772806040440,
+    "category": "learning",
+    "content": "El usuario prefiere respuestas en español que confirmen la acción con el mensaje 'ha sido eliminado correctamente' y muestren la ruta completa.",
+    "metadata": {}
+  },
+  {
+    "id": "a0ygfmn",
+    "timestamp": 1772806040445,
+    "category": "learning",
+    "content": "Al ejecutar un comando de eliminación, el sistema debe registrar el éxito (success:true) y devolverlo sin salida en stdout ni stderr.",
+    "metadata": {}
+  },
+  {
+    "id": "vdte6qq",
+    "timestamp": 1772806040447,
+    "category": "learning",
+    "content": "El nombre de usuario parece derivarse del directorio home (/home/yhondev), por lo que el sistema puede inferir el usuario como 'yhondev' para construir rutas.",
+    "metadata": {}
+  },
+  {
+    "id": "5obbyqh",
+    "timestamp": 1772806085838,
+    "category": "project_status",
+    "content": "Se creó el archivo greeting.txt con el texto 'hola yhon saludo 2' y se registró la relación de saludo de Yhon.",
+    "metadata": {}
+  },
+  {
+    "id": "8clk393",
+    "timestamp": 1772807568949,
+    "category": "user_name",
+    "content": "Yhon",
+    "metadata": {}
+  },
+  {
+    "id": "rzxpc2j",
+    "timestamp": 1772807570114,
+    "category": "user_identity",
+    "content": "El usuario se llama Yhon.",
+    "metadata": {}
+  },
+  {
+    "id": "01cub2t",
+    "timestamp": 1772807574642,
+    "category": "learning",
+    "content": "Cuando el usuario dice su nombre, lo recuerdo y lo utilizo en respuestas futuras.",
+    "metadata": {}
+  },
+  {
+    "id": "bi4ahkg",
+    "timestamp": 1772807574644,
+    "category": "learning",
+    "content": "Al recibir el nombre del usuario, debo guardarlo en memoria a largo plazo.",
+    "metadata": {}
+  },
+  {
+    "id": "c7zezmy",
+    "timestamp": 1772807588051,
+    "category": "learning",
+    "content": "Cuando el usuario menciona 'Sistema de Aprendizaje Activo', espera una respuesta estructurada en formato JSON.",
+    "metadata": {}
+  },
+  {
+    "id": "lchkndg",
+    "timestamp": 1772807588055,
+    "category": "learning",
+    "content": "El usuario prefiere comunicarse en español.",
+    "metadata": {}
+  },
+  {
+    "id": "jdag0og",
+    "timestamp": 1772807609224,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta 'hola como me llamo', prefiere que Charbi recuerde su nombre o solicite que lo proporcione.",
+    "metadata": {}
+  },
+  {
+    "id": "chkqqh3",
+    "timestamp": 1772807609228,
+    "category": "learning",
+    "content": "Charbi actualmente no tiene almacenado el nombre del usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "yum44vn",
+    "timestamp": 1772807611220,
+    "category": "learning",
+    "content": "Cuando el usuario menciona 'Sistema de Aprendizaje Activo', espera una respuesta estructurada en formato JSON.",
+    "metadata": {}
+  },
+  {
+    "id": "wn9kz4d",
+    "timestamp": 1772807611223,
+    "category": "learning",
+    "content": "El usuario se llama Yhon.",
+    "metadata": {}
+  },
+  {
+    "id": "3lv9my6",
+    "timestamp": 1772807611225,
+    "category": "learning",
+    "content": "El usuario prefiere comunicarse en español.",
+    "metadata": {}
+  },
+  {
+    "id": "10xfcbo",
+    "timestamp": 1772807695311,
+    "category": "learning",
+    "content": "Cuando el usuario pide 'elimina <archivo> en <directorio>', espera que el sistema resuelva la ruta relativa al directorio base '/home/yhondev/' y devuelva una confirmación de éxito.",
+    "metadata": {}
+  },
+  {
+    "id": "f5l69av",
+    "timestamp": 1772807695315,
+    "category": "learning",
+    "content": "El usuario habla en español y utiliza nombres de archivo y carpetas en minúsculas sin extensiones ambiguas.",
+    "metadata": {}
+  },
+  {
+    "id": "5mj23h3",
+    "timestamp": 1772807695318,
+    "category": "learning",
+    "content": "El usuario valora respuestas concisas que indiquen claramente que la acción se completó sin errores.",
+    "metadata": {}
   }
 ]

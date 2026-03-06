@@ -37,6 +37,12 @@ def handle_request(request):
             )
             return {"id": id, "result": results}
             
+        elif method == "memory.get_recent":
+            results = hybrid_store.get_recent(
+                params.get("k", 10)
+            )
+            return {"id": id, "result": results}
+            
         elif method == "graph.query":
             results = hybrid_store.graph.query(
                 params.get("entity"), 
@@ -61,6 +67,8 @@ def handle_request(request):
 
 def main():
     """Bucle principal de escucha JSON-RPC sobre Stdio"""
+    sys.stderr.write("[MemoryServer] Python process started and listening...\n")
+    sys.stderr.flush()
     for line in sys.stdin:
         if not line.strip(): continue
         try:

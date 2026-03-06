@@ -4,82 +4,104 @@ export CHARBI_HOME
 CHARBI_CLI="$CHARBI_HOME/cli"
 CHARBI_VENV="$CHARBI_CLI/venv"
 CHARBI_PYTHON="$CHARBI_VENV/bin/python3"
+PID_FILE="$CHARBI_HOME/run/kernel.pid"
+LOG_FILE="$CHARBI_HOME/run/kernel.log"
 export PYTHONPATH="$CHARBI_CLI/src"
-show_help() {
-    echo "CHARBI CLI - Comandos Disponibles:"
-    echo "  charbi config    - Wizard de configuracion"
-    echo "  charbi onboard   - Setup inicial completo"
-    echo "  charbi start     - Iniciar kernel"
-    echo "  charbi status    - Ver estado del sistema"
-    echo "  charbi skill     - Gestionar skills y plugins"
-    echo "  charbi auth      - Gestionar autenticacion"
-    echo "  charbi channels  - Gestionar canales"
-    echo "  charbi chat      - Interactuar con el agente"
-    echo "  charbi help      - Mostrar esta ayuda"
+
+mkdir -p "$CHARBI_HOME/run"
+
+is_kernel_running() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if [ -n "$PID" ] && ps -p "$PID" > /dev/null; then
+            return 0
+        fi
+    fi
+    return 1
 }
-case "${1:-chat}" in
-    config) shift; $CHARBI_PYTHON -m charbi.commands.config "$@" ;;
-    onboard) shift; $CHARBI_PYTHON -m charbi.commands.config onboard "$@" ;;
-    start) 
-        shift
-        PID_FILE="$CHARBI_HOME/run/kernel.pid"
-        if [ -f "$PID_FILE" ] && ps -p $(cat "$PID_FILE") > /dev/null; then
-            echo "Charbi Kernel ya esta corriendo (PID: $(cat $PID_FILE))."
-            exit 0
+
+stop_kernel() {
+    if is_kernel_running; then
+        PID=$(cat "$PID_FILE")
+        echo "Deteniendo Charbi Kernel (PID: $PID)..."
+        kill "$PID" 2>/dev/null
+        sleep 2
+        if ps -p "$PID" > /dev/null; then
+            echo "Forzando cierre de $PID (SIGKILL)..."
+            kill -9 "$PID" 2>/dev/null
         fi
-        echo "Iniciando Charbi Kernel..."
-        cd "$CHARBI_HOME"
-        # Si se pasa -d o --daemon, iniciar en segundo plano
-        if [[ "$*" == *"-d"* ]] || [[ "$*" == *"--daemon"* ]]; then
-            # Asegurar directorio de runtime
-            mkdir -p "$CHARBI_HOME/run"
-            # Limpiar argumentos de daemon para pasarlos al kernel
-            ARGS="${@//-d/}"
-            ARGS="${ARGS//--daemon/}"
-            # Ejecutar en segundo plano de forma robusta
-            cd "$CHARBI_HOME"
-            nohup npx ts-node kernel/bootstrap.ts $ARGS > "$CHARBI_HOME/run/kernel.log" 2>&1 &
-            PID=$!
-            echo $PID > "$PID_FILE"
-            sleep 2
-            if ps -p $PID > /dev/null; then
-                echo "Kernel iniciado en segundo plano (PID: $PID). Logs en $CHARBI_HOME/run/kernel.log"
-            else
-                echo "Error: El kernel no se mantuvo activo. Revisa $CHARBI_HOME/run/kernel.log"
-            fi
-        else
-            npx ts-node kernel/bootstrap.ts "$@"
+        rm -f "$PID_FILE"
+        echo "Charbi detenido."
+    else
+        echo "El kernel no parece estar activo. Limpiando procesos huérfanos..."
+        ORPHANS=$(pgrep -f "kernel/bootstrap.ts")
+        if [ -n "$ORPHANS" ]; then
+            echo "Matando procesos detectados: $ORPHANS"
+            kill -9 $ORPHANS 2>/dev/null
         fi
+        rm -f "$PID_FILE"
+    fi
+}
+
+start_kernel() {
+    if is_kernel_running; then
+        echo "Charbi Kernel YA ESTÁ CORRIENDO (PID: $(cat "$PID_FILE"))."
+        return 0
+    fi
+    
+    stop_kernel > /dev/null 2>&1
+    
+    echo "Iniciando Charbi Kernel..."
+    cd "$CHARBI_HOME" || exit
+    # Ejecutar con nohup y redirigir todo al log
+    nohup npx ts-node kernel/bootstrap.ts > "$LOG_FILE" 2>&1 &
+    NEW_PID=$!
+    echo $NEW_PID > "$PID_FILE"
+    echo "Kernel iniciado (PID: $NEW_PID). Ver logs con: tail -f $LOG_FILE"
+}
+
+case "$1" in
+    start)
+        start_kernel
         ;;
     stop)
-        shift
-        PID_FILE="$CHARBI_HOME/run/kernel.pid"
-        if [ -f "$PID_FILE" ]; then
-            PID=$(cat "$PID_FILE")
-            echo "Deteniendo Charbi Kernel (PID: $PID)..."
-            kill $PID
-            sleep 1
-            if ps -p $PID > /dev/null; then
-                kill -9 $PID
+        stop_kernel
+        ;;
+    restart)
+        stop_kernel
+        sleep 1
+        start_kernel
+        ;;
+    status)
+        if is_kernel_running; then
+            echo "Charbi Kernel: ACTIVO (PID: $(cat "$PID_FILE"))"
+            # Intentar llamar al status de python si existe para más detalle
+            if [ -f "$CHARBI_CLI/src/charbi/commands/status.py" ]; then
+                shift; $CHARBI_PYTHON -m charbi.commands.status "$@"
             fi
-            rm -f "$PID_FILE"
-            echo "Charbi detenido."
         else
-            echo "No se encontro el archivo PID. ¿Esta Charbi corriendo?"
-            # Buscar por si acaso
-            PIDS=$(pgrep -f "ts-node kernel/bootstrap.ts")
-            if [ -n "$PIDS" ]; then
-                echo "Encontrados procesos huerfanos: $PIDS. Deteniendo..."
-                kill $PIDS
-            fi
+            echo "Charbi Kernel: INACTIVO"
         fi
         ;;
-    restart) shift; $CHARBI_PYTHON -m charbi.commands.restart "$@" ;;
-    status)  shift; $CHARBI_PYTHON -m charbi.commands.status "$@" ;;
-    skill) shift; $CHARBI_PYTHON -m charbi.commands.skill "$@" ;;
-    auth) shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
-    channels) shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;
-    chat) shift; $CHARBI_PYTHON -m charbi.commands.chat "$@" ;;
-    help|-h|--help) show_help ;;
-    *) echo "Comando desconocido: $1"; show_help ;;
+    chat)
+        shift; $CHARBI_PYTHON -m charbi.commands.chat "$@" ;;
+    config)
+        shift; $CHARBI_PYTHON -m charbi.commands.config "$@" ;;
+    auth)
+        shift; $CHARBI_PYTHON -m charbi.commands.auth "$@" ;;
+    channels)
+        shift; $CHARBI_PYTHON -m charbi.commands.channels "$@" ;;
+    skill)
+        shift; $CHARBI_PYTHON -m charbi.commands.skill "$@" ;;
+    help|-h|--help)
+        echo "Charbi CLI v2.5 - Comandos:"
+        echo "  start, stop, restart, status"
+        echo "  chat, config, auth, channels, skill"
+        ;;
+    *)
+        if [ -n "$1" ]; then
+            echo "Comando desconocido: $1"
+        fi
+        echo "Uso: charbi {start|stop|restart|status|chat|config|auth|channels|skill}"
+        ;;
 esac

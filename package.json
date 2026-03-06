@@ -3,17 +3,25 @@
   "version": "1.0.0",
   "description": "Professional Cognitive Kernel for Autonomous Agents",
   "main": "charbi/kernel/event_bus.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
   "dependencies": {
     "events": "^3.3.0",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "node-telegram-bot-api": "^0.67.0",
-    "uuid": "^9.0.0"
+    "ts-node-dev": "^2.0.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.0",
-    "@types/node": "^18.0.0",
-    "@types/uuid": "^9.0.0",
-    "ts-node": "^10.9.0",
-    "typescript": "^5.0.0"
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^18.19.130",
+    "@types/uuid": "^9.0.8",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

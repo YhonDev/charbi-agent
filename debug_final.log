@@ -1,0 +1,99 @@
+[MemoryClient] Inciando MemoryServer (Python Lite)...
+
+========================================
+
+[Boot] Step 1/7: Loading configuration...
+[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
+[Boot] System: Charbi v1 (development)
+[Boot] Provider: ollama (gpt-oss:120b-cloud)
+[ConfigService] Hot-reload enabled
+[Boot] Step 2/7: Loading channels...
+[ChannelRegistry] Loaded: telegram
+[ChannelRegistry] No adapter at /home/yhondev/.charbi-agent/channels/cli/adapter.ts, using stub
+[ChannelRegistry] Loaded: cli
+[Telegram] Bot started with polling. Listening for messages...
+[32m[2026-03-06T05:56:23.463Z] [INFO] [TelegramAdapter] Telegram bot started[0m
+[ChannelRegistry] Started: telegram
+[Channel:cli] Started (stub)
+[ChannelRegistry] Started: cli
+[Boot] Active channels: telegram, cli
+[Boot] Step 3/7: Scanning plugins...
+[PluginLoader] Scanning: /home/yhondev/.charbi-agent/agents
+[PluginLoader] Registered: coder (agent)
+[PluginLoader] Registered: main (agent)
+[PluginLoader] Registered: scholar (agent)
+[PluginLoader] Registered: scout (agent)
+[PluginLoader] Registered: cognitive (undefined)
+[PluginLoader] Registered: system (skill)
+[PluginLoader] Loaded 6 plugins
+[Boot] Discovered plugins: 6
+[Boot] Step 4/7: Loading LLM providers...
+[ProviderRegistry] Escaneando proveedores...
+[ProviderRegistry] ✓ Proveedor cargado: gemini
+[ProviderRegistry] ✓ Proveedor cargado: groq
+[ProviderRegistry] ✓ Proveedor cargado: ollama
+[ProviderRegistry] ✓ Proveedor cargado: openai
+[ProviderRegistry] ✓ Proveedor cargado: qwen
+[Boot] Providers available: gemini, groq, ollama, openai, qwen
+[Boot] Step 5/7: Registering skills...
+[SkillRegistry] Registered: coder (agent)
+[SkillRegistry] Registered: main (agent)
+[SkillRegistry] Registered: scholar (agent)
+[SkillRegistry] Registered: scout (agent)
+[SkillRegistry] Registered: cognitive (undefined)
+[SkillRegistry] Registered: system (skill)
+[Boot] Registered skills: 6
+[Boot] Step 6/7: Loading Tools into Registry...
+[ToolRegistry] Escaneando herramientas...
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
+[ToolRegistry] ✓ Herramienta cargada: cognitive.search
+[ToolRegistry] ✓ Herramienta cargada: cognitive.store
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
+[ToolRegistry] ✓ Herramienta cargada: system.fetch
+[ToolRegistry] ✓ Herramienta cargada: system.write
+[ToolRegistry] ✓ Herramienta cargada: system.read
+[ToolRegistry] ✓ Herramienta cargada: system.search
+[ToolRegistry] ✓ Herramienta cargada: system.execute
+[dotenv@17.3.1] injecting env (7) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+[ToolRegistry] ✓ Herramienta cargada: scholar.check-sima
+[ToolRegistry] Total herramientas cargadas: 11
+[Boot] Tools available: cognitive.add_relation, cognitive.query_graph, cognitive.search, cognitive.store, cognitive.brain_recall, system.fetch, system.write, system.read, system.search, system.execute, scholar.check-sima
+[Boot] Step 7/7: Registering services...
+[ServiceManager] Registered: memory
+[ServiceManager] Registered: orchestrator
+[ServiceManager] Registered: gateway
+[ServiceManager] Registered: channels
+[ServiceManager] Starting memory...
+[Boot] MemoryServer (Hybrid) is ACTIVE
+[ServiceManager] memory started.
+[ServiceManager] Starting orchestrator...
+[Orchestrator] Online (Cognitive Singleton Mode)
+[ServiceManager] orchestrator started.
+[ServiceManager] Starting gateway...
+[Gateway] FATAL: Port 18789 is already in use.
+[ServiceManager] Failed to start gateway: Error: listen EADDRINUSE: address already in use 0.0.0.0:18789
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at node:net:2206:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 18789
+}
+[Boot] FATAL ERROR: Error: listen EADDRINUSE: address already in use 0.0.0.0:18789
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at node:net:2206:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 18789
+}

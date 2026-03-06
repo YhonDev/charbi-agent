@@ -4,7 +4,7 @@ import ConfigService from './config_service';
 import { AuthManager } from './auth/auth_manager';
 import { providerRegistry } from './providers/provider_registry';
 
-const LLM_TIMEOUT_MS = 15000;
+const LLM_TIMEOUT_MS = 60000;
 const MAX_TOKENS = 2048;
 
 // The old LLMConfig and getConfig are replaced by the Provider Registry system

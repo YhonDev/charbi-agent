@@ -77,4 +77,10 @@ charbi/
 ```
 
 ---
+
+## 🗺️ Recursos Visuales
+- [Mapa de Interacciones (Mermaid)](file:///C:/Users/WinterOS/.gemini/antigravity/brain/8f024299-3d8b-4da8-8522-31cce8c43e31/architecture_visual_map.md)
+- [Mapa Mental de Componentes (Mindmap)](file:///C:/Users/WinterOS/.gemini/antigravity/brain/8f024299-3d8b-4da8-8522-31cce8c43e31/architecture_mind_map.md)
+
+---
 *Ultima actualización: 5 de Marzo, 2026 - Charbi v2.5 (High Autonomy Edition)*

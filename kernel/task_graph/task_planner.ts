@@ -9,27 +9,27 @@ export class TaskPlanner {
    */
   async plan(goal: string): Promise<TaskGraph> {
     const prompt = `
-Eres la Inteligencia de Planificación Central de Charbi. Tu misión es desglosar objetivos complejos en un Grafo de Tareas (DAG).
+Eres la Inteligencia de Planificación Central de Charbi. Desglosa el objetivo en un Grafo de Tareas (DAG).
 
 OBJETIVO: "${goal}"
 
-AGENTES ESTRATÉGICOS:
-- 'researcher': Para obtener datos externos, navegar o investigar.
-- 'coder': Para procesar datos, escribir archivos, scripts o lógica.
-- 'operator': Para interactuar con el sistema operativo y shell.
-- 'director': Para resumir resultados y dar la respuesta final al usuario.
+AGENTES:
+- 'researcher': Para 'system.search', obtener datos web.
+- 'coder': Para 'system.write', 'system.read', procesar datos.
+- 'operator': Para 'system.execute', comandos shell.
 
-REGLAS CRÍTICAS:
-1. Divide la tarea en pasos ATÓMICOS (ej: 1. Buscar noticias, 2. Resumir, 3. Crear archivo).
-2. Usa dependencias (depends_on) para que el flujo sea lógico.
-3. Si la tarea es "investigar X y guardar en Y", necesitas al menos 3 tareas: (t1: investigar, t2: procesar/resumir, t3: guardar).
+REGLAS:
+1. Pasos ATÓMICOS: (t1: buscar, t2: procesar, t3: guardar).
+2. Usa 'depends_on' para que t2 espere a t1.
+3. Charbi pasará automáticamente el resultado de t1 al contexto de t2.
 4. Responde EXCLUSIVAMENTE con el JSON.
 
 FORMATO:
 {
   "tasks": [
-    {"id": "t1", "description": "...", "agent": "researcher"},
-    {"id": "t2", "description": "...", "agent": "coder", "depends_on": ["t1"]}
+    {"id": "t1", "description": "Buscar noticias sobre X", "agent": "researcher"},
+    {"id": "t2", "description": "Analizar y resumir los resultados de t1", "agent": "coder", "depends_on": ["t1"]},
+    {"id": "t3", "description": "Guardar el resumen en un archivo .md", "agent": "coder", "depends_on": ["t2"]}
   ]
 }
 `;

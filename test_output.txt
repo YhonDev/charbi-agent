@@ -1,0 +1,137 @@
+FAIL tests/unit/kernel/task_graph_engine.test.ts
+  TaskGraphEngine
+    assessComplexity
+      ✕ should identify simple tasks as NOT complex (2 ms)
+      ✕ should identify tasks with complex keywords as complex (1 ms)
+      ✕ should identify multiline/long prompts as complex (1 ms)
+    Task Graph Creation
+      ✕ should create a task graph with multiple tasks from LLM response (1 ms)
+      ✕ should use fallback task if LLM fails to generate tasks (1 ms)
+    Execution Flow
+      ✕ should get the next executable task (1 ms)
+      ✕ should emit TOOL_CALLED when executing a task with a tool (1 ms)
+
+  ● TaskGraphEngine › assessComplexity › should identify simple tasks as NOT complex
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      30 |   describe('assessComplexity', () => {
+      31 |     it('should identify simple tasks as NOT complex', async () => {
+    > 32 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      33 |         content: JSON.stringify({ isComplex: false, reasons: [] })
+      34 |       });
+      35 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:32:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:31:66)
+
+  ● TaskGraphEngine › assessComplexity › should identify tasks with complex keywords as complex
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      41 |
+      42 |     it('should identify tasks with complex keywords as complex', async () => {
+    > 43 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      44 |         content: JSON.stringify({ isComplex: true, reasons: ['Requires planning'] })
+      45 |       });
+      46 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:43:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:42:77)
+
+  ● TaskGraphEngine › assessComplexity › should identify multiline/long prompts as complex
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      53 |
+      54 |     it('should identify multiline/long prompts as complex', async () => {
+    > 55 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      56 |         content: JSON.stringify({ isComplex: true, reasons: ['Long prompt'] })
+      57 |       });
+      58 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:55:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:54:72)
+
+  ● TaskGraphEngine › Task Graph Creation › should create a task graph with multiple tasks from LLM response
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      75 |       };
+      76 |
+    > 77 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      78 |         content: JSON.stringify(mockTasks)
+      79 |       });
+      80 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:77:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:68:87)
+
+  ● TaskGraphEngine › Task Graph Creation › should use fallback task if LLM fails to generate tasks
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      88 |
+      89 |     it('should use fallback task if LLM fails to generate tasks', async () => {
+    > 90 |       mockProxy.generate.mockRejectedValue(new Error('LLM Timeout'));
+         |                 ^
+      91 |
+      92 |       const graph = await engine.create('tarea simple', 'test-id');
+      93 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:90:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:89:78)
+
+  ● TaskGraphEngine › Execution Flow › should get the next executable task
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      100 |     it('should get the next executable task', async () => {
+      101 |       const objective = 'test';
+    > 102 |       mockProxy.generate.mockResolvedValue({
+          |                 ^
+      103 |         content: JSON.stringify({ tasks: [{ description: 't1', tool: 't' }] })
+      104 |       });
+      105 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:102:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:100:58)
+
+  ● TaskGraphEngine › Execution Flow › should emit TOOL_CALLED when executing a task with a tool
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      114 |     it('should emit TOOL_CALLED when executing a task with a tool', async () => {
+      115 |       const objective = 'test';
+    > 116 |       mockProxy.generate.mockResolvedValue({
+          |                 ^
+      117 |         content: JSON.stringify({ tasks: [{ description: 't1', tool: 'my-tool' }] })
+      118 |       });
+      119 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:116:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:114:80)
+
+Test Suites: 1 failed, 1 total
+Tests:       7 failed, 7 total
+Snapshots:   0 total
+Time:        1.755 s, estimated 2 s
+Ran all test suites matching tests/unit/kernel/task_graph_engine.test.ts.

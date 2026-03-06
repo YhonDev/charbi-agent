@@ -40,7 +40,7 @@ class OllamaProvider implements Provider {
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(body)
         },
-        timeout: 30000
+        timeout: 60000 // Aumentado a 60s
       };
 
       const req = http.request(reqOptions, (res) => {

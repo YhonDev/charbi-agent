@@ -50,7 +50,7 @@ provider:
   auth_type: none
   endpoint: http://localhost:11434/v1
 gateway:
-  port: 18789
-  host: 127.0.0.1
-  auth_enabled: true
-  auth_token: 9ec6604dd739abb65f6d240e02cc987c
+  port: 18790
+  host: 0.0.0.0
+  auth_enabled: null
+  auth_token: null

@@ -5,7 +5,7 @@ export type TaskAnalysis = {
   id: string;
   complexity: number;
   risk: 'low' | 'medium' | 'high';
-  specialist: 'director' | 'coder' | 'researcher' | 'operator';
+  specialist: 'main' | 'coder' | 'researcher' | 'operator' | 'scholar';
   requiresTools: boolean;
   reasoning: string;
 };
@@ -23,9 +23,10 @@ export async function analyzeTask(userInput: string): Promise<TaskAnalysis> {
 Analiza la solicitud del usuario y determina el especialista y la complejidad del proyecto.
 
 ESPECIALISTAS:
-- 'director': Saludos, charla general, ayuda sobre Charbi o supervisión de tareas. Es capaz de usar herramientas de sistema para obtener contexto si lo cree necesario.
+- 'main': Saludos, charla general, ayuda sobre Charbi o supervisión de tareas. Es capaz de usar herramientas de sistema para obtener contexto si lo cree necesario.
 - 'coder': Consultas de programación, depuración, creación de scripts o proyectos de código.
-- 'researcher': Búsqueda de información, noticias o investigación profunda.
+- 'researcher': Búsqueda de información o noticias.
+- 'scholar': Tareas académicas, universidad, SIMA, estudio y gestión de aprendizaje.
 - 'operator': Comandos de shell, gestión de archivos y sistema.
 
 COMPLEJIDAD (0.0 a 1.0):
@@ -40,7 +41,7 @@ REGLA CRÍTICA PARA CODER:
 SOLICITUD: "${userInput}"
 
 Responde UNICAMENTE en formato JSON:
-{"specialist": "director|coder|researcher|operator", "reasoning": "...", "risk": "low|medium|high", "complexity": 0.X}
+{"specialist": "main|coder|researcher|operator|scholar", "reasoning": "...", "risk": "low|medium|high", "complexity": 0.X}
 `;
 
     const res = await queryLLM(triagePrompt, "System Triage Engine");
@@ -52,7 +53,7 @@ Responde UNICAMENTE en formato JSON:
           id: triageId,
           complexity: parsed.complexity || complexity,
           risk: parsed.risk || (complexity > 0.7 ? 'high' : 'low'),
-          specialist: parsed.specialist || 'director',
+          specialist: parsed.specialist || 'main',
           requiresTools: (parsed.complexity || complexity) > 0.3,
           reasoning: parsed.reasoning || 'Clasificación por LLM'
         };
@@ -63,9 +64,10 @@ Responde UNICAMENTE en formato JSON:
   }
 
   // FALLBACK Heuristics
-  let specialist: TaskAnalysis['specialist'] = 'director';
+  let specialist: TaskAnalysis['specialist'] = 'main';
   if (userInput.match(/program|code|debug|script|refactor/i)) specialist = 'coder';
   else if (userInput.match(/investigar|buscar|noticias|web|search/i)) specialist = 'researcher';
+  else if (userInput.match(/sima|universidad|estudio|tarea|academy|clase/i)) specialist = 'scholar';
   else if (userInput.match(/install|config|bash|shell|run/i)) specialist = 'operator';
 
   return {

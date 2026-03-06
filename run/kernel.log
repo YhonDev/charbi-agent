@@ -1,17 +1,18 @@
+[MemoryClient] Inciando MemoryServer (Python Lite)...
 
 ========================================
 
 [Boot] Step 1/7: Loading configuration...
 [ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
 [Boot] System: Charbi v1 (development)
-[Boot] Provider: qwen (qwen-max)
+[Boot] Provider: ollama (gpt-oss:120b-cloud)
 [ConfigService] Hot-reload enabled
 [Boot] Step 2/7: Loading channels...
 [ChannelRegistry] Loaded: telegram
 [ChannelRegistry] No adapter at /home/yhondev/.charbi-agent/channels/cli/adapter.ts, using stub
 [ChannelRegistry] Loaded: cli
 [Telegram] Bot started with polling. Listening for messages...
-[32m[2026-03-05T16:02:41.589Z] [INFO] [TelegramAdapter] Telegram bot started[0m
+[32m[2026-03-06T14:40:13.651Z] [INFO] [TelegramAdapter] Telegram bot started[0m
 [ChannelRegistry] Started: telegram
 [Channel:cli] Started (stub)
 [ChannelRegistry] Started: cli
@@ -32,7 +33,8 @@
 [ProviderRegistry] ✓ Proveedor cargado: groq
 [ProviderRegistry] ✓ Proveedor cargado: ollama
 [ProviderRegistry] ✓ Proveedor cargado: openai
-[Boot] Providers available: gemini, groq, ollama, openai
+[ProviderRegistry] ✓ Proveedor cargado: qwen
+[Boot] Providers available: gemini, groq, ollama, openai, qwen
 [Boot] Step 5/7: Registering skills...
 [SkillRegistry] Registered: coder (agent)
 [SkillRegistry] Registered: main (agent)
@@ -43,108 +45,45 @@
 [Boot] Registered skills: 6
 [Boot] Step 6/7: Loading Tools into Registry...
 [ToolRegistry] Escaneando herramientas...
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
 [ToolRegistry] ✓ Herramienta cargada: cognitive.search
 [ToolRegistry] ✓ Herramienta cargada: cognitive.store
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
 [ToolRegistry] ✓ Herramienta cargada: system.fetch
 [ToolRegistry] ✓ Herramienta cargada: system.write
 [ToolRegistry] ✓ Herramienta cargada: system.read
 [ToolRegistry] ✓ Herramienta cargada: system.search
 [ToolRegistry] ✓ Herramienta cargada: system.execute
-[Boot] Tools available: cognitive.search, cognitive.store, system.fetch, system.write, system.read, system.search, system.execute
+[dotenv@17.3.1] injecting env (7) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[ToolRegistry] ✓ Herramienta cargada: scholar.check-sima
+[ToolRegistry] Total herramientas cargadas: 11
+[Boot] Tools available: cognitive.add_relation, cognitive.query_graph, cognitive.search, cognitive.store, cognitive.brain_recall, system.fetch, system.write, system.read, system.search, system.execute, scholar.check-sima
 [Boot] Step 7/7: Registering services...
+[ServiceManager] Registered: memory
 [ServiceManager] Registered: orchestrator
+[ServiceManager] Registered: gateway
 [ServiceManager] Registered: channels
-[ServiceManager] Starting orchestrator...
-[Orchestrator] Online (Cognitive Loop Enabled)
-[ServiceManager] orchestrator started.
-[Boot] Finalizing...
-[32m[2026-03-05T16:02:42.048Z] [INFO] [EventBus] Emitted event: SYSTEM_READY[0m
-
-[Boot] Charbi Kernel is READY (1066ms)
-[Boot] Channels: telegram, cli
-[Boot] Skills: coder, main, scholar, scout, cognitive, system
-[Boot] Listening for requests...
-
-[Telegram] Message from Yhon: Hola
-[Orchestrator] Request from telegram: "Hola"
-[32m[2026-03-05T16:03:20.827Z] [INFO] [EventBus] Emitted event: USER_REQUEST[0m
-[Orchestrator] Specialist: main | Complexity: 0.10800000000000001
-[Orchestrator] Response to telegram (62 chars)
-[32m[2026-03-05T16:03:20.834Z] [INFO] [EventBus] Emitted event: AGENT_RESPONSE[0m
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[Telegram] Message from Yhon: Hola
-[Orchestrator] Request from telegram: "Hola"
-[32m[2026-03-05T16:17:25.063Z] [INFO] [EventBus] Emitted event: USER_REQUEST[0m
-[Orchestrator] Specialist: main | Complexity: 0.10800000000000001
-[Orchestrator] Response to telegram (62 chars)
-[32m[2026-03-05T16:17:25.068Z] [INFO] [EventBus] Emitted event: AGENT_RESPONSE[0m
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[ConfigService] Config file changed, reloading...
-[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-[Telegram] Polling error: EFATAL: AggregateError
-
-[Boot] Shutting down...
-[Telegram] Bot stopped
-[Channel:cli] Stopped (stub)
-[Boot] Goodbye
+[ServiceManager] Starting memory...
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:1025:11)
+    at Socket._write (node:net:1037:8)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Socket.Writable.write (node:internal/streams/writable:508:10)
+    at /home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:66:28
+    at new Promise (<anonymous>)
+    at MemoryClient.call (/home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:56:12)
+    at Object.start (/home/yhondev/.charbi-agent/kernel/bootstrap.ts:95:26)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async ServiceManager.start (/home/yhondev/.charbi-agent/kernel/runtime/service_manager.ts:31:7)
+    at async boot (/home/yhondev/.charbi-agent/kernel/bootstrap.ts:137:3) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}

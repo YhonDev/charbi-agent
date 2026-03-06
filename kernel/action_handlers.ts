@@ -2,6 +2,7 @@
 // Router de acciones que delega la ejecución al ToolRegistry.
 
 import { toolRegistry } from './tool_registry';
+import { log } from './logger';
 
 export interface ActionRequest {
   type: string;
@@ -47,6 +48,7 @@ export async function executeAction(action: ActionRequest): Promise<ActionResult
   // 1. Verificar que la herramienta existe en el registro
   const tool = toolRegistry.getTool(action.type);
   if (!tool) {
+    log({ level: 'ERROR', module: 'ActionHandler', message: `Tool not found: ${action.type}`, data: { origin: action.origin } });
     return { success: false, error: `Herramienta no encontrada o no cargada: ${action.type}` };
   }
 
@@ -65,6 +67,14 @@ export async function executeAction(action: ActionRequest): Promise<ActionResult
     const data = await tool.handler(action.params);
     const success = data.success !== undefined ? data.success : true;
     console.log(`[ActionHandler] ${action.type}: ${success ? 'OK' : 'FAIL'}`);
+
+    log({
+      level: success ? 'INFO' : 'ERROR',
+      module: 'ActionHandler',
+      message: `${action.type} implementation returned ${success ? 'success' : 'failure'}`,
+      data: { origin: action.origin, params: action.params, result: data }
+    });
+
     return { success, data };
   } catch (e: any) {
     console.error(`[ActionHandler] Error ejecutando ${action.type}:`, e.message);

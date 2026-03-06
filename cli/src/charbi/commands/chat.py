@@ -26,7 +26,13 @@ console = Console()
 
 class KernelChatClient:
     """Cliente que delega el chat al Kernel de Charbi vía API"""
-    def __init__(self, endpoint="http://127.0.0.1:5005"):
+    def __init__(self, endpoint=None):
+        if not endpoint:
+            config_mgr = ConfigManager()
+            gw_config = config_mgr.get_gateway()
+            port = gw_config.get("port", 5005)
+            host = gw_config.get("host", "127.0.0.1")
+            endpoint = f"http://{host}:{port}"
         self.endpoint = endpoint
 
     def chat(self, user_input: str) -> str:
@@ -37,7 +43,7 @@ class KernelChatClient:
                 "text": user_input,
                 "chatId": "cli_user"
             }
-            response = requests.post(url, json=payload, timeout=65)
+            response = requests.post(url, json=payload, timeout=180) # Increased timeout to match kernel
             
             if response.status_code == 200:
                 data = response.json()
@@ -46,18 +52,18 @@ class KernelChatClient:
                 return f"[bold red]✗ Error en el Kernel (Status {response.status_code}):[/bold red] {response.text}"
                 
         except requests.exceptions.ConnectionError:
-            return "[bold red]✗ El Kernel de Charbi no está respondiendo.[/bold red]\n[dim]Asegúrate de que el kernel esté corriendo (charbi start).[/dim]"
+            return f"[bold red]✗ El Kernel de Charbi no está respondiendo en {self.endpoint}.[/bold red]\n[dim]Asegúrate de que el kernel esté corriendo (charbi start).[/dim]"
         except Exception as e:
             return f"[Error] {str(e)}"
 
 def main():
     console.print(Panel("[bold green]💬 CHAT CON CHARBI (Cognitive Mode)[/bold green]"))
     
-    console.print(f"[dim]Conectado al Kernel Local (Autónomo)[/dim]")
-    console.print("[dim]Escribe '/exit' para salir[/dim]\n")
-    
     # Iniciar cliente del Kernel
     chat_client = KernelChatClient()
+    
+    console.print(f"[dim]Conectado al Kernel Local en {chat_client.endpoint}[/dim]")
+    console.print("[dim]Escribe '/exit' para salir[/dim]\n")
     
     while True:
         try:

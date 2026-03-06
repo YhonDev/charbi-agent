@@ -7,9 +7,26 @@ import { EventEmitter } from 'events';
  */
 export const eventBus = new EventEmitter();
 
+/** 
+ * Tipos de Eventos Estándar (Grado 3)
+ */
+export enum EventType {
+  USER_REQUEST = 'user.request',
+  AGENT_THINK = 'agent.think',
+  TASK_CREATED = 'task.created',
+  TASK_STARTED = 'task.started',
+  TASK_COMPLETED = 'task.completed',
+  TASK_FAILED = 'task.failed',
+  TOOL_CALLED = 'tool.called',
+  TOOL_RESULT = 'tool.result',
+  AGENT_RESPONSE = 'agent.response',
+  AGENT_STATUS = 'agent.status',
+  SYSTEM_READY = 'system.ready'
+}
+
 export type KernelEvent = {
   id: string;
-  type: string;
+  type: EventType | string;
   timestamp: number;
   origin?: string;
   payload?: any;

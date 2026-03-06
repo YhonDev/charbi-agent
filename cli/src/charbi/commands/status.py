@@ -115,7 +115,20 @@ def main():
     
     console.print(Columns(cols))
 
-    # 4. MEMORY
+    # 4. SECURITY & PERMISSIONS
+    sec = data.get("security", {})
+    console.print(f"\n[bold red]🛡️ SECURITY STATE[/bold red]")
+    sec_table = Table(box=None, show_header=False)
+    sec_table.add_column("Key", style="dim")
+    sec_table.add_column("Value")
+    
+    sec_table.add_row("Engine", f"[green]{sec.get('engine', 'ACTIVE')}[/green]")
+    sec_table.add_row("Rules Loaded", str(sec.get('rules_loaded', 0)))
+    perm_list = ", ".join(sec.get("permissions", []))
+    sec_table.add_row("Active Permissions", f"[dim]{perm_list}[/dim]")
+    console.print(sec_table)
+
+    # 5. MEMORY
     mem = data.get("memory", {})
     hybrid = mem.get("hybrid", {})
     
@@ -131,10 +144,25 @@ def main():
     mem_table.add_row("Knowledge Graph", f"[bold yellow]{hybrid.get('nodes', 0)} nodes, {hybrid.get('edges', 0)} edges[/bold yellow]")
     
     console.print(mem_table)
-    console.print(f"  • Storage: [dim]{mem.get('path', '-')}[/dim]")
-    
+
+    # 6. RECENT LOGS (Audit Trail)
+    logs = data.get("recent_logs", [])
+    if logs:
+        log_text = Text()
+        for line in logs:
+            if "ERROR" in line or "FAIL" in line:
+                log_text.append(f"{line}\n", style="bold red")
+            elif "WARN" in line:
+                log_text.append(f"{line}\n", style="yellow")
+            elif "SUCCESS" in line or "✓" in line:
+                log_text.append(f"{line}\n", style="green")
+            else:
+                log_text.append(f"{line}\n", style="dim")
+        
+        console.print(Panel(log_text, title="[bold white]📄 RECENT KERNEL LOGS[/bold white]", border_style="dim"))
+
     # Footer
-    console.print(f"\n[dim]Config: {config_mgr.config_path}[/dim]\n")
+    console.print(f"\n[dim]Config: {config_mgr.config_path} | Home: {CHARBI_HOME}[/dim]\n")
 
 if __name__ == "__main__":
     main()

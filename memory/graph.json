@@ -9,6 +9,20 @@
       }
     },
     {
+      "subject": "Yhon",
+      "object": "usuario",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "hola yhon saludo 2",
+      "relation": "saluda",
+      "metadata": {
+        "source_file": "/home/yhondev/.charbi-agent/workspace/greeting.txt"
+      }
+    },
+    {
       "subject": "Charbi",
       "object": "Usuario",
       "relation": "salud\u00f3 a",
@@ -33,6 +47,366 @@
       "metadata": {}
     },
     {
+      "subject": "Charbi",
+      "object": "Informaci\u00f3n y soporte para un Sistema de Aprendizaje Activo",
+      "relation": "puede_ofrecer",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "m\u00e1s contexto",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "ejemplos de posibles contextos (proyecto, noticias, clima, tareas)",
+      "relation": "ofreci\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "AutonomousExecutor",
+      "relation": "hasCapability",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "a ayudar con la solicitud de seguridad",
+      "relation": "se neg\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "\u00c1mbito, Naturaleza estructural, Naturaleza operativa, Impacto, Recursos disponibles",
+      "relation": "formulaPreguntas",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "\"mensaje incompleto, solicita m\u00e1s detalles\"",
+      "relation": "respondi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "definicion_y_tipos_de_gateway",
+      "relation": "provee",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "cualquier petici\u00f3n t\u00e9cnica",
+      "relation": "entrar\u00e1 autom\u00e1ticamente en modo proyecto",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "bajado de umbrales de complejidad",
+      "relation": "guard\u00f3 en memoria a largo plazo",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "LISTO PARA PRUEBAS",
+      "relation": "reconoce_estado",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Instrucciones de Operaci\u00f3n \u2013 Charbi",
+      "relation": "has_document",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "funcionalidades",
+      "relation": "describe",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "ls -la on /home/yhondev",
+      "relation": "executed",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "directory listing of /home/yhondev",
+      "relation": "returned",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "credenciales de acceso (usuario, URL, m\u00e9todo) para consultar SIMA",
+      "relation": "necesita",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "activo",
+      "relation": "est\u00e1",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "listo para ayudar",
+      "relation": "est\u00e1",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "clarificaci\u00f3n sobre \"Sima\"",
+      "relation": "solicita",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Resumen de Java",
+      "relation": "respondi\u00f3 con",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "definici\u00f3n de Java",
+      "relation": "responde",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "system commands (e.g., ls, unzip, cat)",
+      "relation": "canExecute",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "analysis and actionable suggestions based on filesystem data",
+      "relation": "provides",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "sistema de aprendizaje activo",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "comando ls",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "ls /home/yhondev/java",
+      "relation": "ejecut\u00f3 comando",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "system.read en /home/yhondev/java",
+      "relation": "us\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "directorio vac\u00edo",
+      "relation": "inform\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "\u26a0\ufe0f No se pudo generar una respuesta.",
+      "relation": "respuesta",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Orquestaci\u00f3n de tareas",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Delegaci\u00f3n a agentes especializados",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Uso de herramientas del sistema",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Investigaci\u00f3n verificada",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Gesti\u00f3n de conocimiento",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Automatizaci\u00f3n",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Cumplimiento de pol\u00edticas de seguridad y privacidad",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "Comunicaci\u00f3n clara",
+      "relation": "has_skill",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "scholar.check-sima",
+      "relation": "used_tool",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "scholar.check-sima (horizonte corto)",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "scholar.check-sima (horizonte amplio)",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "noticia ficticia sobre el proyecto de ley 'Paz Total' con financiaci\u00f3n de m\u00e1s de 10 billones de pesos",
+      "relation": "proporcion\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "sin actividades pendientes",
+      "relation": "responde",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "herramienta scholar.check-sima",
+      "relation": "utiliza",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "/home/yhondev/java/test.txt",
+      "relation": "elimin\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "nombre del usuario",
+      "relation": "no conoce",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "mensaje muy breve (')'",
+      "relation": "envi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "sistema de aprendizaje activo",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "menciona",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "presencia del sistema",
+      "relation": "verifica",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "listado del directorio /home/yhondev",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "interacci\u00f3n proactiva",
+      "relation": "prefiere",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "venv",
+      "relation": "interesado_en",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "sistema_de_aprendizaje_activo",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "espa\u00f1ol",
+      "relation": "prefiere_idioma",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "Charbi",
+      "relation": "salud\u00f3 a",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "formato JSON",
+      "relation": "espera respuesta en",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "/home/yhondev",
+      "relation": "quiere_inspeccionar",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "/home/yhondev/java",
+      "relation": "tieneDirectorio",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "nombre almacenado en Charbi",
+      "relation": "no tiene",
+      "metadata": {}
+    },
+    {
       "subject": "Usuario",
       "object": "Charbi",
       "relation": "salud\u00f3 a",
@@ -41,7 +415,7 @@
     {
       "subject": "Usuario",
       "object": "Sistema de Aprendizaje Activo",
-      "relation": "est\u00e1 interesado en",
+      "relation": "invoc\u00f3",
       "metadata": {}
     },
     {
@@ -54,6 +428,1751 @@
       "subject": "Usuario",
       "object": "resumen de esas noticias almacenado en memoria persistente",
       "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "\"\u00bfQu\u00e9 est\u00e1 pasando?\"",
+      "relation": "pregunt\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "infraestructura t\u00e9cnica (Cuerpo y Nervios)",
+      "relation": "construy\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Documento de prueba",
+      "relation": "crea",
+      "metadata": {
+        "timestamp": "2026-03-05T10:00:00Z",
+        "tipo": "acci\u00f3n"
+      }
+    },
+    {
+      "subject": "Usuario",
+      "object": "desactivar permisos de seguridad",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Estructural y Operativo",
+      "relation": "tieneProblema",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "persistencia cognitiva h\u00edbrida",
+      "relation": "requiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "resultados de pruebas para t6",
+      "relation": "debe proporcionar",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Singleton Kernel",
+      "relation": "interesado_en",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Espa\u00f1ol",
+      "relation": "prefiere_idioma",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "\"y el\"",
+      "relation": "envi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "activaci\u00f3n del Sistema de Aprendizaje Activo",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "gateway",
+      "relation": "interesado_en",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "espa\u00f1ol",
+      "relation": "prefiere idioma",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "JSON",
+      "relation": "solicita_formato",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Desbloqueo de Autonom\u00eda",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "LISTO PARA PRUEBAS",
+      "relation": "tiene_estado",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "ModoAprendizajeActivo",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "capacidades",
+      "relation": "pregunta",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "noticia m\u00e1s importante del mundo de hoy",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "respuesta en espa\u00f1ol",
+      "relation": "prefiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "consultar tareas pendientes en SIMA",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "portal SIMA para gestionar tareas universitarias",
+      "relation": "usa",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "/status",
+      "relation": "envi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Charbi como Sistema de Aprendizaje Activo",
+      "relation": "reconoce",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "actividades en Sima",
+      "relation": "tiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "\"Sima\"",
+      "relation": "menciona",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Que es Java resumen",
+      "relation": "pregunt\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "definici\u00f3n breve de Java",
+      "relation": "pide",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "respuestas de una l\u00ednea",
+      "relation": "prefiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "extraer_transcripciones_local.py",
+      "relation": "mencion\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "sistema de aprendizaje activo",
+      "relation": "quiere activar",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "/home/yhondev/java",
+      "relation": "quiere listarle",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "noticia m\u00e1s importante del mundo",
+      "relation": "pide",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "materias del semestre actual",
+      "relation": "quiere saber",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "\"sementre\" (error ortogr\u00e1fico)",
+      "relation": "escribi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "noticia m\u00e1s importante de Colombia",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "verificar actividad en SIMA",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Sistema",
+      "relation": "salud\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "test.txt en java",
+      "relation": "quiere_eliminar",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "Yhon",
+      "relation": "se llama",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "/home/yhondev/java/test.txt",
+      "relation": "quiere_eliminar",
+      "metadata": {}
+    },
+    {
+      "subject": "comando ls",
+      "object": "listado del directorio actual",
+      "relation": "produjo",
+      "metadata": {}
+    },
+    {
+      "subject": "scholar.check-sima",
+      "object": "no pending activities",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "scholar.check-sima",
+      "object": "no_data (sin actividades pendientes)",
+      "relation": "devuelve",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev/java/test.txt",
+      "object": "/home/yhondev/java/",
+      "relation": "ubicaci\u00f3n",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": "extraer_transcripciones_local.py",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": "go",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": "java",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": "venv",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": "workspace",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".bash_history",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".bashrc",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".charbi-agent",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev/java",
+      "object": "vac\u00edo",
+      "relation": "tiene contenido",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev/java",
+      "object": true,
+      "relation": "exists",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev/java",
+      "object": "none",
+      "relation": "contains_files",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev/java",
+      "object": "test.txt",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "Metadatos de Trazabilidad (reason, createdAt)",
+      "relation": "se beneficia de",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "HechosYRelacionesProactivamente",
+      "relation": "registrar\u00e1",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "buscar noticias en la web",
+      "relation": "intent\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "resultados de b\u00fasqueda",
+      "relation": "no obtuvo",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "advertencia de 'No se pudo generar una respuesta'",
+      "relation": "gener\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "\"principales noticias del mundo 6 de marzo 2026\"",
+      "relation": "intenta_b\u00fasqueda",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "realizar b\u00fasquedas web sobre noticias de Colombia (varias consultas sin resultados)",
+      "relation": "intent\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "obtener contenido de la p\u00e1gina principal de El Tiempo (fetch exitoso, contenido HTML bruto)",
+      "relation": "intent\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "obtener contenido de El Colombiano (fetch 404, p\u00e1gina no encontrada)",
+      "relation": "intent\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "system.write (cre\u00f3 /tmp/greeting.txt)",
+      "relation": "us\u00f3_herramienta",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "system.read (ley\u00f3 /tmp/greeting.txt)",
+      "relation": "us\u00f3_herramienta",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "/tmp/greeting.txt",
+      "relation": "cre\u00f3_archivo",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "\u00a1Hola! Bienvenido. \u00bfEn qu\u00e9 puedo ayudarte hoy?",
+      "relation": "respondi\u00f3_con",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "/home/yhondev/java/test.txt",
+      "relation": "elimin\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "system.execute",
+      "relation": "utiliz\u00f3_herramienta",
+      "metadata": {}
+    },
+    {
+      "subject": "test.txt",
+      "object": "/home/yhondev/java",
+      "relation": "ubicado_en",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Informe de Estado del Proyecto Charbi Aut\u00f3nomo",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/home directory listing",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Orchestrator",
+      "relation": "mentioned",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "ActiveLearningSystem",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "ls -la on /home/yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Java",
+      "relation": "interested_in",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/yhondev/java",
+      "relation": "wants_to_inspect",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Charbi_skills",
+      "relation": "asked_about",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "SIMA activities status",
+      "relation": "requested_check",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "SIMA (as of 2026-03-06)",
+      "relation": "has_no_pending_activities",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list contents of /home/yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "instructor",
+      "relation": "role",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "current_semester_subject",
+      "relation": "wants_to_know",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Yhon",
+      "relation": "has_name",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "warning: No se pudo generar una respuesta",
+      "relation": "generated",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "terms: \"Proyecto Charbi Aut\u00f3nomo\" (Spanish)",
+      "relation": "performedSearch",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "empty",
+      "relation": "searchResult",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "alternative Spanish terms",
+      "relation": "performedSearch",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "English terms: \"Charbi autonomous project\", \"Charbi AI\", \"Charbi autonomous system\"",
+      "relation": "performedSearch",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "progressively change query language and specificity after no results",
+      "relation": "fallbackStrategy",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "execute shell commands and capture stdout",
+      "relation": "hasCapability",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "Java information query",
+      "relation": "performed_search",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "no_results",
+      "relation": "search_outcome",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "Java programming language latest version 2024 features market share",
+      "relation": "needs_more_specific_query",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "/yhondev/java",
+      "relation": "attempted_read",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "path_not_found",
+      "relation": "error",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "ls /home/yhondev",
+      "relation": "executed",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "An\u00e1lisis de requisitos",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Dise\u00f1o de arquitectura",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Dise\u00f1o UI/UX",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Desarrollo Frontend",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Desarrollo Backend",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Integraci\u00f3n y pruebas",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Despliegue",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Crear una web",
+      "object": "Mantenimiento",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "An\u00e1lisis de requisitos",
+      "object": "Definir objetivos",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "An\u00e1lisis de requisitos",
+      "object": "Identificar usuarios",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Dise\u00f1o de arquitectura",
+      "object": "Seleccionar stack tecnol\u00f3gico",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Dise\u00f1o de arquitectura",
+      "object": "Dise\u00f1ar base de datos",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Dise\u00f1o UI/UX",
+      "object": "Crear wireframes",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Dise\u00f1o UI/UX",
+      "object": "Definir estilo visual",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Desarrollo Frontend",
+      "object": "Implementar HTML/CSS",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Desarrollo Frontend",
+      "object": "Implementar JavaScript/Framework",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Desarrollo Backend",
+      "object": "Implementar API",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Desarrollo Backend",
+      "object": "Integrar base de datos",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Integraci\u00f3n y pruebas",
+      "object": "Pruebas unitarias",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Integraci\u00f3n y pruebas",
+      "object": "Pruebas de integraci\u00f3n",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Despliegue",
+      "object": "Configurar servidor",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Despliegue",
+      "object": "Implementar CI/CD",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Mantenimiento",
+      "object": "Actualizaciones",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Mantenimiento",
+      "object": "Monitoreo y soporte",
+      "relation": "implica",
+      "metadata": {}
+    },
+    {
+      "subject": "Pruebas de integraci\u00f3n",
+      "object": "funcionamiento correcto",
+      "relation": "verificaron",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "provided_input",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "active learning system",
+      "relation": "wants",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "Spanish",
+      "relation": "prefers_language",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "active_learning_system",
+      "relation": "wants",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "v22.22.0",
+      "relation": "has_node_version",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "no external sources",
+      "relation": "provided",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "hola",
+      "relation": "said",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "/home/yhondev/java",
+      "relation": "requested_ls_in",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "solicitando aclaraci\u00f3n",
+      "relation": "respondi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "un asistente conversacional",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "limpio y estable",
+      "relation": "estado",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "activo",
+      "relation": "modo",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "presencia",
+      "relation": "confirma",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "ls /home/yhondev",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "ExecutionEngine",
+      "object": "Sandbox",
+      "relation": "uses",
+      "metadata": {}
+    },
+    {
+      "subject": "Sandbox",
+      "object": "Resources",
+      "relation": "restricts",
+      "metadata": {}
+    },
+    {
+      "subject": "APIs",
+      "object": "RealTimeData",
+      "relation": "provide",
+      "metadata": {}
+    },
+    {
+      "subject": "FileIO",
+      "object": "Sandbox",
+      "relation": "enabledIn",
+      "metadata": {}
+    },
+    {
+      "subject": "SecurityReview",
+      "object": "EngineAndSandbox",
+      "relation": "validated",
+      "metadata": {}
+    },
+    {
+      "subject": "Motor de Proyectos",
+      "object": "L\u00f3gica de Descomposici\u00f3n de Tareas",
+      "relation": "tiene",
+      "metadata": {}
+    },
+    {
+      "subject": "L\u00f3gica de Descomposici\u00f3n",
+      "object": "Problemas de Ciclos de Dependencia",
+      "relation": "presenta",
+      "metadata": {}
+    },
+    {
+      "subject": "L\u00f3gica de Descomposici\u00f3n",
+      "object": "Limitaci\u00f3n de Profundidad Recursiva",
+      "relation": "presenta",
+      "metadata": {}
+    },
+    {
+      "subject": "L\u00f3gica de Descomposici\u00f3n",
+      "object": "Esquema de Salida del Motor de Planificaci\u00f3n",
+      "relation": "no coincide con",
+      "metadata": {}
+    },
+    {
+      "subject": "Equipo de Desarrollo",
+      "object": "Detecci\u00f3n de Ciclos (Algoritmo de Tarjan)",
+      "relation": "debe implementar",
+      "metadata": {}
+    },
+    {
+      "subject": "Equipo de Desarrollo",
+      "object": "Algoritmo Iterativo con Pila Expl\u00edcita",
+      "relation": "debe refactorizar a",
+      "metadata": {}
+    },
+    {
+      "subject": "Equipo de Desarrollo",
+      "object": "Adaptador ProjectDecompositionAdapter",
+      "relation": "debe crear",
+      "metadata": {}
+    },
+    {
+      "subject": "Adaptador",
+      "object": "Campos id/parent/duration \u2192 taskId/parentId/estimatedHours",
+      "relation": "transforma",
+      "metadata": {}
+    },
+    {
+      "subject": "Optimizaci\u00f3n de Memoria",
+      "object": "Generadores (yield) bajo demanda",
+      "relation": "se logra mediante",
+      "metadata": {}
+    },
+    {
+      "subject": "Cobertura de Pruebas",
+      "object": "Alta (>80%) pero falta integraci\u00f3n",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "investigaci\u00f3n de t\u00e9cnicas de automatizaci\u00f3n",
+      "relation": "realiz\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "home_path",
+      "relation": "provided",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "ning\u00fan resultado",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "no_process_data_collected",
+      "relation": "was_not_executed",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "completed",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "contenido completo de la noticia",
+      "relation": "produjo",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "qu\u00e9 es Sima y c\u00f3mo consultar actividad",
+      "relation": "investig\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "Necesita usar system.search para obtener informaci\u00f3n externa",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "no data found",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "no se obtuvo informaci\u00f3n",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "summary_of_Sima_activity",
+      "relation": "produced",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "web search for Sima activity",
+      "relation": "attempted",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "failure due to missing search tool",
+      "relation": "resulted_in",
+      "metadata": {}
+    },
+    {
+      "subject": "t1",
+      "object": "buscar informaci\u00f3n en la web",
+      "relation": "intent\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "informaci\u00f3n del usuario",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "exact_path_confirmation",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "gu\u00eda metodol\u00f3gica completa",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "no_processes_identified",
+      "relation": "could_not_parse",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "pending_user_input",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "project directory missing or kernel/bootstrap.ts not found",
+      "relation": "obstacle",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "no extrajo titular y resumen",
+      "relation": "fracaso",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "por pol\u00edtica al intentar obtener credenciales",
+      "relation": "fue bloqueado",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "Solicita ubicaci\u00f3n o contenido de los datos a procesar",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "no data found",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "se requiere usar cognitive.search para recuperar URLs",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "t1_result",
+      "relation": "analyzed",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "t1 output",
+      "relation": "analyzed",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "status report and recommendations",
+      "relation": "produced",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "scholar.check-sima",
+      "relation": "utiliz\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t2",
+      "object": "no hay actividad en SIMA",
+      "relation": "determin\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "instrucciones de configuraci\u00f3n NOPASSWD y .bashrc",
+      "relation": "proporcion\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "summary_of_result",
+      "relation": "asked",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "solicitud de resultados de diagn\u00f3stico",
+      "relation": "accion",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "FastAPI server listening on port 5005 with /execute endpoint",
+      "relation": "implemented",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "bash_cleanup_script",
+      "relation": "generated",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "awaiting_confirmation",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "missing_script_input",
+      "relation": "was_skipped_due_to",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "respuesta final no redactada",
+      "relation": "incompleto",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "acceso a los datos para resumir actividad",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t4",
+      "object": "ask for additional source",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "objective",
+      "object": "falta de datos e implementaci\u00f3n",
+      "relation": "no_fulfilled",
+      "metadata": {}
+    },
+    {
+      "subject": "objective",
+      "object": "gateway API bridge",
+      "relation": "partially achieved",
+      "metadata": {}
+    },
+    {
+      "subject": "objective",
+      "object": "false",
+      "relation": "fulfilled",
+      "metadata": {}
+    },
+    {
+      "subject": "objective",
+      "object": "true",
+      "relation": "achieved",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "detalles de script y entorno",
+      "relation": "requiri\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "solicitud de informe final",
+      "relation": "accion",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "KernelAdapter for translating API requests to kernel calls",
+      "relation": "designed",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "script_not_validated",
+      "relation": "was_not_executed",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "not_started",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "Kernel already running (PID: 500355)",
+      "relation": "result",
+      "metadata": {}
+    },
+    {
+      "subject": "t5",
+      "object": "solicita clarificaci\u00f3n sobre el significado de \"Sima\"",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "t6",
+      "object": "ejecuci\u00f3n del script",
+      "relation": "no_se_realiz\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t6",
+      "object": "CLI client (HTTP/gRPC) to communicate with the gateway",
+      "relation": "designed",
+      "metadata": {}
+    },
+    {
+      "subject": "t6",
+      "object": "guide_document_missing",
+      "relation": "was_not_completed",
+      "metadata": {}
+    },
+    {
+      "subject": "t6",
+      "object": "not_started",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t6",
+      "object": "final_instruction_set",
+      "relation": "produced",
+      "metadata": {}
+    },
+    {
+      "subject": "t7",
+      "object": "procesamiento de logs e informe",
+      "relation": "no_se_realiz\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t7",
+      "object": "unit and integration tests missing",
+      "relation": "incomplete",
+      "metadata": {}
+    },
+    {
+      "subject": "t7",
+      "object": "user_input_for_summary",
+      "relation": "awaits",
+      "metadata": {}
+    },
+    {
+      "subject": "t8",
+      "object": "resumen final al usuario",
+      "relation": "pendiente",
+      "metadata": {}
+    },
+    {
+      "subject": "t8",
+      "object": "firewall configuration not performed",
+      "relation": "incomplete",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "complex_python_script",
+      "relation": "offered",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "solicitud de contexto y logs",
+      "relation": "accion",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "not_started",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "no guard\u00f3 archivo top_world_news.txt",
+      "relation": "fracaso",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "ruta o muestra de los registros",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "request user summary",
+      "relation": "action",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "filesystem_write",
+      "relation": "attempted",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "Markdown summary file",
+      "relation": "generated",
+      "metadata": {}
+    },
+    {
+      "subject": "t3",
+      "object": "sima_resumen.md",
+      "relation": "guard\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "filesystem_write",
+      "object": "write_operation",
+      "relation": "failed",
+      "metadata": {}
+    },
+    {
+      "subject": "/home",
+      "object": "linuxbrew (directory)",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home",
+      "object": "yhondev (directory)",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "Proyecto",
+      "object": "identificar la causa del fallo",
+      "relation": "objetivo",
+      "metadata": {}
+    },
+    {
+      "subject": "Proyecto",
+      "object": "incompleto",
+      "relation": "estado",
+      "metadata": {}
+    },
+    {
+      "subject": "Proyecto",
+      "object": "escenarios de prueba para completar t5",
+      "relation": "necesita",
+      "metadata": {}
+    },
+    {
+      "subject": "Proyecto",
+      "object": "verificar actividad en Sima",
+      "relation": "objetivo",
+      "metadata": {}
+    },
+    {
+      "subject": "Objetivo",
+      "object": "cumplido",
+      "relation": "estado",
+      "metadata": {}
+    },
+    {
+      "subject": "Registro de interacci\u00f3n",
+      "object": "decorador y repositorio abstracto",
+      "relation": "implementado con",
+      "metadata": {}
+    },
+    {
+      "subject": "Respaldo de datos",
+      "object": "BackupPolicy",
+      "relation": "a\u00f1adido",
+      "metadata": {}
+    },
+    {
+      "subject": "t9",
+      "object": "end\u2011to\u2011end validation not executed",
+      "relation": "incomplete",
+      "metadata": {}
+    },
+    {
+      "subject": "project",
+      "object": "objective_of_eliminating_orphan_processes",
+      "relation": "failed_to_meet",
+      "metadata": {}
+    },
+    {
+      "subject": "project",
+      "object": "incompleto",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "LLM",
+      "object": "responder en texto plano",
+      "relation": "tiende a",
+      "metadata": {}
+    },
+    {
+      "subject": "Prompt reinforcement",
+      "object": "respuestas no estructuradas",
+      "relation": "reduce",
+      "metadata": {}
+    },
+    {
+      "subject": "Middleware wrapper",
+      "object": "validaci\u00f3n y fallback JSON",
+      "relation": "proporciona",
+      "metadata": {}
+    },
+    {
+      "subject": "Component",
+      "object": "Singleton",
+      "relation": "status",
+      "metadata": {}
+    },
+    {
+      "subject": "Component",
+      "object": "5005",
+      "relation": "usesPort",
+      "metadata": {}
+    },
+    {
+      "subject": "Kernel restart",
+      "object": "duplicate logic",
+      "relation": "doesNotCause",
+      "metadata": {}
+    },
+    {
+      "subject": "Kernel restart",
+      "object": "port conflicts",
+      "relation": "doesNotCause",
+      "metadata": {}
+    },
+    {
+      "subject": "Singleton pattern",
+      "object": "duplicate logic",
+      "relation": "prevents",
+      "metadata": {}
+    },
+    {
+      "subject": "Singleton pattern",
+      "object": "port conflicts",
+      "relation": "prevents",
+      "metadata": {}
+    },
+    {
+      "subject": "Umbrales de complejidad",
+      "object": "bajados",
+      "relation": "est\u00e1n",
+      "metadata": {}
+    },
+    {
+      "subject": "CLI",
+      "object": "Kernel",
+      "relation": "comunica_con",
+      "metadata": {
+        "medio": "Gateway API"
+      }
+    },
+    {
+      "subject": "charbi",
+      "object": "global command to start Kernel",
+      "relation": "provides",
+      "metadata": {}
+    },
+    {
+      "subject": "analysis",
+      "object": "log output for full validation",
+      "relation": "requires",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".bash_history",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".gitconfig",
+      "relation": "hasFile",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".charbi-agent",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "extraer_transcripciones_local.py",
+      "relation": "hasFile",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/.charbi-agent.zip",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/.charbi-agent",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/venv",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/workspace",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".bashrc",
+      "relation": "hasFile",
+      "metadata": {}
+    },
+    {
+      "subject": "objetivo",
+      "object": "falt\u00f3 acceso a datos de Sima",
+      "relation": "no se cumpli\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "obstacle",
+      "object": "falta de datos y falta de herramienta de b\u00fasqueda",
+      "relation": "type",
+      "metadata": {}
+    },
+    {
+      "subject": "goal",
+      "object": "false",
+      "relation": "achieved",
+      "metadata": {}
+    },
+    {
+      "subject": "proyecto",
+      "object": "mira si hay actividad en sima",
+      "relation": "objetivo",
+      "metadata": {}
+    },
+    {
+      "subject": "obst\u00e1culo",
+      "object": "ambig\u00fcedad del t\u00e9rmino \"Sima\"",
+      "relation": "tipo",
+      "metadata": {}
+    },
+    {
+      "subject": "Respuesta de Charbi",
+      "object": "\ud83d\ude0a",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Sima_de_la_Tormenta",
+      "object": "tourism_and_sport_activity",
+      "relation": "has",
+      "metadata": {}
+    },
+    {
+      "subject": "SIMA_Chile",
+      "object": "air_quality_monitoring",
+      "relation": "has",
+      "metadata": {}
+    },
+    {
+      "subject": "SIMA_Marina_Espa\u00f1a",
+      "object": "maritime_surveillance_with_AI",
+      "relation": "has",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t1",
+      "object": "lista de actividades de Sima (2023\u20112024)",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t1",
+      "object": "metodolog\u00eda para buscar actividad en Sima",
+      "relation": "provee",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t2",
+      "object": "an\u00e1lisis y s\u00edntesis de la informaci\u00f3n de t1",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t2",
+      "object": "la metodolog\u00eda de t1",
+      "relation": "resume",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t3",
+      "object": "archivo Markdown con el resumen",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "Tarea t3",
+      "object": "el resumen en formato .md",
+      "relation": "guarda",
+      "metadata": {}
+    },
+    {
+      "subject": "Sima",
+      "object": "actualizaciones de producto, convenios, webinars, integraci\u00f3n acad\u00e9mica",
+      "relation": "tieneActividad",
+      "metadata": {}
+    },
+    {
+      "subject": "Obst\u00e1culo",
+      "object": "corte de entrenamiento (junio\u202f2024)",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "Obst\u00e1culo",
+      "object": "imposibilidad de acceder a fuentes externas desde el entorno",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "Equipo",
+      "object": "usando fuentes disponibles y se\u00f1alando limitaciones de fecha",
+      "relation": "super\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Objetivo del proyecto",
+      "object": "falta de ejecuci\u00f3n de b\u00fasqueda real",
+      "relation": "no fue alcanzado por",
+      "metadata": {}
+    },
+    {
+      "subject": "Objetivo del proyecto",
+      "object": "t3",
+      "relation": "cumplido",
+      "metadata": {}
+    },
+    {
+      "subject": "Superaci\u00f3n del obst\u00e1culo",
+      "object": "ofrecer instrucciones detalladas para que el usuario realice la b\u00fasqueda",
+      "relation": "consiste en",
+      "metadata": {}
+    },
+    {
+      "subject": "system",
+      "object": "\u00a1Hola! \u00bfEn qu\u00e9 puedo ayudarte hoy?",
+      "relation": "responded",
+      "metadata": {}
+    },
+    {
+      "subject": "Script",
+      "object": "youtube-transcript-api y reportlab",
+      "relation": "requiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Script",
+      "object": "transcripciones_pdfs/",
+      "relation": "guarda PDFs en",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario (yhondev)",
+      "object": "comando ls",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario (yhondev)",
+      "object": "archivos y carpetas en el directorio actual",
+      "relation": "es propietario de",
+      "metadata": {}
+    },
+    {
+      "subject": "B\u00fasqueda",
+      "object": "ninguno",
+      "relation": "resultado",
+      "metadata": {}
+    },
+    {
+      "subject": "Respuesta",
+      "object": "checkmark (\u2705) y mensaje de ausencia de datos",
+      "relation": "incluye",
+      "metadata": {}
+    },
+    {
+      "subject": "Comando_de_eliminaci\u00f3n",
+      "object": "success:true",
+      "relation": "ejecutado_con",
       "metadata": {}
     }
   ]

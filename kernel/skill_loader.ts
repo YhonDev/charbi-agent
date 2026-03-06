@@ -3,13 +3,13 @@ import fs from 'fs';
 import path from 'path';
 import { runInSession } from './process_manager';
 
-export class OpenClawAdapter {
+export class SkillAdapter {
   private skillPath: string;
   private manifest: any;
 
   constructor(skillPath: string) {
     this.skillPath = skillPath;
-    const manifestPath = path.join(skillPath, 'package.json'); // OpenClaw skills often use package.json
+    const manifestPath = path.join(skillPath, 'manifest.json');
     if (fs.existsSync(manifestPath)) {
       this.manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
     } else {
@@ -19,11 +19,11 @@ export class OpenClawAdapter {
 
   /**
    * mapPermissions
-   * Traduce las necesidades de la skill a un perfil de permisos del Supervisor.
+   * Traduce las necesidades de la skill a un perfil de permisos del Kernel.
    */
   mapPermissions(): Record<string, boolean> {
     const profile: Record<string, boolean> = {};
-    const permissions = this.manifest.openclaw?.permissions || ['filesystem.read'];
+    const permissions = this.manifest.permissions || ['filesystem.read'];
 
     for (const p of permissions) {
       profile[p] = true;
@@ -36,8 +36,8 @@ export class OpenClawAdapter {
    * Ejecuta la skill en el contexto de una sesión.
    */
   async execute(session: any, params: any) {
-    console.log(`[SkillLoader] Loading OpenClaw skill: ${this.manifest.name}`);
-    const entry = this.manifest.main || 'index.js';
+    console.log(`[SkillLoader] Executing skill: ${this.manifest.name}`);
+    const entry = this.manifest.entry || this.manifest.main || 'index.js';
     const cmd = `node ${path.join(this.skillPath, entry)} ${JSON.stringify(params)}`;
 
     return await runInSession(session, cmd);

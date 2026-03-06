@@ -1,0 +1,94 @@
+[MemoryClient] Inciando MemoryServer (Python Lite)...
+
+========================================
+
+[Boot] Step 1/7: Loading configuration...
+[ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
+[Boot] System: Charbi v1 (development)
+[Boot] Provider: ollama (gpt-oss:120b-cloud)
+[ConfigService] Hot-reload enabled
+[Boot] Step 2/7: Loading channels...
+[ChannelRegistry] Loaded: telegram
+[ChannelRegistry] No adapter at /home/yhondev/.charbi-agent/channels/cli/adapter.ts, using stub
+[ChannelRegistry] Loaded: cli
+[Telegram] Bot started with polling. Listening for messages...
+[32m[2026-03-06T05:50:44.783Z] [INFO] [TelegramAdapter] Telegram bot started[0m
+[ChannelRegistry] Started: telegram
+[Channel:cli] Started (stub)
+[ChannelRegistry] Started: cli
+[Boot] Active channels: telegram, cli
+[Boot] Step 3/7: Scanning plugins...
+[PluginLoader] Scanning: /home/yhondev/.charbi-agent/agents
+[PluginLoader] Registered: coder (agent)
+[PluginLoader] Registered: main (agent)
+[PluginLoader] Registered: scholar (agent)
+[PluginLoader] Registered: scout (agent)
+[PluginLoader] Registered: cognitive (undefined)
+[PluginLoader] Registered: system (skill)
+[PluginLoader] Loaded 6 plugins
+[Boot] Discovered plugins: 6
+[Boot] Step 4/7: Loading LLM providers...
+[ProviderRegistry] Escaneando proveedores...
+[ProviderRegistry] ✓ Proveedor cargado: gemini
+[ProviderRegistry] ✓ Proveedor cargado: groq
+[ProviderRegistry] ✓ Proveedor cargado: ollama
+[ProviderRegistry] ✓ Proveedor cargado: openai
+[ProviderRegistry] ✓ Proveedor cargado: qwen
+[Boot] Providers available: gemini, groq, ollama, openai, qwen
+[Boot] Step 5/7: Registering skills...
+[SkillRegistry] Registered: coder (agent)
+[SkillRegistry] Registered: main (agent)
+[SkillRegistry] Registered: scholar (agent)
+[SkillRegistry] Registered: scout (agent)
+[SkillRegistry] Registered: cognitive (undefined)
+[SkillRegistry] Registered: system (skill)
+[Boot] Registered skills: 6
+[Boot] Step 6/7: Loading Tools into Registry...
+[ToolRegistry] Escaneando herramientas...
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
+[ToolRegistry] ✓ Herramienta cargada: cognitive.add_relation
+[ToolRegistry] ✓ Herramienta cargada: cognitive.query_graph
+[ToolRegistry] ✓ Herramienta cargada: cognitive.search
+[ToolRegistry] ✓ Herramienta cargada: cognitive.store
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
+[ToolRegistry] ✓ Herramienta cargada: cognitive.brain_recall
+[ToolRegistry] ✓ Herramienta cargada: system.fetch
+[ToolRegistry] ✓ Herramienta cargada: system.write
+[ToolRegistry] ✓ Herramienta cargada: system.read
+[ToolRegistry] ✓ Herramienta cargada: system.search
+[ToolRegistry] ✓ Herramienta cargada: system.execute
+[dotenv@17.3.1] injecting env (7) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[ToolRegistry] ✓ Herramienta cargada: scholar.check-sima
+[ToolRegistry] Total herramientas cargadas: 11
+[Boot] Tools available: cognitive.add_relation, cognitive.query_graph, cognitive.search, cognitive.store, cognitive.brain_recall, system.fetch, system.write, system.read, system.search, system.execute, scholar.check-sima
+[Boot] Step 7/7: Registering services...
+[ServiceManager] Registered: memory
+[ServiceManager] Registered: orchestrator
+[ServiceManager] Registered: gateway
+[ServiceManager] Registered: channels
+[ServiceManager] Starting memory...
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Socket.Writable.write (node:internal/streams/writable:510:10)
+    at /home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:66:28
+    at new Promise (<anonymous>)
+    at MemoryClient.<anonymous> (/home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:56:12)
+    at Generator.next (<anonymous>)
+    at /home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:10:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:6:12)
+    at MemoryClient.call (/home/yhondev/.charbi-agent/kernel/cognition/memory_client.ts:63:16)
+    at /home/yhondev/.charbi-agent/kernel/bootstrap.ts:95:26
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/yhondev/.charbi-agent/kernel/bootstrap.ts:41:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}

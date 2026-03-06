@@ -32,4 +32,6 @@ class HybridStore:
         return {
             "semantic": semantic_results,
             "structural": graph_results
-        }
+    def get_recent(self, k=10):
+        """Retorna los últimos k eventos (historico)"""
+        return self.vector_store.get_recent(k)

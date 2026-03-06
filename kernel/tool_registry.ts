@@ -18,59 +18,79 @@ class ToolRegistry {
     ];
 
     console.log('[ToolRegistry] Escaneando herramientas...');
+    this.tools.clear(); // Limpiar antes de recargar
 
     for (const baseDir of skillsBaseDirs) {
       if (!fs.existsSync(baseDir)) continue;
 
       const skills = fs.readdirSync(baseDir);
       for (const skillName of skills) {
-        const toolsDir = path.join(baseDir, skillName, 'tools');
-        if (fs.existsSync(toolsDir)) {
-          await this.loadToolsFromDir(toolsDir, skillName);
+        const skillDir = path.join(baseDir, skillName);
+        if (fs.existsSync(skillDir)) {
+          await this.scanRecursive(skillDir, skillName);
+        }
+      }
+    }
+    console.log(`[ToolRegistry] Total herramientas cargadas: ${this.tools.size}`);
+  }
+
+  private async scanRecursive(currentDir: string, skillName: string): Promise<void> {
+    const items = fs.readdirSync(currentDir, { withFileTypes: true });
+
+    for (const item of items) {
+      const fullPath = path.join(currentDir, item.name);
+
+      if (item.isDirectory()) {
+        // Ignorar node_modules y carpetas ocultas
+        if (item.name === 'node_modules' || item.name.startsWith('.')) continue;
+
+        // Entramos en carpetas de 'tools' o subcarpetas dentro de ellas
+        if (item.name === 'tools' || currentDir.includes('tools')) {
+          await this.scanRecursive(fullPath, skillName);
+        }
+      } else if (item.isFile() && (item.name.endsWith('.ts') || item.name.endsWith('.js'))) {
+        // Solo cargar si está dentro de una carpeta 'tools' (directa o indirectamente)
+        if (currentDir.split(path.sep).includes('tools')) {
+          await this.loadToolFile(fullPath, skillName);
         }
       }
     }
   }
 
-  private async loadToolsFromDir(dir: string, skillName: string): Promise<void> {
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-      if (!file.endsWith('.ts') && !file.endsWith('.js')) continue;
+  private async loadToolFile(modulePath: string, skillName: string): Promise<void> {
+    try {
+      // Carga dinámica robusta sin query string si falla (o mejor manejo de caché)
+      const mod = await import(modulePath);
 
-      const modulePath = path.resolve(dir, file);
-      try {
-        const mod = await import(modulePath);
+      let toolsToRegister: CharbiTool[] = [];
 
-        let toolsToRegister: CharbiTool[] = [];
-
-        // 1. Manejar export default (objeto único o array)
-        if (mod.default) {
-          if (Array.isArray(mod.default)) {
-            toolsToRegister.push(...mod.default);
-          } else {
-            toolsToRegister.push(mod.default);
-          }
+      // 1. Manejar export default (objeto único o array)
+      if (mod.default) {
+        if (Array.isArray(mod.default)) {
+          toolsToRegister.push(...mod.default);
+        } else {
+          toolsToRegister.push(mod.default);
         }
-
-        // 2. Manejar otras exportaciones con nombre (opcional)
-        for (const key in mod) {
-          if (key === 'default') continue;
-          const item = mod[key];
-          if (item && item.schema && item.handler) {
-            toolsToRegister.push(item);
-          }
-        }
-
-        for (const tool of toolsToRegister) {
-          if (tool && tool.schema && tool.schema.name) {
-            const fullName = `${skillName}.${tool.schema.name}`;
-            this.tools.set(fullName, tool);
-            console.log(`[ToolRegistry] ✓ Herramienta cargada: ${fullName}`);
-          }
-        }
-      } catch (e: any) {
-        console.error(`[ToolRegistry] Error cargando ${file} en ${skillName}:`, e.message);
       }
+
+      // 2. Manejar otras exportaciones con nombre (opcional)
+      for (const key in mod) {
+        if (key === 'default') continue;
+        const item = mod[key];
+        if (item && item.schema && item.handler) {
+          toolsToRegister.push(item);
+        }
+      }
+
+      for (const tool of toolsToRegister) {
+        if (tool && tool.schema && tool.schema.name) {
+          const fullName = `${skillName}.${tool.schema.name}`;
+          this.tools.set(fullName, tool);
+          console.log(`[ToolRegistry] ✓ Herramienta cargada: ${fullName}`);
+        }
+      }
+    } catch (e: any) {
+      console.error(`[ToolRegistry] Error cargando ${path.basename(modulePath)} en ${skillName}:`, e.message);
     }
   }
 

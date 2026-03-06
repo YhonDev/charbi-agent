@@ -1,0 +1,101 @@
+FAIL tests/unit/kernel/task_graph_engine.test.ts
+  TaskGraphEngine
+    assessComplexity
+      ✕ should identify simple tasks as NOT complex (4 ms)
+      ✕ should identify tasks with complex keywords as complex (1 ms)
+    Task Graph Creation
+      ✕ should create a task graph with multiple tasks and propagate chatId (1 ms)
+      ✕ should use fallback task if LLM fails
+    Execution & Events
+      ✕ should emit AGENT_RESPONSE with chatId when graph completes (1 ms)
+
+  ● TaskGraphEngine › assessComplexity › should identify simple tasks as NOT complex
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      32 |   describe('assessComplexity', () => {
+      33 |     it('should identify simple tasks as NOT complex', async () => {
+    > 34 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      35 |         content: JSON.stringify({ isComplex: false, reasons: [] })
+      36 |       });
+      37 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:34:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:33:66)
+
+  ● TaskGraphEngine › assessComplexity › should identify tasks with complex keywords as complex
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      43 |
+      44 |     it('should identify tasks with complex keywords as complex', async () => {
+    > 45 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      46 |         content: JSON.stringify({ isComplex: true, reasons: ['Requires planning'] })
+      47 |       });
+      48 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:45:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:44:77)
+
+  ● TaskGraphEngine › Task Graph Creation › should create a task graph with multiple tasks and propagate chatId
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      66 |       };
+      67 |
+    > 68 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      69 |         content: JSON.stringify(mockTasks)
+      70 |       });
+      71 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:68:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:58:90)
+
+  ● TaskGraphEngine › Task Graph Creation › should use fallback task if LLM fails
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      78 |
+      79 |     it('should use fallback task if LLM fails', async () => {
+    > 80 |       mockProxy.generate.mockRejectedValue(new Error('LLM Timeout'));
+         |                 ^
+      81 |
+      82 |       const graph = await engine.create('tarea simple', 'test-id', 'chat-1');
+      83 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:80:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:79:60)
+
+  ● TaskGraphEngine › Execution & Events › should emit AGENT_RESPONSE with chatId when graph completes
+
+    TypeError: Cannot read properties of undefined (reading 'generate')
+
+      90 |   describe('Execution & Events', () => {
+      91 |     it('should emit AGENT_RESPONSE with chatId when graph completes', async () => {
+    > 92 |       mockProxy.generate.mockResolvedValue({
+         |                 ^
+      93 |         content: JSON.stringify({ tasks: [] }) // Fallback will trigger
+      94 |       });
+      95 |
+
+      at tests/unit/kernel/task_graph_engine.test.ts:92:17
+      at tests/unit/kernel/task_graph_engine.test.ts:8:71
+      at __awaiter (tests/unit/kernel/task_graph_engine.test.ts:4:12)
+      at Object.<anonymous> (tests/unit/kernel/task_graph_engine.test.ts:91:82)
+
+Test Suites: 1 failed, 1 total
+Tests:       5 failed, 5 total
+Snapshots:   0 total
+Time:        1.697 s, estimated 2 s
+Ran all test suites matching tests/unit/kernel/task_graph_engine.test.ts.

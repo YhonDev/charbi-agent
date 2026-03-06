@@ -18,6 +18,7 @@ export class AuthManager {
 
       case 'openai':
       case 'groq':
+      case 'tavily':
         console.log(`\n[AuthManager] Para ${provider}, usa 'charbi auth ${provider} --key <API_KEY>'`);
         return null;
 
