@@ -3,24 +3,56 @@
  * Con debugging integrado y mejores mensajes de error
  */
 
-import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
+import { EventEmitter } from 'events';
 import {
   TaskGraphTestHelper,
   waitForCondition
 } from './helpers/task-graph-test-helpers';
 
-// ✅ Helper global para todos los tests
-const testHelper = new TaskGraphTestHelper();
+// ✅ Prefijo 'mock' permite usarlo en jest.mock (hoisting seguro)
+/** @type {any} */
+var mockInternalEmitter: any;
 
-// ✅ Mock de EventBus CON LOGGING (Usando la implementación real del helper)
+// ✅ Mock de EventBus CON LOGGING (Auto-contenido para evitar TDZ)
 jest.mock('../../../kernel/event_bus', () => {
-  const actual = jest.requireActual('../../../kernel/event_bus');
+  const Emitter = require('events').EventEmitter;
+  const internalEmitter = new Emitter();
+
+  // Guardamos una referencia global (prefeijada con mock) para el test
+  // @ts-ignore
+  global.mockInternalEmitter = internalEmitter;
+
+  const mockEvBus = {
+    on: jest.fn((event, handler) => internalEmitter.on(event, handler)),
+    emit: jest.fn((event, data) => {
+      internalEmitter.emit(event, data);
+    }),
+    removeAllListeners: jest.fn(() => internalEmitter.removeAllListeners()),
+    once: jest.fn((event, handler) => internalEmitter.once(event, handler)),
+    listenerCount: jest.fn((event) => internalEmitter.listenerCount(event)),
+  };
+
+  const mockTypes = {
+    USER_REQUEST: 'user.request',
+    AGENT_THINK: 'agent.think',
+    TASK_CREATED: 'task.created',
+    TASK_STARTED: 'task.started',
+    TASK_COMPLETED: 'task.completed',
+    TASK_FAILED: 'task.failed',
+    TOOL_CALLED: 'tool.called',
+    TOOL_RESULT: 'tool.result',
+    AGENT_RESPONSE: 'agent.response',
+    AGENT_STATUS: 'agent.status',
+    SYSTEM_READY: 'system.ready'
+  };
+
   return {
-    ...actual,
-    eventBus: testHelper.createMockEventBus(),
+    eventBus: mockEvBus,
+    EventType: mockTypes,
     emitEvent: jest.fn((e) => {
-      testHelper.getEmitter().emit(e.type, e);
-    })
+      internalEmitter.emit(e.type, e);
+    }),
+    default: mockEvBus
   };
 });
 
@@ -73,13 +105,28 @@ jest.mock('../../../kernel/tool_registry', () => ({
   }
 }));
 
+// ✅ AHORA SI importamos el engine (después de definir el mock)
+// @ts-ignore
+import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
+
 describe('TaskGraphEngine', () => {
   let taskGraphEngine: TaskGraphEngine;
   let correlationId: string;
+  let mockTestHelper: TaskGraphTestHelper;
 
   beforeEach(() => {
-    // ✅ Reset helper para cada test
-    testHelper.reset();
+    // ✅ Obtener el emitter del mock inyectado en global
+    // @ts-ignore
+    const emitter = global.mockInternalEmitter;
+
+    // ✅ Inicializar helper con el emitter real usado en el mock
+    mockTestHelper = new TaskGraphTestHelper();
+    // @ts-ignore
+    mockTestHelper.realEmitter = emitter;
+
+    // ✅ Reset emitter
+    emitter.removeAllListeners();
+    mockTestHelper.reset();
 
     // ✅ Limpiar singleton
     // @ts-ignore
@@ -101,12 +148,12 @@ describe('TaskGraphEngine', () => {
     // ✅ Imprimir flujo de eventos si el test falló
     if (expect.getState().numFailedTests && expect.getState().numFailedTests > 0) {
       console.log('\n⚠️  TEST FAILED - EVENT FLOW:\n');
-      testHelper.printFlow(correlationId);
+      mockTestHelper.printFlow(correlationId);
     }
 
     console.log('='.repeat(80) + '\n');
 
-    testHelper.reset();
+    mockTestHelper.reset();
     jest.clearAllMocks();
   });
 
@@ -116,7 +163,7 @@ describe('TaskGraphEngine', () => {
 
   describe('Complexity Assessment', () => {
     it('should detect simple tasks (score < 40 threshold)', async () => {
-      const result = await taskGraphEngine.assessComplexity('Hola');
+      const result = await taskGraphEngine.assessComplexity('Hola', correlationId);
       expect(result.isComplex).toBe(false);
       expect(result.score).toBeLessThan(40);
       console.log(`✅ Simple prompt detected: "Hola" (score: ${result.score})`);
@@ -157,7 +204,7 @@ describe('TaskGraphEngine', () => {
 
     it('should emit task.created event', async () => {
       await taskGraphEngine.create('Test task', correlationId, 'chat-1', 'web');
-      testHelper.assertEventOccurred('task.created', correlationId);
+      mockTestHelper.assertEventOccurred('task.created', correlationId);
       console.log('✅ task.created event emitted');
     });
   });
@@ -209,8 +256,8 @@ describe('TaskGraphEngine', () => {
       const finalGraph = taskGraphEngine.getGraph(graph.id);
       expect(finalGraph!.status).toBe('completed');
 
-      testHelper.assertEventOccurred('agent.response', correlationId);
-      testHelper.printFlow(correlationId);
+      mockTestHelper.assertEventOccurred('agent.response', correlationId);
+      mockTestHelper.printFlow(correlationId);
 
       console.log('✅ Graph completed successfully');
     });
@@ -227,7 +274,7 @@ describe('TaskGraphEngine', () => {
       expect(failedTask!.status).toBe('failed');
       expect(failedTask!.retryCount).toBe(1);
 
-      testHelper.assertEventOccurred('task.failed', correlationId);
+      mockTestHelper.assertEventOccurred('task.failed', correlationId);
       console.log('✅ Task failed and retry count incremented');
     });
   });

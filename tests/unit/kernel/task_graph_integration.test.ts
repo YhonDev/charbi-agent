@@ -3,21 +3,44 @@
  * Tests de integración con EventBus, Proxy, etc.
  */
 
-import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
 import { TaskGraphTestHelper } from './helpers/task-graph-test-helpers';
 
-const testHelper = new TaskGraphTestHelper();
-const mockEventBus = testHelper.createMockEventBus();
-
+// ✅ Mock de EventBus CON LOGGING (Auto-contenido)
 jest.mock('../../../kernel/event_bus', () => {
-  const actual = jest.requireActual('../../../kernel/event_bus');
+  const Emitter = require('events').EventEmitter;
+  const internalEmitter = new Emitter();
+
+  // @ts-ignore
+  global.mockInternalEmitterIntegration = internalEmitter;
+
+  const mockEvBus = {
+    on: jest.fn((event, handler) => internalEmitter.on(event, handler)),
+    emit: jest.fn((event, data) => {
+      internalEmitter.emit(event, data);
+    }),
+    removeAllListeners: jest.fn(() => internalEmitter.removeAllListeners()),
+    once: jest.fn((event, handler) => internalEmitter.once(event, handler)),
+    listenerCount: jest.fn((event) => internalEmitter.listenerCount(event)),
+  };
+
+  const mockTypes = {
+    USER_REQUEST: 'user.request',
+    TASK_CREATED: 'task.created',
+    TASK_STARTED: 'task.started',
+    TASK_COMPLETED: 'task.completed',
+    TASK_FAILED: 'task.failed',
+    TOOL_CALLED: 'tool.called',
+    TOOL_RESULT: 'tool.result',
+    AGENT_RESPONSE: 'agent.response'
+  };
+
   return {
-    ...actual,
-    eventBus: mockEventBus,
+    eventBus: mockEvBus,
+    EventType: mockTypes,
     emitEvent: jest.fn((e) => {
-      testHelper.getEmitter().emit(e.type, e);
-      mockEventBus.emit(e.type, e);
-    })
+      internalEmitter.emit(e.type, e);
+    }),
+    default: mockEvBus
   };
 });
 
@@ -54,13 +77,23 @@ jest.mock('../../../kernel/tool_registry', () => ({
   }
 }));
 
+// @ts-ignore
+import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
+
 describe('TaskGraph Integration', () => {
   let taskGraphEngine: TaskGraphEngine;
+  let mockTestHelper: TaskGraphTestHelper;
 
   beforeEach(() => {
-    testHelper.reset();
-    mockEventBus.emit.mockClear();
-    mockEventBus.on.mockClear();
+    // @ts-ignore
+    const emitter = global.mockInternalEmitterIntegration;
+    mockTestHelper = new TaskGraphTestHelper();
+    // @ts-ignore
+    mockTestHelper.realEmitter = emitter;
+
+    emitter.removeAllListeners();
+    mockTestHelper.reset();
+
     // @ts-ignore
     TaskGraphEngine.instance = undefined;
     taskGraphEngine = TaskGraphEngine.getInstance();
@@ -68,19 +101,9 @@ describe('TaskGraph Integration', () => {
 
   it('should integrate with EventBus correctly', async () => {
     const correlationId = 'integration_test_123';
-
     await taskGraphEngine.create('Integration test', correlationId, 'chat-1', 'web');
 
-    // ✅ Verificar que EventBus.emit fue llamado (usando nombres de eventos reales)
-    expect(mockEventBus.emit).toHaveBeenCalled();
-
-    // Buscar el evento de creación de grafo/tarea
-    const emitCalls = mockEventBus.emit.mock.calls;
-    // @ts-ignore
-    const eventTypes = emitCalls.map(call => call[0]);
-
-    expect(eventTypes).toContain('task.created');
-
+    mockTestHelper.assertEventOccurred('task.created', correlationId);
     console.log('✅ EventBus integration works');
   });
 
@@ -89,8 +112,11 @@ describe('TaskGraph Integration', () => {
     const graph = await taskGraphEngine.create('Event test', correlationId, 'chat-1', 'web');
     const task = taskGraphEngine.getNextTask(graph.id);
 
-    // ✅ Simular evento tool.result de otro componente (Orchestrator/Executor)
-    testHelper.getEmitter().emit('tool.result', {
+    // @ts-ignore
+    const emitter = global.mockInternalEmitterIntegration;
+
+    // Simular evento tool.result de otro componente
+    emitter.emit('tool.result', {
       payload: {
         graphId: graph.id,
         taskId: task!.id,
@@ -100,14 +126,13 @@ describe('TaskGraph Integration', () => {
       correlationId,
     });
 
-    // ✅ Esperar a que se procese el evento asíncrono
+    // Esperar rrocesamiento
     await new Promise(resolve => setTimeout(resolve, 50));
 
     const updatedGraph = taskGraphEngine.getGraph(graph.id);
     const completedTask = updatedGraph!.tasks.find((t: any) => t.id === task!.id);
 
     expect(completedTask!.status).toBe('completed');
-
     console.log('✅ Event handling from other components works');
   });
 });

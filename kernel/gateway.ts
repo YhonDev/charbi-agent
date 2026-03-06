@@ -1,7 +1,10 @@
 // kernel/gateway.ts
-import http from 'http';
+import * as http from 'http';
 import { v4 as uuidv4 } from 'uuid';
-import { emitEvent, eventBus, EventType } from './event_bus';
+import { eventBus, EventType, emitEvent } from './event_bus';
+import { TaskGraphEngine } from './task_graph/task_graph_engine';
+import { log } from './logger';
+import { DebugTracker } from './debug/debug_tracker';
 
 export class Gateway {
   private static instance: Gateway;
@@ -55,7 +58,7 @@ export class Gateway {
   private async handleRequest(req: http.IncomingMessage, res: http.ServerResponse) {
     // Habilitar CORS simple
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
@@ -79,6 +82,49 @@ export class Gateway {
           res.end(JSON.stringify({ error: e.message }));
         }
       });
+    } else if (req.url?.startsWith('/api/v1/debug/enable') && req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', async () => {
+        try {
+          const { duration } = JSON.parse(body);
+          const durationMs = (duration || 60) * 1000;
+          DebugTracker.getInstance().enable(durationMs);
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({
+            success: true,
+            message: `Debug mode enabled for ${duration || 60} seconds`,
+            activeUntil: new Date(Date.now() + durationMs).toISOString()
+          }));
+        } catch (e: any) {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ error: 'Invalid duration or JSON' }));
+        }
+      });
+    } else if (req.url?.startsWith('/api/v1/debug/flow') && req.method === 'GET') {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const correlationId = url.searchParams.get('correlationId');
+      const flow = DebugTracker.getInstance().getFlow(correlationId || 'unknown');
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(flow));
+    } else if (req.url === '/api/v1/debug/complexity' && req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', async () => {
+        try {
+          const { prompt, correlationId } = JSON.parse(body);
+          const taskGraphEngine = (await import('./task_graph/task_graph_engine')).TaskGraphEngine.getInstance();
+          const complexity = await taskGraphEngine.assessComplexity(prompt, correlationId || `debug_${Date.now()}`);
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(complexity));
+        } catch (e: any) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: e.message }));
+        }
+      });
     } else if (req.url === '/status') {
       const { StatusService } = await import('./services/status_service');
       const status = await StatusService.getFullStatus();
@@ -95,7 +141,6 @@ export class Gateway {
     return new Promise((resolve, reject) => {
       const requestId = uuidv4();
 
-      // 1. Escuchar la respuesta del agente
       const onResponse = (event: any) => {
         if (event.payload.chatId === chatId) {
           eventBus.off(EventType.AGENT_RESPONSE, onResponse);
@@ -105,13 +150,11 @@ export class Gateway {
 
       eventBus.on(EventType.AGENT_RESPONSE, onResponse);
 
-      // Timeout de seguridad (Largo para permitir Modo Proyecto completo)
       setTimeout(() => {
         eventBus.off(EventType.AGENT_RESPONSE, onResponse);
-        reject(new Error('Kernel request timeout (180s) - El proceso autónomo tardó demasiado.'));
+        reject(new Error('Kernel request timeout (180s)'));
       }, 180000);
 
-      // 2. Emitir la solicitud al bus
       emitEvent({
         id: requestId,
         type: EventType.USER_REQUEST,

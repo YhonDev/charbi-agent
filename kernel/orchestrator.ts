@@ -97,7 +97,7 @@ export class Orchestrator {
             history: conversation
           });
 
-          const llmRes = await queryLLM(systemPrompt, conversation.join('\n'));
+          const llmRes = await queryLLM(systemPrompt, conversation.join('\n'), { correlationId: event.id });
           if (!llmRes.success) {
             finalResponse = `⚠️ Error LLM: ${llmRes.error}`;
             break;
@@ -135,15 +135,15 @@ export class Orchestrator {
             // 4. REFLECT: The next loop iteration will effectively be the reflection phase
             continue;
           } else {
-            // 5. RESPOND: No more tools
-            // SI LA TAREA REQUIERE HERRAMIENTAS Y NO SE HA USADO NINGUNA, FORZAR RE-RAZONAMIENTO
-            if (analysis.requiresTools && step === 1 && !content.includes('{')) {
-              console.warn('[Orchestrator] Direct response detected for action task. Forcing cognitive loop...');
-              conversation.push("System: Has respondido directamente pero esta tarea requiere el uso de herramientas. PLANIFICA Y ACTUA usando el formato JSON.");
+            finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
+
+            // ✅ ANTI-ECHO PROTECTION: Si la respuesta es igual al input, pedir re-generación
+            if (finalResponse.toLowerCase() === text.toLowerCase() && step < MAX_COGNITIVE_STEPS) {
+              console.warn('[Orchestrator] Echo detected. Retrying cognitive loop...');
+              conversation.push('System: Has repetido exactamente lo que dijo el usuario. Por favor, genera una respuesta dinámica y útil que aporte valor o realice una acción.');
               continue;
             }
 
-            finalResponse = content.replace(/\{[\s\S]*\}/, '').trim();
             // Fallback: Si no hay JSON pero hay contenido y hemos intentado forzarlo una vez, aceptamos el contenido
             if (!finalResponse && content && !content.includes('{')) {
               finalResponse = content;
@@ -155,7 +155,9 @@ export class Orchestrator {
           }
         }
 
-        if (!finalResponse) finalResponse = '⚠️ No se pudo generar una respuesta.';
+        if (!finalResponse || finalResponse.toLowerCase() === text.toLowerCase()) {
+          finalResponse = '✅ Entendido. ¿Hay algo específico que quieras que haga con eso?';
+        }
 
         // 6. LEARN: Post-task reflection and storage
         this.emitStatus(chatId, 'LEARNING', 'Extrayendo conocimientos de la tarea...');
@@ -210,6 +212,54 @@ export class Orchestrator {
         });
       }
     });
+
+    // ✅ EVENT: Complex Task Completed (Reflective Response)
+    eventBus.on(EventType.TASK_GRAPH_COMPLETED as any, async (event: any) => {
+      const { graphId, objective, toolResults, correlationId, chatId, origin } = event.payload;
+      console.log(`[Orchestrator] TaskGraph ${graphId} completed. Generating reflective response...`);
+
+      try {
+        const resultsSummary = toolResults.map((r: any) =>
+          `- ${r.description} (${r.tool}): ${r.success ? '✅ Success' : '❌ Failed'}${r.result ? ` - Output: ${JSON.stringify(r.result).substring(0, 100)}...` : ''}`
+        ).join('\n');
+
+        const reflectionPrompt = `
+El usuario solicitó: "${objective}"
+
+Se han ejecutado las siguientes tareas y herramientas:
+${resultsSummary}
+
+Basado en los resultados ANTERIORES, genera una respuesta final para el usuario que sea:
+1. Informativa y amigable.
+2. Mencione qué se logró (o por qué falló algo).
+3. NO repitas simplemente el prompt original.
+4. Indica rutas de archivos si se crearon.
+
+Responde como Charbi, tu asistente autónomo.
+`;
+
+        const reflectionRes = await queryLLM("Eres Charbi, resumiendo los resultados de un proyecto complejo.", reflectionPrompt, { correlationId });
+        const finalText = reflectionRes.success ? reflectionRes.content : `✅ Proyecto finalizado: ${objective}. Se ejecutaron ${toolResults.length} herramientas.`;
+
+        emitEvent({
+          id: uuidv4(),
+          type: EventType.AGENT_RESPONSE,
+          timestamp: Date.now(),
+          origin: 'orchestrator',
+          payload: {
+            text: finalText,
+            chatId,
+            channel: origin,
+            graphId,
+            toolResults // Enviar resultados para que la interfaz pueda mostrarlos
+          }
+        });
+
+      } catch (error) {
+        console.error('[Orchestrator] Error generating reflective response:', error);
+        this.sendResponse(origin, chatId, `✅ Proyecto completado: ${objective}`);
+      }
+    });
   }
 
   /** Procesa una tarea interna generada por el Task Graph Engine */
@@ -231,7 +281,7 @@ export class Orchestrator {
         history: conversation
       });
 
-      const llmRes = await queryLLM(systemPrompt, conversation.join('\n'));
+      const llmRes = await queryLLM(systemPrompt, conversation.join('\n'), { correlationId: task.id });
       if (!llmRes.success) throw new Error(llmRes.error);
 
       const content = (llmRes.content || '').trim();
@@ -280,7 +330,7 @@ Historial detallado: ${history.join('\n')}
 Responde únicamente con un objeto JSON:
 {"learnings": ["..."], "relations": [{"s": "...", "r": "...", "o": "..."}]}
 `;
-      const res = await queryLLM(learningPrompt, "Sistema de Aprendizaje Activo");
+      const res = await queryLLM(learningPrompt, "Sistema de Aprendizaje Activo", { correlationId: `learn_${Date.now()}` });
       if (res.success && res.content) {
         const learned = this.parseCognitiveJSON(res.content);
         if (learned) {

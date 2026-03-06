@@ -323,6 +323,36 @@
       "metadata": {}
     },
     {
+      "subject": "Charbi",
+      "object": "m\u00e1s detalle sobre la acci\u00f3n previa",
+      "relation": "solicita",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "list_directory_request",
+      "relation": "responded_to",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "/home/yhondev",
+      "relation": "stores_last_work_in",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "/home/yhondev/.charbi-agent",
+      "relation": "hasCurrentWorkingDirectory",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "User",
+      "relation": "greets",
+      "metadata": {}
+    },
+    {
       "subject": "usuario",
       "object": "mensaje muy breve (')'",
       "relation": "envi\u00f3",
@@ -349,7 +379,7 @@
     {
       "subject": "usuario",
       "object": "listado del directorio /home/yhondev",
-      "relation": "solicit\u00f3",
+      "relation": "solicita",
       "metadata": {}
     },
     {
@@ -404,6 +434,30 @@
       "subject": "usuario",
       "object": "nombre almacenado en Charbi",
       "relation": "no tiene",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "consultar actividades pendientes en SIMA",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "sistema",
+      "relation": "saluda_a",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "/home/yhondev/.charbi-agent",
+      "relation": "tieneRutaDeTrabajo",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "yhondev",
+      "relation": "nombreDeUsuario",
       "metadata": {}
     },
     {
@@ -680,6 +734,30 @@
       "metadata": {}
     },
     {
+      "subject": "Usuario",
+      "object": "Modo de Aprendizaje Activo",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "pantalla en blanco",
+      "relation": "informa",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "ejecutar comando ls",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "nombre_personal",
+      "relation": "pregunta_sobre",
+      "metadata": {}
+    },
+    {
       "subject": "comando ls",
       "object": "listado del directorio actual",
       "relation": "produjo",
@@ -706,25 +784,25 @@
     {
       "subject": "/home/yhondev",
       "object": "extraer_transcripciones_local.py",
-      "relation": "contains",
+      "relation": "contains_file",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "go",
-      "relation": "contains",
+      "relation": "contains_directory",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "java",
-      "relation": "contains",
+      "relation": "contains_directory",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "venv",
-      "relation": "contains",
+      "relation": "contains_directory",
       "metadata": {}
     },
     {
@@ -736,7 +814,7 @@
     {
       "subject": "/home/yhondev",
       "object": ".bash_history",
-      "relation": "contiene",
+      "relation": "has_file",
       "metadata": {}
     },
     {
@@ -748,7 +826,253 @@
     {
       "subject": "/home/yhondev",
       "object": ".charbi-agent",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".bash_logout",
       "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".charbi-agent-v2",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".charbi-agent.zip",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".claude",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".claude.json",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".config",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".gemini",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".gitconfig",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".local",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".npm",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".npm-global",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".npmrc",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".ollama",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".openclaw",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".pki",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".profile",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".selected_editor",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".ssh",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "/home/yhondev",
+      "object": ".sudo_as_admin_successful",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Informe de Estado del Proyecto Charbi Aut\u00f3nomo",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/home directory listing",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Orchestrator",
+      "relation": "mentioned",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "ActiveLearningSystem",
+      "relation": "requests",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "ls -la on /home/yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Java",
+      "relation": "interested_in",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/yhondev/java",
+      "relation": "wants_to_inspect",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Charbi_skills",
+      "relation": "asked_about",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "SIMA activities status",
+      "relation": "requested_check",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "SIMA (as of 2026-03-06)",
+      "relation": "has_no_pending_activities",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list contents of /home/yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "instructor",
+      "relation": "role",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "current_semester_subject",
+      "relation": "wants_to_know",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Yhon",
+      "relation": "has_name",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "yhondev",
+      "relation": "has_home_directory",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list contents of directory /home/yhondev/java",
+      "relation": "wants",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list_directory_of_yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Hoa",
+      "relation": "hasName",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/home/yhondev",
+      "relation": "has_home_directory",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/home/yhondev/.charbi-agent",
+      "relation": "statesIncorrectPath",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "unknown",
+      "relation": "wantsCorrectPath",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Charbi",
+      "relation": "greets",
       "metadata": {}
     },
     {
@@ -772,7 +1096,163 @@
     {
       "subject": "/home/yhondev/java",
       "object": "test.txt",
-      "relation": "contiene",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "solicitando aclaraci\u00f3n",
+      "relation": "respondi\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "un asistente conversacional",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "limpio y estable",
+      "relation": "estado",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "activo",
+      "relation": "modo",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "Sistema de Aprendizaje Activo",
+      "relation": "es",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "presencia",
+      "relation": "confirma",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "ls /home/yhondev",
+      "relation": "ejecuta",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "scholar.check-sima",
+      "relation": "utiliza_herramienta",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "\u2705 SIMA: Sin actividades pendientes para el per\u00edodo solicitado.",
+      "relation": "respuesta",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "informaci\u00f3n de estado de actividades SIMA",
+      "relation": "provee",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "pwd",
+      "relation": "ejecut\u00f3Comando",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".bash_history",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".gitconfig",
+      "relation": "hasFile",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".charbi-agent",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "extraer_transcripciones_local.py",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/.charbi-agent.zip",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/.charbi-agent",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/venv",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev/workspace",
+      "relation": "owns",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": ".bashrc",
+      "relation": "hasFile",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "go",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "java",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "venv",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "workspace",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "/home/yhondev",
+      "relation": "has_home_directory",
+      "metadata": {}
+    },
+    {
+      "subject": "yhondev",
+      "object": "files in repository",
+      "relation": "owns",
       "metadata": {}
     },
     {
@@ -866,93 +1346,39 @@
       "metadata": {}
     },
     {
+      "subject": "Sistema",
+      "object": "comando ls exitosamente",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "listado del directorio actual",
+      "relation": "proporcion\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Sistema",
+      "object": "nombre_usuario",
+      "relation": "solicita",
+      "metadata": {}
+    },
+    {
       "subject": "test.txt",
       "object": "/home/yhondev/java",
       "relation": "ubicado_en",
       "metadata": {}
     },
     {
-      "subject": "User",
-      "object": "Informe de Estado del Proyecto Charbi Aut\u00f3nomo",
-      "relation": "requested",
+      "subject": "test.txt",
+      "object": "file",
+      "relation": "type",
       "metadata": {}
     },
     {
-      "subject": "User",
-      "object": "/home directory listing",
-      "relation": "requested",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "Orchestrator",
-      "relation": "mentioned",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "ActiveLearningSystem",
-      "relation": "requested",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "ls -la on /home/yhondev",
-      "relation": "requested",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "Java",
-      "relation": "interested_in",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "/yhondev/java",
-      "relation": "wants_to_inspect",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "Charbi_skills",
-      "relation": "asked_about",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "SIMA activities status",
-      "relation": "requested_check",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "SIMA (as of 2026-03-06)",
-      "relation": "has_no_pending_activities",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "list contents of /home/yhondev",
-      "relation": "requested",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "instructor",
-      "relation": "role",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "current_semester_subject",
-      "relation": "wants_to_know",
-      "metadata": {}
-    },
-    {
-      "subject": "User",
-      "object": "Yhon",
-      "relation": "has_name",
+      "subject": "test.txt",
+      "object": "11 bytes",
+      "relation": "size",
       "metadata": {}
     },
     {
@@ -1232,45 +1658,9 @@
       "metadata": {}
     },
     {
-      "subject": "sistema",
-      "object": "solicitando aclaraci\u00f3n",
-      "relation": "respondi\u00f3",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "un asistente conversacional",
-      "relation": "es",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "limpio y estable",
-      "relation": "estado",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "activo",
-      "relation": "modo",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "Sistema de Aprendizaje Activo",
-      "relation": "es",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "presencia",
-      "relation": "confirma",
-      "metadata": {}
-    },
-    {
-      "subject": "sistema",
-      "object": "ls /home/yhondev",
-      "relation": "ejecut\u00f3",
+      "subject": "user",
+      "object": "ls command",
+      "relation": "requested",
       "metadata": {}
     },
     {
@@ -1942,60 +2332,6 @@
       "metadata": {}
     },
     {
-      "subject": "yhondev",
-      "object": ".bash_history",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": ".gitconfig",
-      "relation": "hasFile",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": ".charbi-agent",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": "extraer_transcripciones_local.py",
-      "relation": "hasFile",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": "/home/yhondev/.charbi-agent.zip",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": "/home/yhondev/.charbi-agent",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": "/home/yhondev/venv",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": "/home/yhondev/workspace",
-      "relation": "owns",
-      "metadata": {}
-    },
-    {
-      "subject": "yhondev",
-      "object": ".bashrc",
-      "relation": "hasFile",
-      "metadata": {}
-    },
-    {
       "subject": "objetivo",
       "object": "falt\u00f3 acceso a datos de Sima",
       "relation": "no se cumpli\u00f3",
@@ -2131,6 +2467,18 @@
       "subject": "system",
       "object": "\u00a1Hola! \u00bfEn qu\u00e9 puedo ayudarte hoy?",
       "relation": "responded",
+      "metadata": {}
+    },
+    {
+      "subject": "system",
+      "object": "ls command",
+      "relation": "executed",
+      "metadata": {}
+    },
+    {
+      "subject": "system",
+      "object": "directory listing",
+      "relation": "provided",
       "metadata": {}
     },
     {

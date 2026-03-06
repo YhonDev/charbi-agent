@@ -103,14 +103,18 @@ export class TaskGraphEngine {
     /busca.*y.*crea/i,              // "busca y crea"
     /informe|reporte|documento/i,   // "genera un informe"
     /proyecto/i,                    // "trabaja en el proyecto"
+    /archivo[s]?|página[s]?|componente[s]?|parte[s]?|módulo[s]?/i,
+    /crea.*proyecto|create.*project|build.*app/i, // ✅ Project patterns
+    /explica.*código|explain.*code|tutorial|guide/i, // ✅ Explanation + code
+    /\by\b.*\by\b|\bthen\b|\bdespués\b|\blets\b/i // ✅ Multi-step connectors
   ];
 
   // Umbrales de complejidad
   private readonly THRESHOLDS = {
-    MIN_WORDS_FOR_COMPLEX: 15,
     MIN_PATTERN_MATCHES: 1,
-    MIN_ACTION_VERBS: 2,
-    TASKGRAPH_SCORE: 40,  // Score >= 40 → TaskGraph obligatorio
+    MIN_WORDS_FOR_COMPLEX: 15,
+    MIN_ACTION_VERBS: 1,
+    COMPLEXITY_SCORE: 25, // ✅ Lower threshold (from 40)
   };
 
   private constructor() {
@@ -245,30 +249,32 @@ export class TaskGraphEngine {
         reasons.push('Sequential steps mentioned');
       }
 
-      // 6. Usar LLM para evaluar complejidad
-      const llmAssessment = await this.assessComplexityWithLLM(prompt);
-      if (llmAssessment.isComplex) {
-        score += 20;
-        reasons.push(...llmAssessment.reasons);
+      // 6. Usar LLM para evaluar complejidad (Solo si el score es bajo)
+      if (score < this.THRESHOLDS.COMPLEXITY_SCORE) {
+        const llmAssessment = await this.assessComplexityWithLLM(prompt);
+        if (llmAssessment.isComplex) {
+          score += 40;
+          reasons.push(`LLM Assessment: ${llmAssessment.reasons.join(', ')}`);
+        }
       }
 
-      const isComplex = score >= this.THRESHOLDS.TASKGRAPH_SCORE;
-      const confidence = Math.min(score / 100, 1);
+      const isComplex = score >= this.THRESHOLDS.COMPLEXITY_SCORE;
+      console.log(`[TaskGraph] Score: ${score} | isComplex: ${isComplex}`);
 
       // Determinar modo recomendado
       let recommendedMode: 'chat' | 'react' | 'autonomous' = 'chat';
       if (score >= 60) recommendedMode = 'autonomous';
-      else if (score >= 40) recommendedMode = 'react';
+      else if (score >= 25) recommendedMode = 'react';
 
       const analysis: ComplexityAnalysis = {
         isComplex,
-        confidence,
+        confidence: Math.min(score / 50, 1),
         score,
         reasons,
-        recommendedMode,
+        recommendedMode
       };
 
-      console.log(`[TaskGraph] Complexity: ${isComplex ? 'COMPLEX' : 'SIMPLE'} (${score} points, ${confidence.toFixed(2)} confidence)`);
+      console.log(`[TaskGraph] Complexity: ${analysis.isComplex ? 'COMPLEX' : 'SIMPLE'} (${analysis.score} points, ${analysis.confidence.toFixed(2)} confidence)`);
 
       // Emitir evento para que CLI muestre progreso
       eventBus.emit('COMPLEXITY_ANALYSIS', {
@@ -379,7 +385,7 @@ Respond in JSON format:
       });
 
       // Generar tareas usando el LLM (pasando el contexto)
-      const tasks = await this.generateTasksWithLLM(objective, context);
+      const tasks = await this.generateTasksWithLLM(objective, correlationId);
 
       if (tasks.length === 0) {
         // Fallback: crear tarea única
@@ -434,58 +440,46 @@ Respond in JSON format:
   /**
    * Usa el LLM para descomponer la tarea en pasos
    */
-  private async generateTasksWithLLM(objective: string, context?: string): Promise<Task[]> {
-    console.log('[TaskGraph] 🔍 START: generateTasksWithLLM');
+  private async generateTasksWithLLM(objective: string, correlationId: string): Promise<Task[]> {
     const startTime = Date.now();
-    try {
-      const tools = getAvailableTools();
-      const toolsDescription = tools.map(t => `- ${t.name}: ${t.description}`).join('\n');
+    console.log(`[TaskGraph] 🧠 START: generateTasksWithLLM for ${correlationId}`);
 
-      const planningPrompt = `
-${context ? `RECENT CONTEXT:\n${context}` : ''}
+    const availableTools = getAvailableTools();
+    const toolsSchema = JSON.stringify(availableTools, null, 2);
 
-OBJECTIVE: "${objective}"
+    const prompt = `
+Objective: ${objective}
+Available Tools:
+${toolsSchema}
 
-AVAILABLE TOOLS (USE EXACT NAMES):
-${this.formatToolsForPrompt(tools)}
-
-IMPORTANT RULES:
-1. Use EXACT tool names from the list above (e.g., "system.write" NOT "filesystem.write")
-2. Use ABSOLUTE paths for all file operations (e.g., "/home/yhondev/.charbi-agent/workspace/index.html")
-3. Each task must be ATOMIC (one clear action)
-4. Specify tool arguments that match the schema exactly
-5. Include dependencies between tasks (using IDs like "task_1")
-6. Minimum 2 tasks if the user asks for multiple actions (e.g., "create then list" MUST be 2 tasks)
-7. Do NOT skip follow-up actions like "ls", "read", or "verify".
-
-WSL/PATH REQUIREMENTS:
-- Base directory: "/home/yhondev/.charbi-agent/workspace"
-- Home directory for user: "/home/yhondev"
-- Java workspace: "/home/yhondev/java"
-
-OUTPUT FORMAT (JSON ONLY, no markdown):
+Decompose this objective into a series of logical tasks.
+Each task must be in JSON format:
 {
   "tasks": [
     {
-      "description": "Clear description",
+      "description": "Short explanation",
       "tool": "tool_name",
-      "toolArgs": {"path": "/absolute/path/file.txt", "content": "..." },
-      "dependencies": []
+      "toolArgs": { ...args },
+      "dependencies": ["task_id_of_previous"]
     }
   ]
 }
+
+RULES:
+1. Return ONLY valid JSON.
+2. Use tools whenever possible.
+3. If no tool is available, leave "tool" null.
+4. Set "agent": "coder" for coding tasks.
 `;
 
-      const response = await this.proxy.generate(planningPrompt, {
+    try {
+      const res = await this.proxy.generate(prompt, {
         mode: 'planning',
-        systemPrompt: "Eres un planificador de tareas para Charbi Kernel. Responde solo en JSON."
+        jsonMode: true,
+        correlationId
       });
 
-      let content = response.content.trim();
-      const m = content.match(/```(?:json)?\s*([\s\S]*?)```/);
-      if (m) content = m[1].trim();
-
-      const parsed = JSON.parse(content);
+      const parsed = res.raw || {};
 
       // ✅ FIX 3: Validar tool names contra registry y rutas absolutas
       const tasks = parsed.tasks.map((task: any, index: number) => {
@@ -597,12 +591,54 @@ OUTPUT FORMAT (JSON ONLY, no markdown):
 
   private async executeTaskWithLLM(task: Task, graphId: string): Promise<void> {
     const graph = this.graphs.get(graphId);
-    if (!graph) return;
+    const correlationId = graph?.correlationId || task.id;
+    console.log(`[TaskGraph] 🤖 START: executeTaskWithLLM (${task.id}) for ${correlationId}`);
+
+    const prompt = `
+Objective: ${graph?.objective}
+Current Task: ${task.description}
+Task ID: ${task.id}
+
+Execute this task. If you need to use a tool, respond with the tool call in JSON.
+`;
 
     try {
-      const response = await this.proxy.generate(task.description, {
-        systemPrompt: `Executing task: ${task.description}. Objective: ${graph.objective}`
+      const response = await this.proxy.generate(prompt, {
+        mode: 'execution',
+        correlationId
       });
+
+      // Si el LLM devolvió un tool call (o texto que parece JSON)
+      const content = response.content.trim();
+      const match = content.match(/\{[\s\S]*\}/);
+
+      if (match) {
+        try {
+          const parsed = JSON.parse(match[0]);
+          if (parsed.tool) {
+            console.log(`[TaskGraph] 🛠️ LLM decided to use tool during task execution: ${parsed.tool}`);
+
+            // Emitir TOOL_CALLED para que el orquestador lo ejecute
+            eventBus.emit(EventType.TOOL_CALLED, {
+              id: `ev_${Date.now()}`,
+              type: EventType.TOOL_CALLED,
+              timestamp: Date.now(),
+              payload: {
+                toolName: parsed.tool,
+                arguments: parsed.params || parsed.args || {},
+                taskId: task.id,
+                graphId,
+                correlationId: graph.correlationId,
+              },
+              origin: 'TaskGraphEngine'
+            });
+            return; // No completamos la tarea aún, esperamos al TOOL_RESULT
+          }
+        } catch (e) {
+          console.warn('[TaskGraph] Failed to parse internal LLM tool call, treat as message');
+        }
+      }
+
       this.completeTask(graphId, task.id, response.content);
     } catch (error: any) {
       this.failTask(graphId, task.id, error.message);
@@ -723,18 +759,26 @@ OUTPUT FORMAT (JSON ONLY, no markdown):
     graph.status = 'completed';
     graph.completedAt = Date.now();
 
-    eventBus.emit(EventType.AGENT_RESPONSE, {
+    // ✅ Propagar resultados reales para que el orquestador genere el resumen
+    const toolResults = graph.tasks.map(t => ({
+      id: t.id,
+      description: t.description,
+      tool: t.tool,
+      success: t.status === 'completed',
+      result: typeof t.result === 'string' ? t.result.substring(0, 500) : t.result,
+    }));
+
+    eventBus.emit(EventType.TASK_GRAPH_COMPLETED as any, {
       id: `ev_${Date.now()}`,
-      type: EventType.AGENT_RESPONSE,
+      type: EventType.TASK_GRAPH_COMPLETED,
       timestamp: Date.now(),
       payload: {
         graphId,
-        text: `✅ Proyecto completado: ${graph.objective}`,
         objective: graph.objective,
+        toolResults,
         correlationId: graph.correlationId,
         chatId: graph.metadata.chatId,
         origin: graph.metadata.origin,
-        status: 'completed'
       },
       origin: 'TaskGraphEngine'
     });

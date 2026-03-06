@@ -12,6 +12,7 @@ import { emitEvent } from './event_bus';
 import { ServiceManager } from './runtime/service_manager';
 import { providerRegistry } from './providers/provider_registry';
 import { toolRegistry } from './tool_registry';
+import { MaintenanceService } from './services/maintenance_service';
 import fs from 'fs';
 import path from 'path';
 
@@ -134,9 +135,19 @@ async function boot(): Promise<void> {
     running: true // Assume already started by channelRegistry.startAll() for now
   });
 
+  // Register Maintenance Service
+  ServiceManager.register({
+    name: 'maintenance',
+    type: 'core',
+    start: async () => { await MaintenanceService.getInstance().start(); },
+    stop: async () => { MaintenanceService.getInstance().stop(); },
+    running: false
+  });
+
   await ServiceManager.start('memory');
   await ServiceManager.start('orchestrator');
   await ServiceManager.start('gateway');
+  await ServiceManager.start('maintenance');
 
   // Emit READY
   console.log('[Boot] Finalizing...');

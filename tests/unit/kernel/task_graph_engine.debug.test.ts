@@ -1,18 +1,48 @@
 /**
- * 🐛 TaskGraphEngine - Debug Tests
- * Tests diseñados específicamente para identificar problemas
+ * 🧪 TaskGraphEngine - Debug Tests
+ * Tests diseñados para flujo de eventos y problemas de colgado
  */
 
-import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
 import { TaskGraphTestHelper } from './helpers/task-graph-test-helpers';
 
-const testHelper = new TaskGraphTestHelper();
+// ✅ Mock de EventBus CON LOGGING (Auto-contenido)
+jest.mock('../../../kernel/event_bus', () => {
+  const Emitter = require('events').EventEmitter;
+  const internalEmitter = new Emitter();
 
-jest.mock('../../../kernel/event_bus', () => ({
-  eventBus: testHelper.createMockEventBus(),
-  EventType: jest.requireActual('../../../kernel/event_bus').EventType,
-  emitEvent: jest.fn((e) => testHelper.getEmitter().emit(e.type, e))
-}));
+  // @ts-ignore
+  global.mockInternalEmitterDebug = internalEmitter;
+
+  const mockEvBus = {
+    on: jest.fn((event, handler) => internalEmitter.on(event, handler)),
+    emit: jest.fn((event, data) => {
+      internalEmitter.emit(event, data);
+    }),
+    removeAllListeners: jest.fn(() => internalEmitter.removeAllListeners()),
+    once: jest.fn((event, handler) => internalEmitter.once(event, handler)),
+    listenerCount: jest.fn((event) => internalEmitter.listenerCount(event)),
+  };
+
+  const mockTypes = {
+    USER_REQUEST: 'user.request',
+    TASK_CREATED: 'task.created',
+    TASK_STARTED: 'task.started',
+    TASK_COMPLETED: 'task.completed',
+    TASK_FAILED: 'task.failed',
+    TOOL_CALLED: 'tool.called',
+    TOOL_RESULT: 'tool.result',
+    AGENT_RESPONSE: 'agent.response'
+  };
+
+  return {
+    eventBus: mockEvBus,
+    EventType: mockTypes,
+    emitEvent: jest.fn((e) => {
+      internalEmitter.emit(e.type, e);
+    }),
+    default: mockEvBus
+  };
+});
 
 jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
   IntelligenceProxy: {
@@ -21,9 +51,9 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
         content: JSON.stringify({
           tasks: [
             {
-              description: 'Debug test task',
+              id: 'debug_task_1',
+              description: 'Step 1',
               tool: 'system.write',
-              toolArgs: { path: '/tmp/debug.txt', content: 'debug' },
               dependencies: [],
             },
           ],
@@ -37,17 +67,32 @@ jest.mock('../../../kernel/cognition/intelligence_proxy', () => ({
 // Mock de ToolRegistry
 jest.mock('../../../kernel/tool_registry', () => ({
   toolRegistry: {
-    getTool: jest.fn((name) => ({ schema: { name }, handler: jest.fn() })),
+    getTool: jest.fn((name) => ({
+      schema: { name, description: 'mock tool' },
+      handler: jest.fn().mockResolvedValue({ success: true, data: {} })
+    })),
     getAllSchemas: jest.fn(() => []),
     listNames: jest.fn(() => [])
   }
 }));
 
-describe('TaskGraphEngine - Debug Scenarios', () => {
+// @ts-ignore
+import { TaskGraphEngine } from '../../../kernel/task_graph/task_graph_engine';
+
+describe('TaskGraph Debug', () => {
   let taskGraphEngine: TaskGraphEngine;
+  let mockTestHelper: TaskGraphTestHelper;
 
   beforeEach(() => {
-    testHelper.reset();
+    // @ts-ignore
+    const emitter = global.mockInternalEmitterDebug;
+    mockTestHelper = new TaskGraphTestHelper();
+    // @ts-ignore
+    mockTestHelper.realEmitter = emitter;
+
+    emitter.removeAllListeners();
+    mockTestHelper.reset();
+
     // @ts-ignore
     TaskGraphEngine.instance = undefined;
     taskGraphEngine = TaskGraphEngine.getInstance();
@@ -60,10 +105,11 @@ describe('TaskGraphEngine - Debug Scenarios', () => {
 
     const graph = await taskGraphEngine.create('Debug task', correlationId, 'chat-debug', 'web');
     const task = taskGraphEngine.getNextTask(graph.id);
+
     taskGraphEngine.completeTask(graph.id, task!.id, { success: true });
 
-    // ✅ Imprimir flujo completo SIEMPRE en debug tests
-    testHelper.printFlow(correlationId);
+    // Imprimir flujo
+    mockTestHelper.printFlow(correlationId);
 
     expect(graph).toBeDefined();
   });
@@ -71,7 +117,9 @@ describe('TaskGraphEngine - Debug Scenarios', () => {
   it('DEBUG: Should show all registered event handlers', () => {
     console.log('\n🔍 DEBUG TEST: Event Handler Registration\n');
 
-    // ✅ Verificar handlers registrados
+    // @ts-ignore
+    const emitter = global.mockInternalEmitterDebug;
+
     const eventTypes = [
       'task.completed',
       'task.failed',
@@ -79,7 +127,7 @@ describe('TaskGraphEngine - Debug Scenarios', () => {
     ];
 
     for (const eventType of eventTypes) {
-      const listenerCount = testHelper.getEmitter().listenerCount(eventType);
+      const listenerCount = emitter.listenerCount(eventType);
       console.log(`  ${eventType}: ${listenerCount} listener(s)`);
       expect(listenerCount).toBeGreaterThan(0);
     }

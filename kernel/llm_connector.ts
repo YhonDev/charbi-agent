@@ -3,18 +3,23 @@ import { recordJournal } from './journal';
 import ConfigService from './config_service';
 import { AuthManager } from './auth/auth_manager';
 import { providerRegistry } from './providers/provider_registry';
+import { DebugTracker } from './debug/debug_tracker';
 
 const LLM_TIMEOUT_MS = 60000;
 const MAX_TOKENS = 2048;
 
-// The old LLMConfig and getConfig are replaced by the Provider Registry system
-// which is initialized during bootstrap.
+export interface LLMOptions {
+  correlationId?: string;
+  jsonMode?: boolean;
+  temperature?: number;
+}
 
-export async function queryLLM(systemPrompt: string, userPrompt: string): Promise<any> {
+export async function queryLLM(systemPrompt: string, userPrompt: string, options: LLMOptions = {}): Promise<any> {
   const configService = ConfigService.getInstance();
   const providerConfig = configService.getProvider();
   const providerName = providerConfig?.name || 'ollama';
   const startTime = Date.now();
+  const correlationId = options.correlationId || 'unknown';
 
   try {
     const provider = providerRegistry.getProvider(providerName);
@@ -38,6 +43,19 @@ export async function queryLLM(systemPrompt: string, userPrompt: string): Promis
     // Llamar al provider
     const res = await provider.chat(messages);
 
+    // ✅ LOG RAW RESPONSE FOR DEBUG
+    DebugTracker.getInstance().track({
+      timestamp: Date.now(),
+      type: 'LLM_RAW_RESPONSE',
+      correlationId,
+      payload: {
+        latencyMs: res.latencyMs || (Date.now() - startTime),
+        provider: providerName,
+        success: res.success
+      },
+      raw: res.content
+    });
+
     return {
       success: res.success,
       content: res.content,
@@ -47,6 +65,7 @@ export async function queryLLM(systemPrompt: string, userPrompt: string): Promis
     };
 
   } catch (e: any) {
+    console.error(`[LLMConnector] Error for ${correlationId}:`, e.message);
     return {
       success: false,
       error: e.message,
@@ -55,7 +74,7 @@ export async function queryLLM(systemPrompt: string, userPrompt: string): Promis
   }
 }
 
-export async function generatePlan(objective: string, context?: string): Promise<any> {
+export async function generatePlan(objective: string, context?: string, options: LLMOptions = {}): Promise<any> {
   const systemPrompt = `You are a Charbi Kernel planning engine. Decompose objective into JSON:
 {
   "objective": "...",
@@ -66,7 +85,7 @@ export async function generatePlan(objective: string, context?: string): Promise
 RULES: valid JSON ONLY. Steps: filesystem.read|write, network.fetch, shell.execute.`;
 
   const userPrompt = context ? `Objective: ${objective}\nContext: ${context}` : objective;
-  const res = await queryLLM(systemPrompt, userPrompt);
+  const res = await queryLLM(systemPrompt, userPrompt, options);
 
   if (!res.success) return { raw: '', parsed: null, latencyMs: res.latencyMs };
 

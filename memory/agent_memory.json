@@ -1965,5 +1965,285 @@
     "category": "learning",
     "content": "El usuario valora respuestas concisas que indiquen claramente que la acción se completó sin errores.",
     "metadata": {}
+  },
+  {
+    "id": "meeoqb0",
+    "timestamp": 1772824103347,
+    "category": "learning",
+    "content": "Cuando el usuario dice \"Hola\", espera recibir un saludo de respuesta.",
+    "metadata": {}
+  },
+  {
+    "id": "5it2mxh",
+    "timestamp": 1772824103364,
+    "category": "learning",
+    "content": "Cuando el usuario menciona \"Sistema de Aprendizaje Activo\", indica que desea que el asistente opere en modo de aprendizaje activo, proporcionando análisis y estructuración de información.",
+    "metadata": {}
+  },
+  {
+    "id": "p3b53gj",
+    "timestamp": 1772824132023,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta 'Mira si hay actividad sima', busca saber si existen actividades pendientes en el portal SIMA y prefiere una respuesta directa indicando si hay o no actividades.",
+    "metadata": {}
+  },
+  {
+    "id": "jkka7k3",
+    "timestamp": 1772824132027,
+    "category": "learning",
+    "content": "El sistema debe utilizar la herramienta 'scholar.check-sima' para obtener el estado actual y luego comunicar el mensaje obtenido al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "kgmoa8v",
+    "timestamp": 1772824132029,
+    "category": "learning",
+    "content": "El usuario está interesado en obtener información actualizada del portal SIMA sin requerir detalles extensos, solo el estado (ej. 'Sin actividades pendientes').",
+    "metadata": {}
+  },
+  {
+    "id": "a173shi",
+    "timestamp": 1772824155332,
+    "category": "learning",
+    "content": "When the user asks 'Haz un ls en <dir>', they expect the system to execute an ls command in that directory and return the raw listing formatted as a code block.",
+    "metadata": {}
+  },
+  {
+    "id": "cm2dbrr",
+    "timestamp": 1772824155335,
+    "category": "learning",
+    "content": "The user refers to their home directory by the name 'yhondev'.",
+    "metadata": {}
+  },
+  {
+    "id": "oo0k6ce",
+    "timestamp": 1772824155338,
+    "category": "learning",
+    "content": "The user communicates in Spanish and prefers concise, direct responses.",
+    "metadata": {}
+  },
+  {
+    "id": "prg1fj6",
+    "timestamp": 1772824339784,
+    "category": "learning",
+    "content": "Cuando el usuario dice \"No veo nada\", suele indicar que la pantalla está en blanco o que no se muestra contenido esperado.",
+    "metadata": {}
+  },
+  {
+    "id": "m17p5xd",
+    "timestamp": 1772824339787,
+    "category": "learning",
+    "content": "En caso de que el usuario informe que no ve nada, es útil solicitar más detalles sobre la acción previa para diagnosticar el problema.",
+    "metadata": {}
+  },
+  {
+    "id": "zv4dhsk",
+    "timestamp": 1772824385698,
+    "category": "learning",
+    "content": "Cuando el usuario solicita 'ls en <usuario>', espera obtener el listado completo del directorio home de ese usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "v99g0zr",
+    "timestamp": 1772824385702,
+    "category": "learning",
+    "content": "El usuario está interesado en los contenidos del directorio /home/yhondev, incluyendo archivos de configuración y agentes de Charbi.",
+    "metadata": {}
+  },
+  {
+    "id": "r6etchn",
+    "timestamp": 1772824385705,
+    "category": "learning",
+    "content": "El formato de respuesta esperado es un objeto JSON con campos 'learnings' y 'relations' sin texto adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "ty6vviy",
+    "timestamp": 1772824407074,
+    "category": "learning",
+    "content": "When the user says 'entra a <nombre> y muestrame su contenido', they expect a directory listing of /home/yhondev/<nombre>.",
+    "metadata": {}
+  },
+  {
+    "id": "225j55c",
+    "timestamp": 1772824407077,
+    "category": "learning",
+    "content": "The user prefers a concise list of files/subdirectories without extra narrative.",
+    "metadata": {}
+  },
+  {
+    "id": "2iy79zx",
+    "timestamp": 1772824962414,
+    "category": "learning",
+    "content": "Cuando el usuario dice \"hola\", prefiere comunicarse en español.",
+    "metadata": {}
+  },
+  {
+    "id": "bz2zbnn",
+    "timestamp": 1772824962430,
+    "category": "learning",
+    "content": "El usuario tiende a iniciar la conversación con un saludo breve.",
+    "metadata": {}
+  },
+  {
+    "id": "7rz1hhf",
+    "timestamp": 1772825400989,
+    "category": "learning",
+    "content": "Cuando el usuario pide listados de directorios (e.g., \"ls en yhondev\"), prefiere recibir tanto el listado crudo como un resumen estructurado y amigable.",
+    "metadata": {}
+  },
+  {
+    "id": "pxr1lg6",
+    "timestamp": 1772825400996,
+    "category": "learning",
+    "content": "El usuario muestra interés en proyectos y archivos relacionados con Charbi, Claude, Gemini, Ollama y herramientas de desarrollo (Python, Go, Java, npm).",
+    "metadata": {}
+  },
+  {
+    "id": "wkis6ud",
+    "timestamp": 1772825400998,
+    "category": "learning",
+    "content": "Después de proporcionar el listado, el usuario valora que se ofrezca la posibilidad de explorar subcarpetas o abrir archivos específicos.",
+    "metadata": {}
+  },
+  {
+    "id": "d1kf70j",
+    "timestamp": 1772826193678,
+    "category": "learning",
+    "content": "When the user provides only a name, they expect a greeting.",
+    "metadata": {}
+  },
+  {
+    "id": "loo2ykz",
+    "timestamp": 1772826193690,
+    "category": "learning",
+    "content": "When the user mentions 'Sistema de Aprendizaje Activo', they intend to engage the active learning system.",
+    "metadata": {}
+  },
+  {
+    "id": "hosziu5",
+    "timestamp": 1772827378641,
+    "category": "learning",
+    "content": "When the user asks for the location of recent actions, they prefer an explicit absolute path and a brief listing of relevant files/directories.",
+    "metadata": {}
+  },
+  {
+    "id": "wcypa7w",
+    "timestamp": 1772827378657,
+    "category": "learning",
+    "content": "The user’s home directory is /home/yhondev and contains development-related projects (java, go, python).",
+    "metadata": {}
+  },
+  {
+    "id": "shwt9mr",
+    "timestamp": 1772827378659,
+    "category": "learning",
+    "content": "The user values visibility of recent changes and expects the system to point them to the exact location.",
+    "metadata": {}
+  },
+  {
+    "id": "qcwm5fp",
+    "timestamp": 1772827410185,
+    "category": "project_status",
+    "content": "Working directory for Java projects is /home/yhondev/java",
+    "metadata": {}
+  },
+  {
+    "id": "zaacr4b",
+    "timestamp": 1772827694081,
+    "category": "learning",
+    "content": "Cuando el usuario pide \"Haz un ls\" espera obtener directamente el listado del directorio actual sin explicaciones adicionales.",
+    "metadata": {}
+  },
+  {
+    "id": "xxccvnx",
+    "timestamp": 1772827694087,
+    "category": "learning",
+    "content": "El usuario escribe en español y prefiere respuestas concisas en su mismo idioma.",
+    "metadata": {}
+  },
+  {
+    "id": "srcey5d",
+    "timestamp": 1772827694089,
+    "category": "learning",
+    "content": "El usuario puede mencionar haber ejecutado el comando manualmente, pero aun así desea que el sistema lo confirme o lo reproduzca.",
+    "metadata": {}
+  },
+  {
+    "id": "gcu5nmh",
+    "timestamp": 1772827740349,
+    "category": "learning",
+    "content": "Cuando el usuario indica que la ruta de trabajo actual proporcionada no es correcta, debemos solicitar la ruta correcta en lugar de asumirla.",
+    "metadata": {}
+  },
+  {
+    "id": "h7sazu0",
+    "timestamp": 1772827740352,
+    "category": "learning",
+    "content": "El agente debe registrar la ruta de trabajo actual del entorno, pero reconocer que puede ser incorrecta según la retroalimentación del usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "andzk74",
+    "timestamp": 1772828654052,
+    "category": "learning",
+    "content": "When the user greets with 'hola', they expect a friendly, brief response.",
+    "metadata": {}
+  },
+  {
+    "id": "11tmk8y",
+    "timestamp": 1772828654057,
+    "category": "learning",
+    "content": "The user prefers communicating in Spanish.",
+    "metadata": {}
+  },
+  {
+    "id": "ioai49g",
+    "timestamp": 1772828681577,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta '¿cómo me llamo?' el bot no tiene su nombre y debe solicitarlo al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "4jnnk94",
+    "timestamp": 1772828681581,
+    "category": "learning",
+    "content": "El usuario escribe 'coomo' con error tipográfico; el bot debe interpretar la intención a pesar de faltas ortográficas.",
+    "metadata": {}
+  },
+  {
+    "id": "f775omo",
+    "timestamp": 1772828707853,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta por su ruta de trabajo, prefiere recibir la ruta absoluta del directorio actual.",
+    "metadata": {}
+  },
+  {
+    "id": "5d6xkp6",
+    "timestamp": 1772828707858,
+    "category": "learning",
+    "content": "El usuario escribe en español, por lo que la respuesta debe estar en español.",
+    "metadata": {}
+  },
+  {
+    "id": "a90tlcd",
+    "timestamp": 1772828744938,
+    "category": "learning",
+    "content": "When the user asks for a shell command in Spanish (e.g., \"haz un ls\"), they expect the raw command output with minimal extra commentary.",
+    "metadata": {}
+  },
+  {
+    "id": "pvv2cso",
+    "timestamp": 1772828744940,
+    "category": "learning",
+    "content": "The user interacts with a repository where the file owner is 'yhondev', indicating the user likely has the username yhondev or works under that account.",
+    "metadata": {}
+  },
+  {
+    "id": "tbn02za",
+    "timestamp": 1772828744942,
+    "category": "learning",
+    "content": "The system is capable of executing shell commands via a `system.execute` call and returns a structured JSON result containing success, stdout, stderr, and exitCode.",
+    "metadata": {}
   }
 ]

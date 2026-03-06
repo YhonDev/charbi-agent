@@ -21,7 +21,8 @@ export enum EventType {
   TOOL_RESULT = 'tool.result',
   AGENT_RESPONSE = 'agent.response',
   AGENT_STATUS = 'agent.status',
-  SYSTEM_READY = 'system.ready'
+  SYSTEM_READY = 'system.ready',
+  TASK_GRAPH_COMPLETED = 'task.graph.completed'
 }
 
 export type KernelEvent = {
