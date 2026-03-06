@@ -17,6 +17,8 @@ console = Console()
 import sys
 import requests
 import json
+import subprocess
+import time
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -32,8 +34,38 @@ class KernelChatClient:
             gw_config = config_mgr.get_gateway()
             port = gw_config.get("port", 5005)
             host = gw_config.get("host", "127.0.0.1")
-            endpoint = f"http://{host}:{port}"
+            
+            # 0.0.0.0 is for binding, but for dialing we must use 127.0.0.1 or localhost
+            target_host = "127.0.0.1" if host == "0.0.0.0" else host
+            endpoint = f"http://{target_host}:{port}"
         self.endpoint = endpoint
+        self.ensure_kernel_running()
+
+    def ensure_kernel_running(self):
+        """Verifica si el kernel responde, de lo contrario lo inicia automáticamente"""
+        console.print("[dim]Verificando estado del Kernel...[/dim]")
+        try:
+            # Una simple petición GET para ver si el servidor web levanta la conexión (retornará 404 pero no ConnectionError)
+            requests.get(self.endpoint, timeout=2)
+            console.print("[dim]Kernel detectado de manera exitosa.[/dim]")
+        except requests.exceptions.ConnectionError:
+            console.print("[yellow]⚠️ El Kernel no está activo o el puerto está ocupado. Iniciando entorno limpio...[/yellow]")
+            with console.status("[cyan]Limpiando puertos e iniciando Charbi Kernel...[/cyan]", spinner="dots"):
+                # Delegamos al script bash wrapper que ya sabe manejar stop_kernel y start_kernel maravillosamente
+                subprocess.run(["charbi", "restart"], capture_output=True, text=True)
+                
+                # Polling para esperar a que el servidor de Express esté listo
+                max_retries = 15
+                for _ in range(max_retries):
+                    try:
+                        requests.get(self.endpoint, timeout=2)
+                        console.print("[green]✔ Kernel iniciado y listo para chatear.[/green]\n")
+                        return
+                    except requests.exceptions.ConnectionError:
+                        time.sleep(1)
+                
+                console.print("[red]❌ Falló el inicio del Kernel tras varios intentos. Revisa los logs en ~/.charbi-agent/run/kernel.log[/red]")
+                sys.exit(1)
 
     def chat(self, user_input: str) -> str:
         """Envia el mensaje al Kernel y espera la respuesta procesada (autónoma)"""
@@ -83,8 +115,11 @@ def main():
         except KeyboardInterrupt:
             console.print("\n[dim]Saliendo...[/dim]")
             break
+        except EOFError:
+            break
         except Exception as e:
-            console.print(f"[bold red]Error inesperado: {e}[/bold red]")
+            console.print(f"\n[bold red]Error inesperado: {e}[/bold red]")
+            break
 
 if __name__ == "__main__":
     main()

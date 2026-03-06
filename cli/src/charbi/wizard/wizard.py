@@ -15,34 +15,9 @@ from charbi.wizard.steps.provider import provider_step
 from charbi.wizard.steps.gateway import gateway_step
 from charbi.wizard.steps.channels import channels_step
 from charbi.wizard.steps.skills import skills_step
+from charbi.wizard.steps.security import security_step
 
 console = Console()
-
-
-def get_default_security_config() -> dict:
-    """Retorna la configuración de seguridad predeterminada (estándar)"""
-    return {
-        "supervisor": {
-            "enabled": True,
-            "policy_file": "charbi/config/policies/default.yaml",
-            "max_cpu_time": 5000,
-            "max_tool_calls": 20,
-            "emergency_kill": True,
-        },
-        "runtime": {
-            "session_path": "charbi/runtime/sessions",
-            "isolate_workspace": True,
-            "autonomy": {
-                "enabled": False,
-                "mode": "governed",
-                "maxDepth": 2,
-                "maxActionsPerSession": 15,
-                "maxExecutionTimeMs": 30000,
-                "allowShell": False,
-                "allowNetwork": False,
-            },
-        },
-    }
 
 
 def deep_merge(base: dict, override: dict) -> dict:
@@ -89,9 +64,6 @@ def run_wizard(options: dict = None):
     config_manager = ConfigManager()
     state = config_manager.config.copy()
 
-    # Aplicar seguridad predeterminada automáticamente
-    state = deep_merge(state, get_default_security_config())
-
     # Asegurar que system siempre exista
     if "system" not in state:
         state["system"] = {"name": "Charbi", "version": 1.0, "mode": "development"}
@@ -118,6 +90,11 @@ def run_wizard(options: dict = None):
 
         # === PASO 4: Skills ===
         result = skills_step(options)
+        if result:
+            state = deep_merge(state, result)
+
+        # === PASO 5: Seguridad y Autonomía ===
+        result = security_step(options)
         if result:
             state = deep_merge(state, result)
 

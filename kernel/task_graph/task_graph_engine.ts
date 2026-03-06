@@ -164,15 +164,14 @@ export class TaskGraphEngine {
 
   /** Garantiza que una ruta sea absoluta para WSL */
   private ensureAbsolutePath(filePath: string): string {
-    const charbiHome = process.env.CHARBI_HOME || '/home/yhondev/.charbi-agent';
-    const workspace = `${charbiHome}/workspace`;
-
     if (!filePath) return filePath;
     if (filePath.startsWith('/')) return filePath;
+    if (filePath.startsWith('~/')) return filePath.replace(/^~/, process.env.HOME || require('os').homedir());
 
-    // Convertir rutas relativas comunes
+    // Resolve relative paths from HOME instead of a rigid workspace folder
+    const baseDir = process.env.HOME || require('os').homedir();
     const cleanPath = filePath.replace(/^\.?\//, '');
-    return `${workspace}/${cleanPath}`;
+    return `${baseDir}/${cleanPath}`;
   }
 
   /** Tareas de respaldo si el LLM falla */
@@ -385,7 +384,7 @@ Respond in JSON format:
       });
 
       // Generar tareas usando el LLM (pasando el contexto)
-      const tasks = await this.generateTasksWithLLM(objective, correlationId);
+      const tasks = await this.generateTasksWithLLM(objective, correlationId, context);
 
       if (tasks.length === 0) {
         // Fallback: crear tarea única
@@ -440,7 +439,7 @@ Respond in JSON format:
   /**
    * Usa el LLM para descomponer la tarea en pasos
    */
-  private async generateTasksWithLLM(objective: string, correlationId: string): Promise<Task[]> {
+  private async generateTasksWithLLM(objective: string, correlationId: string, context?: string): Promise<Task[]> {
     const startTime = Date.now();
     console.log(`[TaskGraph] 🧠 START: generateTasksWithLLM for ${correlationId}`);
 
@@ -449,6 +448,8 @@ Respond in JSON format:
 
     const prompt = `
 Objective: ${objective}
+${context ? `Context/Memory:\n${context}` : ''}
+
 Available Tools:
 ${toolsSchema}
 
@@ -569,7 +570,11 @@ RULES:
    * Ejecuta una tarea
    */
   executeTask(task: Task, graphId: string): void {
-    if (!task.tool) {
+    // Si la tarea no tiene herramienta asignada o sus argumentos tienen placeholders generados por LLM (<...>)
+    const hasPlaceholders = task.toolArgs ? /<[^>]+>/.test(JSON.stringify(task.toolArgs)) : false;
+
+    if (!task.tool || hasPlaceholders) {
+      if (hasPlaceholders) console.log(`[TaskGraph] Placeholder detected in args, escalating task ${task.id} to dynamic LLM execution`);
       this.executeTaskWithLLM(task, graphId);
       return;
     }
@@ -594,12 +599,27 @@ RULES:
     const correlationId = graph?.correlationId || task.id;
     console.log(`[TaskGraph] 🤖 START: executeTaskWithLLM (${task.id}) for ${correlationId}`);
 
+    const completedTasks = graph?.tasks.filter(t => t.status === 'completed' && t.result) || [];
+    const previousContext = completedTasks.length > 0
+      ? `\n--- PREVIOUS TASKS RESULTS ---\n` + completedTasks.map(t => `Task: ${t.description}\nResult: ${typeof t.result === 'string' ? t.result.substring(0, 1000) : JSON.stringify(t.result).substring(0, 1000)}`).join('\n\n') + `\n------------------------------\n`
+      : '';
+
+    const availableTools = getAvailableTools();
+    const toolsSchema = JSON.stringify(availableTools, null, 2);
+
     const prompt = `
 Objective: ${graph?.objective}
+${previousContext}
+
+Available Tools:
+${toolsSchema}
+
 Current Task: ${task.description}
 Task ID: ${task.id}
 
-Execute this task. If you need to use a tool, respond with the tool call in JSON.
+Execute this task based on the objective and the results of previous tasks. 
+If you need to use a tool to accomplish this, respond with the EXACT tool call in JSON format:
+{ "tool": "tool_name", "params": { "arg1": "value" } }
 `;
 
     try {
@@ -701,21 +721,23 @@ Execute this task. If you need to use a tool, respond with the tool call in JSON
     }
   }
 
-  failTask(graphId: string, taskId: string, error: string): void {
+  failTask(graphId: string, taskId: string, error: any): void {
     const graph = this.graphs.get(graphId);
     if (!graph) return;
 
     const task = graph.tasks.find(t => t.id === taskId);
     if (!task) return;
 
+    const errorMsg = typeof error === 'object' ? JSON.stringify(error) : String(error);
+
     task.status = 'failed';
-    task.error = error;
+    task.error = errorMsg;
     task.retryCount++;
 
     console.error('[TaskGraph] ❌ Task failed:', {
       graphId,
       taskId,
-      error,
+      errorMsg,
       retryCount: task.retryCount
     });
 
@@ -726,7 +748,7 @@ Execute this task. If you need to use a tool, respond with the tool call in JSON
       payload: {
         graphId,
         taskId,
-        error,
+        error: errorMsg,
         canRetry: task.retryCount < 3,
         retryCount: task.retryCount,
         correlationId: graph.correlationId,
@@ -748,7 +770,7 @@ Execute this task. If you need to use a tool, respond with the tool call in JSON
       }, 1000 * task.retryCount);
     } else {
       console.error('[TaskGraph] ❌ Task failed after 3 retries:', taskId);
-      this.failGraph(graphId, `Task ${task.id} failed after 3 tries: ${error}`);
+      this.failGraph(graphId, `Task ${task.id} failed after 3 tries: ${errorMsg}`);
     }
   }
 

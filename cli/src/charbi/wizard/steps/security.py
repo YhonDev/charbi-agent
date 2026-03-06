@@ -1,5 +1,5 @@
 """
-� Paso 5: Seguridad y Runtime
+🚀 Paso 5: Seguridad y Autonomía
 Autonomía, límites del supervisor, sandbox.
 """
 
@@ -9,85 +9,69 @@ from charbi.wizard.ui_helpers import clear_and_header, print_status, print_secti
 
 console = Console()
 
-
 def security_step(options: dict = None) -> dict:
     """Configura seguridad, autonomía y límites del runtime"""
-    clear_and_header(5, "Seguridad y Runtime", "Define los límites y el nivel de autonomía del kernel")
+    clear_and_header(5, "Seguridad y Autonomía", "Define los límites y la libertad del agente")
 
-    if not questionary.confirm("¿Deseas configurar Seguridad y Runtime ahora o saltar? (Next)", default=True).ask():
+    if not questionary.confirm("¿Deseas configurar Seguridad y Autonomía ahora o saltar? (Next)", default=True).ask():
         return {}
 
-    # --- Supervisor ---
-    print_section("Supervisor")
+    print_section("Nivel de Seguridad")
 
-    supervisor_enabled = questionary.confirm(
-        "¿Habilitar el Supervisor de seguridad? (recomendado)",
-        default=True
+    mode_choice = questionary.select(
+        "Selecciona el nivel de seguridad y autonomía del agente:",
+        choices=[
+            "🛡️  Seguro: Seguridad total (Producción, Supervisor Estricto)",
+            "⚖️  Medio: Flexible (Desarrollo, Supervisor Permisivo)",
+            "🚀 Autónomo: Sin Seguridad (Libertad Total, Modo Autónomo)",
+        ],
+        style=questionary.Style([
+            ("selected", "fg:cyan bold"),
+            ("pointer", "fg:cyan bold"),
+        ])
     ).ask()
 
+    # Valores base
+    supervisor_enabled = True
+    system_mode = "production"
+    
+    # Defaults de supervisor
     max_tool_calls = 20
     max_cpu_time = 5000
     emergency_kill = True
 
-    if supervisor_enabled:
-        preset = questionary.select(
-            "Nivel de restricción del Supervisor:",
-            choices=[
-                "� Relajado (30 tool calls, 10s timeout)",
-                "� Estándar (20 tool calls, 5s timeout) — recomendado",
-                "� Estricto (10 tool calls, 3s timeout)",
-                "⚙️ Personalizado",
-            ],
-            default="� Estándar (20 tool calls, 5s timeout) — recomendado",
-            style=questionary.Style([
-                ("selected", "fg:cyan bold"),
-                ("pointer", "fg:cyan bold"),
-            ])
-        ).ask()
+    # Defaults de autonomía
+    autonomy_enabled = False
+    autonomy_mode = "governed"
+    allow_shell = False
+    allow_network = False
 
-        if "Relajado" in (preset or ""):
-            max_tool_calls, max_cpu_time = 30, 10000
-        elif "Estricto" in (preset or ""):
-            max_tool_calls, max_cpu_time = 10, 3000
-        elif "Personalizado" in (preset or ""):
-            tc = questionary.text("Max tool calls por sesión:", default="20").ask()
-            max_tool_calls = int(tc) if tc and tc.isdigit() else 20
-            ct = questionary.text("Max CPU time (ms):", default="5000").ask()
-            max_cpu_time = int(ct) if ct and ct.isdigit() else 5000
-            emergency_kill = questionary.confirm("¿Habilitar emergency kill?", default=True).ask()
+    if "Seguro" in mode_choice:
+        supervisor_enabled = True
+        system_mode = "production"
+        autonomy_enabled = False
+        print_status("Modo Seguro activado. El agente tiene restricciones estrictas.", "success")
+        
+    elif "Medio" in mode_choice:
+        supervisor_enabled = True
+        system_mode = "development"
+        max_tool_calls, max_cpu_time = 30, 10000
+        autonomy_enabled = True
+        autonomy_mode = "governed"
+        allow_shell = True
+        allow_network = True
+        print_status("Modo Medio activado. El agente tiene mayor libertad pero es supervisado.", "info")
 
-    print_status(f"Supervisor: {'Habilitado' if supervisor_enabled else 'Deshabilitado'}", "success")
-    print_status(f"Límites: {max_tool_calls} tool calls, {max_cpu_time}ms timeout", "info")
-
-    # --- Autonomía ---
-    print_section("Autonomía del Agente")
-
-    autonomy_enabled = questionary.confirm(
-        "¿Permitir ejecución autónoma? (sin intervención humana)",
-        default=False
-    ).ask()
-
-    autonomy_config = {"enabled": autonomy_enabled}
-    if autonomy_enabled:
-        mode = questionary.select(
-            "Modo de autonomía:",
-            choices=[
-                "governed — con límites estrictos (recomendado)",
-                "free — sin límites (peligroso)",
-            ],
-            style=questionary.Style([
-                ("selected", "fg:cyan bold"),
-                ("pointer", "fg:cyan bold"),
-            ])
-        ).ask()
-        autonomy_config["mode"] = "governed" if "governed" in (mode or "") else "free"
-        autonomy_config["maxDepth"] = 2
-        autonomy_config["maxActionsPerSession"] = 15
-        autonomy_config["maxExecutionTimeMs"] = 30000
-        autonomy_config["allowShell"] = False
-        autonomy_config["allowNetwork"] = False
-
-    print_status(f"Autonomía: {'Activada (' + autonomy_config.get('mode', 'N/A') + ')' if autonomy_enabled else 'Desactivada'}", "success")
+    elif "Autónomo" in mode_choice:
+        supervisor_enabled = False
+        system_mode = "autonomous"
+        max_tool_calls, max_cpu_time = 100, 30000
+        emergency_kill = False
+        autonomy_enabled = True
+        autonomy_mode = "free"
+        allow_shell = True
+        allow_network = True
+        print_status("Modo Autónomo activado. ⚠️ ADVERTENCIA: El agente tiene control total de los recursos.", "warning")
 
     # --- Workspace ---
     print_section("Workspace")
@@ -97,6 +81,9 @@ def security_step(options: dict = None) -> dict:
     ).ask()
 
     return {
+        "system": {
+            "mode": system_mode
+        },
         "supervisor": {
             "enabled": supervisor_enabled,
             "policy_file": "charbi/config/policies/default.yaml",
@@ -107,6 +94,14 @@ def security_step(options: dict = None) -> dict:
         "runtime": {
             "session_path": "charbi/runtime/sessions",
             "isolate_workspace": isolate,
-            "autonomy": autonomy_config,
+            "autonomy": {
+                "enabled": autonomy_enabled,
+                "mode": autonomy_mode,
+                "maxDepth": 5 if autonomy_mode == "free" else 2,
+                "maxActionsPerSession": 50 if autonomy_mode == "free" else 15,
+                "maxExecutionTimeMs": max_cpu_time * 2,
+                "allowShell": allow_shell,
+                "allowNetwork": allow_network,
+            },
         },
     }

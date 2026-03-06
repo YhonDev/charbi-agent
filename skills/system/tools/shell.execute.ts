@@ -34,10 +34,13 @@ const tool: CharbiTool = {
     }
 
     return new Promise((resolve, reject) => {
+      // Use the user's home directory as the default working directory
+      const defaultCwd = process.env.HOME || require('os').homedir();
+
       exec(command, {
         timeout: SHELL_TIMEOUT_MS,
         maxBuffer: 1024 * 1024,
-        cwd: CHARBI_HOME
+        cwd: defaultCwd
       }, (error, stdout, stderr) => {
         const output = (stdout || '').trim();
         const errOutput = (stderr || '').trim();

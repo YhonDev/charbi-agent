@@ -2245,5 +2245,362 @@
     "category": "learning",
     "content": "The system is capable of executing shell commands via a `system.execute` call and returns a structured JSON result containing success, stdout, stderr, and exitCode.",
     "metadata": {}
+  },
+  {
+    "id": "il0fj3l",
+    "timestamp": 1772832457026,
+    "category": "learning",
+    "content": "El usuario escribe en español, por lo que prefiere la interacción en español.",
+    "metadata": {}
+  },
+  {
+    "id": "5ihpopx",
+    "timestamp": 1772832457055,
+    "category": "learning",
+    "content": "Cuando el usuario saluda con \"hola\", la respuesta debe ser en español y amistosa.",
+    "metadata": {}
+  },
+  {
+    "id": "2j5mzfz",
+    "timestamp": 1772832457057,
+    "category": "learning",
+    "content": "El usuario menciona \"Sistema de Aprendizaje Activo\", indicando que desea activar o usar el modo de aprendizaje activo.",
+    "metadata": {}
+  },
+  {
+    "id": "0318huk",
+    "timestamp": 1772832584602,
+    "category": "learning",
+    "content": "Cuando el usuario pide \"ls en <directorio>\", Charbi ejecuta el comando ls en ese directorio y muestra el listado de archivos.",
+    "metadata": {}
+  },
+  {
+    "id": "vi2b6fb",
+    "timestamp": 1772832584608,
+    "category": "learning",
+    "content": "El usuario escribe sus peticiones en español y prefiere respuestas concisas que sólo incluyan la información solicitada.",
+    "metadata": {}
+  },
+  {
+    "id": "f1usl7l",
+    "timestamp": 1772832770193,
+    "category": "learning",
+    "content": "When the user asks about the contents of a folder (e.g., \"en la carpeta ... que hay\"), they expect a directory listing.",
+    "metadata": {}
+  },
+  {
+    "id": "p41vco1",
+    "timestamp": 1772832770197,
+    "category": "learning",
+    "content": "If the requested path does not exist, respond with a clear explanation that the folder was not found rather than a generic error.",
+    "metadata": {}
+  },
+  {
+    "id": "1ifhhs9",
+    "timestamp": 1772833939434,
+    "category": "learning",
+    "content": "When the user asks for a directory listing (e.g., 'haz un ls en <nombre>'), they expect a concise markdown code block showing only the filenames.",
+    "metadata": {}
+  },
+  {
+    "id": "0ecokui",
+    "timestamp": 1772833939446,
+    "category": "learning",
+    "content": "The user refers to system users by name and expects the home directory to be '/home/<nombre>'.",
+    "metadata": {}
+  },
+  {
+    "id": "t75qhnk",
+    "timestamp": 1772833991692,
+    "category": "learning",
+    "content": "Cuando el usuario indica una ruta de carpeta donde trabajar, espera que el sistema verifique su existencia y, si no existe, la cree automáticamente.",
+    "metadata": {}
+  },
+  {
+    "id": "39lx5uq",
+    "timestamp": 1772834011602,
+    "category": "learning",
+    "content": "Cuando el usuario responde con una frase muy corta y ambigua como \"ya estaba creada\", es útil pedir clarificación para entender el contexto.",
+    "metadata": {}
+  },
+  {
+    "id": "xzk99jy",
+    "timestamp": 1772834011604,
+    "category": "learning",
+    "content": "El usuario tiende a usar respuestas breves que pueden referirse a recursos o configuraciones previamente existentes.",
+    "metadata": {}
+  },
+  {
+    "id": "ep4elat",
+    "timestamp": 1772834058203,
+    "category": "learning",
+    "content": "Cuando el usuario menciona que no se debe crear nada, prefiere que Charbi simplemente reconozca la información sin generar contenido adicional.",
+    "metadata": {}
+  },
+  {
+    "id": "sasy9rv",
+    "timestamp": 1772834090080,
+    "category": "learning",
+    "content": "Cuando el usuario escribe en español 'haz un ls' espera que Charbi liste el contenido del directorio actual.",
+    "metadata": {}
+  },
+  {
+    "id": "8fr26kt",
+    "timestamp": 1772834090083,
+    "category": "learning",
+    "content": "El usuario se refiere a 'esa carpeta' como la carpeta previamente mencionada en la conversación, por lo que Charbi debe mantener contexto de la ruta actual.",
+    "metadata": {}
+  },
+  {
+    "id": "c1049bc",
+    "timestamp": 1772834090087,
+    "category": "learning",
+    "content": "Charbi puede ejecutar comandos del sistema (p.ej., ls) y devolver la salida al usuario.",
+    "metadata": {}
+  },
+  {
+    "id": "lijpr5j",
+    "timestamp": 1772834836954,
+    "category": "learning",
+    "content": "Cuando el usuario menciona \"Sistema de Aprendizaje Activo\", está interesado en o quiere interactuar con el sistema de aprendizaje activo.",
+    "metadata": {}
+  },
+  {
+    "id": "0ib4cl2",
+    "timestamp": 1772834865923,
+    "category": "learning",
+    "content": "When the user asks about their own programming language preference, Charbi should respond with a prompt encouraging the user to share which language they enjoy.",
+    "metadata": {}
+  },
+  {
+    "id": "ir23lt3",
+    "timestamp": 1772834893786,
+    "category": "learning",
+    "content": "Cuando el usuario pregunta por el emoji del asistente, prefiere una respuesta directa que incluya el emoji.",
+    "metadata": {}
+  },
+  {
+    "id": "8aqvtib",
+    "timestamp": 1772835068175,
+    "category": "learning",
+    "content": "User prefers direct, technical, concise answers without unnecessary pleasantries.",
+    "metadata": {}
+  },
+  {
+    "id": "3jtkst5",
+    "timestamp": 1772835068180,
+    "category": "learning",
+    "content": "User values explanations of the \"why\", especially for Python and system design topics.",
+    "metadata": {}
+  },
+  {
+    "id": "o19cojh",
+    "timestamp": 1772835068184,
+    "category": "learning",
+    "content": "User appreciates proactive actions such as scripts, verified searches, and concise reports.",
+    "metadata": {}
+  },
+  {
+    "id": "l9rerht",
+    "timestamp": 1772835068187,
+    "category": "learning",
+    "content": "User is a 3rd‑year Software Engineering student named Yhon, located in America/Bogotá (GMT‑5).",
+    "metadata": {}
+  },
+  {
+    "id": "1zfz2ky",
+    "timestamp": 1772835068189,
+    "category": "learning",
+    "content": "User has solid skills in Java, HTML, CSS and is developing skills in Python, JavaScript, Git, FastAPI, and CLI tools.",
+    "metadata": {}
+  },
+  {
+    "id": "rwwdyq8",
+    "timestamp": 1772835068197,
+    "category": "learning",
+    "content": "User focuses on software architecture, the OpenClaw/Charbi multi‑agent project, and maintaining high academic performance.",
+    "metadata": {}
+  },
+  {
+    "id": "c5htmuh",
+    "timestamp": 1772835420010,
+    "category": "learning",
+    "content": "Cuando el usuario escribe 'haz un ls en <nombre>', prefiere que Charbi liste el contenido del directorio home del usuario indicado.",
+    "metadata": {}
+  },
+  {
+    "id": "y397qx2",
+    "timestamp": 1772835420015,
+    "category": "learning",
+    "content": "El usuario emplea español y utiliza el nombre 'yhondev' como referencia a un directorio bajo /home.",
+    "metadata": {}
+  },
+  {
+    "id": "8ezxfbo",
+    "timestamp": 1772835420018,
+    "category": "learning",
+    "content": "Charbi debe interpretar '<nombre>' como el nombre de usuario y mapearlo a la ruta /home/<nombre> antes de ejecutar 'ls'.",
+    "metadata": {}
+  },
+  {
+    "id": "t1fuwgo",
+    "timestamp": 1772835474830,
+    "category": "learning",
+    "content": "Cuando el usuario solicita crear un archivo en una carpeta ya existente, espera que se use la ruta del directorio del usuario (/home/yhondev) sin preguntar por la ruta completa.",
+    "metadata": {}
+  },
+  {
+    "id": "3fnfesa",
+    "timestamp": 1772835474834,
+    "category": "learning",
+    "content": "El usuario emplea comandos en español del tipo \"crea <archivo> que diga <texto>\", por lo que prefiere que el contenido del archivo sea exactamente el texto especificado.",
+    "metadata": {}
+  },
+  {
+    "id": "9o98kjp",
+    "timestamp": 1772835474836,
+    "category": "learning",
+    "content": "El usuario confía en que Charbi pueda crear archivos dentro de su directorio home y confirmar la creación mostrando la ruta completa y el contenido.",
+    "metadata": {}
+  },
+  {
+    "id": "sbtgdyy",
+    "timestamp": 1772835541988,
+    "category": "learning",
+    "content": "El usuario prefiere que las respuestas se den en español.",
+    "metadata": {}
+  },
+  {
+    "id": "gd98ot9",
+    "timestamp": 1772835541991,
+    "category": "learning",
+    "content": "Cuando el usuario solicita \"analiza que hay en esa carpeta y dame un resumen\", espera un resumen conciso de los archivos y directorios presentes.",
+    "metadata": {}
+  },
+  {
+    "id": "knfyqzq",
+    "timestamp": 1772835541993,
+    "category": "learning",
+    "content": "El usuario utiliza un estilo imperativo y aprecia respuestas directas sin información superflua.",
+    "metadata": {}
+  },
+  {
+    "id": "h5fz252",
+    "timestamp": 1772835541995,
+    "category": "learning",
+    "content": "El sistema dispone de una función system.read que permite listar el contenido del directorio actual.",
+    "metadata": {}
+  },
+  {
+    "id": "1jcdpt4",
+    "timestamp": 1772835573477,
+    "category": "learning",
+    "content": "Cuando el usuario dice que la carpeta no es la correcta, prefiere que se le solicite la ruta exacta para ejecutar la acción correcta.",
+    "metadata": {}
+  },
+  {
+    "id": "4gc8dm4",
+    "timestamp": 1772835573479,
+    "category": "learning",
+    "content": "El usuario quiere que el sistema de aprendizaje esté activo y registre los hechos y relaciones de la interacción.",
+    "metadata": {}
+  },
+  {
+    "id": "iy4wryk",
+    "timestamp": 1772835617276,
+    "category": "learning",
+    "content": "When the user asks 'donde creaste el archivo X', they expect a direct response with the file's location/path.",
+    "metadata": {}
+  },
+  {
+    "id": "5htu5qm",
+    "timestamp": 1772835617279,
+    "category": "learning",
+    "content": "The user communicates in Spanish, so responses should be in Spanish.",
+    "metadata": {}
+  },
+  {
+    "id": "b0e37c9",
+    "timestamp": 1772835617282,
+    "category": "learning",
+    "content": "If the system cannot locate the file, the user may still expect a clear answer (e.g., 'no se encontró el archivo').",
+    "metadata": {}
+  },
+  {
+    "id": "8vgk2w3",
+    "timestamp": 1772835978785,
+    "category": "learning",
+    "content": "When the user types 'hahaz ls en <directory>', they intend to list the contents of that directory.",
+    "metadata": {}
+  },
+  {
+    "id": "z69jpgf",
+    "timestamp": 1772835978789,
+    "category": "learning",
+    "content": "The user is interested in the items inside /home/yhondev.",
+    "metadata": {}
+  },
+  {
+    "id": "a08udvc",
+    "timestamp": 1772836413322,
+    "category": "learning",
+    "content": "When the user asks 'haz un ls en <username>', they expect Charbi to list the contents of /home/<username> and present the full directory listing.",
+    "metadata": {}
+  },
+  {
+    "id": "eppd4s7",
+    "timestamp": 1772836413326,
+    "category": "learning",
+    "content": "The user communicates in Spanish, so responses should use Spanish phrasing and formatting.",
+    "metadata": {}
+  },
+  {
+    "id": "6lt3t93",
+    "timestamp": 1772836413328,
+    "category": "learning",
+    "content": "The user is interested in seeing file metadata (permissions, owner, size, timestamps) for the specified user's home directory.",
+    "metadata": {}
+  },
+  {
+    "id": "2laq8pu",
+    "timestamp": 1772836413331,
+    "category": "learning",
+    "content": "The system can execute shell commands and return structured output without additional explanation unless asked.",
+    "metadata": {}
+  },
+  {
+    "id": "t3585zb",
+    "timestamp": 1772836704983,
+    "category": "learning",
+    "content": "When the user says \"haz un ls en <name>\", they expect a listing of the directory \"/home/<name>\".",
+    "metadata": {}
+  },
+  {
+    "id": "v4bn9up",
+    "timestamp": 1772836704990,
+    "category": "learning",
+    "content": "The user prefers responses in Spanish.",
+    "metadata": {}
+  },
+  {
+    "id": "euy8ncp",
+    "timestamp": 1772836704992,
+    "category": "learning",
+    "content": "The user is interested in the contents of the home directory of the user \"yhondev\".",
+    "metadata": {}
+  },
+  {
+    "id": "x2z7c1h",
+    "timestamp": 1772836925439,
+    "category": "learning",
+    "content": "When the user asks for a listing (e.g., 'haz un ls en yhondev'), they expect a concise list of the directory's contents.",
+    "metadata": {}
+  },
+  {
+    "id": "mkvabv4",
+    "timestamp": 1772836925446,
+    "category": "learning",
+    "content": "The user refers to directories by name without a leading slash, implying they operate within a predefined base environment.",
+    "metadata": {}
   }
 ]

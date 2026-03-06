@@ -20,6 +20,14 @@ export function inspect(action: ActionDetails): { allow: boolean, decision: Deci
   const config = loadConfig();
   const mode = config.system.mode || 'production';
 
+  if (config.supervisor && config.supervisor.enabled === false) {
+    return { allow: true, decision: 'allow', rule: 'supervisor-disabled' };
+  }
+
+  if (mode === 'autonomous') {
+    return { allow: true, decision: 'allow', rule: 'autonomous-mode-allow-all' };
+  }
+
   let policies: any;
   try {
     const fileContents = fs.readFileSync(POLICY_PATH, 'utf8');
@@ -30,7 +38,7 @@ export function inspect(action: ActionDetails): { allow: boolean, decision: Deci
   }
 
   // 0. Safe Mode strict overrides
-  if (mode === 'safe') {
+  if (mode === 'production' || mode === 'safe') {
     if (action.type === 'shell.execute') return { allow: false, decision: 'block', rule: 'safe-mode-no-shell' };
   }
 

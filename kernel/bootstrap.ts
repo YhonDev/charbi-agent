@@ -144,10 +144,10 @@ async function boot(): Promise<void> {
     running: false
   });
 
+  await ServiceManager.start('maintenance');
   await ServiceManager.start('memory');
   await ServiceManager.start('orchestrator');
   await ServiceManager.start('gateway');
-  await ServiceManager.start('maintenance');
 
   // Emit READY
   console.log('[Boot] Finalizing...');

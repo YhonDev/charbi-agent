@@ -23,6 +23,108 @@
       }
     },
     {
+      "subject": "Yhon",
+      "object": "Software Engineering Student (3rd year)",
+      "relation": "hasRole",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "America/Bogot\u00e1 (GMT\u20115)",
+      "relation": "locatedIn",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Java",
+      "relation": "hasSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "HTML",
+      "relation": "hasSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "CSS",
+      "relation": "hasSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Python",
+      "relation": "learningSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "JavaScript",
+      "relation": "learningSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Git",
+      "relation": "learningSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "FastAPI",
+      "relation": "learningSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "CLI tools",
+      "relation": "learningSkill",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Software Architecture",
+      "relation": "focusesOn",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "OpenClaw/Charbi multi\u2011agent project",
+      "relation": "focusesOn",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Academic Performance",
+      "relation": "focusesOn",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Direct technical answers",
+      "relation": "prefersInteractionStyle",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Educational explanations",
+      "relation": "prefersInteractionStyle",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "Proactive actions",
+      "relation": "appreciates",
+      "metadata": {}
+    },
+    {
+      "subject": "Yhon",
+      "object": "High academic performance",
+      "relation": "aimsFor",
+      "metadata": {}
+    },
+    {
       "subject": "Charbi",
       "object": "Usuario",
       "relation": "salud\u00f3 a",
@@ -353,6 +455,66 @@
       "metadata": {}
     },
     {
+      "subject": "Charbi",
+      "object": "ls /home/yhondev",
+      "relation": "executed",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "directory_listing_of_/home/yhondev",
+      "relation": "provided",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "la informaci\u00f3n del usuario",
+      "relation": "reconoci\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "ls en la carpeta actual",
+      "relation": "ejecuta",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "\ud83e\udd16",
+      "relation": "hasEmoji",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "/home/yhondev/java/saludo.txt",
+      "relation": "created_file",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "resumen del contenido de la carpeta",
+      "relation": "proporcion\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "system.read en el directorio actual",
+      "relation": "ejecut\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "usuario",
+      "relation": "acknowledged_query",
+      "metadata": {}
+    },
+    {
+      "subject": "Charbi",
+      "object": "archivo saludo",
+      "relation": "attempted_to_find",
+      "metadata": {}
+    },
+    {
       "subject": "usuario",
       "object": "mensaje muy breve (')'",
       "relation": "envi\u00f3",
@@ -458,6 +620,18 @@
       "subject": "usuario",
       "object": "yhondev",
       "relation": "nombreDeUsuario",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "modo_aprendizaje_activo",
+      "relation": "solicita",
+      "metadata": {}
+    },
+    {
+      "subject": "usuario",
+      "object": "yhondev/java",
+      "relation": "quiere_directorio_de_trabajo",
       "metadata": {}
     },
     {
@@ -670,7 +844,7 @@
     {
       "subject": "Usuario",
       "object": "sistema de aprendizaje activo",
-      "relation": "quiere activar",
+      "relation": "desea",
       "metadata": {}
     },
     {
@@ -758,6 +932,42 @@
       "metadata": {}
     },
     {
+      "subject": "Usuario",
+      "object": "a Charbi sobre el lugar donde va a trabajar",
+      "relation": "inform\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "que no era necesario crear nada",
+      "relation": "indic\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "listado de archivos en la carpeta actual",
+      "relation": "pide",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "resumen del contenido de la carpeta",
+      "relation": "solicit\u00f3",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "ruta exacta de la carpeta",
+      "relation": "quiere",
+      "metadata": {}
+    },
+    {
+      "subject": "Usuario",
+      "object": "clarificaci\u00f3n antes de ejecutar acciones",
+      "relation": "prefiere",
+      "metadata": {}
+    },
+    {
       "subject": "comando ls",
       "object": "listado del directorio actual",
       "relation": "produjo",
@@ -784,25 +994,25 @@
     {
       "subject": "/home/yhondev",
       "object": "extraer_transcripciones_local.py",
-      "relation": "contains_file",
+      "relation": "contains",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "go",
-      "relation": "contains_directory",
+      "relation": "contains",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "java",
-      "relation": "contains_directory",
+      "relation": "contains",
       "metadata": {}
     },
     {
       "subject": "/home/yhondev",
       "object": "venv",
-      "relation": "contains_directory",
+      "relation": "contains",
       "metadata": {}
     },
     {
@@ -1076,6 +1286,60 @@
       "metadata": {}
     },
     {
+      "subject": "User",
+      "object": "ls en yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "folder /yhondev/java",
+      "relation": "asked_about",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "preferred programming language",
+      "relation": "asked",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "Spanish",
+      "relation": "communicates in",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "cual es tu emoji",
+      "relation": "asked",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "/home/yhondev/java/saludo.txt",
+      "relation": "requested_creation_of",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "archivo saludo",
+      "relation": "asked_about_location_of",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list directory of user yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "User",
+      "object": "list directory /home/yhondev",
+      "relation": "requested",
+      "metadata": {}
+    },
+    {
       "subject": "/home/yhondev/java",
       "object": "vac\u00edo",
       "relation": "tiene contenido",
@@ -1163,6 +1427,18 @@
       "subject": "sistema",
       "object": "pwd",
       "relation": "ejecut\u00f3Comando",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "saludo_en_espa\u00f1ol",
+      "relation": "responde_con",
+      "metadata": {}
+    },
+    {
+      "subject": "sistema",
+      "object": "yhondev/java",
+      "relation": "cre\u00f3_directorio",
       "metadata": {}
     },
     {
@@ -1364,6 +1640,24 @@
       "metadata": {}
     },
     {
+      "subject": "java",
+      "object": "saludo.txt",
+      "relation": "contains_file",
+      "metadata": {}
+    },
+    {
+      "subject": ".charbi-agent",
+      "object": "directory inside /home/yhondev",
+      "relation": "is a",
+      "metadata": {}
+    },
+    {
+      "subject": ".charbi-agent.zip",
+      "object": "72121574 bytes",
+      "relation": "has size",
+      "metadata": {}
+    },
+    {
       "subject": "test.txt",
       "object": "/home/yhondev/java",
       "relation": "ubicado_en",
@@ -1379,6 +1673,24 @@
       "subject": "test.txt",
       "object": "11 bytes",
       "relation": "size",
+      "metadata": {}
+    },
+    {
+      "subject": "system.execute",
+      "object": "true",
+      "relation": "result_success",
+      "metadata": {}
+    },
+    {
+      "subject": "system.execute",
+      "object": "",
+      "relation": "result_output",
+      "metadata": {}
+    },
+    {
+      "subject": "saludo.txt",
+      "object": "yhondev y charbi son los mejores",
+      "relation": "has_content",
       "metadata": {}
     },
     {
@@ -1457,6 +1769,24 @@
       "subject": "System",
       "object": "ls /home/yhondev",
       "relation": "executed",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "folder /yhondev/java",
+      "relation": "attempted_to_read",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "path does not exist",
+      "relation": "found_error",
+      "metadata": {}
+    },
+    {
+      "subject": "System",
+      "object": "execution of shell commands",
+      "relation": "supports",
       "metadata": {}
     },
     {
@@ -1661,6 +1991,18 @@
       "subject": "user",
       "object": "ls command",
       "relation": "requested",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "\"ya estaba creada\"",
+      "relation": "said",
+      "metadata": {}
+    },
+    {
+      "subject": "user",
+      "object": "algo que ya estaba creado",
+      "relation": "refers_to",
       "metadata": {}
     },
     {
@@ -2521,6 +2863,36 @@
       "subject": "Comando_de_eliminaci\u00f3n",
       "object": "success:true",
       "relation": "ejecutado_con",
+      "metadata": {}
+    },
+    {
+      "subject": "Carpeta actual",
+      "object": "081212, 081212.pub, agents, ARCHITECTURE_SUMMARY.md, auth, bin, canvas, channels, cli, config, cron, debug_final_fix.log, debug_final.log, debug.log, goals, jest.config.js, kernel, kernel_v2.log, LICENSE, logs, memory, metrics, node_modules, package.json, package-lock.json, providers, README.md, requirements-test.txt, run, runtime, scripts, sima_resumen.md, skills, test_comm_flow.ts, test_comm_flow_v2.ts, test_output_full.txt, test_output.txt, tests, tsconfig.json, yhondev",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Directorio",
+      "object": "archivos .env, .env.bak, .gitignore, ARCHITECTURE_SUMMARY.md, LICENSE, README.md, debug.log, debug_final.log, debug_final_fix.log, kernel_v2.log, jest.config.js, package.json, package-lock.json, requirements-test.txt, sima_resumen.md, test_cognition.ts, test_comm_flow.ts, test_comm_flow_v2.ts, test_output.txt, test_output_full.txt, tsconfig.json",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": "Directorio",
+      "object": "subdirectorios .git, .github, agents, auth, bin, canvas, channels, cli, config, cron, goals, kernel, logs, memory, metrics, node_modules, providers, run, runtime, scripts, skills, tests, yhondev",
+      "relation": "contiene",
+      "metadata": {}
+    },
+    {
+      "subject": ".env",
+      "object": "617\u202fbytes",
+      "relation": "tama\u00f1o",
+      "metadata": {}
+    },
+    {
+      "subject": ".env.bak",
+      "object": "196\u202fbytes",
+      "relation": "tama\u00f1o",
       "metadata": {}
     }
   ]

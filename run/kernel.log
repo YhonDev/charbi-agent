@@ -4,15 +4,14 @@
 
 [Boot] Step 1/7: Loading configuration...
 [ConfigService] Config loaded from /home/yhondev/.charbi-agent/config/charbi-agent.yaml
-[Boot] System: Charbi v1 (development)
+[Boot] System: Charbi v1 (autonomous)
 [Boot] Provider: ollama (gpt-oss:120b-cloud)
-[ConfigService] Hot-reload enabled
 [Boot] Step 2/7: Loading channels...
 [ChannelRegistry] Loaded: telegram
 [ChannelRegistry] No adapter at /home/yhondev/.charbi-agent/channels/cli/adapter.ts, using stub
 [ChannelRegistry] Loaded: cli
 [Telegram] Bot started with polling. Listening for messages...
-[32m[2026-03-06T20:25:21.509Z] [INFO] [TelegramAdapter] Telegram bot started[0m
+[32m[2026-03-06T22:58:30.218Z] [INFO] [TelegramAdapter] Telegram bot started[0m
 [ChannelRegistry] Started: telegram
 [Channel:cli] Started (stub)
 [ChannelRegistry] Started: cli
@@ -58,7 +57,7 @@
 [ToolRegistry] ✓ Herramienta cargada: system.read
 [ToolRegistry] ✓ Herramienta cargada: system.search
 [ToolRegistry] ✓ Herramienta cargada: system.execute
-[dotenv@17.3.1] injecting env (7) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+[dotenv@17.3.1] injecting env (7) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
 [ToolRegistry] ✓ Herramienta cargada: scholar.check-sima
 [ToolRegistry] Total herramientas cargadas: 11
 [Boot] Tools available: cognitive.add_relation, cognitive.query_graph, cognitive.search, cognitive.store, cognitive.brain_recall, system.fetch, system.write, system.read, system.search, system.execute, scholar.check-sima
@@ -68,6 +67,11 @@
 [ServiceManager] Registered: gateway
 [ServiceManager] Registered: channels
 [ServiceManager] Registered: maintenance
+[ServiceManager] Starting maintenance...
+[MaintenanceService] Starting lifecycle maintenance...
+[MaintenanceService] Performing scheduled cleanup...
+[MaintenanceService] Cleanup completed.
+[ServiceManager] maintenance started.
 [ServiceManager] Starting memory...
 [Boot] MemoryServer (Hybrid) is ACTIVE
 [ServiceManager] memory started.
@@ -77,37 +81,16 @@
 [ServiceManager] Starting gateway...
 [Gateway] API listening on http://0.0.0.0:18790
 [ServiceManager] gateway started.
-[ServiceManager] Starting maintenance...
-[MaintenanceService] Starting lifecycle maintenance...
-[MaintenanceService] Performing scheduled cleanup...
-[MaintenanceService] Cleanup completed.
-[ServiceManager] maintenance started.
 [Boot] Finalizing...
-[32m[2026-03-06T20:25:22.839Z] [INFO] [EventBus] Emitted event: SYSTEM_READY[0m
+[32m[2026-03-06T22:58:31.573Z] [INFO] [EventBus] Emitted event: SYSTEM_READY[0m
 
-[Boot] Charbi Kernel is READY (2008ms)
+[Boot] Charbi Kernel is READY (2141ms)
 [Boot] Channels: telegram, cli
 [Boot] Skills: coder, main, scholar, scout, cognitive, system
 [Boot] Listening for requests...
 
 [MemoryServer-LOG] [MemoryServer] Python process started and listening...
 
-[Orchestrator] Request from cli_gateway: "haz un ls"
-[AuthManager] No hay credenciales para ollama. Ejecuta 'charbi auth ollama'
-[OllamaProvider] Inicializado con modelo: gpt-oss:120b-cloud
-[32m[2026-03-06T20:25:24.279Z] [INFO] [EventBus] Emitted event: user.request[0m
-[Orchestrator] Specialist: main | Complexity: 0.1
-[TaskGraph] 🔍 START: assessComplexity
-[TaskGraph] Prompt: haz un ls
-[32m[2026-03-06T20:25:27.066Z] [INFO] [IntelligenceProxy] Generating response for mode: analysis[0m
-[AuthManager] No hay credenciales para ollama. Ejecuta 'charbi auth ollama'
-[OllamaProvider] Inicializado con modelo: gpt-oss:120b-cloud
-[TaskGraph] Score: 0 | isComplex: false
-[TaskGraph] Complexity: SIMPLE (0 points, 0.00 confidence)
-[TaskGraph] ✅ END: assessComplexity SIMPLE (Score: 0)
-[32m[2026-03-06T20:25:28.028Z] [INFO] [EventBus] Emitted event: agent.status[0m
-[AuthManager] No hay credenciales para ollama. Ejecuta 'charbi auth ollama'
-[OllamaProvider] Inicializado con modelo: gpt-oss:120b-cloud
 stderr: error: required option '-t, --target <dest>' not specified
 
 Error sending morning briefing: Error: Command failed: openclaw message send --message "☀️ Buenos días, Yhon! Aquí está tu resumen matutino:\n\n" --channel "webchat"
@@ -125,21 +108,85 @@ error: required option '-t, --target <dest>' not specified
   signal: null,
   cmd: 'openclaw message send --message "☀️ Buenos días, Yhon! Aquí está tu resumen matutino:\\n\\n" --channel "webchat"'
 }
-[Orchestrator] Thought (1): Ejecutar listado de directorio actual...
-[32m[2026-03-06T20:25:29.182Z] [INFO] [EventBus] Emitted event: agent.status[0m
-[Orchestrator] Actuating: system.execute
-[ActionHandler] Executing: system.execute from orchestrator:main
-[ActionHandler] system.execute: OK
-[32m[2026-03-06T20:25:29.200Z] [INFO] [ActionHandler] system.execute implementation returned success[0m
-[32m[2026-03-06T20:25:29.201Z] [INFO] [EventBus] Emitted event: agent.status[0m
+[Orchestrator] Request from cli_gateway: "haz un ls en yhondev y muestra el resultado y despues en la carpeta java que esta aqui analiza que hay detro y lee los archivos que hay y dame un resumen que tienen y que hacen"
 [AuthManager] No hay credenciales para ollama. Ejecuta 'charbi auth ollama'
 [OllamaProvider] Inicializado con modelo: gpt-oss:120b-cloud
-[32m[2026-03-06T20:25:38.968Z] [INFO] [EventBus] Emitted event: agent.status[0m
+[32m[2026-03-06T22:59:13.139Z] [INFO] [EventBus] Emitted event: user.request[0m
+[Orchestrator] Specialist: operator | Complexity: 0.8
+[TaskGraph] 🔍 START: assessComplexity
+[TaskGraph] Prompt: haz un ls en yhondev y muestra el resultado y despues en la carpeta java que esta aqui analiza que h
+[TaskGraph] Score: 110 | isComplex: true
+[TaskGraph] Complexity: COMPLEX (110 points, 1.00 confidence)
+[TaskGraph] ✅ END: assessComplexity COMPLEX (Score: 110)
+[Orchestrator] Complex task detected (Score: 110) → Creating TaskGraph...
+[32m[2026-03-06T22:59:17.162Z] [INFO] [EventBus] Emitted event: agent.status[0m
+[TaskGraph] 🔍 START: create TaskGraph
+[TaskGraph] Objective: haz un ls en yhondev y muestra el resultado y despues en la carpeta java que esta aqui analiza que h
+[TaskGraph] CorrelationID: 624f688f-c312-4e25-a50f-0cd3fa9cbd69
+[TaskGraph] 🧠 START: generateTasksWithLLM for 624f688f-c312-4e25-a50f-0cd3fa9cbd69
+[32m[2026-03-06T22:59:17.167Z] [INFO] [IntelligenceProxy] Generating response for mode: planning[0m
 [AuthManager] No hay credenciales para ollama. Ejecuta 'charbi auth ollama'
 [OllamaProvider] Inicializado con modelo: gpt-oss:120b-cloud
-[Orchestrator] Response to cli_gateway (2829 chars)
-[32m[2026-03-06T20:25:38.970Z] [INFO] [EventBus] Emitted event: agent.response[0m
-[MemoryManager] Memorizado en learning: When the user asks for a shell command in Spanish ...
-[MemoryManager] Memorizado en learning: The user interacts with a repository where the fil...
-[MemoryManager] Memorizado en learning: The system is capable of executing shell commands ...
-[Orchestrator] Aprendizaje completado: 3 lecciones, 5 relaciones.
+[TaskGraph] ✅ END: generateTasksWithLLM (4 tasks generated in 6707ms)
+[TaskGraph] Created with 4 tasks
+[TaskGraph] ✅ END: create TaskGraph tg_1772837957166_6gxhi190q with 4 tasks
+[Orchestrator] Executing tool for TaskGraph: system.execute (task_1)
+[ActionHandler] Executing: system.execute from task_graph:tg_1772837957166_6gxhi190q
+[ActionHandler] system.execute: FAIL
+[32m[2026-03-06T22:59:23.890Z] [ERROR] [ActionHandler] system.execute implementation returned failure[0m
+[TaskGraph] Tool failed for task task_1: {
+  success: false,
+  error: 'Command failed: ls /yhondev\n' +
+    "ls: cannot access '/yhondev': No such file or directory\n",
+  stdout: '',
+  stderr: "ls: cannot access '/yhondev': No such file or directory",
+  exitCode: 2
+}
+[TaskGraph] ❌ Task failed: {
+  graphId: 'tg_1772837957166_6gxhi190q',
+  taskId: 'task_1',
+  errorMsg: `{"success":false,"error":"Command failed: ls /yhondev\\nls: cannot access '/yhondev': No such file or directory\\n","stdout":"","stderr":"ls: cannot access '/yhondev': No such file or directory","exitCode":2}`,
+  retryCount: 1
+}
+[TaskGraph] 🔄 Retrying task: task_1 (attempt 2 )
+[32m[2026-03-06T22:59:23.893Z] [INFO] [EventBus] Emitted event: tool.result[0m
+[Orchestrator] Executing tool for TaskGraph: system.execute (task_1)
+[ActionHandler] Executing: system.execute from task_graph:tg_1772837957166_6gxhi190q
+[ActionHandler] system.execute: FAIL
+[32m[2026-03-06T22:59:24.910Z] [ERROR] [ActionHandler] system.execute implementation returned failure[0m
+[TaskGraph] Tool failed for task task_1: {
+  success: false,
+  error: 'Command failed: ls /yhondev\n' +
+    "ls: cannot access '/yhondev': No such file or directory\n",
+  stdout: '',
+  stderr: "ls: cannot access '/yhondev': No such file or directory",
+  exitCode: 2
+}
+[TaskGraph] ❌ Task failed: {
+  graphId: 'tg_1772837957166_6gxhi190q',
+  taskId: 'task_1',
+  errorMsg: `{"success":false,"error":"Command failed: ls /yhondev\\nls: cannot access '/yhondev': No such file or directory\\n","stdout":"","stderr":"ls: cannot access '/yhondev': No such file or directory","exitCode":2}`,
+  retryCount: 2
+}
+[TaskGraph] 🔄 Retrying task: task_1 (attempt 3 )
+[32m[2026-03-06T22:59:24.911Z] [INFO] [EventBus] Emitted event: tool.result[0m
+[Orchestrator] Executing tool for TaskGraph: system.execute (task_1)
+[ActionHandler] Executing: system.execute from task_graph:tg_1772837957166_6gxhi190q
+[ActionHandler] system.execute: FAIL
+[32m[2026-03-06T22:59:26.924Z] [ERROR] [ActionHandler] system.execute implementation returned failure[0m
+[TaskGraph] Tool failed for task task_1: {
+  success: false,
+  error: 'Command failed: ls /yhondev\n' +
+    "ls: cannot access '/yhondev': No such file or directory\n",
+  stdout: '',
+  stderr: "ls: cannot access '/yhondev': No such file or directory",
+  exitCode: 2
+}
+[TaskGraph] ❌ Task failed: {
+  graphId: 'tg_1772837957166_6gxhi190q',
+  taskId: 'task_1',
+  errorMsg: `{"success":false,"error":"Command failed: ls /yhondev\\nls: cannot access '/yhondev': No such file or directory\\n","stdout":"","stderr":"ls: cannot access '/yhondev': No such file or directory","exitCode":2}`,
+  retryCount: 3
+}
+[TaskGraph] ❌ Task failed after 3 retries: task_1
+[32m[2026-03-06T22:59:26.925Z] [INFO] [EventBus] Emitted event: tool.result[0m

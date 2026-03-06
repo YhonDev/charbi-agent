@@ -7,7 +7,7 @@ export interface CharbiConfig {
   system: {
     name: string;
     version: number;
-    mode: 'development' | 'production' | 'safe';
+    mode: 'development' | 'production' | 'safe' | 'autonomous';
   };
   models: {
     router: string;

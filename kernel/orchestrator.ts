@@ -35,7 +35,7 @@ export class Orchestrator {
   private setupListeners() {
     eventBus.on(EventType.USER_REQUEST, async (event: any) => {
       const origin = event.payload?.origin || event.origin || 'unknown';
-      const { text, chatId } = event.payload;
+      const { text, chatId, history, sessionId } = event.payload;
 
       if (!text || !chatId) return;
 
@@ -55,7 +55,6 @@ export class Orchestrator {
           console.log(`[Orchestrator] Complex task detected (Score: ${complexityAnalysis.score}) → Creating TaskGraph...`);
           this.emitStatus(chatId, 'PLANNING', 'Planificando proyecto complejo...');
 
-          // 1. Obtener historial reciente para el contexto
           let recentContext = '';
           try {
             const recentMemories = await memoryClient.call('memory.get_recent', { k: 10 });
@@ -64,6 +63,13 @@ export class Orchestrator {
             }
           } catch (e) {
             console.warn('[Orchestrator] Error fetching context for TaskGraph:', e);
+          }
+
+          // Inject CLI short-term history if available to give context like "aquí" or "eso"
+          if (history && Array.isArray(history) && history.length > 0) {
+            recentContext += '\n--- Recent Chat Context ---\n';
+            recentContext += history.map((m: any) => `${m.role === 'user' ? 'User' : 'Charbi'}: ${m.content}`).join('\n');
+            recentContext += '\n---------------------------\n';
           }
 
           const graph = await taskGraphEngine.create(text, event.id, chatId, event.origin || origin, recentContext);
@@ -97,7 +103,10 @@ export class Orchestrator {
             history: conversation
           });
 
-          const llmRes = await queryLLM(systemPrompt, conversation.join('\n'), { correlationId: event.id });
+          const llmRes = await queryLLM(systemPrompt, conversation.join('\n'), {
+            correlationId: event.id,
+            chatHistory: history
+          });
           if (!llmRes.success) {
             finalResponse = `⚠️ Error LLM: ${llmRes.error}`;
             break;

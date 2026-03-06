@@ -12,6 +12,7 @@ export interface LLMOptions {
   correlationId?: string;
   jsonMode?: boolean;
   temperature?: number;
+  chatHistory?: Array<{ role: string; content: string }>;
 }
 
 export async function queryLLM(systemPrompt: string, userPrompt: string, options: LLMOptions = {}): Promise<any> {
@@ -25,10 +26,20 @@ export async function queryLLM(systemPrompt: string, userPrompt: string, options
     const provider = providerRegistry.getProvider(providerName);
 
     // Preparar mensajes en formato estándar (OpenAI-like)
-    const messages = [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt }
+    const messages: any[] = [
+      { role: 'system', content: systemPrompt }
     ];
+
+    // Inyectar historial nativo de conversación si existe (memoria a corto plazo)
+    if (options.chatHistory && Array.isArray(options.chatHistory)) {
+      options.chatHistory.forEach(msg => {
+        messages.push({ role: msg.role || 'user', content: msg.content });
+      });
+      // Contextual marker for the LLM
+      messages.push({ role: 'system', content: '[Context: You are continuing the conversation above. Use it as memory.]' });
+    }
+
+    messages.push({ role: 'user', content: userPrompt });
 
     // Obtener token/key si es necesario
     const authKey = AuthManager.getToken(providerName);

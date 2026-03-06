@@ -1,7 +1,7 @@
 system:
   name: Charbi
   version: 1.0
-  mode: development
+  mode: autonomous
 models:
   router: gpt-oss:120b-cloud
   fallback: openrouter-auto
@@ -10,22 +10,22 @@ memory:
   kernel_db: charbi/memory/kernel.db
   sessions_db: charbi/memory/sessions.db
 supervisor:
-  enabled: true
+  enabled: false
   policy_file: charbi/config/policies/default.yaml
-  max_cpu_time: 5000
-  max_tool_calls: 20
-  emergency_kill: true
+  max_cpu_time: 30000
+  max_tool_calls: 100
+  emergency_kill: false
 runtime:
   session_path: charbi/runtime/sessions
   isolate_workspace: true
   autonomy:
-    enabled: false
-    mode: governed
-    maxDepth: 2
-    maxActionsPerSession: 15
-    maxExecutionTimeMs: 30000
-    allowShell: false
-    allowNetwork: false
+    enabled: true
+    mode: free
+    maxDepth: 5
+    maxActionsPerSession: 50
+    maxExecutionTimeMs: 60000
+    allowShell: true
+    allowNetwork: true
 channels:
   telegram:
     enabled: true

@@ -44,7 +44,7 @@ export class MaintenanceService {
       await this.rotateFiles(this.LOGS_DIR, '.log', 10);
 
       // 2. Rotar Backups de Config (máximo 5)
-      await this.rotateFiles(this.BACKUPS_DIR, '.bak', 5);
+      await this.rotateFiles(this.BACKUPS_DIR, '.yaml', 5);
 
       console.log('[MaintenanceService] Cleanup completed.');
     } catch (error) {
